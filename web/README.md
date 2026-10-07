@@ -1,7 +1,7 @@
 # LoaderKit for the web
 
-Loading indicators described as data (JSON specs) and drawn on a `<canvas>`, as a class or as the
-`<loader-kit>` custom element. The same specs drive the Android, iOS, macOS and Windows engines;
+Loading indicators described as data (JSON specs) and drawn on a `<canvas>`: React, Vue and Svelte
+components, the `<loader-kit>` custom element, or a class. The same specs drive the Android, iOS, macOS and Windows engines;
 see [`SPEC.md`](https://github.com/maitrungduc1410/loader-kit/blob/master/SPEC.md) for the format.
 
 Full documentation: [maitrungduc1410.github.io/loader-kit/platforms/web](https://maitrungduc1410.github.io/loader-kit/platforms/web)
@@ -12,8 +12,42 @@ Full documentation: [maitrungduc1410.github.io/loader-kit/platforms/web](https:/
 npm install @loader-kit/web
 ```
 
-ES modules and CommonJS, with TypeScript types. The main entry is safe to import during server-side
-rendering: it touches no DOM globals until you create a view.
+ES modules and CommonJS, with TypeScript types. Every entry is safe to import during server-side
+rendering. React, Vue and Svelte are optional peer dependencies.
+
+## React, Vue and Svelte
+
+```tsx
+// React 17 or later
+import { LoaderKit } from '@loader-kit/web/react';
+
+<LoaderKit indicator="BallSpinFadeLoader" color="#7c3aed" size={48} animating={busy} />
+```
+
+```vue
+<!-- Vue 3.3 or later -->
+<script setup lang="ts">
+import { LoaderKit } from '@loader-kit/web/vue';
+</script>
+
+<template>
+  <LoaderKit indicator="BallSpinFadeLoader" color="#7c3aed" :size="48" :animating="busy" @error="onError" />
+</template>
+```
+
+```svelte
+<!-- Svelte 4 or 5 -->
+<script>
+  import { LoaderKit } from '@loader-kit/web/svelte';
+</script>
+
+<LoaderKit indicator="BallSpinFadeLoader" color="#7c3aed" size={48} animating={busy} />
+```
+
+The components take `indicator`, `spec`, `params`, `color`, `colors`, `speed`, `animating`,
+`hidesWhenStopped`, `cycleProgress`, `respectsReduceMotion`, `size` and `onError` (`@error` in Vue).
+Other attributes such as `class` go to the element. They render the `<loader-kit>` element below and
+register it, so server-side rendering and hydration work with nothing else to set up.
 
 ## Custom element
 

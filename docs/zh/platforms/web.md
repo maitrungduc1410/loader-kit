@@ -1,13 +1,20 @@
 ---
-description: "在 Web 上使用 @loader-kit/web：LoaderKitView 类、自定义元素、React、Vue、Svelte 集成与 SSR 注意事项。"
+description: "在 Web 上使用 @loader-kit/web：React、Vue、Svelte 组件，<loader-kit> 自定义元素，LoaderKitView canvas 类，以及服务端渲染。"
 ---
 
 # Web
 
-`@loader-kit/web` 把 LoaderKit 加载动画绘制到 `<canvas>` 上。它有两个入口：
+`@loader-kit/web` 把 LoaderKit 加载动画绘制到 `<canvas>` 上。按你的项目选择合适的入口：
 
-- `@loader-kit/web`：`LoaderKitView` 类，以及一些更底层的函数，方便你自己准备并绘制 spec。在服务端渲染时导入也是安全的。
-- `@loader-kit/web/element`：注册 `<loader-kit>` 自定义元素。
+| 入口 | 提供的内容 |
+| --- | --- |
+| `@loader-kit/web/react` | `<LoaderKit>` 组件，适用于 React 17 及以上 |
+| `@loader-kit/web/vue` | `<LoaderKit>` 组件，适用于 Vue 3.3 及以上 |
+| `@loader-kit/web/svelte` | `<LoaderKit>` 组件，适用于 Svelte 4 和 5 |
+| `@loader-kit/web/element` | `<loader-kit>` 自定义元素，适用于纯 HTML 和其他框架 |
+| `@loader-kit/web` | `LoaderKitView` 类，以及自己准备和绘制 spec 的函数 |
+
+这些组件会渲染 `<loader-kit>` 元素并自动完成注册，不需要任何额外配置。所有入口在服务端渲染时导入都是安全的。
 
 ## 安装 {#install}
 
@@ -27,9 +34,106 @@ pnpm add @loader-kit/web
 
 :::
 
+React、Vue 和 Svelte 都是可选的 peer dependency，只需安装你正在用的框架。
+
+## React {#react}
+
+```tsx
+import { LoaderKit } from '@loader-kit/web/react';
+
+export function Saving({ busy }: { busy: boolean }) {
+  return <LoaderKit indicator="BallSpinFadeLoader" color="#7c3aed" size={48} animating={busy} />;
+}
+```
+
+- 这个模块带有 `'use client'` 标记，所以在 Next.js App Router 中，可以直接在 Server Component 里渲染 `<LoaderKit>`，前提是 props 可以序列化。`onError` 和 `ref` 需要从 Client Component 传入。
+- `ref` 指向 `<loader-kit>` 元素（`LoaderKitElementApi`），比如可以读取 `ref.current.time`。
+- 动画无法绘制时，`onError` 会收到错误信息；恢复正常后会收到 `null`。
+
+## Vue {#vue}
+
+```vue
+<script setup lang="ts">
+import { LoaderKit } from '@loader-kit/web/vue';
+
+defineProps<{ busy: boolean }>();
+
+function onError(message: string | null) {
+  if (message) console.warn(message);
+}
+</script>
+
+<template>
+  <LoaderKit indicator="BallSpinFadeLoader" color="#7c3aed" :size="48" :animating="busy" @error="onError" />
+</template>
+```
+
+- 它就是一个普通的 Vue 组件：不需要任何编译器配置，也可以在 Nuxt 和服务端渲染中使用。
+- 如果想在任何地方直接使用而不必每次导入，注册一次即可：`app.component('LoaderKit', LoaderKit)`。
+- 在组件上使用模板 ref，可以拿到它暴露的 `element`，也就是 `<loader-kit>` 元素。
+
+## Svelte {#svelte}
+
+```svelte
+<script lang="ts">
+  import { LoaderKit } from '@loader-kit/web/svelte';
+
+  let { busy }: { busy: boolean } = $props();
+</script>
+
+<LoaderKit indicator="BallSpinFadeLoader" color="#7c3aed" size={48} animating={busy} />
+```
+
+- 支持 Svelte 4 和 5，也支持 SvelteKit 的服务端渲染。包里附带组件源码，由 Vite 的 Svelte 插件和你的应用一起编译。
+- `bind:element` 可以拿到 `<loader-kit>` 元素。`onError` 会收到错误信息，恢复正常后收到 `null`。
+- 组件没有使用 runes 编写，这样同一份源码可以同时用 Svelte 4 和 5 编译。如果你的 Svelte 5 配置对所有文件都开启了 `runes`，请把它限制在你自己的代码上，例如 `runes: ({ filename }) => filename.split(/[/\\]/).includes('node_modules') ? undefined : true`。
+
+## 组件 props {#component-props}
+
+三个组件的 props 完全相同：
+
+| Prop | 类型 | 默认值 |
+| --- | --- | --- |
+| `indicator` | 内置动画名称 | `'BallPulse'` |
+| `spec` | `IndicatorSpec` 或 JSON 字符串，优先于 `indicator` | 无 |
+| `params` | `Record<string, number>` 或 JSON 字符串 | 无 |
+| `color` | 任意 CSS 颜色 | 元素的 CSS `color` |
+| `colors` | `string[]`，非空时优先于 `color` | 无 |
+| `speed` | `number`，小于等于 0 时暂停 | `1` |
+| `animating` | `boolean` | `true` |
+| `hidesWhenStopped` | `boolean` | `true` |
+| `cycleProgress` | 0 到 1 之间的数，定格在这一帧；`null` 表示跟随时钟 | `null` |
+| `respectsReduceMotion` | `boolean` | `true` |
+| `size` | 以 px 为单位的数字，或任意 CSS 长度，如 `'3rem'` | 40px，除非 CSS 另行设置 |
+| `onError`（React、Svelte）、`@error`（Vue） | `(message: string \| null) => void` | 无 |
+
+- 其他属性，比如 `class`、`style`、`id` 或 `aria-label`，会传给 `<loader-kit>` 元素。
+- 不传 `size` 时，元素靠自身样式默认为 40px × 40px，因此任何 class 或 CSS 规则都能覆盖它的尺寸（例如 `class="h-12 w-12"`）。
+- `spec` 和 `params` 按 JSON 内容比较，所以每次渲染都传入内容相同的新对象，也不会让动画从头开始。
+- 某个 prop 变回 undefined 时，会恢复为默认值。
+
+## 其他框架 {#other-frameworks}
+
+Angular、Solid、Lit、纯 HTML 或其他任何环境，都可以直接使用[自定义元素](#the-custom-element)。在 Angular 中，先在组件里允许自定义元素，再导入一次 element 入口：
+
+```ts
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import '@loader-kit/web/element';
+
+@Component({
+  selector: 'app-saving',
+  standalone: true,
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  template: `<loader-kit indicator="BallSpinFadeLoader" [animating]="busy"></loader-kit>`,
+})
+export class SavingComponent {
+  busy = true;
+}
+```
+
 ## 自定义元素 {#the-custom-element}
 
-在浏览器中导入一次 element 入口即可。如果 `<loader-kit>` 还没有被定义，它会完成定义。
+在纯 HTML 中，或者在上面没有现成组件的框架里，可以直接使用这个元素。导入一次 element 入口即可。如果 `<loader-kit>` 还没有被定义，它会完成定义。
 
 ```ts
 import '@loader-kit/web/element';
@@ -158,83 +262,12 @@ view.destroy(); // 停止帧循环，移除 observer 和它创建的 canvas
 
 视图根据宿主的大小来设置 canvas 尺寸，所以请用 CSS 设置宿主的尺寸。
 
-## React
-
-在 effect 中使用这个类。视图只创建一次，props 变化时更新它的属性：
-
-```tsx
-import { useEffect, useRef } from 'react';
-import { LoaderKitView, type LoaderKitOptions } from '@loader-kit/web';
-
-export function Loader({ indicator = 'BallPulse', color, speed = 1, animating = true }: LoaderKitOptions) {
-  const host = useRef<HTMLDivElement>(null);
-  const view = useRef<LoaderKitView | null>(null);
-
-  useEffect(() => {
-    view.current = new LoaderKitView(host.current!);
-    return () => view.current?.destroy();
-  }, []);
-
-  useEffect(() => {
-    const v = view.current!;
-    v.indicator = indicator;
-    v.color = color ?? null;
-    v.speed = speed;
-    v.animating = animating;
-  }, [indicator, color, speed, animating]);
-
-  return <div ref={host} style={{ width: 48, height: 48 }} />;
-}
-```
-
-也可以在客户端导入 element 入口之后，直接渲染 `<loader-kit>`。这时 `params` 和 `colors` 要以字符串形式传入（`params='{"count":5}'`）。
-
-## Vue
-
-先告诉 Vue 编译器 `loader-kit` 是自定义元素，然后就能在模板中使用。只有元素已经定义好时，Vue 才会把值设置为 DOM 属性（property）。这里 element 入口是在 `onMounted` 里加载的，晚于首次渲染，所以对象和数组要用 `.prop` 修饰符绑定。否则 Vue 会把它写成 `params="[object Object]"` 这样的 attribute。
-
-```ts
-// vite.config.ts
-import vue from '@vitejs/plugin-vue';
-
-export default {
-  plugins: [vue({ template: { compilerOptions: { isCustomElement: (tag) => tag === 'loader-kit' } } })],
-};
-```
-
-```vue
-<script setup lang="ts">
-import { onMounted } from 'vue';
-
-onMounted(() => import('@loader-kit/web/element'));
-</script>
-
-<template>
-  <loader-kit indicator="BallPulse" :params.prop="{ count: 5 }" :speed="1.5" style="width: 48px; height: 48px" />
-</template>
-```
-
-## Svelte
-
-Svelte 原生支持自定义元素，无需任何配置：
-
-```svelte
-<script lang="ts">
-  import { onMount } from 'svelte';
-
-  export let loading = true;
-
-  onMount(() => import('@loader-kit/web/element'));
-</script>
-
-<loader-kit indicator="LineScale" animating={loading} style="width: 48px; height: 48px"></loader-kit>
-```
-
 ## 服务端渲染 {#server-side-rendering}
 
-- 在 SSR 期间导入 `@loader-kit/web` 是安全的：导入时不会访问任何 DOM 全局对象。只在浏览器中创建 `LoaderKitView`（放在 `useEffect`、`onMounted` 或 `onMount` 里）。
-- `@loader-kit/web/element` 只在 `customElements` 存在时才注册元素。不过仍然建议在客户端导入它，例如在挂载钩子里用动态 `import()`，这样元素会在 hydration（水合）之后再升级。
-- 服务端会把 `<loader-kit>` 渲染成一个空元素。给它设置 CSS 尺寸，这样开始绘制时页面就不会发生布局偏移。
+- 所有入口在服务端导入都是安全的：导入时不会访问任何 DOM 全局对象，而且只有在存在 `customElements` 的环境里才会注册元素。
+- React、Vue 和 Svelte 组件会在服务端渲染出带有全部属性的 `<loader-kit>`。到了浏览器里，元素一升级就会绘制同样的动画，hydration（水合）也会保留服务端渲染的元素。
+- 在 JavaScript 加载完成之前，元素本身没有尺寸。请设置 `size` 或 CSS 尺寸，避免开始绘制时页面发生布局偏移。
+- 只在浏览器中创建 `LoaderKitView`，例如放在 `useEffect`、`onMounted` 或 `onMount` 里。
 
 ## 自定义 spec {#custom-specs}
 
@@ -251,6 +284,13 @@ const problems = validate(JSON.parse(json));
 if (problems.length > 0) console.warn(problems);
 
 const view = new LoaderKitView(host, { spec: json, params: { count: 4 } });
+```
+
+```tsx [React]
+import { LoaderKit } from '@loader-kit/web/react';
+import typingDots from './typing-dots.json';
+
+<LoaderKit spec={typingDots} params={{ count: 4 }} />
 ```
 
 ```html [HTML]

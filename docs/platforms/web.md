@@ -1,13 +1,20 @@
 ---
-description: "Use LoaderKit on the web with @loader-kit/web: the LoaderKitView canvas class, the <loader-kit> custom element, React, Vue, Svelte and SSR notes."
+description: "Use LoaderKit on the web with @loader-kit/web: React, Vue and Svelte components, the <loader-kit> custom element, the LoaderKitView canvas class and server-side rendering."
 ---
 
 # Web
 
-`@loader-kit/web` draws LoaderKit indicators into a `<canvas>`. It has two entry points:
+`@loader-kit/web` draws LoaderKit indicators into a `<canvas>`. Pick the entry point that fits your app:
 
-- `@loader-kit/web`: the `LoaderKitView` class, plus lower level functions to prepare and draw a spec yourself. It is safe to import during server-side rendering.
-- `@loader-kit/web/element`: registers the `<loader-kit>` custom element.
+| Entry point | What it gives you |
+| --- | --- |
+| `@loader-kit/web/react` | the `<LoaderKit>` component for React 17 and later |
+| `@loader-kit/web/vue` | the `<LoaderKit>` component for Vue 3.3 and later |
+| `@loader-kit/web/svelte` | the `<LoaderKit>` component for Svelte 4 and 5 |
+| `@loader-kit/web/element` | the `<loader-kit>` custom element, for plain HTML and other frameworks |
+| `@loader-kit/web` | the `LoaderKitView` class, plus functions to prepare and draw a spec yourself |
+
+The components render the `<loader-kit>` element and register it for you, so there is nothing else to set up. All entry points are safe to import during server-side rendering.
 
 ## Install
 
@@ -27,9 +34,106 @@ pnpm add @loader-kit/web
 
 :::
 
+React, Vue and Svelte are optional peer dependencies: install only the framework you use.
+
+## React
+
+```tsx
+import { LoaderKit } from '@loader-kit/web/react';
+
+export function Saving({ busy }: { busy: boolean }) {
+  return <LoaderKit indicator="BallSpinFadeLoader" color="#7c3aed" size={48} animating={busy} />;
+}
+```
+
+- The module is marked `'use client'`, so in the Next.js App Router you can render `<LoaderKit>` from a Server Component with serializable props. Pass `onError` or `ref` from a Client Component.
+- `ref` is the `<loader-kit>` element (`LoaderKitElementApi`), for example to read `ref.current.time`.
+- `onError` receives the error message when the indicator cannot be drawn, and `null` when it recovers.
+
+## Vue
+
+```vue
+<script setup lang="ts">
+import { LoaderKit } from '@loader-kit/web/vue';
+
+defineProps<{ busy: boolean }>();
+
+function onError(message: string | null) {
+  if (message) console.warn(message);
+}
+</script>
+
+<template>
+  <LoaderKit indicator="BallSpinFadeLoader" color="#7c3aed" :size="48" :animating="busy" @error="onError" />
+</template>
+```
+
+- It is a regular Vue component: no compiler option is needed, and it works with Nuxt and server-side rendering.
+- To use it everywhere without importing it, register it once: `app.component('LoaderKit', LoaderKit)`.
+- A template ref on the component exposes `element`, the `<loader-kit>` element.
+
+## Svelte
+
+```svelte
+<script lang="ts">
+  import { LoaderKit } from '@loader-kit/web/svelte';
+
+  let { busy }: { busy: boolean } = $props();
+</script>
+
+<LoaderKit indicator="BallSpinFadeLoader" color="#7c3aed" size={48} animating={busy} />
+```
+
+- It works with Svelte 4 and 5, and with SvelteKit server-side rendering. The package ships the component source, which the Svelte plugin for Vite compiles with the rest of your app.
+- `bind:element` gives the `<loader-kit>` element. `onError` receives the error message, and `null` when it recovers.
+- The component is written without runes so that the same source compiles with both versions. If your Svelte 5 config turns on `runes` for every file, limit it to your own code, for example `runes: ({ filename }) => filename.split(/[/\\]/).includes('node_modules') ? undefined : true`.
+
+## Component props
+
+The three components take the same props:
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `indicator` | a built-in name | `'BallPulse'` |
+| `spec` | `IndicatorSpec` or a JSON string. Wins over `indicator` | none |
+| `params` | `Record<string, number>` or a JSON string | none |
+| `color` | any CSS color | the CSS `color` of the element |
+| `colors` | `string[]`. Wins over `color` when not empty | none |
+| `speed` | `number`. 0 or less pauses | `1` |
+| `animating` | `boolean` | `true` |
+| `hidesWhenStopped` | `boolean` | `true` |
+| `cycleProgress` | a number from 0 to 1 freezes that frame. `null` follows the clock | `null` |
+| `respectsReduceMotion` | `boolean` | `true` |
+| `size` | a number in px, or any CSS length such as `'3rem'` | 40px, unless CSS sizes it |
+| `onError` (React, Svelte), `@error` (Vue) | `(message: string \| null) => void` | none |
+
+- Other attributes, such as `class`, `style`, `id` or `aria-label`, go to the `<loader-kit>` element.
+- Without `size`, the element is 40px by 40px from its own style, so a class or any CSS rule can size it instead (for example `class="h-12 w-12"`).
+- `spec` and `params` are compared as JSON, so passing a new object with the same content on every render does not restart the animation.
+- A prop that goes back to undefined resets to its default.
+
+## Other frameworks
+
+For Angular, Solid, Lit, plain HTML or anything else, use the [custom element](#the-custom-element). In Angular, allow custom elements in the component and import the element entry once:
+
+```ts
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import '@loader-kit/web/element';
+
+@Component({
+  selector: 'app-saving',
+  standalone: true,
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  template: `<loader-kit indicator="BallSpinFadeLoader" [animating]="busy"></loader-kit>`,
+})
+export class SavingComponent {
+  busy = true;
+}
+```
+
 ## The custom element
 
-Import the element entry once, in the browser. It defines `<loader-kit>` if it is not defined yet.
+Use the element directly in plain HTML, or in a framework without a component above. Import the element entry once. It defines `<loader-kit>` if it is not defined yet.
 
 ```ts
 import '@loader-kit/web/element';
@@ -158,83 +262,12 @@ Read-only members:
 
 The view sizes its canvas from the host, so size the host with CSS.
 
-## React
-
-Use the class in an effect. Create the view once and update its properties when props change:
-
-```tsx
-import { useEffect, useRef } from 'react';
-import { LoaderKitView, type LoaderKitOptions } from '@loader-kit/web';
-
-export function Loader({ indicator = 'BallPulse', color, speed = 1, animating = true }: LoaderKitOptions) {
-  const host = useRef<HTMLDivElement>(null);
-  const view = useRef<LoaderKitView | null>(null);
-
-  useEffect(() => {
-    view.current = new LoaderKitView(host.current!);
-    return () => view.current?.destroy();
-  }, []);
-
-  useEffect(() => {
-    const v = view.current!;
-    v.indicator = indicator;
-    v.color = color ?? null;
-    v.speed = speed;
-    v.animating = animating;
-  }, [indicator, color, speed, animating]);
-
-  return <div ref={host} style={{ width: 48, height: 48 }} />;
-}
-```
-
-You can also render `<loader-kit>` directly once the element entry is imported on the client. Pass `params` and `colors` as strings (`params='{"count":5}'`).
-
-## Vue
-
-Tell the Vue compiler that `loader-kit` is a custom element, then use it in templates. Vue only sets a property when the element is already defined. Here the element entry loads in `onMounted`, after the first render, so bind objects and arrays with the `.prop` modifier. Without it, Vue writes `params="[object Object]"` as an attribute.
-
-```ts
-// vite.config.ts
-import vue from '@vitejs/plugin-vue';
-
-export default {
-  plugins: [vue({ template: { compilerOptions: { isCustomElement: (tag) => tag === 'loader-kit' } } })],
-};
-```
-
-```vue
-<script setup lang="ts">
-import { onMounted } from 'vue';
-
-onMounted(() => import('@loader-kit/web/element'));
-</script>
-
-<template>
-  <loader-kit indicator="BallPulse" :params.prop="{ count: 5 }" :speed="1.5" style="width: 48px; height: 48px" />
-</template>
-```
-
-## Svelte
-
-Svelte supports custom elements without configuration:
-
-```svelte
-<script lang="ts">
-  import { onMount } from 'svelte';
-
-  export let loading = true;
-
-  onMount(() => import('@loader-kit/web/element'));
-</script>
-
-<loader-kit indicator="LineScale" animating={loading} style="width: 48px; height: 48px"></loader-kit>
-```
-
 ## Server-side rendering
 
-- Importing `@loader-kit/web` during SSR is safe: it touches no DOM globals at import time. Create a `LoaderKitView` only in the browser (in `useEffect`, `onMounted` or `onMount`).
-- `@loader-kit/web/element` registers the element only when `customElements` exists. Still, import it on the client, for example with a dynamic `import()` in a mount hook, so the element upgrades after hydration.
-- The server renders `<loader-kit>` as an empty element. Give it a CSS size so the page does not shift when it starts drawing.
+- Every entry point is safe to import on the server: none of them touches DOM globals at import time, and the element is registered only where `customElements` exists.
+- The React, Vue and Svelte components render `<loader-kit>` with all its attributes on the server. In the browser the element draws the same indicator as soon as it upgrades, and hydration keeps the server element.
+- Until the JavaScript loads, the element has no size of its own. Set `size` or a CSS size so the page does not shift when it starts drawing.
+- Create a `LoaderKitView` only in the browser, for example in `useEffect`, `onMounted` or `onMount`.
 
 ## Custom specs
 
@@ -251,6 +284,13 @@ const problems = validate(JSON.parse(json));
 if (problems.length > 0) console.warn(problems);
 
 const view = new LoaderKitView(host, { spec: json, params: { count: 4 } });
+```
+
+```tsx [React]
+import { LoaderKit } from '@loader-kit/web/react';
+import typingDots from './typing-dots.json';
+
+<LoaderKit spec={typingDots} params={{ count: 4 }} />
 ```
 
 ```html [HTML]

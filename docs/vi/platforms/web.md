@@ -1,13 +1,20 @@
 ---
-description: "Dùng LoaderKit trên web với @loader-kit/web: class canvas LoaderKitView, custom element <loader-kit>, cách dùng với React, Vue, Svelte và lưu ý khi SSR."
+description: "Dùng LoaderKit trên web với @loader-kit/web: component cho React, Vue và Svelte, custom element <loader-kit>, class canvas LoaderKitView và server-side rendering."
 ---
 
 # Web
 
-`@loader-kit/web` vẽ các indicator của LoaderKit vào một `<canvas>`. Package có hai entry point:
+`@loader-kit/web` vẽ các indicator của LoaderKit vào một `<canvas>`. Chọn entry point hợp với app của bạn:
 
-- `@loader-kit/web`: class `LoaderKitView`, cùng các hàm cấp thấp hơn để bạn tự prepare và vẽ một spec. Import trong lúc server-side rendering vẫn an toàn.
-- `@loader-kit/web/element`: đăng ký custom element `<loader-kit>`.
+| Entry point | Bạn nhận được gì |
+| --- | --- |
+| `@loader-kit/web/react` | component `<LoaderKit>` cho React 17 trở lên |
+| `@loader-kit/web/vue` | component `<LoaderKit>` cho Vue 3.3 trở lên |
+| `@loader-kit/web/svelte` | component `<LoaderKit>` cho Svelte 4 và 5 |
+| `@loader-kit/web/element` | custom element `<loader-kit>`, cho HTML thuần và các framework khác |
+| `@loader-kit/web` | class `LoaderKitView`, cùng các hàm để bạn tự prepare và vẽ một spec |
+
+Các component render element `<loader-kit>` và tự đăng ký nó, nên bạn không cần setup gì thêm. Mọi entry point đều import an toàn trong lúc server-side rendering.
 
 ## Cài đặt {#install}
 
@@ -27,9 +34,106 @@ pnpm add @loader-kit/web
 
 :::
 
+React, Vue và Svelte là peer dependency tùy chọn: chỉ cần cài framework bạn đang dùng.
+
+## React {#react}
+
+```tsx
+import { LoaderKit } from '@loader-kit/web/react';
+
+export function Saving({ busy }: { busy: boolean }) {
+  return <LoaderKit indicator="BallSpinFadeLoader" color="#7c3aed" size={48} animating={busy} />;
+}
+```
+
+- Module được đánh dấu `'use client'`, nên với App Router của Next.js bạn có thể render `<LoaderKit>` ngay trong một Server Component, với các props serialize được. `onError` hoặc `ref` thì truyền từ một Client Component.
+- `ref` trỏ tới element `<loader-kit>` (`LoaderKitElementApi`), ví dụ để đọc `ref.current.time`.
+- `onError` nhận thông báo lỗi khi indicator không vẽ được, và nhận `null` khi nó vẽ lại được.
+
+## Vue {#vue}
+
+```vue
+<script setup lang="ts">
+import { LoaderKit } from '@loader-kit/web/vue';
+
+defineProps<{ busy: boolean }>();
+
+function onError(message: string | null) {
+  if (message) console.warn(message);
+}
+</script>
+
+<template>
+  <LoaderKit indicator="BallSpinFadeLoader" color="#7c3aed" :size="48" :animating="busy" @error="onError" />
+</template>
+```
+
+- Đây là một component Vue bình thường: không cần cấu hình compiler, chạy được với Nuxt và server-side rendering.
+- Muốn dùng ở mọi nơi mà không phải import, hãy đăng ký một lần: `app.component('LoaderKit', LoaderKit)`.
+- Template ref trên component expose `element`, chính là element `<loader-kit>`.
+
+## Svelte {#svelte}
+
+```svelte
+<script lang="ts">
+  import { LoaderKit } from '@loader-kit/web/svelte';
+
+  let { busy }: { busy: boolean } = $props();
+</script>
+
+<LoaderKit indicator="BallSpinFadeLoader" color="#7c3aed" size={48} animating={busy} />
+```
+
+- Chạy được với Svelte 4 và 5, và với server-side rendering của SvelteKit. Package đi kèm source của component, plugin Svelte cho Vite sẽ compile nó cùng phần còn lại của app.
+- `bind:element` cho bạn element `<loader-kit>`. `onError` nhận thông báo lỗi, và nhận `null` khi indicator vẽ lại được.
+- Component được viết không dùng runes để cùng một source compile được với cả hai phiên bản. Nếu config Svelte 5 của bạn bật `runes` cho mọi file, hãy giới hạn nó trong code của bạn, ví dụ `runes: ({ filename }) => filename.split(/[/\\]/).includes('node_modules') ? undefined : true`.
+
+## Props của component {#component-props}
+
+Cả ba component nhận cùng một bộ props:
+
+| Prop | Kiểu | Mặc định |
+| --- | --- | --- |
+| `indicator` | tên một indicator có sẵn | `'BallPulse'` |
+| `spec` | `IndicatorSpec` hoặc chuỗi JSON. Được ưu tiên hơn `indicator` | không có |
+| `params` | `Record<string, number>` hoặc chuỗi JSON | không có |
+| `color` | màu CSS bất kỳ | CSS `color` của element |
+| `colors` | `string[]`. Được ưu tiên hơn `color` khi không rỗng | không có |
+| `speed` | `number`. Từ 0 trở xuống là tạm dừng | `1` |
+| `animating` | `boolean` | `true` |
+| `hidesWhenStopped` | `boolean` | `true` |
+| `cycleProgress` | số từ 0 đến 1 để đứng yên ở frame đó. `null` thì chạy theo đồng hồ | `null` |
+| `respectsReduceMotion` | `boolean` | `true` |
+| `size` | số tính bằng px, hoặc độ dài CSS bất kỳ như `'3rem'` | 40px, trừ khi CSS đặt kích thước |
+| `onError` (React, Svelte), `@error` (Vue) | `(message: string \| null) => void` | không có |
+
+- Các attribute khác như `class`, `style`, `id` hay `aria-label` được chuyển xuống element `<loader-kit>`.
+- Khi không có `size`, element rộng 40px, cao 40px theo style của chính nó, nên một class hay rule CSS bất kỳ đều đặt lại được kích thước (ví dụ `class="h-12 w-12"`).
+- `spec` và `params` được so sánh dưới dạng JSON, nên truyền một object mới có cùng nội dung ở mỗi lần render sẽ không làm animation chạy lại từ đầu.
+- Prop nào quay về undefined thì trở lại giá trị mặc định.
+
+## Framework khác {#other-frameworks}
+
+Với Angular, Solid, Lit, HTML thuần hay bất cứ gì khác, hãy dùng [custom element](#the-custom-element). Trong Angular, cho phép custom element trong component và import entry của element một lần:
+
+```ts
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import '@loader-kit/web/element';
+
+@Component({
+  selector: 'app-saving',
+  standalone: true,
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  template: `<loader-kit indicator="BallSpinFadeLoader" [animating]="busy"></loader-kit>`,
+})
+export class SavingComponent {
+  busy = true;
+}
+```
+
 ## Custom element {#the-custom-element}
 
-Import entry của element một lần, trong trình duyệt. Nó sẽ định nghĩa `<loader-kit>` nếu tag này chưa được định nghĩa.
+Dùng element trực tiếp trong HTML thuần, hoặc trong framework chưa có component ở trên. Import entry của element một lần. Nó sẽ định nghĩa `<loader-kit>` nếu tag này chưa được định nghĩa.
 
 ```ts
 import '@loader-kit/web/element';
@@ -158,83 +262,12 @@ Các member chỉ đọc:
 
 View lấy kích thước canvas theo host, nên bạn hãy đặt kích thước cho host bằng CSS.
 
-## React {#react}
-
-Dùng class này trong một effect. Tạo view một lần, rồi cập nhật property mỗi khi props thay đổi:
-
-```tsx
-import { useEffect, useRef } from 'react';
-import { LoaderKitView, type LoaderKitOptions } from '@loader-kit/web';
-
-export function Loader({ indicator = 'BallPulse', color, speed = 1, animating = true }: LoaderKitOptions) {
-  const host = useRef<HTMLDivElement>(null);
-  const view = useRef<LoaderKitView | null>(null);
-
-  useEffect(() => {
-    view.current = new LoaderKitView(host.current!);
-    return () => view.current?.destroy();
-  }, []);
-
-  useEffect(() => {
-    const v = view.current!;
-    v.indicator = indicator;
-    v.color = color ?? null;
-    v.speed = speed;
-    v.animating = animating;
-  }, [indicator, color, speed, animating]);
-
-  return <div ref={host} style={{ width: 48, height: 48 }} />;
-}
-```
-
-Bạn cũng có thể render thẳng `<loader-kit>` sau khi đã import entry của element ở phía client. Khi đó truyền `params` và `colors` dưới dạng chuỗi (`params='{"count":5}'`).
-
-## Vue {#vue}
-
-Báo cho Vue compiler biết `loader-kit` là custom element, rồi dùng nó trong template. Vue chỉ gán property khi element đã được define. Ở đây entry của element được load trong `onMounted`, tức là sau lần render đầu tiên, nên hãy bind object và array bằng modifier `.prop`. Nếu không, Vue sẽ ghi `params="[object Object]"` thành attribute.
-
-```ts
-// vite.config.ts
-import vue from '@vitejs/plugin-vue';
-
-export default {
-  plugins: [vue({ template: { compilerOptions: { isCustomElement: (tag) => tag === 'loader-kit' } } })],
-};
-```
-
-```vue
-<script setup lang="ts">
-import { onMounted } from 'vue';
-
-onMounted(() => import('@loader-kit/web/element'));
-</script>
-
-<template>
-  <loader-kit indicator="BallPulse" :params.prop="{ count: 5 }" :speed="1.5" style="width: 48px; height: 48px" />
-</template>
-```
-
-## Svelte {#svelte}
-
-Svelte hỗ trợ custom element mà không cần cấu hình gì:
-
-```svelte
-<script lang="ts">
-  import { onMount } from 'svelte';
-
-  export let loading = true;
-
-  onMount(() => import('@loader-kit/web/element'));
-</script>
-
-<loader-kit indicator="LineScale" animating={loading} style="width: 48px; height: 48px"></loader-kit>
-```
-
 ## Server-side rendering {#server-side-rendering}
 
-- Import `@loader-kit/web` trong lúc SSR là an toàn: lúc import nó không đụng tới DOM global nào. Chỉ tạo `LoaderKitView` trong trình duyệt (trong `useEffect`, `onMounted` hoặc `onMount`).
-- `@loader-kit/web/element` chỉ đăng ký element khi có `customElements`. Dù vậy, bạn vẫn nên import nó ở client, ví dụ bằng `import()` động trong một mount hook, để element được upgrade sau khi hydration.
-- Server render `<loader-kit>` thành một phần tử rỗng. Hãy đặt kích thước CSS cho nó để trang không bị xô lệch khi nó bắt đầu vẽ.
+- Mọi entry point đều import an toàn trên server: không entry nào đụng tới DOM global lúc import, và element chỉ được đăng ký ở nơi có `customElements`.
+- Các component React, Vue và Svelte render `<loader-kit>` kèm đầy đủ attribute ngay trên server. Trong trình duyệt, element vẽ đúng indicator đó ngay khi được upgrade, và hydration giữ nguyên element mà server đã render.
+- Khi JavaScript chưa load xong, element chưa có kích thước riêng. Hãy đặt `size` hoặc kích thước CSS để trang không bị xô lệch khi nó bắt đầu vẽ.
+- Chỉ tạo `LoaderKitView` trong trình duyệt, ví dụ trong `useEffect`, `onMounted` hoặc `onMount`.
 
 ## Spec tùy chỉnh {#custom-specs}
 
@@ -251,6 +284,13 @@ const problems = validate(JSON.parse(json));
 if (problems.length > 0) console.warn(problems);
 
 const view = new LoaderKitView(host, { spec: json, params: { count: 4 } });
+```
+
+```tsx [React]
+import { LoaderKit } from '@loader-kit/web/react';
+import typingDots from './typing-dots.json';
+
+<LoaderKit spec={typingDots} params={{ count: 4 }} />
 ```
 
 ```html [HTML]

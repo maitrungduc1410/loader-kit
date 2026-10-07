@@ -29,7 +29,7 @@ Yes. Stop an indicator when the work is done, or remove it from the view tree. A
 
 ### What do screen readers announce?
 
-- **Web**: `<loader-kit>` has `role="progressbar"` with no value (an indeterminate progress bar) and `aria-label="Loading"`, unless you set your own label. It is `aria-hidden` while it is hidden.
+- **Web**: `<loader-kit>`, which the React, Vue and Svelte components render, has `role="progressbar"` with no value (an indeterminate progress bar) and `aria-label="Loading"`, unless you set your own label. It is `aria-hidden` while it is hidden.
 - **Windows**: the control reports itself to UI Automation as a progress bar.
 - **Android and Apple**: the views add no label. Set `contentDescription` on Android or `accessibilityLabel` on iOS and macOS, or describe the loading state in the surrounding UI.
 
@@ -69,7 +69,7 @@ Check these in order:
 2. **The color is visible.** The default color may match your background: white on Windows, `systemGray` on Apple platforms, the theme foreground on Android, `currentColor` on the web.
 3. **The indicator is animating.** With `hidesWhenStopped` (the default), a stopped indicator draws nothing.
 4. **The name or spec is valid.** An unknown name or an invalid spec draws nothing and reports an error. Read `specError` (web, Apple), `onError` (Android View), Logcat (Compose), or `SpecError` and `SpecFailed` (Windows). Names are case sensitive: `BallPulse`, not `ballPulse`.
-5. **On the web, the element is registered.** `<loader-kit>` works only after `import '@loader-kit/web/element'` has run in the browser.
+5. **On the web, the element is registered.** The React, Vue and Svelte components register it for you. A `<loader-kit>` you write yourself works only after `import '@loader-kit/web/element'` has run in the browser.
 
 ### The indicator does not move
 

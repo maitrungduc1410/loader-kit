@@ -49,6 +49,52 @@ function web(c: IndicatorConfig): string {
 ></loader-kit>`;
 }
 
+/** Component props: `{expr}` bindings for React and Svelte, `:prop="expr"` for Vue. */
+function componentProps(c: IndicatorConfig, bind: (name: string, expr: string) => string): string[] {
+  const props = [`indicator="${c.indicator}"`];
+  if (entries(c.params).length > 0) {
+    props.push(bind('params', `{ ${entries(c.params).map(([k, v]) => `${k}: ${num(v)}`).join(', ')} }`));
+  }
+  if (c.colors.length > 0) props.push(bind('colors', `[${c.colors.map((v) => `'${v}'`).join(', ')}]`));
+  else if (c.color) props.push(`color="${c.color}"`);
+  if (c.speed !== 1) props.push(bind('speed', num(c.speed)));
+  props.push(bind('size', String(c.size)));
+  return props;
+}
+
+const jsxBind = (name: string, expr: string) => `${name}={${expr}}`;
+
+function react(c: IndicatorConfig): string {
+  return `import { LoaderKit } from '@loader-kit/web/react';
+
+<LoaderKit
+  ${componentProps(c, jsxBind).join('\n  ')}
+/>`;
+}
+
+function vue(c: IndicatorConfig): string {
+  const props = componentProps(c, (name, expr) => `:${name}="${expr}"`);
+  return `<script setup lang="ts">
+import { LoaderKit } from '@loader-kit/web/vue';
+</script>
+
+<template>
+  <LoaderKit
+    ${props.join('\n    ')}
+  />
+</template>`;
+}
+
+function svelte(c: IndicatorConfig): string {
+  return `<script lang="ts">
+  import { LoaderKit } from '@loader-kit/web/svelte';
+</script>
+
+<LoaderKit
+  ${componentProps(c, jsxBind).join('\n  ')}
+/>`;
+}
+
 function webClass(c: IndicatorConfig): string {
   const options = [`indicator: '${c.indicator}'`];
   if (entries(c.params).length > 0) {
@@ -194,7 +240,10 @@ function reactNative(c: IndicatorConfig): string {
 
 export function snippets(c: IndicatorConfig): Snippet[] {
   return [
-    { id: 'web', label: 'Web', lang: 'html', code: web(c) },
+    { id: 'react', label: 'React', lang: 'tsx', code: react(c) },
+    { id: 'vue', label: 'Vue', lang: 'vue', code: vue(c) },
+    { id: 'svelte', label: 'Svelte', lang: 'svelte', code: svelte(c) },
+    { id: 'web', label: 'HTML', lang: 'html', code: web(c) },
     { id: 'web-ts', label: 'Web (TS)', lang: 'ts', code: webClass(c) },
     { id: 'android', label: 'Android View', lang: 'kotlin', code: androidView(c) },
     { id: 'compose', label: 'Compose', lang: 'kotlin', code: compose(c) },

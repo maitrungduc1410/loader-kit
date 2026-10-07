@@ -29,7 +29,7 @@ description: "LoaderKit 常见问题：性能、无障碍、与 GIF、Lottie 和
 
 ### 屏幕阅读器会读出什么？ {#what-do-screen-readers-announce}
 
-- **Web**：`<loader-kit>` 带有 `role="progressbar"`，不带进度值（即不确定进度条），并且带有 `aria-label="Loading"`，除非你设置了自己的标签。隐藏时它是 `aria-hidden` 的。
+- **Web**：`<loader-kit>`（React、Vue、Svelte 组件渲染的也是它）带有 `role="progressbar"`，不带进度值（即不确定进度条），并且带有 `aria-label="Loading"`，除非你设置了自己的标签。隐藏时它是 `aria-hidden` 的。
 - **Windows**：控件向 UI Automation 报告自己是一个进度条。
 - **Android 和 Apple**：视图不添加任何标签。请在 Android 上设置 `contentDescription`，在 iOS 和 macOS 上设置 `accessibilityLabel`，或者在周围的界面中说明加载状态。
 
@@ -69,7 +69,7 @@ Lottie 播放的是从设计工具导出的动画，适合插画和复杂动效�
 2. **颜色可见。** 默认颜色可能和背景相同：Windows 上是白色，Apple 平台上是 `systemGray`，Android 上是主题前景色，Web 上是 `currentColor`。
 3. **加载动画正在播放。** 开启 `hidesWhenStopped` 时（默认开启），停止后的加载动画什么都不画。
 4. **名称或 spec 有效。** 未知名称或无效 spec 什么都不画，并报告错误。查看 `specError`（Web、Apple）、`onError`（Android View）、Logcat（Compose），或者 `SpecError` 和 `SpecFailed`（Windows）。名称区分大小写：是 `BallPulse`，不是 `ballPulse`。
-5. **在 Web 上，元素已经注册。** 只有在浏览器中执行过 `import '@loader-kit/web/element'` 之后，`<loader-kit>` 才能工作。
+5. **在 Web 上，元素已经注册。** React、Vue、Svelte 组件会自动注册它。如果你直接手写 `<loader-kit>`，只有在浏览器中执行过 `import '@loader-kit/web/element'` 之后它才能工作。
 
 ### 加载动画不动 {#the-indicator-does-not-move}
 

@@ -45,7 +45,7 @@ Các indicator có sẵn cũng là spec. Chúng được đóng gói sẵn trong
 | Android | `Canvas`, kèm một `View` và một composable Jetpack Compose | `io.github.maitrungduc1410:loaderkit-core`, `loaderkit-compose` |
 | iOS, macOS | Core Animation, kèm view cho UIKit, AppKit và SwiftUI | `LoaderKit` (Swift Package Manager, CocoaPods) |
 | Windows | `Microsoft.UI.Composition`, kèm một control WinUI 3 | `LoaderKit.WinUI`, `LoaderKit.Core` (NuGet) |
-| Web | `<canvas>`, kèm một class và custom element `<loader-kit>` | `@loader-kit/web` (npm) |
+| Web | `<canvas>`, kèm component cho React, Vue và Svelte, custom element `<loader-kit>` và một class | `@loader-kit/web` (npm) |
 | React Native | engine Android và iOS | [`react-native-loader-kit`](/vi/platforms/react-native) (npm) |
 | Công cụ | schema, validator, reference evaluator | `@loader-kit/spec` (npm) |
 

@@ -45,7 +45,7 @@ spec 用数据来描述一个加载动画：
 | Android | `Canvas`，提供 `View` 和 Jetpack Compose 可组合项 | `io.github.maitrungduc1410:loaderkit-core`、`loaderkit-compose` |
 | iOS、macOS | Core Animation，提供 UIKit、AppKit 和 SwiftUI 视图 | `LoaderKit`（Swift Package Manager、CocoaPods） |
 | Windows | `Microsoft.UI.Composition`，提供 WinUI 3 控件 | `LoaderKit.WinUI`、`LoaderKit.Core`（NuGet） |
-| Web | `<canvas>`，提供一个类和 `<loader-kit>` 自定义元素 | `@loader-kit/web`（npm） |
+| Web | `<canvas>`，提供 React、Vue、Svelte 组件，`<loader-kit>` 自定义元素和一个类 | `@loader-kit/web`（npm） |
 | React Native | 复用 Android 和 iOS 引擎 | [`react-native-loader-kit`](/zh/platforms/react-native)（npm） |
 | 工具链 | schema、校验器、参考求值器 | `@loader-kit/spec`（npm） |
 

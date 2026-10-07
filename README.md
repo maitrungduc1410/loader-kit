@@ -15,7 +15,7 @@ indicators, some with params (`count`, `minScale`), and you can write your own (
 | Android (View, Jetpack Compose) | `io.github.maitrungduc1410:loaderkit-core`, `loaderkit-compose` | Maven Central, [docs](https://maitrungduc1410.github.io/loader-kit/platforms/android) |
 | iOS, macOS (UIKit, AppKit, SwiftUI) | `LoaderKit` | Swift Package Manager or CocoaPods `:git`/`:tag`, [docs](https://maitrungduc1410.github.io/loader-kit/platforms/apple) |
 | Windows (WinUI 3) | `LoaderKit.WinUI`, `LoaderKit.Core` | NuGet, [docs](https://maitrungduc1410.github.io/loader-kit/platforms/windows) |
-| Web (canvas, custom element) | `@loader-kit/web` | npm, [docs](https://maitrungduc1410.github.io/loader-kit/platforms/web) |
+| Web (React, Vue, Svelte, custom element) | `@loader-kit/web` | npm, [docs](https://maitrungduc1410.github.io/loader-kit/platforms/web) |
 | JavaScript / TypeScript | `@loader-kit/spec` | npm: schema, `defineIndicator`, validator, reference evaluator |
 | React Native | [`react-native-loader-kit`](https://github.com/maitrungduc1410/react-native-loader-kit) | npm |
 
@@ -52,7 +52,15 @@ Windows:
 <lk:LoaderKitIndicator Indicator="BallPulse" Color="White" Speed="1.5" />
 ```
 
-Web:
+Web (React shown; Vue and Svelte take the same props from `@loader-kit/web/vue` and `@loader-kit/web/svelte`):
+
+```tsx
+import { LoaderKit } from '@loader-kit/web/react';
+
+<LoaderKit indicator="BallSpinFadeLoader" color="#7c3aed" speed={1.5} />
+```
+
+Plain HTML:
 
 ```js
 import '@loader-kit/web/element'; // registers <loader-kit>

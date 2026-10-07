@@ -92,6 +92,10 @@ See [Getting started](/guide/getting-started) for the first indicator on each pl
 
 ::: code-group
 
+```tsx [React, Vue, Svelte]
+<LoaderKit indicator="BallSpinFadeLoader" color="#7c3aed" />
+```
+
 ```html [Web]
 <loader-kit indicator="BallSpinFadeLoader" color="#7c3aed"></loader-kit>
 ```

@@ -14,7 +14,7 @@ version (`fixed` in `config.json`): a changeset for any of them releases all of 
 | Package | What it versions |
 | --- | --- |
 | `@loader-kit/spec` | the npm package in `spec/` (schema, JSON Schema, built-in indicators, evaluator) |
-| `@loader-kit/web` | the npm package in `web/` (canvas view and `<loader-kit>` element) |
+| `@loader-kit/web` | the npm package in `web/` (canvas view, `<loader-kit>` element, React, Vue and Svelte components) |
 | `@loader-kit/android` | `io.github.maitrungduc1410:loaderkit-core` and `loaderkit-compose` |
 | `@loader-kit/apple` | the Swift package and the `LoaderKit` pod |
 | `@loader-kit/windows` | `LoaderKit.Core` and `LoaderKit.WinUI` on NuGet |

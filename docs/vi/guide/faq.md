@@ -29,7 +29,7 @@ Có. Hãy dừng indicator khi xong việc, hoặc gỡ nó khỏi view tree. In
 
 ### Screen reader sẽ đọc gì? {#what-do-screen-readers-announce}
 
-- **Web**: `<loader-kit>` có `role="progressbar"` không kèm giá trị (một progress bar không xác định) và `aria-label="Loading"`, trừ khi bạn tự đặt label. Khi bị ẩn, nó có `aria-hidden`.
+- **Web**: `<loader-kit>`, cũng là element mà các component React, Vue và Svelte render ra, có `role="progressbar"` không kèm giá trị (một progress bar không xác định) và `aria-label="Loading"`, trừ khi bạn tự đặt label. Khi bị ẩn, nó có `aria-hidden`.
 - **Windows**: control tự khai báo với UI Automation là một progress bar.
 - **Android và Apple**: view không thêm label nào. Hãy đặt `contentDescription` trên Android hoặc `accessibilityLabel` trên iOS và macOS, hoặc mô tả trạng thái đang tải ở phần UI xung quanh.
 
@@ -69,7 +69,7 @@ Kiểm tra lần lượt:
 2. **Màu có nhìn thấy được.** Màu mặc định có thể trùng với màu nền: trắng trên Windows, `systemGray` trên Apple, màu foreground của theme trên Android, `currentColor` trên web.
 3. **Indicator đang chạy.** Với `hidesWhenStopped` (mặc định), indicator đã dừng sẽ không vẽ gì.
 4. **Tên hoặc spec hợp lệ.** Tên không tồn tại hoặc spec không hợp lệ sẽ không vẽ gì và báo lỗi. Đọc `specError` (web, Apple), `onError` (Android View), Logcat (Compose), hoặc `SpecError` và `SpecFailed` (Windows). Tên phân biệt hoa thường: `BallPulse` chứ không phải `ballPulse`.
-5. **Trên web, phần tử đã được đăng ký.** `<loader-kit>` chỉ hoạt động sau khi `import '@loader-kit/web/element'` đã chạy trong trình duyệt.
+5. **Trên web, phần tử đã được đăng ký.** Các component React, Vue và Svelte tự đăng ký nó. Nếu bạn tự viết `<loader-kit>` thì nó chỉ hoạt động sau khi `import '@loader-kit/web/element'` đã chạy trong trình duyệt.
 
 ### Indicator không chuyển động {#the-indicator-does-not-move}
 

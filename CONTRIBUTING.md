@@ -6,7 +6,7 @@
 | --- | --- |
 | `SPEC.md` | the indicator spec: meaning of every field and the rules every engine follows |
 | `spec/` | `@loader-kit/spec`: TypeScript schema, JSON Schema, reference evaluator, validator, built-in indicators, generator |
-| `web/` | `@loader-kit/web`: canvas renderer, `LoaderKitView` and the `<loader-kit>` custom element |
+| `web/` | `@loader-kit/web`: canvas renderer, `LoaderKitView`, the `<loader-kit>` custom element and the React, Vue and Svelte components |
 | `test-vectors/` | generated conformance suite, run by the tests of every engine |
 | `android/` | Gradle project: `loaderkit-core` (View) and `loaderkit-compose` |
 | `Package.swift`, `apple/` | Swift package: `LoaderKitCore` (pure Swift) and `LoaderKit` (Core Animation, UIKit, AppKit, SwiftUI) |

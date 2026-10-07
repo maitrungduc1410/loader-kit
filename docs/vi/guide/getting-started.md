@@ -72,6 +72,30 @@ Mỗi đoạn code dưới đây hiển thị `BallSpinFadeLoader` màu tím, nh
 
 ::: code-group
 
+```tsx [React]
+import { LoaderKit } from '@loader-kit/web/react';
+
+<LoaderKit indicator="BallSpinFadeLoader" color="#7c3aed" speed={1.5} />
+```
+
+```vue [Vue]
+<script setup lang="ts">
+import { LoaderKit } from '@loader-kit/web/vue';
+</script>
+
+<template>
+  <LoaderKit indicator="BallSpinFadeLoader" color="#7c3aed" :speed="1.5" />
+</template>
+```
+
+```svelte [Svelte]
+<script lang="ts">
+  import { LoaderKit } from '@loader-kit/web/svelte';
+</script>
+
+<LoaderKit indicator="BallSpinFadeLoader" color="#7c3aed" speed={1.5} />
+```
+
 ```html [HTML]
 <script type="module">
   import '@loader-kit/web/element';

@@ -45,7 +45,7 @@ The built-in indicators are specs too. They ship inside every engine, so you onl
 | Android | `Canvas`, with a `View` and a Jetpack Compose composable | `io.github.maitrungduc1410:loaderkit-core`, `loaderkit-compose` |
 | iOS, macOS | Core Animation, with UIKit, AppKit and SwiftUI views | `LoaderKit` (Swift Package Manager, CocoaPods) |
 | Windows | `Microsoft.UI.Composition`, with a WinUI 3 control | `LoaderKit.WinUI`, `LoaderKit.Core` (NuGet) |
-| Web | `<canvas>`, with a class and a `<loader-kit>` custom element | `@loader-kit/web` (npm) |
+| Web | `<canvas>`, with React, Vue and Svelte components, a `<loader-kit>` custom element and a class | `@loader-kit/web` (npm) |
 | React Native | the Android and iOS engines | [`react-native-loader-kit`](/platforms/react-native) (npm) |
 | Tooling | schema, validator, reference evaluator | `@loader-kit/spec` (npm) |
 

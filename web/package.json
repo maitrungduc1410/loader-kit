@@ -1,7 +1,7 @@
 {
   "name": "@loader-kit/web",
   "version": "0.0.0",
-  "description": "LoaderKit loading indicators for the web: a canvas renderer and a <loader-kit> custom element",
+  "description": "LoaderKit loading indicators for the web: a canvas renderer, a <loader-kit> custom element, and React, Vue and Svelte components",
   "license": "MIT",
   "author": "Duc Trung Mai <maitrungduc1410@gmail.com> (https://github.com/maitrungduc1410)",
   "homepage": "https://maitrungduc1410.github.io/loader-kit/platforms/web",
@@ -19,7 +19,10 @@
     "spinner",
     "animation",
     "canvas",
-    "web-component"
+    "web-component",
+    "react",
+    "vue",
+    "svelte"
   ],
   "type": "module",
   "main": "./dist/cjs/index.js",
@@ -46,11 +49,37 @@
         "default": "./dist/cjs/element.js"
       }
     },
+    "./react": {
+      "import": {
+        "types": "./dist/esm/react.d.ts",
+        "default": "./dist/esm/react.js"
+      },
+      "require": {
+        "types": "./dist/cjs/react.d.ts",
+        "default": "./dist/cjs/react.js"
+      }
+    },
+    "./vue": {
+      "import": {
+        "types": "./dist/esm/vue.d.ts",
+        "default": "./dist/esm/vue.js"
+      },
+      "require": {
+        "types": "./dist/cjs/vue.d.ts",
+        "default": "./dist/cjs/vue.js"
+      }
+    },
+    "./svelte": {
+      "types": "./svelte/index.d.ts",
+      "svelte": "./svelte/index.js",
+      "default": "./svelte/index.js"
+    },
     "./package.json": "./package.json"
   },
   "files": [
     "dist",
-    "src"
+    "src",
+    "svelte"
   ],
   "sideEffects": [
     "./dist/esm/element.js",
@@ -68,8 +97,31 @@
   "dependencies": {
     "@loader-kit/spec": "0.0.0"
   },
+  "peerDependencies": {
+    "react": ">=17",
+    "svelte": "^4.0.0 || ^5.0.0",
+    "vue": "^3.3.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "svelte": {
+      "optional": true
+    },
+    "vue": {
+      "optional": true
+    }
+  },
   "devDependencies": {
-    "happy-dom": "^20.14.5"
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "happy-dom": "^20.14.5",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "svelte": "^5.57.2",
+    "svelte4": "npm:svelte@^4.2.20",
+    "vue": "^3.5.43"
   },
   "publishConfig": {
     "access": "public"

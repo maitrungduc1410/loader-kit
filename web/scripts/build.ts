@@ -1,6 +1,6 @@
 // Builds dist/esm (ES modules) and dist/cjs (CommonJS) from src/.
 import { execFileSync } from 'node:child_process';
-import { rmSync, writeFileSync } from 'node:fs';
+import { readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -24,3 +24,10 @@ run(
   'false'
 );
 writeFileSync(join(pkg, 'dist/cjs/package.json'), `${JSON.stringify({ type: 'commonjs' })}\n`);
+
+// Declarations keep the `.ts` specifiers of the sources, which TypeScript 4 consumers reject.
+for (const file of readdirSync(join(pkg, 'dist'), { recursive: true, encoding: 'utf8' })) {
+  if (!file.endsWith('.d.ts')) continue;
+  const path = join(pkg, 'dist', file);
+  writeFileSync(path, readFileSync(path, 'utf8').replace(/(['"])(\.\.?\/[^'"]+)\.ts\1/g, '$1$2.js$1'));
+}

@@ -92,6 +92,10 @@ Xem [Bắt đầu](/vi/guide/getting-started) để hiển thị indicator đầ
 
 ::: code-group
 
+```tsx [React, Vue, Svelte]
+<LoaderKit indicator="BallSpinFadeLoader" color="#7c3aed" />
+```
+
 ```html [Web]
 <loader-kit indicator="BallSpinFadeLoader" color="#7c3aed"></loader-kit>
 ```
