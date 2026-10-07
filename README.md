@@ -2,6 +2,19 @@
 
 Loading indicators described as data and rendered natively on Android, iOS, macOS, Windows and the web.
 
+<p align="center">
+  <a href="https://maitrungduc1410.github.io/loader-kit/guide/indicators">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="docs/public/readme/indicators-dark.gif">
+      <img alt="The 33 built-in LoaderKit indicators, animating" src="docs/public/readme/indicators-light.gif" width="100%">
+    </picture>
+  </a>
+</p>
+
+<p align="center">
+  All 33 built-in indicators. <a href="https://maitrungduc1410.github.io/loader-kit/guide/indicators">Open the gallery</a> to try them with your own colors, size and speed, or build a new one in the <a href="https://maitrungduc1410.github.io/loader-kit/tools/playground">playground</a>.
+</p>
+
 Each indicator is a small JSON spec: elements laid out in a unit box, and keyframe tracks for
 their scale, opacity, rotation and translation. Every platform engine reads the same spec and
 follows the same rules ([SPEC.md](SPEC.md)), checked against a shared conformance suite
