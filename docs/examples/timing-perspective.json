@@ -1,0 +1,13 @@
+{
+  "$schema": "https://maitrungduc1410.github.io/loader-kit/schema/v1.json",
+  "schemaVersion": 1,
+  "name": "TimingPerspective",
+  "duration": 2,
+  "perspective": 1.5,
+  "layout": { "type": "single", "size": 0.6 },
+  "shape": { "type": "rect", "cornerRadius": 0.1 },
+  "tracks": [
+    { "property": "rotateX", "keyTimes": [0, 0.5, 1], "values": [0, 3.141592654, 3.141592654], "easing": "easeInOut" },
+    { "property": "rotateY", "keyTimes": [0, 0.5, 1], "values": [0, 0, 3.141592654], "easing": "easeInOut" }
+  ]
+}

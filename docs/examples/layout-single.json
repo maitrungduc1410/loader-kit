@@ -1,0 +1,11 @@
+{
+  "$schema": "https://maitrungduc1410.github.io/loader-kit/schema/v1.json",
+  "schemaVersion": 1,
+  "name": "LayoutSingle",
+  "duration": 1.2,
+  "layout": { "type": "single", "width": 0.7, "height": 0.35 },
+  "shape": { "type": "rect", "cornerRadius": 0.3 },
+  "tracks": [
+    { "property": "rotate", "keyTimes": [0, 1], "values": [0, 3.141592654], "easing": "easeInOut" }
+  ]
+}

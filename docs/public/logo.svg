@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <title>LoaderKit</title>
+  <defs>
+    <linearGradient id="lk" x1="8" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#8b5cf6" />
+      <stop offset="1" stop-color="#06b6d4" />
+    </linearGradient>
+  </defs>
+  <!-- eight dots on a ring, fading behind the leading one: a spinner caught mid-turn -->
+  <g fill="url(#lk)">
+    <circle cx="32" cy="10" r="6.2" />
+    <circle cx="16.44" cy="16.44" r="5.83" fill-opacity="0.91" />
+    <circle cx="10" cy="32" r="5.46" fill-opacity="0.82" />
+    <circle cx="16.44" cy="47.56" r="5.09" fill-opacity="0.73" />
+    <circle cx="32" cy="54" r="4.71" fill-opacity="0.65" />
+    <circle cx="47.56" cy="47.56" r="4.34" fill-opacity="0.56" />
+    <circle cx="54" cy="32" r="3.97" fill-opacity="0.47" />
+    <circle cx="47.56" cy="16.44" r="3.6" fill-opacity="0.38" />
+  </g>
+</svg>

@@ -1,0 +1,13 @@
+{
+  "$schema": "https://maitrungduc1410.github.io/loader-kit/schema/v1.json",
+  "schemaVersion": 1,
+  "name": "ShapeRingTrim",
+  "duration": 1.5,
+  "layout": { "type": "single", "size": 0.9 },
+  "shape": { "type": "ring", "strokeWidth": 0.1 },
+  "tracks": [
+    { "property": "strokeStart", "keyTimes": [0, 0.5, 1], "values": [0, 0, 1], "easing": "easeInOut" },
+    { "property": "strokeEnd", "keyTimes": [0, 0.5, 1], "values": [0, 1, 1], "easing": "easeInOut" },
+    { "property": "rotate", "keyTimes": [0, 1], "values": [0, 3.141592654] }
+  ]
+}

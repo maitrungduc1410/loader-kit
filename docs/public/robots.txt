@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://maitrungduc1410.github.io/loader-kit/sitemap.xml

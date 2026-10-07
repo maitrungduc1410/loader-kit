@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows10.0.19041.0</TargetFramework>
+    <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
+    <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
+    <UseWinUI>true</UseWinUI>
+    <RootNamespace>LoaderKit.WinUI</RootNamespace>
+    <AssemblyName>LoaderKit.WinUI</AssemblyName>
+    <PackageId>LoaderKit.WinUI</PackageId>
+    <Description>Loading indicators described as data, rendered with Microsoft.UI.Composition: the LoaderKitIndicator control for WinUI 3 and the Windows App SDK.</Description>
+    <PackageTags>$(PackageTags);winui;winui3;windowsappsdk;composition</PackageTags>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.8.260921001" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LoaderKit.Core\LoaderKit.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\README.md" Pack="true" PackagePath="\" Visible="false" />
+  </ItemGroup>
+
+</Project>

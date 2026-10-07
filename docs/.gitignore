@@ -1,0 +1,7 @@
+.vitepress/dist/
+.vitepress/cache/
+
+# Written by scripts/prepare.ts
+public/schema/
+public/llms.txt
+public/llms-full.txt

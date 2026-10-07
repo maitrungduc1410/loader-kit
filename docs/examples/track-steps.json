@@ -1,0 +1,12 @@
+{
+  "$schema": "https://maitrungduc1410.github.io/loader-kit/schema/v1.json",
+  "schemaVersion": 1,
+  "name": "TrackSteps",
+  "duration": 2,
+  "layout": { "type": "single", "size": 0.6 },
+  "shape": { "type": "rect", "cornerRadius": 0.2 },
+  "tracks": [
+    { "property": "scale", "keyTimes": [0, 0.25, 0.5, 0.75, 1], "values": [1, 0.5, 0.5, 1, 1], "easing": "easeInOut" },
+    { "property": "opacity", "keyTimes": [0, 0.5, 0.5, 1], "values": [1, 1, 0.4, 0.4] }
+  ]
+}

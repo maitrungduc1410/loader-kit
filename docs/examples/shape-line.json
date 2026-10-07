@@ -1,0 +1,12 @@
+{
+  "$schema": "https://maitrungduc1410.github.io/loader-kit/schema/v1.json",
+  "schemaVersion": 1,
+  "name": "ShapeLine",
+  "duration": 0.9,
+  "layout": { "type": "row", "count": 4, "gap": 0.12, "itemHeight": 0.8 },
+  "shape": { "type": "line" },
+  "stagger": [0, 0.3, 0.15, 0.45],
+  "tracks": [
+    { "property": "scaleY", "keyTimes": [0, 0.5, 1], "values": [0.3, 1, 0.3], "easing": "easeInOut" }
+  ]
+}

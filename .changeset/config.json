@@ -1,0 +1,15 @@
+{
+  "$schema": "https://unpkg.com/@changesets/config@4.0.1/schema.json",
+  "baseBranch": "master",
+  "access": "public",
+  "changelog": "@changesets/cli/changelog",
+  "commit": false,
+  "format": false,
+  "ignore": ["loader-kit-docs"],
+  "fixed": [["@loader-kit/spec", "@loader-kit/web", "@loader-kit/android", "@loader-kit/apple", "@loader-kit/windows"]],
+  "linked": [],
+  "privatePackages": {
+    "version": true,
+    "tag": false
+  }
+}

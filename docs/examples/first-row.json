@@ -1,0 +1,11 @@
+{
+  "$schema": "https://maitrungduc1410.github.io/loader-kit/schema/v1.json",
+  "schemaVersion": 1,
+  "name": "FirstRow",
+  "duration": 1,
+  "layout": { "type": "row", "count": 3, "gap": 0.1 },
+  "shape": { "type": "circle" },
+  "tracks": [
+    { "property": "scale", "keyTimes": [0, 0.5, 1], "values": [1, 0.4, 1] }
+  ]
+}

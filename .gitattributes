@@ -1,0 +1,8 @@
+* text=auto eol=lf
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.sln text eol=crlf
+*.jar binary
+*.png binary
+test-vectors/*.json linguist-generated=true
+**/BuiltinIndicatorSpecs.* linguist-generated=true

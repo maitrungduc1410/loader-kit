@@ -1,0 +1,32 @@
+{
+  "name": "loader-kit-docs",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Documentation site for LoaderKit (VitePress)",
+  "type": "module",
+  "scripts": {
+    "prepare-assets": "node scripts/prepare.ts",
+    "og": "node scripts/og.ts",
+    "dev": "node scripts/prepare.ts && vitepress dev",
+    "build": "node scripts/prepare.ts && vitepress build",
+    "preview": "vitepress preview",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@codemirror/autocomplete": "^6.20.3",
+    "@codemirror/commands": "^6.11.1",
+    "@codemirror/lang-json": "^6.0.2",
+    "@codemirror/language": "^6.12.4",
+    "@codemirror/lint": "^6.9.7",
+    "@codemirror/state": "^6.7.6",
+    "@codemirror/view": "^6.43.13",
+    "@lezer/highlight": "^1.2.5",
+    "@loader-kit/spec": "0.0.0",
+    "@loader-kit/web": "0.0.0"
+  },
+  "devDependencies": {
+    "@resvg/resvg-js": "^2.6.2",
+    "vitepress": "^1.6.4",
+    "vue": "^3.5.43"
+  }
+}

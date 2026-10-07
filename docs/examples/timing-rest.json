@@ -1,0 +1,13 @@
+{
+  "$schema": "https://maitrungduc1410.github.io/loader-kit/schema/v1.json",
+  "schemaVersion": 1,
+  "name": "TimingRest",
+  "duration": 1.2,
+  "layout": { "type": "row", "count": 4, "gap": 0.08 },
+  "shape": { "type": "circle" },
+  "stagger": { "each": 0.3 },
+  "rest": { "scale": 0 },
+  "tracks": [
+    { "property": "scale", "keyTimes": [0, 0.5, 1], "values": [0, 1, 0], "easing": "easeInOut" }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://maitrungduc1410.github.io/loader-kit/schema/v1.json",
+  "schemaVersion": 1,
+  "name": "FirstParams",
+  "duration": 1,
+  "params": { "count": 3, "minScale": 0.4 },
+  "layout": { "type": "row", "count": { "$param": "count" }, "gap": 0.1 },
+  "shape": { "type": "circle" },
+  "stagger": { "each": 0.15 },
+  "tracks": [
+    { "property": "scale", "keyTimes": [0, 0.5, 1], "values": [1, { "$param": "minScale" }, 1], "easing": "easeInOut" },
+    { "property": "opacity", "keyTimes": [0, 0.5, 1], "values": [1, 0.3, 1], "easing": "easeInOut" }
+  ]
+}

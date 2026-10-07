@@ -1,0 +1,58 @@
+{
+  "name": "@loader-kit/spec",
+  "version": "0.0.0",
+  "description": "Schema, built-in indicators and reference evaluator for LoaderKit indicator specs",
+  "license": "MIT",
+  "author": "Duc Trung Mai <maitrungduc1410@gmail.com> (https://github.com/maitrungduc1410)",
+  "homepage": "https://github.com/maitrungduc1410/loader-kit#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maitrungduc1410/loader-kit.git",
+    "directory": "spec"
+  },
+  "bugs": {
+    "url": "https://github.com/maitrungduc1410/loader-kit/issues"
+  },
+  "keywords": [
+    "loader",
+    "loading-indicator",
+    "spinner",
+    "animation",
+    "react-native"
+  ],
+  "type": "module",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/esm/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/esm/index.d.ts",
+        "default": "./dist/esm/index.js"
+      },
+      "require": {
+        "types": "./dist/cjs/index.d.ts",
+        "default": "./dist/cjs/index.js"
+      }
+    },
+    "./schema.json": "./schema.json",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "src",
+    "schema.json"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "build": "node scripts/build.ts",
+    "test": "node --test \"test/**/*.test.ts\"",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "ajv": "^8.20.0"
+  }
+}

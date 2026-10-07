@@ -1,0 +1,11 @@
+{
+  "$schema": "https://maitrungduc1410.github.io/loader-kit/schema/v1.json",
+  "schemaVersion": 1,
+  "name": "ShapeRing",
+  "duration": 0.75,
+  "layout": { "type": "single", "size": 0.9 },
+  "shape": { "type": "ring", "strokeWidth": 0.1, "sweep": 4.71238898 },
+  "tracks": [
+    { "property": "rotate", "keyTimes": [0, 1], "values": [0, 6.283185307] }
+  ]
+}

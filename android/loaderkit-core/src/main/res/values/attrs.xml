@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="LoaderKitView">
+        <!-- Name of a built-in indicator, e.g. BallPulse. -->
+        <attr name="indicator" format="string" />
+        <!-- Same format as the Material Components attribute of the same name, so both libraries merge. -->
+        <attr name="indicatorColor" format="color|reference" />
+        <!-- Playback rate, 1 is the speed of the spec. -->
+        <attr name="speed" format="float" />
+        <attr name="hidesWhenStopped" format="boolean" />
+        <!-- A frozen point of the animation cycle, 0 to 1. Unset follows the clock. -->
+        <attr name="cycleProgress" format="float" />
+    </declare-styleable>
+</resources>

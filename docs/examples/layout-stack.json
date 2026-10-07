@@ -1,0 +1,13 @@
+{
+  "$schema": "https://maitrungduc1410.github.io/loader-kit/schema/v1.json",
+  "schemaVersion": 1,
+  "name": "LayoutStack",
+  "duration": 1.5,
+  "layout": { "type": "stack", "count": 3 },
+  "shape": { "type": "circle" },
+  "stagger": [0, -0.5, -1],
+  "tracks": [
+    { "property": "scale", "keyTimes": [0, 1], "values": [0, 1], "easing": "easeOut" },
+    { "property": "opacity", "keyTimes": [0, 0.1, 1], "values": [0, 0.8, 0] }
+  ]
+}

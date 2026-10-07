@@ -1,0 +1,1010 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://maitrungduc1410.github.io/loader-kit/schema/v1.json",
+  "title": "LoaderKit indicator spec",
+  "description": "A loading indicator described as data, schema version 1. Coordinates are fractions of a unit box (origin top-left, y down), angles are radians (positive is clockwise), times are seconds at speed 1.",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "URL of this JSON Schema, for editors. Engines ignore it."
+    },
+    "schemaVersion": {
+      "const": 1,
+      "description": "Schema version of the spec."
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Name of the indicator."
+    },
+    "duration": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "description": "Length of one cycle in seconds, at speed 1."
+    },
+    "params": {
+      "type": "object",
+      "description": "Parameter defaults, referenced as `{ \"$param\": \"name\" }`. Users can override them by name.",
+      "additionalProperties": {
+        "type": "number"
+      }
+    },
+    "perspective": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "description": "Distance from the viewer to the box for rotateX and rotateY, in box units. Default 2.5."
+    },
+    "parts": {
+      "type": "array",
+      "description": "Groups of elements drawn in order. Element indices (and so colors) run across the parts.",
+      "items": {
+        "$ref": "#/definitions/part"
+      },
+      "minItems": 1
+    },
+    "layout": {
+      "$ref": "#/definitions/layout"
+    },
+    "shape": {
+      "$ref": "#/definitions/shape"
+    },
+    "tracks": {
+      "type": "array",
+      "description": "Tracks applied to every element of the group. A property can have at most one track.",
+      "items": {
+        "$ref": "#/definitions/track"
+      }
+    },
+    "stagger": {
+      "description": "Start offset of each element: a list of offsets in seconds by element index, or `{ each, start? }`.",
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "each": {
+              "type": "number",
+              "description": "Element i starts at `start + each * i` seconds."
+            },
+            "start": {
+              "type": "number",
+              "description": "Offset of element 0, default 0."
+            }
+          },
+          "required": [
+            "each"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "durations": {
+      "type": "array",
+      "description": "Cycle length of each element in seconds, by index. Must cover every element.",
+      "items": {
+        "type": "number",
+        "exclusiveMinimum": 0
+      }
+    },
+    "rest": {
+      "type": "object",
+      "description": "Values of properties that no track drives, also shown before an element starts.",
+      "properties": {
+        "scale": {
+          "$ref": "#/definitions/num"
+        },
+        "scaleX": {
+          "$ref": "#/definitions/num"
+        },
+        "scaleY": {
+          "$ref": "#/definitions/num"
+        },
+        "opacity": {
+          "$ref": "#/definitions/num"
+        },
+        "rotate": {
+          "$ref": "#/definitions/num"
+        },
+        "rotateX": {
+          "$ref": "#/definitions/num"
+        },
+        "rotateY": {
+          "$ref": "#/definitions/num"
+        },
+        "translateX": {
+          "$ref": "#/definitions/num"
+        },
+        "translateY": {
+          "$ref": "#/definitions/num"
+        },
+        "strokeStart": {
+          "$ref": "#/definitions/num"
+        },
+        "strokeEnd": {
+          "$ref": "#/definitions/num"
+        }
+      },
+      "additionalProperties": false
+    },
+    "groupTracks": {
+      "type": "array",
+      "description": "Tracks that move the whole group around the box center, on the group cycle, without stagger.",
+      "items": {
+        "$ref": "#/definitions/groupTrack"
+      }
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "name",
+    "duration"
+  ],
+  "additionalProperties": false,
+  "if": {
+    "properties": {
+      "parts": true
+    },
+    "required": [
+      "parts"
+    ]
+  },
+  "then": {
+    "not": {
+      "anyOf": [
+        {
+          "properties": {
+            "layout": true
+          },
+          "required": [
+            "layout"
+          ]
+        },
+        {
+          "properties": {
+            "shape": true
+          },
+          "required": [
+            "shape"
+          ]
+        },
+        {
+          "properties": {
+            "tracks": true
+          },
+          "required": [
+            "tracks"
+          ]
+        },
+        {
+          "properties": {
+            "stagger": true
+          },
+          "required": [
+            "stagger"
+          ]
+        },
+        {
+          "properties": {
+            "durations": true
+          },
+          "required": [
+            "durations"
+          ]
+        },
+        {
+          "properties": {
+            "rest": true
+          },
+          "required": [
+            "rest"
+          ]
+        },
+        {
+          "properties": {
+            "groupTracks": true
+          },
+          "required": [
+            "groupTracks"
+          ]
+        }
+      ]
+    }
+  },
+  "else": {
+    "properties": {
+      "layout": true,
+      "shape": true
+    },
+    "required": [
+      "layout",
+      "shape"
+    ]
+  },
+  "definitions": {
+    "paramRef": {
+      "type": "object",
+      "description": "A reference to a value of `params`.",
+      "properties": {
+        "$param": {
+          "type": "string",
+          "description": "Name of a key in the spec `params`."
+        }
+      },
+      "required": [
+        "$param"
+      ],
+      "additionalProperties": false
+    },
+    "num": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "$ref": "#/definitions/paramRef"
+        }
+      ]
+    },
+    "part": {
+      "type": "object",
+      "description": "A group of elements that share a layout, a shape and tracks.",
+      "properties": {
+        "layout": {
+          "$ref": "#/definitions/layout"
+        },
+        "shape": {
+          "$ref": "#/definitions/shape"
+        },
+        "tracks": {
+          "type": "array",
+          "description": "Tracks applied to every element of the group. A property can have at most one track.",
+          "items": {
+            "$ref": "#/definitions/track"
+          }
+        },
+        "stagger": {
+          "description": "Start offset of each element: a list of offsets in seconds by element index, or `{ each, start? }`.",
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "number"
+              }
+            },
+            {
+              "type": "object",
+              "properties": {
+                "each": {
+                  "type": "number",
+                  "description": "Element i starts at `start + each * i` seconds."
+                },
+                "start": {
+                  "type": "number",
+                  "description": "Offset of element 0, default 0."
+                }
+              },
+              "required": [
+                "each"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "durations": {
+          "type": "array",
+          "description": "Cycle length of each element in seconds, by index. Must cover every element.",
+          "items": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          }
+        },
+        "rest": {
+          "type": "object",
+          "description": "Values of properties that no track drives, also shown before an element starts.",
+          "properties": {
+            "scale": {
+              "$ref": "#/definitions/num"
+            },
+            "scaleX": {
+              "$ref": "#/definitions/num"
+            },
+            "scaleY": {
+              "$ref": "#/definitions/num"
+            },
+            "opacity": {
+              "$ref": "#/definitions/num"
+            },
+            "rotate": {
+              "$ref": "#/definitions/num"
+            },
+            "rotateX": {
+              "$ref": "#/definitions/num"
+            },
+            "rotateY": {
+              "$ref": "#/definitions/num"
+            },
+            "translateX": {
+              "$ref": "#/definitions/num"
+            },
+            "translateY": {
+              "$ref": "#/definitions/num"
+            },
+            "strokeStart": {
+              "$ref": "#/definitions/num"
+            },
+            "strokeEnd": {
+              "$ref": "#/definitions/num"
+            }
+          },
+          "additionalProperties": false
+        },
+        "groupTracks": {
+          "type": "array",
+          "description": "Tracks that move the whole group around the box center, on the group cycle, without stagger.",
+          "items": {
+            "$ref": "#/definitions/groupTrack"
+          }
+        },
+        "duration": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "description": "Cycle length of this group in seconds. Default: the spec duration."
+        }
+      },
+      "required": [
+        "layout",
+        "shape"
+      ],
+      "additionalProperties": false
+    },
+    "layout": {
+      "description": "Where the elements sit inside the unit box.",
+      "oneOf": [
+        {
+          "type": "object",
+          "description": "One element.",
+          "properties": {
+            "type": {
+              "const": "single"
+            },
+            "size": {
+              "description": "Side of the element, default 1.",
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "$ref": "#/definitions/paramRef"
+                }
+              ]
+            },
+            "width": {
+              "description": "Element width, default `size`.",
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "$ref": "#/definitions/paramRef"
+                }
+              ]
+            },
+            "height": {
+              "description": "Element height, default `size`.",
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "$ref": "#/definitions/paramRef"
+                }
+              ]
+            },
+            "x": {
+              "description": "Element center x, default 0.5.",
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "$ref": "#/definitions/paramRef"
+                }
+              ]
+            },
+            "y": {
+              "description": "Element center y, default 0.5.",
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "$ref": "#/definitions/paramRef"
+                }
+              ]
+            }
+          },
+          "required": [
+            "type"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "`count` elements on top of each other, all at the same place.",
+          "properties": {
+            "type": {
+              "const": "stack"
+            },
+            "count": {
+              "description": "Number of elements.",
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "$ref": "#/definitions/paramRef"
+                }
+              ]
+            },
+            "size": {
+              "description": "Side of the element, default 1.",
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "$ref": "#/definitions/paramRef"
+                }
+              ]
+            },
+            "width": {
+              "description": "Element width, default `size`.",
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "$ref": "#/definitions/paramRef"
+                }
+              ]
+            },
+            "height": {
+              "description": "Element height, default `size`.",
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "$ref": "#/definitions/paramRef"
+                }
+              ]
+            },
+            "x": {
+              "description": "Element center x, default 0.5.",
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "$ref": "#/definitions/paramRef"
+                }
+              ]
+            },
+            "y": {
+              "description": "Element center y, default 0.5.",
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "$ref": "#/definitions/paramRef"
+                }
+              ]
+            }
+          },
+          "required": [
+            "type",
+            "count"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Elements side by side, left to right, centered vertically.",
+          "properties": {
+            "type": {
+              "const": "row"
+            },
+            "count": {
+              "description": "Number of elements.",
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "$ref": "#/definitions/paramRef"
+                }
+              ]
+            },
+            "gap": {
+              "description": "Space between two elements.",
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "$ref": "#/definitions/paramRef"
+                }
+              ]
+            },
+            "itemWidth": {
+              "description": "Element width. Default: the elements and gaps fill the box. With a width the row is centered.",
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "$ref": "#/definitions/paramRef"
+                }
+              ]
+            },
+            "itemHeight": {
+              "description": "Element height. Default: the element width.",
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "$ref": "#/definitions/paramRef"
+                }
+              ]
+            }
+          },
+          "required": [
+            "type",
+            "count",
+            "gap"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Elements in rows and columns filling the box, numbered row by row.",
+          "properties": {
+            "type": {
+              "const": "grid"
+            },
+            "columns": {
+              "description": "Number of columns.",
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "$ref": "#/definitions/paramRef"
+                }
+              ]
+            },
+            "rows": {
+              "description": "Number of rows.",
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "$ref": "#/definitions/paramRef"
+                }
+              ]
+            },
+            "gap": {
+              "description": "Space between two cells.",
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "$ref": "#/definitions/paramRef"
+                }
+              ]
+            }
+          },
+          "required": [
+            "type",
+            "columns",
+            "rows",
+            "gap"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Elements evenly spaced on a circle, clockwise.",
+          "properties": {
+            "type": {
+              "const": "ring"
+            },
+            "count": {
+              "description": "Number of elements.",
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "$ref": "#/definitions/paramRef"
+                }
+              ]
+            },
+            "itemSize": {
+              "description": "Side of each element. Centers sit on a circle of radius `0.5 - itemSize / 2`.",
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "$ref": "#/definitions/paramRef"
+                }
+              ]
+            },
+            "itemWidth": {
+              "description": "Element width, default `itemSize`.",
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "$ref": "#/definitions/paramRef"
+                }
+              ]
+            },
+            "itemHeight": {
+              "description": "Element height, default `itemSize`.",
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "$ref": "#/definitions/paramRef"
+                }
+              ]
+            },
+            "startAngle": {
+              "description": "Angle of the first element, default 0 (to the right of the center).",
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "$ref": "#/definitions/paramRef"
+                }
+              ]
+            },
+            "orient": {
+              "type": "boolean",
+              "description": "Rotate each element by its angle plus π/2, so its top points away from the center."
+            }
+          },
+          "required": [
+            "type",
+            "count",
+            "itemSize"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "shape": {
+      "description": "What each element draws, filling its box.",
+      "oneOf": [
+        {
+          "type": "object",
+          "description": "A filled ellipse, or with `sweep` below 2π the part of it cut off by a chord.",
+          "properties": {
+            "type": {
+              "const": "circle"
+            },
+            "startAngle": {
+              "description": "Where the arc starts, in radians clockwise from the right. Default -π/2 (the top).",
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "$ref": "#/definitions/paramRef"
+                }
+              ]
+            },
+            "sweep": {
+              "description": "Angle covered by the arc, in radians within (0, 2π]. Default 2π.",
+              "anyOf": [
+                {
+                  "type": "number",
+                  "exclusiveMinimum": 0,
+                  "maximum": 6.283185308179586
+                },
+                {
+                  "$ref": "#/definitions/paramRef"
+                }
+              ]
+            }
+          },
+          "required": [
+            "type"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "A filled rectangle.",
+          "properties": {
+            "type": {
+              "const": "rect"
+            },
+            "cornerRadius": {
+              "description": "Corner radius as a fraction of the shorter side of the element, 0 to 0.5.",
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "$ref": "#/definitions/paramRef"
+                }
+              ]
+            }
+          },
+          "required": [
+            "type"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "A stroked circle, or arcs of it. strokeStart and strokeEnd trim every arc.",
+          "properties": {
+            "type": {
+              "const": "ring"
+            },
+            "strokeWidth": {
+              "description": "Stroke width as a fraction of the shorter side of the element.",
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "$ref": "#/definitions/paramRef"
+                }
+              ]
+            },
+            "startAngle": {
+              "description": "Where the first arc starts, default -π/2 (the top). Arcs go clockwise.",
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "$ref": "#/definitions/paramRef"
+                }
+              ]
+            },
+            "sweep": {
+              "description": "Angle covered by each arc, in radians within (0, 2π]. Default 2π.",
+              "anyOf": [
+                {
+                  "type": "number",
+                  "exclusiveMinimum": 0,
+                  "maximum": 6.283185308179586
+                },
+                {
+                  "$ref": "#/definitions/paramRef"
+                }
+              ]
+            },
+            "segments": {
+              "description": "Number of arcs, evenly spaced around the circle. Default 1.",
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "$ref": "#/definitions/paramRef"
+                }
+              ]
+            }
+          },
+          "required": [
+            "type",
+            "strokeWidth"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "An isosceles triangle pointing up, filling the element.",
+          "properties": {
+            "type": {
+              "const": "triangle"
+            }
+          },
+          "required": [
+            "type"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "A bar with fully rounded ends.",
+          "properties": {
+            "type": {
+              "const": "line"
+            }
+          },
+          "required": [
+            "type"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "easing": {
+      "anyOf": [
+        {
+          "enum": [
+            "linear",
+            "ease",
+            "easeIn",
+            "easeOut",
+            "easeInOut"
+          ],
+          "description": "A named easing. `ease` is the CSS default."
+        },
+        {
+          "type": "array",
+          "description": "A cubic bezier `[x1, y1, x2, y2]`, like CSS cubic-bezier().",
+          "items": [
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "minItems": 4,
+          "maxItems": 4
+        }
+      ]
+    },
+    "track": {
+      "type": "object",
+      "description": "Keyframes of one element property over one cycle.",
+      "properties": {
+        "property": {
+          "enum": [
+            "scale",
+            "scaleX",
+            "scaleY",
+            "opacity",
+            "rotate",
+            "rotateX",
+            "rotateY",
+            "translateX",
+            "translateY",
+            "strokeStart",
+            "strokeEnd"
+          ],
+          "description": "The animated property."
+        },
+        "keyTimes": {
+          "type": "array",
+          "description": "Non-decreasing times within [0, 1] of the cycle, one per value. Usually starts at 0 and ends at 1.",
+          "items": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "minItems": 2
+        },
+        "values": {
+          "type": "array",
+          "description": "Value at each key time. Angles are radians, lengths are fractions of the box.",
+          "items": {
+            "$ref": "#/definitions/num"
+          },
+          "minItems": 2
+        },
+        "easing": {
+          "description": "One easing for every segment, or a list with one easing per segment (`keyTimes.length - 1`). Default linear.",
+          "anyOf": [
+            {
+              "$ref": "#/definitions/easing"
+            },
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/easing"
+              },
+              "minItems": 1
+            }
+          ]
+        }
+      },
+      "required": [
+        "property",
+        "keyTimes",
+        "values"
+      ],
+      "additionalProperties": false
+    },
+    "groupTrack": {
+      "type": "object",
+      "description": "Keyframes of one group property over the group cycle.",
+      "properties": {
+        "property": {
+          "enum": [
+            "scale",
+            "scaleX",
+            "scaleY",
+            "opacity",
+            "rotate",
+            "translateX",
+            "translateY"
+          ],
+          "description": "The animated property."
+        },
+        "keyTimes": {
+          "type": "array",
+          "description": "Non-decreasing times within [0, 1] of the cycle, one per value. Usually starts at 0 and ends at 1.",
+          "items": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "minItems": 2
+        },
+        "values": {
+          "type": "array",
+          "description": "Value at each key time. Angles are radians, lengths are fractions of the box.",
+          "items": {
+            "$ref": "#/definitions/num"
+          },
+          "minItems": 2
+        },
+        "easing": {
+          "description": "One easing for every segment, or a list with one easing per segment (`keyTimes.length - 1`). Default linear.",
+          "anyOf": [
+            {
+              "$ref": "#/definitions/easing"
+            },
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/easing"
+              },
+              "minItems": 1
+            }
+          ]
+        }
+      },
+      "required": [
+        "property",
+        "keyTimes",
+        "values"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

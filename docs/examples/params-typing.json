@@ -1,0 +1,23 @@
+{
+  "$schema": "https://maitrungduc1410.github.io/loader-kit/schema/v1.json",
+  "schemaVersion": 1,
+  "name": "TypingDots",
+  "duration": 1.2,
+  "params": { "count": 3, "rise": -0.15, "dim": 0.4 },
+  "layout": { "type": "row", "count": { "$param": "count" }, "gap": 0.1 },
+  "shape": { "type": "circle" },
+  "stagger": { "each": 0.15 },
+  "tracks": [
+    {
+      "property": "translateY",
+      "keyTimes": [0, 0.3, 0.6, 1],
+      "values": [0, { "$param": "rise" }, 0, 0],
+      "easing": ["easeOut", "easeIn", "linear"]
+    },
+    {
+      "property": "opacity",
+      "keyTimes": [0, 0.3, 0.6, 1],
+      "values": [{ "$param": "dim" }, 1, { "$param": "dim" }, { "$param": "dim" }]
+    }
+  ]
+}

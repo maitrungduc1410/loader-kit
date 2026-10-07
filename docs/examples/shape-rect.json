@@ -1,0 +1,12 @@
+{
+  "$schema": "https://maitrungduc1410.github.io/loader-kit/schema/v1.json",
+  "schemaVersion": 1,
+  "name": "ShapeRect",
+  "duration": 1.6,
+  "layout": { "type": "single", "size": 0.55 },
+  "shape": { "type": "rect", "cornerRadius": 0.25 },
+  "tracks": [
+    { "property": "rotate", "keyTimes": [0, 0.5, 1], "values": [0, 1.570796327, 3.141592654], "easing": "easeInOut" },
+    { "property": "scale", "keyTimes": [0, 0.25, 0.5, 0.75, 1], "values": [1, 0.7, 1, 0.7, 1], "easing": "easeInOut" }
+  ]
+}

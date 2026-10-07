@@ -1,0 +1,11 @@
+{
+  "$schema": "https://maitrungduc1410.github.io/loader-kit/schema/v1.json",
+  "schemaVersion": 1,
+  "name": "ShapeTriangle",
+  "duration": 1.5,
+  "layout": { "type": "single", "size": 0.7 },
+  "shape": { "type": "triangle" },
+  "tracks": [
+    { "property": "rotate", "keyTimes": [0, 1], "values": [0, 2.094395102], "easing": "easeInOut" }
+  ]
+}

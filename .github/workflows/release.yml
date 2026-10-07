@@ -1,0 +1,307 @@
+name: Release
+
+# Runs on every push to master, after CI passed. Every step can be rerun safely:
+#   1. Pending changesets: open or update the "chore: release X.Y.Z" pull request (branch
+#      release/X.Y.Z) that bumps every package to the same version and writes the changelogs.
+#   2. Otherwise publish the current version wherever it is missing:
+#      - @loader-kit/spec and @loader-kit/web to npm with trusted publishing (OIDC, no token stored),
+#      - loaderkit-core and loaderkit-compose to Maven Central,
+#      - LoaderKit.Core and LoaderKit.WinUI to NuGet with trusted publishing,
+#   3. then create the GitHub release and the tag X.Y.Z (no "v"), which is also the version that
+#      Swift Package Manager and CocoaPods (`:git`/`:tag`) resolve.
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  ci:
+    name: CI
+    uses: ./.github/workflows/ci.yml
+    permissions:
+      contents: read
+
+  prepare:
+    name: Prepare
+    needs: ci
+    # A manual run from another branch must not publish or tag anything.
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+      contents: write
+      pull-requests: write
+    outputs:
+      version: ${{ steps.plan.outputs.version }}
+      prerelease: ${{ steps.plan.outputs.prerelease }}
+      npm: ${{ steps.plan.outputs.npm }}
+      maven: ${{ steps.plan.outputs.maven }}
+      nuget: ${{ steps.plan.outputs.nuget }}
+      release: ${{ steps.plan.outputs.release }}
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - run: npm ci
+
+      # Not changesets/action: it always uses the branch changeset-release/<base> and a fixed
+      # title, and the version is only known after `changeset version` has run.
+      - id: changesets
+        name: Open the release pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BASE: ${{ github.ref_name }}
+        run: |
+          # In prerelease mode consumed changesets move to .changeset/pre/, so leaving that mode
+          # (`changeset pre exit`) is pending work too.
+          exiting_pre="$(node -p "try { require('./.changeset/pre.json').mode === 'exit' } catch { false }")"
+          if [ -z "$(find .changeset -maxdepth 1 -name '*.md' ! -name README.md)" ] && [ "$exiting_pre" != true ]; then
+            echo "has-changesets=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "has-changesets=true" >> "$GITHUB_OUTPUT"
+
+          npm run version-packages
+          npm install --package-lock-only --ignore-scripts
+          version="$(node -p "require('./spec/package.json').version")"
+          branch="release/$version"
+          title="chore: release $version"
+
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git switch -C "$branch"
+          # docs is not versioned, but its dependencies on the packages are bumped with them.
+          git add package-lock.json .changeset spec web android apple windows docs
+          git commit -m "$title"
+          git push --force origin "$branch"
+          gh workflow run ci.yml --ref "$branch"
+
+          {
+            echo "Merging this pull request publishes LoaderKit \`$version\` to npm, Maven Central and NuGet, then creates the GitHub release and tag \`$version\` used by Swift Package Manager and CocoaPods."
+            echo "It is regenerated whenever more changesets land on \`$BASE\`; edit the changesets there rather than this branch."
+            echo
+            node scripts/release-notes.mjs "$version"
+          } > "$RUNNER_TEMP/body.md"
+
+          pr="$(gh pr list --base "$BASE" --head "$branch" --state open --json number --jq '.[0].number // empty')"
+          if [ -n "$pr" ]; then
+            gh pr edit "$pr" --title "$title" --body-file "$RUNNER_TEMP/body.md"
+          else
+            gh pr create --base "$BASE" --head "$branch" --title "$title" --body-file "$RUNNER_TEMP/body.md"
+            pr="$(gh pr list --base "$BASE" --head "$branch" --state open --json number --jq '.[0].number')"
+          fi
+
+          # A bigger bump (say a minor changeset on top of patches) moves the release to a new branch.
+          gh pr list --base "$BASE" --state open --limit 100 --json number,headRefName \
+            --jq ".[] | select(.headRefName | startswith(\"release/\")) | select(.headRefName != \"$branch\") | .number" |
+            while read -r old; do
+              gh pr close "$old" --delete-branch --comment "Superseded by #$pr."
+            done
+
+      - id: plan
+        name: Decide what to release
+        if: steps.changesets.outputs.has-changesets == 'false'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          MAVEN_CENTRAL_USERNAME: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
+          MAVEN_CENTRAL_PASSWORD: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
+        run: |
+          version="$(node -p "require('./spec/package.json').version")"
+          for pkg in web android apple windows; do
+            other="$(node -p "require('./$pkg/package.json').version")"
+            if [ "$other" != "$version" ]; then
+              echo "::error::$pkg/package.json is $other but spec/package.json is $version"; exit 1
+            fi
+          done
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          case "$version" in
+            *-*) echo "prerelease=true" >> "$GITHUB_OUTPUT" ;;
+            *) echo "prerelease=false" >> "$GITHUB_OUTPUT" ;;
+          esac
+
+          if npm view "@loader-kit/spec@$version" version > /dev/null 2>&1 &&
+            npm view "@loader-kit/web@$version" version > /dev/null 2>&1; then
+            echo "npm=false" >> "$GITHUB_OUTPUT"; echo "LoaderKit $version is already on npm"
+          else
+            echo "npm=true" >> "$GITHUB_OUTPUT"
+          fi
+
+          # The Central Portal knows about a release right away; repo1 only after it has synced.
+          maven_published() {
+            local artifact="$1"
+            if [ -n "$MAVEN_CENTRAL_USERNAME" ]; then
+              curl -fsS -H "Authorization: Bearer $(printf '%s:%s' "$MAVEN_CENTRAL_USERNAME" "$MAVEN_CENTRAL_PASSWORD" | base64 -w0)" \
+                "https://central.sonatype.com/api/v1/publisher/published?namespace=io.github.maitrungduc1410&name=$artifact&version=$version" |
+                jq -e '.published == true' > /dev/null
+            else
+              curl -fsI "https://repo1.maven.org/maven2/io/github/maitrungduc1410/$artifact/$version/$artifact-$version.pom" > /dev/null
+            fi
+          }
+          if maven_published loaderkit-core && maven_published loaderkit-compose; then
+            echo "maven=false" >> "$GITHUB_OUTPUT"; echo "loaderkit $version is already on Maven Central"
+          else
+            echo "maven=true" >> "$GITHUB_OUTPUT"
+          fi
+
+          nuget_published() {
+            curl -fsS "https://api.nuget.org/v3-flatcontainer/$1/index.json" |
+              jq -e --arg v "${version,,}" '.versions | index($v) != null' > /dev/null
+          }
+          if nuget_published loaderkit.core && nuget_published loaderkit.winui; then
+            echo "nuget=false" >> "$GITHUB_OUTPUT"; echo "LoaderKit $version is already on NuGet"
+          else
+            echo "nuget=true" >> "$GITHUB_OUTPUT"
+          fi
+
+          if gh release view "$version" > /dev/null 2>&1; then
+            echo "release=false" >> "$GITHUB_OUTPUT"; echo "GitHub release $version already exists"
+          else
+            echo "release=true" >> "$GITHUB_OUTPUT"
+          fi
+
+  npm:
+    name: npm
+    needs: prepare
+    if: needs.prepare.outputs.npm == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      # Trusted publishing needs npm 11.5.1 or newer.
+      - run: npm install -g npm@11
+
+      - run: npm ci
+
+      - run: npm run build
+
+      # @loader-kit/web depends on @loader-kit/spec at the same version, so spec goes first. A rerun
+      # skips what is already published.
+      - name: Publish @loader-kit/spec and @loader-kit/web
+        env:
+          VERSION: ${{ needs.prepare.outputs.version }}
+          TAG: ${{ needs.prepare.outputs.prerelease == 'true' && 'next' || 'latest' }}
+        run: |
+          for pkg in @loader-kit/spec @loader-kit/web; do
+            if npm view "$pkg@$VERSION" version > /dev/null 2>&1; then
+              echo "$pkg@$VERSION is already on npm"
+            else
+              npm publish --workspace "$pkg" --access public --provenance --ignore-scripts --tag "$TAG"
+            fi
+          done
+
+  maven:
+    name: Maven Central
+    needs: prepare
+    if: needs.prepare.outputs.maven == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    defaults:
+      run:
+        working-directory: android
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - uses: gradle/actions/setup-gradle@v6
+
+      - name: Publish loaderkit-core and loaderkit-compose
+        env:
+          # Central Portal user token (central.sonatype.com > Account > Generate User Token).
+          ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
+          ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
+          # Maven Central requires signed artifacts; the in-memory key works headless.
+          ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.GPG_SIGNING_KEY }}
+          ORG_GRADLE_PROJECT_signingInMemoryKeyId: ${{ secrets.GPG_SIGNING_KEY_ID }}
+          ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.GPG_SIGNING_PASSWORD }}
+        run: |
+          if [ -z "$ORG_GRADLE_PROJECT_mavenCentralUsername" ] || [ -z "$ORG_GRADLE_PROJECT_signingInMemoryKey" ]; then
+            echo "::error::missing MAVEN_CENTRAL_USERNAME/PASSWORD or GPG_SIGNING_KEY secrets"; exit 1
+          fi
+          # Uploads and releases in one go, without a manual step on the portal.
+          ./gradlew publishAndReleaseToMavenCentral --no-configuration-cache --stacktrace
+
+  nuget:
+    name: NuGet
+    needs: prepare
+    if: needs.prepare.outputs.nuget == 'true'
+    runs-on: windows-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Pack LoaderKit.Core and LoaderKit.WinUI
+        shell: bash
+        env:
+          VERSION: ${{ needs.prepare.outputs.version }}
+        run: |
+          dotnet pack windows/LoaderKit.Core -c Release -p:Version="$VERSION" -o artifacts
+          dotnet pack windows/LoaderKit.WinUI -c Release -p:Version="$VERSION" -o artifacts
+
+      - name: Log in to NuGet
+        id: login
+        uses: NuGet/login@v1
+        with:
+          user: ${{ vars.NUGET_USER }}
+
+      - name: Push
+        shell: bash
+        env:
+          NUGET_API_KEY: ${{ steps.login.outputs.NUGET_API_KEY }}
+        run: |
+          for package in artifacts/*.nupkg; do
+            dotnet nuget push "$package" --api-key "$NUGET_API_KEY" \
+              --source https://api.nuget.org/v3/index.json --skip-duplicate
+          done
+
+  github-release:
+    name: GitHub release
+    needs: [prepare, npm, maven, nuget]
+    if: >-
+      always() && needs.prepare.result == 'success' && needs.prepare.outputs.release == 'true' &&
+      !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Create the GitHub release and tag
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ needs.prepare.outputs.version }}
+          PRERELEASE: ${{ needs.prepare.outputs.prerelease }}
+        run: |
+          node scripts/release-notes.mjs "$VERSION" > "$RUNNER_TEMP/notes.md"
+          flags=()
+          [ "$PRERELEASE" = "true" ] && flags+=(--prerelease)
+          gh release create "$VERSION" --target "$GITHUB_SHA" --title "$VERSION" \
+            --notes-file "$RUNNER_TEMP/notes.md" "${flags[@]}"

@@ -1,0 +1,34 @@
+{
+  "name": "loader-kit",
+  "private": true,
+  "description": "Loading indicators described as data, rendered natively on Android, iOS, macOS, Windows and the web",
+  "license": "MIT",
+  "workspaces": [
+    "spec",
+    "web",
+    "android",
+    "apple",
+    "windows",
+    "docs"
+  ],
+  "engines": {
+    "node": ">=22.18"
+  },
+  "scripts": {
+    "generate": "node spec/scripts/generate.ts",
+    "check:generated": "node spec/scripts/generate.ts --check",
+    "build": "npm run build --workspace @loader-kit/spec --workspace @loader-kit/web",
+    "test": "npm test --workspace @loader-kit/spec --workspace @loader-kit/web",
+    "typecheck": "npm run typecheck --workspace @loader-kit/spec --workspace @loader-kit/web",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "docs:dev": "npm run dev --workspace loader-kit-docs",
+    "docs:build": "npm run build --workspace loader-kit-docs",
+    "docs:preview": "npm run preview --workspace loader-kit-docs"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^3.0.3",
+    "@types/node": "^22.20.5",
+    "typescript": "^5.9.3"
+  }
+}

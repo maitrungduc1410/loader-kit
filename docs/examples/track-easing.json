@@ -1,0 +1,29 @@
+{
+  "$schema": "https://maitrungduc1410.github.io/loader-kit/schema/v1.json",
+  "schemaVersion": 1,
+  "name": "TrackEasing",
+  "duration": 1.6,
+  "parts": [
+    {
+      "layout": { "type": "single", "size": 0.2, "x": 0.18, "y": 0.2 },
+      "shape": { "type": "circle" },
+      "tracks": [
+        { "property": "translateX", "keyTimes": [0, 0.5, 1], "values": [0, 0.64, 0], "easing": "linear" }
+      ]
+    },
+    {
+      "layout": { "type": "single", "size": 0.2, "x": 0.18, "y": 0.5 },
+      "shape": { "type": "circle" },
+      "tracks": [
+        { "property": "translateX", "keyTimes": [0, 0.5, 1], "values": [0, 0.64, 0], "easing": "easeInOut" }
+      ]
+    },
+    {
+      "layout": { "type": "single", "size": 0.2, "x": 0.18, "y": 0.8 },
+      "shape": { "type": "circle" },
+      "tracks": [
+        { "property": "translateX", "keyTimes": [0, 0.5, 1], "values": [0, 0.64, 0], "easing": [0.34, 1.56, 0.64, 1] }
+      ]
+    }
+  ]
+}

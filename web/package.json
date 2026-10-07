@@ -1,0 +1,77 @@
+{
+  "name": "@loader-kit/web",
+  "version": "0.0.0",
+  "description": "LoaderKit loading indicators for the web: a canvas renderer and a <loader-kit> custom element",
+  "license": "MIT",
+  "author": "Duc Trung Mai <maitrungduc1410@gmail.com> (https://github.com/maitrungduc1410)",
+  "homepage": "https://maitrungduc1410.github.io/loader-kit/platforms/web",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maitrungduc1410/loader-kit.git",
+    "directory": "web"
+  },
+  "bugs": {
+    "url": "https://github.com/maitrungduc1410/loader-kit/issues"
+  },
+  "keywords": [
+    "loader",
+    "loading-indicator",
+    "spinner",
+    "animation",
+    "canvas",
+    "web-component"
+  ],
+  "type": "module",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/esm/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/esm/index.d.ts",
+        "default": "./dist/esm/index.js"
+      },
+      "require": {
+        "types": "./dist/cjs/index.d.ts",
+        "default": "./dist/cjs/index.js"
+      }
+    },
+    "./element": {
+      "import": {
+        "types": "./dist/esm/element.d.ts",
+        "default": "./dist/esm/element.js"
+      },
+      "require": {
+        "types": "./dist/cjs/element.d.ts",
+        "default": "./dist/cjs/element.js"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "sideEffects": [
+    "./dist/esm/element.js",
+    "./dist/cjs/element.js",
+    "./src/element.ts"
+  ],
+  "scripts": {
+    "prebuild": "npm run build --workspace @loader-kit/spec",
+    "build": "node scripts/build.ts",
+    "pretest": "npm run build --workspace @loader-kit/spec",
+    "test": "node --test \"test/**/*.test.ts\"",
+    "pretypecheck": "npm run build --workspace @loader-kit/spec",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@loader-kit/spec": "0.0.0"
+  },
+  "devDependencies": {
+    "happy-dom": "^20.14.5"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

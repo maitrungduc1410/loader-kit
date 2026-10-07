@@ -1,0 +1,12 @@
+{
+  "$schema": "https://maitrungduc1410.github.io/loader-kit/schema/v1.json",
+  "schemaVersion": 1,
+  "name": "LayoutRingOrient",
+  "duration": 1.2,
+  "layout": { "type": "ring", "count": 12, "itemSize": 0.26, "itemWidth": 0.07, "orient": true },
+  "shape": { "type": "line" },
+  "stagger": { "each": 0.1 },
+  "tracks": [
+    { "property": "opacity", "keyTimes": [0, 1], "values": [1, 0.15] }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "$schema": "https://maitrungduc1410.github.io/loader-kit/schema/v1.json",
+  "schemaVersion": 1,
+  "name": "TimingParts",
+  "duration": 1.2,
+  "parts": [
+    {
+      "layout": { "type": "single", "size": 0.4 },
+      "shape": { "type": "circle" },
+      "tracks": [
+        { "property": "scale", "keyTimes": [0, 0.5, 1], "values": [1, 0.7, 1], "easing": "easeInOut" }
+      ]
+    },
+    {
+      "layout": { "type": "single", "size": 0.16 },
+      "shape": { "type": "circle" },
+      "duration": 0.6,
+      "rest": { "translateY": -0.4 },
+      "tracks": [
+        { "property": "opacity", "keyTimes": [0, 0.5, 1], "values": [1, 0.4, 1] }
+      ]
+    }
+  ]
+}

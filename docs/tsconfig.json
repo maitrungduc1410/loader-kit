@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2023", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "verbatimModuleSyntax": true,
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "types": ["node", "vite/client"],
+    "paths": {
+      "@loader-kit/spec": ["../spec/src/index.ts"],
+      "@loader-kit/web": ["../web/src/index.ts"],
+      "@loader-kit/web/element": ["../web/src/element.ts"]
+    },
+    "noEmit": true
+  },
+  "include": [".vitepress/config.mts", ".vitepress/theme/lib", "scripts"]
+}

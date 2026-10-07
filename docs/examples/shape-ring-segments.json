@@ -1,0 +1,12 @@
+{
+  "$schema": "https://maitrungduc1410.github.io/loader-kit/schema/v1.json",
+  "schemaVersion": 1,
+  "name": "ShapeRingSegments",
+  "duration": 1.4,
+  "layout": { "type": "single", "size": 0.9 },
+  "shape": { "type": "ring", "strokeWidth": 0.12, "segments": 3, "sweep": 1.5 },
+  "tracks": [
+    { "property": "rotate", "keyTimes": [0, 1], "values": [0, 6.283185307] },
+    { "property": "strokeEnd", "keyTimes": [0, 0.5, 1], "values": [0.2, 1, 0.2], "easing": "easeInOut" }
+  ]
+}
