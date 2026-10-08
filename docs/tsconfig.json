@@ -14,7 +14,8 @@
     "paths": {
       "@loader-kit/spec": ["../spec/src/index.ts"],
       "@loader-kit/web": ["../web/src/index.ts"],
-      "@loader-kit/web/element": ["../web/src/element.ts"]
+      "@loader-kit/web/element": ["../web/src/element.ts"],
+      "@loader-kit/web/vue": ["../web/src/vue.ts"]
     },
     "noEmit": true
   },

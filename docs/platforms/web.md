@@ -147,7 +147,7 @@ import '@loader-kit/web/element';
 
 <div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: center; margin: 16px 0;">
   <LoaderKitPreview indicator="BallSpinFadeLoader" color="#7c3aed" :speed="1.5" />
-  <LoaderKitPreview indicator="BallPulse" :params.prop="{ count: 5 }" :colors="['#f43f5e', '#f59e0b', '#10b981']" />
+  <LoaderKitPreview indicator="BallPulse" :params="{ count: 5 }" :colors="['#f43f5e', '#f59e0b', '#10b981']" />
   <LoaderKitPreview indicator="BallPulse" :cycle-progress="0.25" />
 </div>
 

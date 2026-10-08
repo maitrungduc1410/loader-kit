@@ -305,6 +305,7 @@ export default defineConfig({
       alias: [
         { find: /^@loader-kit\/spec$/, replacement: root('spec/src/index.ts') },
         { find: /^@loader-kit\/web\/element$/, replacement: root('web/src/element.ts') },
+        { find: /^@loader-kit\/web\/vue$/, replacement: root('web/src/vue.ts') },
         { find: /^@loader-kit\/web$/, replacement: root('web/src/index.ts') },
       ],
     },
