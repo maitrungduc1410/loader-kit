@@ -1,6 +1,6 @@
 {
   "name": "@loader-kit/spec",
-  "version": "1.0.0-rc.0",
+  "version": "1.0.0-rc.1",
   "description": "Schema, built-in indicators and reference evaluator for LoaderKit indicator specs",
   "license": "MIT",
   "author": "Duc Trung Mai <maitrungduc1410@gmail.com> (https://github.com/maitrungduc1410)",
