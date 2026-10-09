@@ -4,7 +4,7 @@ description: "LoaderKitProgress: 30 mẫu progress (linear, circular, pie, gauge
 
 # Progress indicator
 
-`LoaderKitProgress` cho biết một tác vụ đã chạy được bao nhiêu. Có 9 type và 30 mẫu, mẫu nào cũng chạy được khi có value, hoặc ở chế độ vô định khi chưa biết value. Khi value thay đổi, indicator chạy mượt tới value mới.
+`LoaderKitProgress` cho biết một tác vụ đã chạy được bao nhiêu. Có 9 type và 30 mẫu, mẫu nào cũng chạy được khi có value, hoặc ở chế độ vô định khi chưa biết value. Khi value thay đổi, indicator chạy mượt tới value mới. Bấm vào một mẫu để mở panel của nó: đổi value, độ dày, kích thước và màu, rồi copy code cho nền tảng của bạn.
 
 <ProgressGallery />
 
@@ -237,7 +237,7 @@ LoaderKitProgress(value: progress, type: .border) {
 
 :::
 
-View Android là một `ViewGroup`: thêm view con trong XML hoặc bằng `addView`. Với UIKit và AppKit, thêm subview vào `contentView`.
+View Android là một `ViewGroup`: thêm view con trong XML hoặc bằng `addView`. Với UIKit và AppKit, gán view cần hiển thị cho `contentView`, ví dụ `progress.contentView = stopButton`.
 
 ## Accessibility {#accessibility}
 

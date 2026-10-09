@@ -452,6 +452,25 @@ select.lk-input {
   }
 }
 
+/* Content of the progress demos: a stop button in the middle, a button inside a border. */
+.lk-pgal-stop {
+  display: block;
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  background: currentColor;
+}
+
+.lk-pgal-chip {
+  display: block;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--vp-c-text-1);
+  background: var(--vp-c-bg);
+}
+
 /* Schema hover in the playground editor. */
 .lk-hover {
   max-width: 360px;
@@ -521,6 +540,42 @@ select.lk-input {
 }
 
 /* ----- layout tweaks ----- */
+
+/* The two galleries are the pages most visitors come for, so the sidebar always marks them. */
+.VPSidebarItem .link[href$='/guide/indicators'],
+.VPSidebarItem .link[href$='/guide/progress'] {
+  margin: 2px 0;
+  padding: 0 10px;
+  border-radius: 8px;
+  background: var(--vp-c-brand-soft);
+}
+
+.VPSidebarItem .link[href$='/guide/indicators'] > .text,
+.VPSidebarItem .link[href$='/guide/progress'] > .text {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  color: var(--vp-c-brand-1);
+}
+
+.VPSidebarItem .link[href$='/guide/indicators'] > .text::before,
+.VPSidebarItem .link[href$='/guide/progress'] > .text::before {
+  content: '';
+  flex: none;
+  width: 16px;
+  height: 16px;
+  background: currentColor;
+  mask: var(--lk-sidebar-icon) no-repeat center / contain;
+}
+
+.VPSidebarItem .link[href$='/guide/indicators'] > .text {
+  --lk-sidebar-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='2' r='1.8'/%3E%3Ccircle cx='12.24' cy='3.76' r='1.7' opacity='.88'/%3E%3Ccircle cx='14' cy='8' r='1.6' opacity='.76'/%3E%3Ccircle cx='12.24' cy='12.24' r='1.5' opacity='.64'/%3E%3Ccircle cx='8' cy='14' r='1.4' opacity='.52'/%3E%3Ccircle cx='3.76' cy='12.24' r='1.3' opacity='.4'/%3E%3Ccircle cx='2' cy='8' r='1.2' opacity='.3'/%3E%3Ccircle cx='3.76' cy='3.76' r='1.1' opacity='.2'/%3E%3C/svg%3E");
+}
+
+.VPSidebarItem .link[href$='/guide/progress'] > .text {
+  --lk-sidebar-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect x='1' y='6' width='14' height='4' rx='2' opacity='.35'/%3E%3Crect x='1' y='6' width='9' height='4' rx='2'/%3E%3C/svg%3E");
+}
 
 /* VPNavBar sets white-space: nowrap; long site titles must wrap inside the title area instead of overflowing. */
 .VPNavBar .container > .title {

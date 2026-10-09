@@ -5,17 +5,20 @@ layout: home
 hero:
   name: LoaderKit
   text: 用数据描述加载动画，原生渲染
-  tagline: 一份 JSON spec，在 Android、iOS、macOS、Windows 和 Web 上呈现完全相同的动效。从 50 个内置加载动画里挑一个，或者描述你自己的。
+  tagline: 一份 JSON spec，在 Android、iOS、macOS、Windows 和 Web 上呈现完全相同的动效。从 50 个内置加载动画和 30 种进度样式里挑一个，或者描述你自己的。
   actions:
     - theme: brand
+      text: 内置加载动画
+      link: /zh/guide/indicators
+    - theme: brand
+      text: 进度指示器
+      link: /zh/guide/progress
+    - theme: alt
       text: 快速开始
       link: /zh/guide/getting-started
     - theme: alt
       text: LoaderKit 是什么？
       link: /zh/guide/
-    - theme: alt
-      text: 浏览加载动画
-      link: /zh/guide/indicators
 
 features:
   - icon: 🎛️
@@ -56,6 +59,10 @@ features:
 ---
 
 <div class="vp-doc home-content">
+
+## 找到动画，复制代码 {#find-an-indicator}
+
+<HomeShortcuts />
 
 ## 安装 {#install}
 
@@ -118,20 +125,5 @@ LoaderKitIndicator("BallSpinFadeLoader").color(.purple)
 ```
 
 :::
-
-## 部分内置动画 {#a-few-of-the-built-ins}
-
-<div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: center; margin: 16px 0;">
-  <LoaderKitPreview indicator="BallPulse" />
-  <LoaderKitPreview indicator="BallSpinFadeLoader" />
-  <LoaderKitPreview indicator="LineScale" />
-  <LoaderKitPreview indicator="BallClipRotateMultiple" />
-  <LoaderKitPreview indicator="SquareSpin" />
-  <LoaderKitPreview indicator="Pacman" />
-  <LoaderKitPreview indicator="BallGridPulse" />
-  <LoaderKitPreview indicator="Orbit" />
-</div>
-
-[查看全部 50 个加载动画](/zh/guide/indicators)，包括参数、颜色设置和可复制的代码。
 
 </div>

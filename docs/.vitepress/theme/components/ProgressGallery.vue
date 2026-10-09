@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import { LoaderKitProgress } from '@loader-kit/web/vue';
-import { computed, onBeforeUnmount, onMounted, ref, useId, watch } from 'vue';
+import { computed, nextTick, onBeforeUnmount, onMounted, ref, useId } from 'vue';
+import { useBackdropClose } from '../lib/dialog.ts';
+import { useSimulatedDownload } from '../lib/download.ts';
 import { useStrings } from '../lib/i18n.ts';
-import { PROGRESS_DESIGNS, designTitle, progressSnippets } from '../lib/progress.ts';
-import CodeTabs from './CodeTabs.vue';
+import { PROGRESS_DESIGNS, type ProgressDesign, designTitle } from '../lib/progress.ts';
+import { queryFromUrl } from '../lib/query.ts';
+import ProgressControls from './ProgressControls.vue';
 
 type Mode = 'download' | 'manual' | 'indeterminate';
 
@@ -11,60 +14,60 @@ const { t } = useStrings();
 const id = useId();
 
 const mode = ref<Mode>('download');
-const value = ref(0.4);
 const smooth = ref(true);
-const selected = ref(0);
+const query = ref('');
+const selected = ref<ProgressDesign | null>(null);
+const dialog = ref<HTMLDialogElement>();
 
-// Uneven steps, like the bytes of a real download arriving in bursts.
-const STEPS = [0.03, 0.08, 0.01, 0.12, 0.05, 0, 0.09, 0.02, 0.15, 0.04, 0.07, 0, 0.11, 0.06];
-let timer: ReturnType<typeof setInterval> | undefined;
-let step = 0;
-let hold = 0;
-
-function tick() {
-  if (value.value >= 1) {
-    if (++hold < 4) return;
-    hold = 0;
-    value.value = 0;
-    return;
-  }
-  value.value = Math.min(1, value.value + STEPS[step++ % STEPS.length]!);
-}
-
-function updateTimer() {
-  const run = mode.value === 'download';
-  if (run && timer === undefined) timer = setInterval(tick, 400);
-  if (!run && timer !== undefined) {
-    clearInterval(timer);
-    timer = undefined;
-  }
-}
-
-onMounted(updateTimer);
-watch(mode, updateTimer);
-onBeforeUnmount(() => {
-  if (timer !== undefined) clearInterval(timer);
+const download = useSimulatedDownload(computed(() => mode.value === 'download'));
+onBeforeUnmount(download.stop);
+onMounted(() => {
+  query.value = queryFromUrl() ?? '';
 });
 
-const designs = computed(() =>
-  PROGRESS_DESIGNS.map((design, index) => {
-    const indeterminate = design.indeterminate || mode.value === 'indeterminate';
-    return {
-      design,
-      index,
-      title: designTitle(design),
-      value: indeterminate ? null : value.value,
-      buffer: design.buffer && !indeterminate ? Math.min(1, value.value + 0.25) : null,
-    };
-  }),
-);
+const designs = computed(() => {
+  const words = query.value.trim().toLowerCase().split(/\s+/).filter(Boolean);
+  return PROGRESS_DESIGNS.map((design, index) => ({ design, index, title: designTitle(design) }))
+    .filter((item) => words.every((word) => item.title.includes(word)))
+    .map((item) => {
+      const indeterminate = item.design.indeterminate || mode.value === 'indeterminate';
+      return {
+        ...item,
+        value: indeterminate ? null : download.value.value,
+        buffer: item.design.buffer && !indeterminate ? Math.min(1, download.value.value + 0.25) : null,
+      };
+    });
+});
 
-const current = computed(() => PROGRESS_DESIGNS[selected.value] ?? PROGRESS_DESIGNS[0]!);
-const code = computed(() => progressSnippets(current.value));
+async function open(design: ProgressDesign) {
+  selected.value = design;
+  await nextTick();
+  dialog.value?.showModal();
+}
+
+function close() {
+  dialog.value?.close();
+}
+
+const backdrop = useBackdropClose(dialog, close);
 </script>
 
 <template>
-  <div class="lk-card lk-pgal">
+  <div class="lk-pgal">
+    <div class="lk-gallery-bar">
+      <label class="visually-hidden" :for="`${id}-filter`">{{ t('filterProgress') }}</label>
+      <input
+        :id="`${id}-filter`"
+        v-model="query"
+        class="lk-input lk-gallery-filter"
+        type="search"
+        :placeholder="t('filterProgress')"
+        autocomplete="off"
+        spellcheck="false"
+      />
+      <span class="lk-muted" aria-live="polite">{{ t('shown', { count: designs.length, total: PROGRESS_DESIGNS.length }) }}</span>
+    </div>
+
     <form class="lk-form lk-pgal-controls" @submit.prevent>
       <div class="lk-segmented" role="radiogroup" :aria-label="t('progressMode')">
         <label v-for="option in (['download', 'manual', 'indeterminate'] as const)" :key="option">
@@ -76,7 +79,7 @@ const code = computed(() => progressSnippets(current.value));
         <label :for="`${id}-value`"><code>value</code></label>
         <input
           :id="`${id}-value`"
-          v-model.number="value"
+          v-model.number="download.value.value"
           type="range"
           min="0"
           max="1"
@@ -84,61 +87,74 @@ const code = computed(() => progressSnippets(current.value));
           :disabled="mode === 'indeterminate'"
           @input="mode = 'manual'"
         />
-        <output :for="`${id}-value`">{{ mode === 'indeterminate' ? 'null' : value.toFixed(2) }}</output>
+        <output :for="`${id}-value`">{{ mode === 'indeterminate' ? 'null' : download.value.value.toFixed(2) }}</output>
       </div>
       <label class="lk-check">
         <input v-model="smooth" type="checkbox" />
         <code>smooth</code>
       </label>
-      <p class="lk-muted lk-note">{{ t('progressHint') }}</p>
     </form>
+    <p class="lk-gallery-hint">{{ t('progressHint') }}</p>
 
     <ol class="lk-pgal-grid">
-      <li
-        v-for="item in designs"
-        :key="item.index"
-        class="lk-pgal-item"
-        :class="{ 'lk-pgal-selected': item.index === selected, 'lk-pgal-wide': item.design.type === 'linear' }"
-        @click="selected = item.index"
-      >
-        <div class="lk-pgal-stage">
-          <LoaderKitProgress
-            class="lk-pgal-progress"
-            :class="`lk-pgal-${item.design.type}`"
-            :value="item.value"
-            :buffer="item.buffer"
-            :smooth="smooth"
-            :type="item.design.type"
-            :variant="item.design.variant ?? null"
-            :thickness="item.design.thickness ?? null"
-            :segments="item.design.segments ?? null"
-            :show-label="item.design.showLabel ?? null"
-            :size="item.design.size ?? null"
-            :accessibility-label="item.title"
-          >
-            <span v-if="item.design.child === 'stop'" class="lk-pgal-stop" aria-hidden="true" />
-            <span v-else-if="item.design.child === 'button'" class="lk-pgal-chip">{{ t('progressUpload') }}</span>
-          </LoaderKitProgress>
-        </div>
-        <button type="button" class="lk-pgal-name" :aria-pressed="item.index === selected" @click.stop="selected = item.index">
-          <span class="lk-pgal-number">#{{ item.index + 1 }}</span>
-          <code>{{ item.title }}</code>
-          <span v-if="item.design.indeterminate" class="lk-pgal-tag">{{ t('progressIndeterminate') }}</span>
+      <li v-for="item in designs" :key="item.index" :class="{ 'lk-pgal-wide': item.design.type === 'linear' }">
+        <button type="button" class="lk-pgal-item" aria-haspopup="dialog" @click="open(item.design)">
+          <span class="lk-pgal-stage">
+            <LoaderKitProgress
+              class="lk-pgal-progress"
+              :class="`lk-pgal-${item.design.type}`"
+              :value="item.value"
+              :buffer="item.buffer"
+              :smooth="smooth"
+              :type="item.design.type"
+              :variant="item.design.variant ?? null"
+              :thickness="item.design.thickness ?? null"
+              :segments="item.design.segments ?? null"
+              :show-label="item.design.showLabel ?? null"
+              :size="item.design.size ?? null"
+              aria-hidden="true"
+            >
+              <span v-if="item.design.child === 'stop'" class="lk-pgal-stop" />
+              <span v-else-if="item.design.child === 'button'" class="lk-pgal-chip">{{ t('progressUpload') }}</span>
+            </LoaderKitProgress>
+          </span>
+          <span class="lk-pgal-name">
+            <span class="lk-pgal-number">#{{ item.index + 1 }}</span>
+            <code>{{ item.title }}</code>
+          </span>
         </button>
       </li>
     </ol>
+    <p v-if="designs.length === 0" class="lk-muted">{{ t('noMatchProgress', { query }) }}</p>
 
-    <div>
-      <div class="lk-label">{{ t('progressCode', { index: selected + 1, name: designTitle(current) }) }}</div>
-      <CodeTabs :tabs="code" :label="t('code')" />
-    </div>
+    <dialog
+      ref="dialog"
+      class="lk-dialog"
+      :aria-labelledby="`${id}-title`"
+      @pointerdown="backdrop.onPointerdown"
+      @click="backdrop.onClick"
+      @close="selected = null"
+    >
+      <div v-if="selected" class="lk-dialog-body">
+        <header class="lk-dialog-header">
+          <h2 :id="`${id}-title`">{{ t('customize', { name: designTitle(selected) }) }}</h2>
+          <button type="button" class="lk-icon-button" :aria-label="t('close')" @click="close">
+            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+              <path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            </svg>
+          </button>
+        </header>
+        <ProgressControls :design="selected" />
+      </div>
+    </dialog>
   </div>
 </template>
 
 <style scoped>
 .lk-pgal {
   display: grid;
-  gap: 20px;
+  gap: 16px;
+  margin: 24px 0;
 }
 
 .lk-pgal-controls {
@@ -147,6 +163,24 @@ const code = computed(() => progressSnippets(current.value));
 
 .lk-pgal-controls .lk-field {
   width: min(100%, 420px);
+}
+
+.lk-gallery-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.lk-gallery-filter {
+  flex: 1 1 220px;
+  max-width: 320px;
+}
+
+.lk-gallery-hint {
+  margin: 0;
+  font-size: 14px;
+  color: var(--vp-c-text-2);
 }
 
 .lk-pgal-grid {
@@ -158,7 +192,7 @@ const code = computed(() => progressSnippets(current.value));
   list-style: none;
 }
 
-.lk-pgal-grid > li {
+.vp-doc .lk-pgal-grid > li {
   margin: 0;
 }
 
@@ -175,21 +209,24 @@ const code = computed(() => progressSnippets(current.value));
 .lk-pgal-item {
   display: grid;
   grid-template-rows: 112px auto;
+  width: 100%;
+  height: 100%;
+  padding: 0;
   border: 1px solid var(--vp-c-divider);
   border-radius: 12px;
   background: var(--lk-stage-bg);
   overflow: hidden;
-  cursor: pointer;
+  text-align: left;
   transition: border-color 0.2s;
 }
 
 .lk-pgal-item:hover {
-  border-color: var(--vp-c-brand-2);
+  border-color: var(--vp-c-brand-1);
 }
 
-.lk-pgal-selected {
-  border-color: var(--vp-c-brand-1);
-  box-shadow: 0 0 0 1px var(--vp-c-brand-1);
+.lk-pgal-item:focus-visible {
+  outline: 2px solid var(--vp-c-brand-1);
+  outline-offset: 2px;
 }
 
 .lk-pgal-stage {
@@ -211,14 +248,8 @@ const code = computed(() => progressSnippets(current.value));
   padding: 8px 10px;
   border-top: 1px solid var(--vp-c-divider);
   font-size: 13px;
-  text-align: left;
   color: var(--vp-c-text-1);
   background: var(--vp-c-bg);
-}
-
-.lk-pgal-name:focus-visible {
-  outline: 2px solid var(--vp-c-brand-1);
-  outline-offset: -2px;
 }
 
 .lk-pgal-number {
@@ -228,28 +259,5 @@ const code = computed(() => progressSnippets(current.value));
 
 .lk-pgal-name code {
   font-size: 12px;
-}
-
-.lk-pgal-tag {
-  font-size: 12px;
-  color: var(--vp-c-text-2);
-}
-
-.lk-pgal-stop {
-  display: block;
-  width: 12px;
-  height: 12px;
-  border-radius: 2px;
-  background: currentColor;
-}
-
-.lk-pgal-chip {
-  display: block;
-  padding: 6px 14px;
-  border-radius: 8px;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--vp-c-text-1);
-  background: var(--vp-c-bg);
 }
 </style>

@@ -3,6 +3,7 @@ import DefaultTheme from 'vitepress/theme';
 import { defineAsyncComponent, h } from 'vue';
 import EasingCurve from './components/EasingCurve.vue';
 import HeroArt from './components/HeroArt.vue';
+import HomeShortcuts from './components/HomeShortcuts.vue';
 import IndicatorDemo from './components/IndicatorDemo.vue';
 import IndicatorGallery from './components/IndicatorGallery.vue';
 import LayoutVisualizer from './components/LayoutVisualizer.vue';
@@ -28,5 +29,6 @@ export default {
     app.component('SpecExample', SpecExample);
     app.component('SpecPlayground', defineAsyncComponent(() => import('./components/SpecPlayground.vue')));
     app.component('HeroArt', HeroArt);
+    app.component('HomeShortcuts', HomeShortcuts);
   },
 } satisfies Theme;

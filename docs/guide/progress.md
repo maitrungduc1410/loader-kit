@@ -4,7 +4,7 @@ description: "LoaderKitProgress: 30 progress designs (linear, circular, pie, gau
 
 # Progress indicators
 
-`LoaderKitProgress` shows how much of a task is done. It has 9 types and 30 designs, and each one runs with a value or, when the value is unknown, indeterminate. When the value changes, the indicator glides to it.
+`LoaderKitProgress` shows how much of a task is done. It has 9 types and 30 designs, and each one runs with a value or, when the value is unknown, indeterminate. When the value changes, the indicator glides to it. Click a design to open its panel: change the value, thickness, size and color, then copy the code for your platform.
 
 <ProgressGallery />
 
@@ -237,7 +237,7 @@ LoaderKitProgress(value: progress, type: .border) {
 
 :::
 
-The Android view is a `ViewGroup`: add children in XML or with `addView`. On UIKit and AppKit, add subviews to `contentView`.
+The Android view is a `ViewGroup`: add children in XML or with `addView`. On UIKit and AppKit, set `contentView` to the view to show, for example `progress.contentView = stopButton`.
 
 ## Accessibility
 

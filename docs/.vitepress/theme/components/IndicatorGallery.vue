@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { BUILTIN_INDICATOR_NAMES } from '@loader-kit/spec';
-import { computed, nextTick, ref, useId } from 'vue';
+import { computed, nextTick, onMounted, ref, useId } from 'vue';
+import { useBackdropClose } from '../lib/dialog.ts';
 import { useStrings } from '../lib/i18n.ts';
+import { queryFromUrl } from '../lib/query.ts';
 import IndicatorControls from './IndicatorControls.vue';
 import LoaderKitPreview from './LoaderKitPreview.vue';
 
@@ -11,8 +13,12 @@ const query = ref('');
 const selected = ref<string | null>(null);
 const dialog = ref<HTMLDialogElement>();
 
+onMounted(() => {
+  query.value = queryFromUrl() ?? '';
+});
+
 const names = computed(() => {
-  const q = query.value.trim().toLowerCase();
+  const q = query.value.replace(/\s+/g, '').toLowerCase();
   return q ? BUILTIN_INDICATOR_NAMES.filter((name) => name.toLowerCase().includes(q)) : BUILTIN_INDICATOR_NAMES;
 });
 
@@ -26,9 +32,7 @@ function close() {
   dialog.value?.close();
 }
 
-function onDialogClick(event: MouseEvent) {
-  if (event.target === dialog.value) close();
-}
+const backdrop = useBackdropClose(dialog, close);
 </script>
 
 <template>
@@ -62,7 +66,8 @@ function onDialogClick(event: MouseEvent) {
       ref="dialog"
       class="lk-dialog"
       :aria-labelledby="`${id}-title`"
-      @click="onDialogClick"
+      @pointerdown="backdrop.onPointerdown"
+      @click="backdrop.onClick"
       @close="selected = null"
     >
       <div v-if="selected" class="lk-dialog-body">

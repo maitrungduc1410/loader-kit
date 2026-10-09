@@ -15,7 +15,7 @@ const released = version !== '0.0.0';
 const root = (path: string) => fileURLToPath(new URL(`../../${path}`, import.meta.url));
 
 const sections = {
-  guide: ['', 'getting-started', 'indicators', 'customizing', 'playback', 'progress', 'faq'],
+  guide: ['', 'getting-started', 'indicators', 'progress', 'customizing', 'playback', 'faq'],
   platforms: ['web', 'android', 'apple', 'windows', 'react-native'],
   spec: ['', 'layouts', 'shapes', 'tracks', 'timing', 'params', 'using', 'reference'],
   tools: ['playground', 'json-schema', 'ai'],

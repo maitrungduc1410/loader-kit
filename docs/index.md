@@ -5,17 +5,20 @@ layout: home
 hero:
   name: LoaderKit
   text: Loading indicators as data, rendered natively
-  tagline: One JSON spec, the same motion on Android, iOS, macOS, Windows and the web. Pick one of 50 built-in indicators or describe your own.
+  tagline: One JSON spec, the same motion on Android, iOS, macOS, Windows and the web. Pick one of 50 built-in indicators or 30 progress designs, or describe your own.
   actions:
     - theme: brand
+      text: Built-in indicators
+      link: /guide/indicators
+    - theme: brand
+      text: Progress indicators
+      link: /guide/progress
+    - theme: alt
       text: Get started
       link: /guide/getting-started
     - theme: alt
       text: What is LoaderKit?
       link: /guide/
-    - theme: alt
-      text: Browse indicators
-      link: /guide/indicators
 
 features:
   - icon: 🎛️
@@ -56,6 +59,10 @@ features:
 ---
 
 <div class="vp-doc home-content">
+
+## Find an indicator, copy the code {#find-an-indicator}
+
+<HomeShortcuts />
 
 ## Install
 
@@ -118,20 +125,5 @@ LoaderKitIndicator("BallSpinFadeLoader").color(.purple)
 ```
 
 :::
-
-## A few of the built-ins
-
-<div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: center; margin: 16px 0;">
-  <LoaderKitPreview indicator="BallPulse" />
-  <LoaderKitPreview indicator="BallSpinFadeLoader" />
-  <LoaderKitPreview indicator="LineScale" />
-  <LoaderKitPreview indicator="BallClipRotateMultiple" />
-  <LoaderKitPreview indicator="SquareSpin" />
-  <LoaderKitPreview indicator="Pacman" />
-  <LoaderKitPreview indicator="BallGridPulse" />
-  <LoaderKitPreview indicator="Orbit" />
-</div>
-
-[See all 50 indicators](/guide/indicators), with params, colors and copyable code.
 
 </div>

@@ -1,17 +1,50 @@
 <script setup lang="ts">
-import { computed, ref, useId } from 'vue';
+import { computed, onMounted, ref, useId, watch } from 'vue';
 import { useStrings } from '../lib/i18n.ts';
 import type { Snippet } from '../lib/snippets.ts';
 import { useCopy } from '../lib/copy.ts';
+import { highlight } from '../lib/highlight.ts';
+import { usePreferredTab } from '../lib/preferred-tab.ts';
 
 const props = defineProps<{ tabs: readonly Snippet[]; label: string }>();
 
 const { t } = useStrings();
 const id = useId();
+const { preferred, restore, prefer } = usePreferredTab();
 const selected = ref(props.tabs[0]?.id ?? '');
 const current = computed(() => props.tabs.find((tab) => tab.id === selected.value) ?? props.tabs[0]);
 const buttons = ref<HTMLButtonElement[]>([]);
 const { copied, copy } = useCopy();
+const html = ref<string | null>(null);
+
+function select(tabId: string) {
+  selected.value = tabId;
+  prefer(tabId);
+}
+
+onMounted(() => {
+  restore();
+  watch(
+    preferred,
+    (tabId) => {
+      if (tabId && props.tabs.some((tab) => tab.id === tabId)) selected.value = tabId;
+    },
+    { immediate: true },
+  );
+
+  // The previous highlight stays until the next one is ready, so moving a slider does not flash
+  // plain text; it is one step behind for a moment at most.
+  let latest = 0;
+  watch(
+    () => [current.value?.code ?? '', current.value?.lang ?? ''] as const,
+    async ([code, lang]) => {
+      const request = ++latest;
+      const result = await highlight(code, lang).catch(() => null);
+      if (request === latest) html.value = result?.replace(' tabindex="0"', '') ?? null;
+    },
+    { immediate: true },
+  );
+});
 
 function onKeydown(event: KeyboardEvent, index: number) {
   const count = props.tabs.length;
@@ -23,7 +56,7 @@ function onKeydown(event: KeyboardEvent, index: number) {
     : -1;
   if (next < 0) return;
   event.preventDefault();
-  selected.value = props.tabs[next]!.id;
+  select(props.tabs[next]!.id);
   buttons.value[next]?.focus();
 }
 </script>
@@ -43,7 +76,7 @@ function onKeydown(event: KeyboardEvent, index: number) {
           :aria-selected="tab.id === current?.id"
           :aria-controls="`${id}-panel`"
           :tabindex="tab.id === current?.id ? 0 : -1"
-          @click="selected = tab.id"
+          @click="select(tab.id)"
           @keydown="onKeydown($event, index)"
         >
           {{ tab.label }}
@@ -60,7 +93,8 @@ function onKeydown(event: KeyboardEvent, index: number) {
       :aria-labelledby="`${id}-tab-${current?.id}`"
       tabindex="0"
     >
-      <pre><code :class="`language-${current?.lang}`">{{ current?.code }}</code></pre>
+      <div v-if="html" class="lk-code-html" v-html="html" />
+      <pre v-else><code :class="`language-${current?.lang}`">{{ current?.code }}</code></pre>
     </div>
     <span class="visually-hidden" aria-live="polite">{{ copied ? t('copied') : '' }}</span>
   </div>
@@ -138,7 +172,8 @@ function onKeydown(event: KeyboardEvent, index: number) {
   overflow-x: auto;
 }
 
-.lk-code-panel pre {
+.lk-code-panel pre,
+.lk-code-panel :deep(pre.shiki) {
   margin: 0;
   padding: 16px 20px;
   font-family: var(--vp-font-family-mono);
@@ -148,10 +183,19 @@ function onKeydown(event: KeyboardEvent, index: number) {
   background: transparent;
 }
 
-.lk-code-panel code {
+.lk-code-panel code,
+.lk-code-panel :deep(.shiki code) {
   font-size: inherit;
   padding: 0;
   background: none;
   color: inherit;
+}
+
+.lk-code-panel :deep(.shiki span) {
+  color: var(--shiki-light);
+}
+
+.dark .lk-code-panel :deep(.shiki span) {
+  color: var(--shiki-dark);
 }
 </style>

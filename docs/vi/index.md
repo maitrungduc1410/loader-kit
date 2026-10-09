@@ -5,17 +5,20 @@ layout: home
 hero:
   name: LoaderKit
   text: Loading indicator dạng dữ liệu, render native
-  tagline: Một spec JSON, cùng một chuyển động trên Android, iOS, macOS, Windows và web. Chọn một trong 50 indicator có sẵn hoặc tự mô tả indicator của bạn.
+  tagline: Một spec JSON, cùng một chuyển động trên Android, iOS, macOS, Windows và web. Chọn một trong 50 indicator có sẵn hay 30 mẫu progress, hoặc tự mô tả indicator của bạn.
   actions:
     - theme: brand
+      text: Indicator có sẵn
+      link: /vi/guide/indicators
+    - theme: brand
+      text: Progress indicator
+      link: /vi/guide/progress
+    - theme: alt
       text: Bắt đầu
       link: /vi/guide/getting-started
     - theme: alt
       text: LoaderKit là gì?
       link: /vi/guide/
-    - theme: alt
-      text: Xem các indicator
-      link: /vi/guide/indicators
 
 features:
   - icon: 🎛️
@@ -56,6 +59,10 @@ features:
 ---
 
 <div class="vp-doc home-content">
+
+## Tìm indicator, copy code {#find-an-indicator}
+
+<HomeShortcuts />
 
 ## Cài đặt {#install}
 
@@ -118,20 +125,5 @@ LoaderKitIndicator("BallSpinFadeLoader").color(.purple)
 ```
 
 :::
-
-## Vài indicator có sẵn {#a-few-of-the-built-ins}
-
-<div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: center; margin: 16px 0;">
-  <LoaderKitPreview indicator="BallPulse" />
-  <LoaderKitPreview indicator="BallSpinFadeLoader" />
-  <LoaderKitPreview indicator="LineScale" />
-  <LoaderKitPreview indicator="BallClipRotateMultiple" />
-  <LoaderKitPreview indicator="SquareSpin" />
-  <LoaderKitPreview indicator="Pacman" />
-  <LoaderKitPreview indicator="BallGridPulse" />
-  <LoaderKitPreview indicator="Orbit" />
-</div>
-
-[Xem đủ 50 indicator](/vi/guide/indicators), kèm params, màu và code để copy.
 
 </div>

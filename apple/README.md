@@ -244,8 +244,8 @@ LoaderKitProgress(value: progress, type: .border) {
 ```
 
 Content goes in the middle, or inside the stroke of `.border`: the SwiftUI view takes a view
-builder, and on UIKit and AppKit subviews go in `contentView`. VoiceOver reads a progress value in
-percent.
+builder, and on UIKit and AppKit you set `contentView` to the view to show. VoiceOver reads a
+progress value in percent.
 
 ## Development
 

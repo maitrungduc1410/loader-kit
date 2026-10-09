@@ -4,7 +4,7 @@ description: "LoaderKitProgress：30 种进度样式（linear、circular、pie�
 
 # 进度指示器
 
-`LoaderKitProgress` 用来显示任务完成了多少。它有 9 种 type、30 种样式，每种样式都可以显示具体的 value，也可以在 value 未知时以不确定状态运行。value 变化时，指示器会平滑过渡到新的 value。
+`LoaderKitProgress` 用来显示任务完成了多少。它有 9 种 type、30 种样式，每种样式都可以显示具体的 value，也可以在 value 未知时以不确定状态运行。value 变化时，指示器会平滑过渡到新的 value。点击任意一种样式即可打开面板：调整 value、粗细、尺寸和颜色，然后复制对应平台的代码。
 
 <ProgressGallery />
 
@@ -237,7 +237,7 @@ LoaderKitProgress(value: progress, type: .border) {
 
 :::
 
-Android 视图是一个 `ViewGroup`：在 XML 中或用 `addView` 添加子视图。在 UIKit 和 AppKit 中，把子视图添加到 `contentView`。
+Android 视图是一个 `ViewGroup`：在 XML 中或用 `addView` 添加子视图。在 UIKit 和 AppKit 中，把要显示的视图赋给 `contentView`，例如 `progress.contentView = stopButton`。
 
 ## 无障碍 {#accessibility}
 
