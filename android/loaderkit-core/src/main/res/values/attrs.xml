@@ -11,4 +11,38 @@
         <!-- A frozen point of the animation cycle, 0 to 1. Unset follows the clock. -->
         <attr name="cycleProgress" format="float" />
     </declare-styleable>
+
+    <declare-styleable name="LoaderKitProgressView">
+        <!-- linear, circular, pie, gauge, liquid, border, bars, grid or battery. Default circular. -->
+        <attr name="progressType" format="string" />
+        <!-- A variant of the type, e.g. wavy. Default: the first variant of the type. -->
+        <attr name="progressVariant" format="string" />
+        <!-- 0 to 1. Unset shows the indeterminate animation. -->
+        <attr name="progressValue" format="float" />
+        <!-- 0 to 1, drawn by linear flat and wavy. Unset draws no buffer. -->
+        <attr name="progressBuffer" format="float" />
+        <attr name="progressSmooth" format="boolean" />
+        <attr name="progressThickness" format="dimension" />
+        <attr name="progressTrackGap" format="dimension" />
+        <attr name="progressSegments" format="integer" />
+        <attr name="progressShowLabel" format="boolean" />
+        <attr name="progressStopIndicator" format="boolean" />
+        <!-- round or butt. Default round. -->
+        <attr name="progressStrokeCap" format="string" />
+        <attr name="progressAmplitude" format="dimension" />
+        <attr name="progressWavelength" format="dimension" />
+        <!-- Wavelengths per second. Default 1. -->
+        <attr name="progressWaveSpeed" format="float" />
+        <!-- Degrees, 30 to 350. Default 270. -->
+        <attr name="progressSweepAngle" format="float" />
+        <attr name="progressCornerRadius" format="dimension" />
+        <attr name="progressRespectsReduceMotion" format="boolean" />
+        <!-- Size used for wrap_content by every type but linear and border, and the width of linear when unbounded. Default 48dp. -->
+        <attr name="progressSize" format="dimension" />
+        <attr name="progressColor" format="color|reference" />
+        <attr name="progressTrackColor" format="color|reference" />
+        <attr name="progressLabelColor" format="color|reference" />
+        <!-- Playback rate of the indeterminate animation. -->
+        <attr name="speed" />
+    </declare-styleable>
 </resources>

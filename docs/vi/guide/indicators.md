@@ -1,10 +1,10 @@
 ---
-description: "Xem trực tiếp 33 indicator có sẵn của LoaderKit, chỉnh params, màu và tốc độ, rồi copy code dùng ngay cho web, Android, Apple và Windows."
+description: "Xem trực tiếp 50 indicator có sẵn của LoaderKit, chỉnh params, màu và tốc độ, rồi copy code dùng ngay cho web, Android, Apple và Windows."
 ---
 
 # Indicator có sẵn
 
-LoaderKit có sẵn 33 indicator. Trên mọi nền tảng chúng có cùng tên, cùng params và cùng chuyển động. Bấm vào một indicator để mở panel của nó: đổi params, màu, tốc độ và kích thước, rồi copy code cho nền tảng của bạn.
+LoaderKit có sẵn 50 indicator. Trên mọi nền tảng chúng có cùng tên, cùng params và cùng chuyển động. Bấm vào một indicator để mở panel của nó: đổi params, màu, tốc độ và kích thước, rồi copy code cho nền tảng của bạn.
 
 <IndicatorGallery />
 
@@ -14,14 +14,19 @@ Hiện tại chỉ có hai indicator có sẵn nhận params. Các indicator cò
 
 | Indicator | Params (mặc định) | Chu kỳ (s) |
 | --- | --- | --- |
+| `Atom` | không có | 1.5 |
 | `AudioEqualizer` | không có | 4.3 |
 | `BallBeat` | không có | 0.7 |
 | `BallClipRotate` | không có | 0.75 |
 | `BallClipRotateMultiple` | không có | 1 |
 | `BallClipRotatePulse` | không có | 1 |
 | `BallDoubleBounce` | không có | 2 |
+| `BallFall` | không có | 1 |
 | `BallGridBeat` | không có | 1 |
 | `BallGridPulse` | không có | 1 |
+| `BallHelix` | không có | 1.8 |
+| `BallHoneycomb` | không có | 1.4 |
+| `BallMerge` | không có | 1.4 |
 | `BallPulse` | `count` (3), `minScale` (0.3) | 0.75 |
 | `BallPulseRise` | không có | 1 |
 | `BallPulseSync` | không có | 0.6 |
@@ -32,21 +37,33 @@ Hiện tại chỉ có hai indicator có sẵn nhận params. Các indicator cò
 | `BallScaleRipple` | không có | 1 |
 | `BallScaleRippleMultiple` | không có | 1.25 |
 | `BallSpinFadeLoader` | `count` (8), `minScale` (0.4), `minOpacity` (0.3) | 1 |
+| `BallSquareSpin` | không có | 1 |
 | `BallTrianglePath` | không có | 2 |
 | `BallZigZag` | không có | 0.7 |
 | `BallZigZagDeflect` | không có | 1.5 |
+| `ChasingDots` | không có | 2 |
 | `CircleStrokeSpin` | không có | 1.7 |
 | `CubeTransition` | không có | 1.6 |
+| `JellyBox` | không có | 0.9 |
 | `LineScale` | không có | 1 |
 | `LineScaleParty` | không có | 1 |
 | `LineScalePulseOut` | không có | 1 |
 | `LineScalePulseOutRapid` | không có | 0.9 |
+| `LineSlide` | không có | 1.5 |
 | `LineSpinFadeLoader` | không có | 1.2 |
+| `NewtonCradle` | không có | 1.2 |
 | `Orbit` | không có | 1.9 |
 | `Pacman` | không có | 1 |
+| `Radar` | không có | 2 |
+| `RunningDots` | không có | 2 |
 | `SemiCircleSpin` | không có | 0.6 |
+| `SquareGridFlip` | không có | 1.6 |
+| `SquareGridWave` | không có | 1.3 |
 | `SquareSpin` | không có | 3 |
+| `Timer` | không có | 4 |
+| `TriangleOrbit` | không có | 2.1 |
 | `TriangleSkewSpin` | không có | 3 |
+| `TripleArcSpin` | không có | 2.4 |
 
 Chu kỳ là thời gian của một vòng lặp ở speed 1. Dùng [`speed`](/vi/guide/playback#speed) để làm nó nhanh hơn hoặc chậm hơn.
 
@@ -69,7 +86,7 @@ Params nào bạn truyền vào mà indicator không khai báo thì sẽ bị b�
 ```ts [TypeScript]
 import { BUILTIN_INDICATOR_NAMES } from '@loader-kit/web';
 
-console.log(BUILTIN_INDICATOR_NAMES); // ['AudioEqualizer', 'BallBeat', ...]
+console.log(BUILTIN_INDICATOR_NAMES); // ['Atom', 'AudioEqualizer', ...]
 ```
 
 ```kotlin [Kotlin]
@@ -109,4 +126,4 @@ Truyền một tên không tồn tại không bao giờ làm app crash. View s�
 
 ## Ghi nhận {#credits}
 
-Chuyển động của các indicator có sẵn lấy từ [NVActivityIndicatorView](https://github.com/ninjaprox/NVActivityIndicatorView), [loaders.css](https://github.com/ConnorAtherton/loaders.css) và [DGActivityIndicatorView](https://github.com/gontovnik/DGActivityIndicatorView). Xem `THIRD_PARTY_NOTICES.md` trong repo.
+Chuyển động của phần lớn indicator có sẵn lấy từ [NVActivityIndicatorView](https://github.com/ninjaprox/NVActivityIndicatorView), [loaders.css](https://github.com/ConnorAtherton/loaders.css), [DGActivityIndicatorView](https://github.com/gontovnik/DGActivityIndicatorView) và [SpinKit](https://github.com/tobiasahlin/SpinKit); số còn lại được thiết kế riêng cho LoaderKit. Xem `THIRD_PARTY_NOTICES.md` trong repo.

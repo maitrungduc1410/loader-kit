@@ -1,5 +1,6 @@
 // Generates everything the platform engines share with this package:
 //   - test-vectors/*.json: expected element states that every engine must reproduce
+//   - test-vectors/progress/*.json: expected LoaderKitProgress options, draw commands and animator runs
 //   - the built-in specs as JSON strings for Kotlin, Swift and C#
 //   - spec/schema.json: the JSON Schema of a spec, for editors and tools
 // Usage: node spec/scripts/generate.ts [--check]
@@ -18,6 +19,7 @@ import {
   type Params,
 } from '../src/index.ts';
 import { EDGE_CASES, type VectorSource } from './edge-cases.ts';
+import { progressVectorFiles } from './progress-vectors.ts';
 import { indicatorSpecSchema } from './schema.ts';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
@@ -116,13 +118,24 @@ emit(
   `${JSON.stringify({ note: HEADER, tolerance: 1e-6, files: vectors.map((item) => `${item.id}.json`) }, null, 2)}\n`
 );
 
-// The engine tests expect index.json to list every file of test-vectors/, so leftovers must go.
-const vectorFiles = new Set(['index.json', ...vectors.map((item) => `${item.id}.json`)]);
-for (const name of readdirSync(join(root, 'test-vectors'))) {
-  if (!name.endsWith('.json') || vectorFiles.has(name)) continue;
-  if (check) stale.push(`test-vectors/${name}`);
-  else rmSync(join(root, 'test-vectors', name));
+const progressFiles = progressVectorFiles();
+for (const file of progressFiles) emit(`test-vectors/progress/${file.name}`, file.content);
+emit(
+  'test-vectors/progress/index.json',
+  `${JSON.stringify({ note: HEADER, tolerance: 1e-6, files: progressFiles.map((file) => file.name) }, null, 2)}\n`
+);
+
+// The engine tests expect each index.json to list every file of its directory, so leftovers must go.
+function removeLeftovers(dir: string, names: string[]) {
+  const keep = new Set(['index.json', ...names]);
+  for (const name of readdirSync(join(root, dir))) {
+    if (!name.endsWith('.json') || keep.has(name)) continue;
+    if (check) stale.push(`${dir}/${name}`);
+    else rmSync(join(root, dir, name));
+  }
 }
+removeLeftovers('test-vectors', vectors.map((item) => `${item.id}.json`));
+if (existsSync(join(root, 'test-vectors/progress'))) removeLeftovers('test-vectors/progress', progressFiles.map((file) => file.name));
 
 // ----- built-in specs for the native engines -----
 

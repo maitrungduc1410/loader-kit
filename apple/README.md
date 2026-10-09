@@ -91,21 +91,23 @@ SwiftUI modifiers such as `frame`.
 
 ### Built-in indicators
 
-33 indicators, the same on every platform:
+50 indicators, the same on every platform:
 
-AudioEqualizer, BallBeat, BallClipRotate, BallClipRotateMultiple, BallClipRotatePulse,
-BallDoubleBounce, BallGridBeat, BallGridPulse, BallPulse, BallPulseRise, BallPulseSync,
-BallRotate, BallRotateChase, BallScale, BallScaleMultiple, BallScaleRipple,
-BallScaleRippleMultiple, BallSpinFadeLoader, BallTrianglePath, BallZigZag, BallZigZagDeflect,
-CircleStrokeSpin, CubeTransition, LineScale, LineScaleParty, LineScalePulseOut,
-LineScalePulseOutRapid, LineSpinFadeLoader, Orbit, Pacman, SemiCircleSpin, SquareSpin,
-TriangleSkewSpin.
+Atom, AudioEqualizer, BallBeat, BallClipRotate, BallClipRotateMultiple, BallClipRotatePulse,
+BallDoubleBounce, BallFall, BallGridBeat, BallGridPulse, BallHelix, BallHoneycomb, BallMerge,
+BallPulse, BallPulseRise, BallPulseSync, BallRotate, BallRotateChase, BallScale,
+BallScaleMultiple, BallScaleRipple, BallScaleRippleMultiple, BallSpinFadeLoader,
+BallSquareSpin, BallTrianglePath, BallZigZag, BallZigZagDeflect, ChasingDots, CircleStrokeSpin,
+CubeTransition, JellyBox, LineScale, LineScaleParty, LineScalePulseOut, LineScalePulseOutRapid,
+LineSlide, LineSpinFadeLoader, NewtonCradle, Orbit, Pacman, Radar, RunningDots, SemiCircleSpin,
+SquareGridFlip, SquareGridWave, SquareSpin, Timer, TriangleOrbit, TriangleSkewSpin,
+TripleArcSpin.
 
 `BallPulse` takes the params `count` (3) and `minScale` (0.3); `BallSpinFadeLoader` takes
 `count` (8), `minScale` (0.4) and `minOpacity` (0.3).
 
 ```swift
-IndicatorSpec.builtinNames            // the 33 names above
+IndicatorSpec.builtinNames            // the 50 names above
 IndicatorSpec.builtin(named: "BallPulse")
 ```
 
@@ -219,6 +221,31 @@ view moves to a new window.
 
 To reuse a view, for example in a list cell, call `reset()`: it restores every property to its
 default and restarts the animation.
+
+### Progress
+
+`LoaderKitProgressView` (UIKit, AppKit) and `LoaderKitProgress` (SwiftUI) show how much of a task
+is done: 30 designs across 9 types, with a value from 0 to 1 or, with `nil`, indeterminate. With
+`smooth` (on by default) they glide to every new value. Full guide:
+[maitrungduc1410.github.io/loader-kit/guide/progress](https://maitrungduc1410.github.io/loader-kit/guide/progress)
+
+```swift
+let progress = LoaderKitProgressView(value: nil, type: .linear, variant: .wavy)
+progress.value = 0.4
+
+// SwiftUI
+LoaderKitProgress(value: progress, type: .gauge)
+    .showLabel()
+    .size(64)
+
+LoaderKitProgress(value: progress, type: .border) {
+    Button("Upload", action: upload)
+}
+```
+
+Content goes in the middle, or inside the stroke of `.border`: the SwiftUI view takes a view
+builder, and on UIKit and AppKit subviews go in `contentView`. VoiceOver reads a progress value in
+percent.
 
 ## Development
 

@@ -5,9 +5,9 @@
 | Path | Contents |
 | --- | --- |
 | `SPEC.md` | the indicator spec: meaning of every field and the rules every engine follows |
-| `spec/` | `@loader-kit/spec`: TypeScript schema, JSON Schema, reference evaluator, validator, built-in indicators, generator |
-| `web/` | `@loader-kit/web`: canvas renderer, `LoaderKitView`, the `<loader-kit>` custom element and the React, Vue and Svelte components |
-| `test-vectors/` | generated conformance suite, run by the tests of every engine |
+| `spec/` | `@loader-kit/spec`: TypeScript schema, JSON Schema, reference evaluator, validator, built-in indicators, progress geometry, generator |
+| `web/` | `@loader-kit/web`: canvas renderer, `LoaderKitView`, `LoaderKitProgressView`, the `<loader-kit>` and `<loader-kit-progress>` custom elements and the React, Vue and Svelte components |
+| `test-vectors/` | generated conformance suite, run by the tests of every engine (`test-vectors/progress/` for the progress indicators) |
 | `android/` | Gradle project: `loaderkit-core` (View) and `loaderkit-compose` |
 | `Package.swift`, `apple/` | Swift package: `LoaderKitCore` (pure Swift) and `LoaderKit` (Core Animation, UIKit, AppKit, SwiftUI) |
 | `LoaderKit.podspec` | the same sources as a pod, consumed with `:git` and `:tag` |
@@ -37,6 +37,13 @@ spec field goes there too.
 A change in behaviour goes into `SPEC.md`, the reference evaluator and every engine in the same
 pull request, with a test vector that covers it (`spec/scripts/edge-cases.ts` holds synthetic
 specs for rules the built-in indicators do not exercise).
+
+Progress indicators are not specs, but follow the same idea. `spec/src/progress/` is the reference:
+it resolves the options, runs the value glide and turns both into draw commands. Each platform
+ports it (`ProgressGeometry` and `ProgressAnimator` in Kotlin, Swift and C#) and only maps the
+commands to its canvas. `npm run generate` writes `test-vectors/progress/` from
+`spec/scripts/progress-vectors.ts`; a change in the geometry goes into the reference, every port
+and a vector in the same pull request.
 
 ## Running the checks
 

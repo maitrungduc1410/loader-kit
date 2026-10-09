@@ -4,7 +4,7 @@ description: "react-native-loader-kit 把 LoaderKit 带到 React Native。从 np
 
 # React Native
 
-[`react-native-loader-kit`](https://github.com/maitrungduc1410/react-native-loader-kit) 是一个基于 LoaderKit 构建的 React Native 库。它使用本站介绍的 Android 和 iOS 原生引擎，所以同样提供 33 个内置加载动画，名称、参数和动效都完全一致。
+[`react-native-loader-kit`](https://github.com/maitrungduc1410/react-native-loader-kit) 是一个基于 LoaderKit 构建的 React Native 库。它使用本站介绍的 Android 和 iOS 原生引擎，所以同样提供这些内置加载动画，名称、参数和动效都完全一致。
 
 ## 安装 {#install}
 

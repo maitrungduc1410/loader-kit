@@ -108,6 +108,23 @@ struct LoadingView: View {
 LoaderKit 的修饰符返回的是 `LoaderKitIndicator`。要在 `frame`、`padding` 这类 SwiftUI 修饰符之前调用它们，因为后者返回的是另一种视图类型。
 :::
 
+## 进度指示器 {#progress}
+
+`LoaderKitProgress` 用来显示任务完成了多少：9 种 type、30 种样式，支持确定与不确定状态，value 平滑过渡。
+
+```swift
+// UIKit 与 AppKit
+let progress = LoaderKitProgressView(value: 0.4, type: .linear, variant: .wavy)
+progress.value = 0.8        // 平滑过渡到 0.8；nil 表示不确定状态
+
+// SwiftUI
+LoaderKitProgress(value: progress, type: .gauge)
+    .showLabel()
+    .size(64)
+```
+
+所有 type、variant 和选项见[进度指示器](/zh/guide/progress)。
+
 ## 自定义 spec {#custom-specs}
 
 ::: warning 实验性功能

@@ -1,11 +1,11 @@
 ---
-description: "用 JSON 描述加载动画，在 Android、iOS、macOS、Windows 和 Web 上原生渲染。提供 33 个内置动画，也可以自己编写 spec。"
+description: "用 JSON 描述加载动画，在 Android、iOS、macOS、Windows 和 Web 上原生渲染。提供 50 个内置动画，也可以自己编写 spec。"
 layout: home
 
 hero:
   name: LoaderKit
   text: 用数据描述加载动画，原生渲染
-  tagline: 一份 JSON spec，在 Android、iOS、macOS、Windows 和 Web 上呈现完全相同的动效。从 33 个内置加载动画里挑一个，或者描述你自己的。
+  tagline: 一份 JSON spec，在 Android、iOS、macOS、Windows 和 Web 上呈现完全相同的动效。从 50 个内置加载动画里挑一个，或者描述你自己的。
   actions:
     - theme: brand
       text: 快速开始
@@ -19,10 +19,15 @@ hero:
 
 features:
   - icon: 🎛️
-    title: 33 个内置加载动画
+    title: 50 个内置加载动画
     details: 脉冲、旋转、条形、网格、环绕等样式，在每个平台上名称都一样。部分动画还支持 count、minScale 等参数。
     link: /zh/guide/indicators
     linkText: 查看全部
+  - icon: 📊
+    title: 30 种进度样式
+    details: Linear、circular、pie、gauge、liquid、border、bars、grid 和 battery，支持确定与不确定状态，value 变化时平滑过渡。
+    link: /zh/guide/progress
+    linkText: 进度指示器
   - icon: 📱
     title: 各平台原生实现
     details: Android 上用 Canvas（View 和 Compose），iOS 和 macOS 上用 Core Animation（UIKit、AppKit、SwiftUI），Windows 上用 Composition，Web 上用 canvas。
@@ -127,6 +132,6 @@ LoaderKitIndicator("BallSpinFadeLoader").color(.purple)
   <LoaderKitPreview indicator="Orbit" />
 </div>
 
-[查看全部 33 个加载动画](/zh/guide/indicators)，包括参数、颜色设置和可复制的代码。
+[查看全部 50 个加载动画](/zh/guide/indicators)，包括参数、颜色设置和可复制的代码。
 
 </div>

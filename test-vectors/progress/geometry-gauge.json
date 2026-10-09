@@ -1,0 +1,183 @@
+{
+  "description": "progressCommands for gauge",
+  "cases": [
+    {"description":"gauge flat at 0","options":{"type":"gauge","variant":"flat"},"width":48,"height":48,"state":{"indeterminate":false,"value":0,"buffer":0,"wave":0,"time":0,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":2.35619449,"end":7.068583471,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}}
+    ]},
+    {"description":"gauge flat at 0.37","options":{"type":"gauge","variant":"flat"},"width":48,"height":48,"state":{"indeterminate":false,"value":0.37,"buffer":0,"wave":1,"time":0.8,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":4.575968889,"end":7.068583471,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":2.35619449,"end":4.099778413,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}}
+    ]},
+    {"description":"gauge flat at 1","options":{"type":"gauge","variant":"flat"},"width":48,"height":48,"state":{"indeterminate":false,"value":1,"buffer":0,"wave":0,"time":1.3,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":2.35619449,"end":7.068583471,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}}
+    ]},
+    {"description":"gauge flat indeterminate at 0.3 s","options":{"type":"gauge","variant":"flat"},"width":48,"height":48,"state":{"indeterminate":true,"value":0,"buffer":0,"wave":1,"time":0.27,"indeterminateTime":0.3},"x":0,"y":0, "commands": [
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":2.35619449,"end":2.618160183,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":4.701514491,"end":7.068583471,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":3.094350659,"end":4.225324015,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}}
+    ]},
+    {"description":"gauge flat indeterminate at 1.1 s","options":{"type":"gauge","variant":"flat"},"width":48,"height":48,"state":{"indeterminate":true,"value":0,"buffer":0,"wave":1,"time":0.99,"indeterminateTime":1.1},"x":0,"y":0, "commands": [
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":2.35619449,"end":5.37377616,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":5.849966637,"end":6.980939992,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}}
+    ]},
+    {"description":"gauge flat indeterminate at 2.75 s","options":{"type":"gauge","variant":"flat"},"width":48,"height":48,"state":{"indeterminate":true,"value":0,"buffer":0,"wave":1,"time":2.475,"indeterminateTime":2.75},"x":0,"y":0, "commands": [
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":2.35619449,"end":4.936933464,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":7.020287772,"end":7.068583471,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":5.41312394,"end":6.544097295,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}}
+    ]},
+    {"description":"gauge flat with butt caps at 0.62","options":{"type":"gauge","variant":"flat","strokeCap":"butt"},"width":48,"height":48,"state":{"indeterminate":false,"value":0.62,"buffer":0,"wave":0.6,"time":0.4,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":5.468351849,"end":7.068583471,"lineWidth":6,"cap":"butt","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":2.35619449,"end":5.277875658,"lineWidth":6,"cap":"butt","paint":{"type":"solid","color":"color","alpha":1}}
+    ]},
+    {"description":"gauge flat with a label at 0.48","options":{"type":"gauge","variant":"flat","showLabel":true},"width":48,"height":48,"state":{"indeterminate":false,"value":0.48,"buffer":0,"wave":1,"time":0.2,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":5.094331677,"end":7.068583471,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":2.35619449,"end":4.618141201,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"text","x":24,"y":24,"size":10.56,"text":"48%","align":"center","paint":{"type":"solid","color":"label","alpha":1}}
+    ]},
+    {"description":"gauge segmented at 0","options":{"type":"gauge","variant":"segmented"},"width":48,"height":48,"state":{"indeterminate":false,"value":0,"buffer":0,"wave":0,"time":0,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":2.35619449,"end":2.39886196,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":2.875052436,"end":2.917719905,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":3.393910382,"end":3.436577851,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":3.912768327,"end":3.955435797,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":4.431626273,"end":4.474293742,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":4.950484218,"end":4.993151688,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":5.469342164,"end":5.512009634,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":5.98820011,"end":6.030867579,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":6.507058055,"end":6.549725525,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":7.025916001,"end":7.068583471,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}}
+    ]},
+    {"description":"gauge segmented at 0.37","options":{"type":"gauge","variant":"segmented"},"width":48,"height":48,"state":{"indeterminate":false,"value":0.37,"buffer":0,"wave":1,"time":0.8,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":2.35619449,"end":2.39886196,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":2.35619449,"end":2.39886196,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":2.875052436,"end":2.917719905,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":2.875052436,"end":2.917719905,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":3.393910382,"end":3.436577851,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":3.393910382,"end":3.436577851,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":3.912768327,"end":3.955435797,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":3.912768327,"end":3.942635556,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":4.431626273,"end":4.474293742,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":4.950484218,"end":4.993151688,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":5.469342164,"end":5.512009634,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":5.98820011,"end":6.030867579,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":6.507058055,"end":6.549725525,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":7.025916001,"end":7.068583471,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}}
+    ]},
+    {"description":"gauge segmented at 1","options":{"type":"gauge","variant":"segmented"},"width":48,"height":48,"state":{"indeterminate":false,"value":1,"buffer":0,"wave":0,"time":1.3,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":2.35619449,"end":2.39886196,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":2.35619449,"end":2.39886196,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":2.875052436,"end":2.917719905,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":2.875052436,"end":2.917719905,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":3.393910382,"end":3.436577851,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":3.393910382,"end":3.436577851,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":3.912768327,"end":3.955435797,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":3.912768327,"end":3.955435797,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":4.431626273,"end":4.474293742,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":4.431626273,"end":4.474293742,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":4.950484218,"end":4.993151688,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":4.950484218,"end":4.993151688,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":5.469342164,"end":5.512009634,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":5.469342164,"end":5.512009634,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":5.98820011,"end":6.030867579,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":5.98820011,"end":6.030867579,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":6.507058055,"end":6.549725525,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":6.507058055,"end":6.549725525,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":7.025916001,"end":7.068583471,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":7.025916001,"end":7.068583471,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}}
+    ]},
+    {"description":"gauge segmented indeterminate at 0.3 s","options":{"type":"gauge","variant":"segmented"},"width":48,"height":48,"state":{"indeterminate":true,"value":0,"buffer":0,"wave":1,"time":0.27,"indeterminateTime":0.3},"x":0,"y":0, "commands": [
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":2.35619449,"end":2.39886196,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":2.35619449,"end":2.39886196,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"color","alpha":0.114206379}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":2.875052436,"end":2.917719905,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":2.875052436,"end":2.917719905,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"color","alpha":0.818061759}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":3.393910382,"end":3.436577851,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":3.393910382,"end":3.436577851,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"color","alpha":0.885793621}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":3.912768327,"end":3.955435797,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":3.912768327,"end":3.955435797,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"color","alpha":0.181938241}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":4.431626273,"end":4.474293742,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":4.950484218,"end":4.993151688,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":5.469342164,"end":5.512009634,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":5.98820011,"end":6.030867579,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":6.507058055,"end":6.549725525,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":7.025916001,"end":7.068583471,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}}
+    ]},
+    {"description":"gauge segmented indeterminate at 1.1 s","options":{"type":"gauge","variant":"segmented"},"width":48,"height":48,"state":{"indeterminate":true,"value":0,"buffer":0,"wave":1,"time":0.99,"indeterminateTime":1.1},"x":0,"y":0, "commands": [
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":2.35619449,"end":2.39886196,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":2.875052436,"end":2.917719905,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":3.393910382,"end":3.436577851,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":3.912768327,"end":3.955435797,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":4.431626273,"end":4.474293742,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":4.950484218,"end":4.993151688,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":5.469342164,"end":5.512009634,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":5.98820011,"end":6.030867579,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":6.507058055,"end":6.549725525,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":6.507058055,"end":6.549725525,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"color","alpha":0.304831804}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":7.025916001,"end":7.068583471,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":7.025916001,"end":7.068583471,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"color","alpha":0.960336155}}
+    ]},
+    {"description":"gauge segmented indeterminate at 2.75 s","options":{"type":"gauge","variant":"segmented"},"width":48,"height":48,"state":{"indeterminate":true,"value":0,"buffer":0,"wave":1,"time":2.475,"indeterminateTime":2.75},"x":0,"y":0, "commands": [
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":2.35619449,"end":2.39886196,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":2.875052436,"end":2.917719905,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":3.393910382,"end":3.436577851,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":3.912768327,"end":3.955435797,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":4.431626273,"end":4.474293742,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":4.950484218,"end":4.993151688,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":5.469342164,"end":5.512009634,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":5.98820011,"end":6.030867579,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":5.98820011,"end":6.030867579,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"color","alpha":0.472106225}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":6.507058055,"end":6.549725525,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":6.507058055,"end":6.549725525,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"color","alpha":0.999221331}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":7.025916001,"end":7.068583471,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":7.025916001,"end":7.068583471,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"color","alpha":0.527893775}}
+    ]},
+    {"description":"gauge segmented with butt caps at 0.62","options":{"type":"gauge","variant":"segmented","strokeCap":"butt"},"width":48,"height":48,"state":{"indeterminate":false,"value":0.62,"buffer":0,"wave":0.6,"time":0.4,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":2.35619449,"end":2.656004817,"lineWidth":6,"cap":"butt","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":2.35619449,"end":2.656004817,"lineWidth":6,"cap":"butt","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":2.846481007,"end":3.146291334,"lineWidth":6,"cap":"butt","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":2.846481007,"end":3.146291334,"lineWidth":6,"cap":"butt","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":3.336767524,"end":3.636577851,"lineWidth":6,"cap":"butt","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":3.336767524,"end":3.636577851,"lineWidth":6,"cap":"butt","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":3.827054041,"end":4.126864368,"lineWidth":6,"cap":"butt","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":3.827054041,"end":4.126864368,"lineWidth":6,"cap":"butt","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":4.317340559,"end":4.617150885,"lineWidth":6,"cap":"butt","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":4.317340559,"end":4.617150885,"lineWidth":6,"cap":"butt","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":4.807627076,"end":5.107437402,"lineWidth":6,"cap":"butt","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":4.807627076,"end":5.107437402,"lineWidth":6,"cap":"butt","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":5.297913593,"end":5.597723919,"lineWidth":6,"cap":"butt","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":5.297913593,"end":5.357875658,"lineWidth":6,"cap":"butt","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":5.78820011,"end":6.088010436,"lineWidth":6,"cap":"butt","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":6.278486627,"end":6.578296953,"lineWidth":6,"cap":"butt","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":6.768773144,"end":7.068583471,"lineWidth":6,"cap":"butt","paint":{"type":"solid","color":"track","alpha":1}}
+    ]},
+    {"description":"gauge segmented with a label at 0.48","options":{"type":"gauge","variant":"segmented","showLabel":true},"width":48,"height":48,"state":{"indeterminate":false,"value":0.48,"buffer":0,"wave":1,"time":0.2,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":2.35619449,"end":2.39886196,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":2.35619449,"end":2.39886196,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":2.875052436,"end":2.917719905,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":2.875052436,"end":2.917719905,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":3.393910382,"end":3.436577851,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":3.393910382,"end":3.436577851,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":3.912768327,"end":3.955435797,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":3.912768327,"end":3.955435797,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":4.431626273,"end":4.474293742,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":4.431626273,"end":4.465760248,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":4.950484218,"end":4.993151688,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":5.469342164,"end":5.512009634,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":5.98820011,"end":6.030867579,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":6.507058055,"end":6.549725525,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":7.025916001,"end":7.068583471,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"text","x":24,"y":24,"size":10.56,"text":"48%","align":"center","paint":{"type":"solid","color":"label","alpha":1}}
+    ]},
+    {"description":"gauge with a 180 degree sweep","options":{"type":"gauge","sweepAngle":180},"width":48,"height":48,"state":{"indeterminate":false,"value":0.5,"buffer":0,"wave":1,"time":0,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":5.188579457,"end":6.283185307,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":3.141592654,"end":4.71238898,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}}
+    ]},
+    {"description":"gauge segmented with a 120 degree sweep","options":{"type":"gauge","variant":"segmented","sweepAngle":120,"segments":4},"width":48,"height":48,"state":{"indeterminate":false,"value":0.6,"buffer":0,"wave":1,"time":0,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":3.665191429,"end":3.831647348,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":3.665191429,"end":3.831647348,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":4.307837824,"end":4.474293742,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":4.307837824,"end":4.474293742,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":4.950484218,"end":5.116940137,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":4.950484218,"end":5.017066586,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":21,"start":5.593130613,"end":5.759586532,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}}
+    ]}
+  ]
+}

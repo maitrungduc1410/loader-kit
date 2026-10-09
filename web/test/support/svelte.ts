@@ -1,4 +1,4 @@
-// Compiles svelte/LoaderKit.svelte with Svelte 5 or Svelte 4 (installed as `svelte4`) and imports the
+// Compiles svelte/LoaderKit.svelte (or another component of svelte/) with Svelte 5 or Svelte 4 (installed as `svelte4`) and imports the
 // result. The component's imports of the built package point at src/ instead, and the runtime
 // imports at the browser or server build of the matching Svelte, so no build or bundler is needed.
 import { mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
@@ -37,19 +37,22 @@ export function svelteModule(version: SvelteVersion, target: Target, specifier: 
 }
 
 /** Svelte 5 output always hydrates; Svelte 4 client output hydrates only when compiled `hydratable`. */
-export async function compileLoaderKit(version: SvelteVersion, target: Target, { hydratable = false } = {}): Promise<unknown> {
-  const source = readFileSync(join(web, 'svelte/LoaderKit.svelte'), 'utf8');
+export async function compileLoaderKit(
+  version: SvelteVersion,
+  target: Target,
+  { hydratable = false, component = 'LoaderKit' } = {},
+): Promise<unknown> {
+  const source = readFileSync(join(web, `svelte/${component}.svelte`), 'utf8');
   const compiler = (await import(version === 5 ? 'svelte/compiler' : 'svelte4/compiler')) as {
     compile: (source: string, options: Record<string, unknown>) => { js: { code: string }; warnings: { code: string; message: string }[] };
   };
   const generate = version === 5 ? target : target === 'client' ? 'dom' : 'ssr';
   const options = version === 4 && hydratable ? { generate, hydratable } : { generate };
-  const { js, warnings } = compiler.compile(source, { ...options, filename: 'LoaderKit.svelte' });
+  const { js, warnings } = compiler.compile(source, { ...options, filename: `${component}.svelte` });
   if (warnings.length > 0) throw new Error(warnings.map((w) => `${w.code}: ${w.message}`).join('\n'));
 
   const resolve = (specifier: string) => {
-    if (specifier === '../dist/esm/element.js') return pathToFileURL(join(web, 'src/element.ts')).href;
-    if (specifier === '../dist/esm/attributes.js') return pathToFileURL(join(web, 'src/attributes.ts')).href;
+    if (specifier.startsWith('../dist/esm/')) return pathToFileURL(join(web, 'src', specifier.slice('../dist/esm/'.length).replace(/\.js$/, '.ts'))).href;
     if (specifier === 'svelte' || specifier.startsWith('svelte/')) return svelteModule(version, target, specifier);
     return specifier;
   };
@@ -59,7 +62,7 @@ export async function compileLoaderKit(version: SvelteVersion, target: Target, {
   );
 
   // Test files run in parallel processes, so each compiles to a file of its own.
-  const out = join(web, 'test/.svelte', `svelte${version}-${target}${hydratable ? '-hydratable' : ''}-${process.pid}.js`);
+  const out = join(web, 'test/.svelte', `${component}-svelte${version}-${target}${hydratable ? '-hydratable' : ''}-${process.pid}.js`);
   mkdirSync(dirname(out), { recursive: true });
   writeFileSync(out, code);
   try {

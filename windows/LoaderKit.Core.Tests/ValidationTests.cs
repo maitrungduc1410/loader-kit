@@ -70,7 +70,7 @@ public class ValidationTests
     [Fact]
     public void BuiltinIndicatorsAreValid()
     {
-        Assert.Equal(33, BuiltinIndicators.Names.Count);
+        Assert.Equal(50, BuiltinIndicators.Names.Count);
         foreach (var name in BuiltinIndicators.Names)
         {
             Assert.Empty(IndicatorSpecValidator.Validate(BuiltinIndicators.GetJson(name)));

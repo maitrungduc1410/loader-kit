@@ -8,7 +8,7 @@ LoaderKit is a set of loading indicators for Android, iOS, macOS, Windows and th
 
 You can use it in two ways:
 
-- **Built-in indicators.** Pick one of [33 indicators](/guide/indicators) by name, such as `BallPulse` or `LineSpinFadeLoader`. Set a color, a size, a speed and, for some indicators, params like `count`.
+- **Built-in indicators.** Pick one of [50 indicators](/guide/indicators) by name, such as `BallPulse` or `LineSpinFadeLoader`. Set a color, a size, a speed and, for some indicators, params like `count`.
 - **Custom indicators.** Write your own spec: elements placed in a box, a shape, and keyframe tracks that animate them. Every engine draws it, with no new native code. See [Custom indicators](/spec/).
 
 <div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: center; margin: 16px 0;">
@@ -72,5 +72,5 @@ All packages share one version number, and release tags look like `1.0.0` (no `v
 ## Next steps
 
 - [Getting started](/guide/getting-started): install and show a first indicator.
-- [Built-in indicators](/guide/indicators): browse and tune the 33 built-ins.
+- [Built-in indicators](/guide/indicators): browse and tune the 50 built-ins.
 - [Custom indicators](/spec/): build a spec step by step with live previews.

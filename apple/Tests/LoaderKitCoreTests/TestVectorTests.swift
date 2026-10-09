@@ -90,7 +90,7 @@ final class TestVectorTests: XCTestCase {
 
     func testEveryVectorMatchesTheReferenceEvaluator() throws {
         let index = try load(Index.self, "index.json")
-        XCTAssertEqual(index.files.count, 40)
+        XCTAssertEqual(index.files.count, 57)
         let tolerance = index.tolerance
         var sampleCount = 0
 
@@ -159,7 +159,7 @@ final class TestVectorTests: XCTestCase {
     }
 
     func testEveryBuiltinLoads() {
-        XCTAssertEqual(IndicatorSpec.builtinNames.count, 33)
+        XCTAssertEqual(IndicatorSpec.builtinNames.count, 50)
         for name in IndicatorSpec.builtinNames {
             XCTAssertNotNil(IndicatorSpec.builtin(named: name), name)
         }

@@ -1,11 +1,11 @@
 ---
-description: "Loading indicator mô tả bằng JSON, render native trên Android, iOS, macOS, Windows và web. Có sẵn 33 indicator, hoặc bạn tự viết spec của riêng mình."
+description: "Loading indicator mô tả bằng JSON, render native trên Android, iOS, macOS, Windows và web. Có sẵn 50 indicator, hoặc bạn tự viết spec của riêng mình."
 layout: home
 
 hero:
   name: LoaderKit
   text: Loading indicator dạng dữ liệu, render native
-  tagline: Một spec JSON, cùng một chuyển động trên Android, iOS, macOS, Windows và web. Chọn một trong 33 indicator có sẵn hoặc tự mô tả indicator của bạn.
+  tagline: Một spec JSON, cùng một chuyển động trên Android, iOS, macOS, Windows và web. Chọn một trong 50 indicator có sẵn hoặc tự mô tả indicator của bạn.
   actions:
     - theme: brand
       text: Bắt đầu
@@ -19,10 +19,15 @@ hero:
 
 features:
   - icon: 🎛️
-    title: 33 indicator có sẵn
+    title: 50 indicator có sẵn
     details: Pulse, spinner, bar, grid và orbit, cùng một tên trên mọi nền tảng. Một số indicator nhận params, ví dụ count và minScale.
     link: /vi/guide/indicators
     linkText: Xem tất cả
+  - icon: 📊
+    title: 30 mẫu progress
+    details: Linear, circular, pie, gauge, liquid, border, bars, grid và battery, có value hoặc vô định, chạy mượt tới mỗi value mới.
+    link: /vi/guide/progress
+    linkText: Progress indicator
   - icon: 📱
     title: Native trên mọi nền tảng
     details: Canvas trên Android (View và Compose), Core Animation trên iOS và macOS (UIKit, AppKit, SwiftUI), Composition trên Windows, canvas trên web.
@@ -127,6 +132,6 @@ LoaderKitIndicator("BallSpinFadeLoader").color(.purple)
   <LoaderKitPreview indicator="Orbit" />
 </div>
 
-[Xem đủ 33 indicator](/vi/guide/indicators), kèm params, màu và code để copy.
+[Xem đủ 50 indicator](/vi/guide/indicators), kèm params, màu và code để copy.
 
 </div>

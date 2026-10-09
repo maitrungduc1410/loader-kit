@@ -53,16 +53,21 @@ loader.start()
 
 ## Built-in indicators
 
-`BuiltinIndicators.names` lists them at runtime. All 33:
+`BuiltinIndicators.names` lists them at runtime. All 50:
 
+- `Atom`
 - `AudioEqualizer`
 - `BallBeat`
 - `BallClipRotate`
 - `BallClipRotateMultiple`
 - `BallClipRotatePulse`
 - `BallDoubleBounce`
+- `BallFall`
 - `BallGridBeat`
 - `BallGridPulse`
+- `BallHelix`
+- `BallHoneycomb`
+- `BallMerge`
 - `BallPulse`
 - `BallPulseRise`
 - `BallPulseSync`
@@ -73,21 +78,33 @@ loader.start()
 - `BallScaleRipple`
 - `BallScaleRippleMultiple`
 - `BallSpinFadeLoader`
+- `BallSquareSpin`
 - `BallTrianglePath`
 - `BallZigZag`
 - `BallZigZagDeflect`
+- `ChasingDots`
 - `CircleStrokeSpin`
 - `CubeTransition`
+- `JellyBox`
 - `LineScale`
 - `LineScaleParty`
 - `LineScalePulseOut`
 - `LineScalePulseOutRapid`
+- `LineSlide`
 - `LineSpinFadeLoader`
+- `NewtonCradle`
 - `Orbit`
 - `Pacman`
+- `Radar`
+- `RunningDots`
 - `SemiCircleSpin`
+- `SquareGridFlip`
+- `SquareGridWave`
 - `SquareSpin`
+- `Timer`
+- `TriangleOrbit`
 - `TriangleSkewSpin`
+- `TripleArcSpin`
 
 ## Compose
 
@@ -103,6 +120,37 @@ LoaderKitIndicator(
 ```
 
 The composable is 40.dp square unless `modifier` sizes it.
+
+## Progress
+
+`LoaderKitProgressView` and the `LoaderKitProgress` composable show how much of a task is done:
+30 designs across 9 types, with a value from 0 to 1 or, with null, indeterminate. With `smooth`
+(on by default) they glide to every new value. Full guide:
+[maitrungduc1410.github.io/loader-kit/guide/progress](https://maitrungduc1410.github.io/loader-kit/guide/progress)
+
+```xml
+<io.github.maitrungduc1410.loaderkit.LoaderKitProgressView
+    android:id="@+id/progress"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:progressType="linear"
+    app:progressVariant="wavy" />
+```
+
+```kotlin
+progress.value = 0.4        // null is indeterminate
+
+LoaderKitProgress(
+    value = progress,
+    type = ProgressType.Gauge,
+    showLabel = true,
+    size = 64.dp,
+)
+```
+
+The view is a `ViewGroup` and the composable takes a `content` lambda: content sits in the middle,
+or inside the stroke of `ProgressType.Border`. Both are announced as a progress bar with the value
+in percent.
 
 ## Custom specs
 

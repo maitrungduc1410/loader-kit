@@ -8,7 +8,7 @@ LoaderKit 是一套面向 Android、iOS、macOS、Windows 和 Web 的加载动�
 
 有两种用法：
 
-- **内置加载动画。** 按名字从 [33 个内置动画](/zh/guide/indicators)中选一个，比如 `BallPulse` 或 `LineSpinFadeLoader`。可以设置颜色、尺寸和速度；部分动画还支持 `count` 这样的参数。
+- **内置加载动画。** 按名字从 [50 个内置动画](/zh/guide/indicators)中选一个，比如 `BallPulse` 或 `LineSpinFadeLoader`。可以设置颜色、尺寸和速度；部分动画还支持 `count` 这样的参数。
 - **自定义加载动画。** 自己编写 spec：在方框里摆放元素，指定形状，再用关键帧 track（动画轨道）让它们动起来。所有引擎都能绘制，无需新增原生代码。详见[自定义加载动画](/zh/spec/)。
 
 <div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: center; margin: 16px 0;">
@@ -72,5 +72,5 @@ spec 用数据来描述一个加载动画：
 ## 下一步 {#next-steps}
 
 - [快速开始](/zh/guide/getting-started)：安装并显示第一个加载动画。
-- [内置加载动画](/zh/guide/indicators)：浏览并调整 33 个内置动画。
+- [内置加载动画](/zh/guide/indicators)：浏览并调整 50 个内置动画。
 - [自定义加载动画](/zh/spec/)：借助实时预览，一步步写出一份 spec。

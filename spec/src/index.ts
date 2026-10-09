@@ -26,3 +26,4 @@ export { InvalidIndicatorError, defineIndicator, param } from './define.ts';
 export type { IndicatorDefinition } from './define.ts';
 export { BUILTIN_INDICATORS, BUILTIN_INDICATOR_NAMES } from './indicators/index.ts';
 export type { BuiltinIndicatorName } from './indicators/index.ts';
+export * from './progress/index.ts';

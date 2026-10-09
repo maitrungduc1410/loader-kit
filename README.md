@@ -6,19 +6,19 @@ Loading indicators described as data and rendered natively on Android, iOS, macO
   <a href="https://maitrungduc1410.github.io/loader-kit/guide/indicators">
     <picture>
       <source media="(prefers-color-scheme: dark)" srcset="docs/public/readme/indicators-dark.gif">
-      <img alt="The 33 built-in LoaderKit indicators, animating" src="docs/public/readme/indicators-light.gif" width="100%">
+      <img alt="The 50 built-in LoaderKit indicators, animating" src="docs/public/readme/indicators-light.gif" width="100%">
     </picture>
   </a>
 </p>
 
 <p align="center">
-  All 33 built-in indicators. <a href="https://maitrungduc1410.github.io/loader-kit/guide/indicators">Open the gallery</a> to try them with your own colors, size and speed, or build a new one in the <a href="https://maitrungduc1410.github.io/loader-kit/tools/playground">playground</a>.
+  All 50 built-in indicators. <a href="https://maitrungduc1410.github.io/loader-kit/guide/indicators">Open the gallery</a> to try them with your own colors, size and speed, or build a new one in the <a href="https://maitrungduc1410.github.io/loader-kit/tools/playground">playground</a>.
 </p>
 
 Each indicator is a small JSON spec: elements laid out in a unit box, and keyframe tracks for
 their scale, opacity, rotation and translation. Every platform engine reads the same spec and
 follows the same rules ([SPEC.md](SPEC.md)), checked against a shared conformance suite
-([test-vectors/](test-vectors)), so an indicator looks and moves the same everywhere. There are 33 built-in
+([test-vectors/](test-vectors)), so an indicator looks and moves the same everywhere. There are 50 built-in
 indicators, some with params (`count`, `minScale`), and you can write your own (experimental).
 
 **Documentation, live demos and the playground: https://maitrungduc1410.github.io/loader-kit/**
@@ -83,10 +83,34 @@ import '@loader-kit/web/element'; // registers <loader-kit>
 <loader-kit indicator="BallSpinFadeLoader" color="#7c3aed" speed="1.5"></loader-kit>
 ```
 
+## Progress indicators
+
+`LoaderKitProgress` shows how much of a task is done: 30 designs across 9 types (linear, circular,
+pie, gauge, liquid, border, bars, grid, battery). Each one runs with a value from 0 to 1 or, with
+null, indeterminate, and glides smoothly to every new value. The geometry is shared by every
+platform and checked by the same test vectors ([test-vectors/progress](test-vectors/progress)).
+
+```tsx
+<LoaderKitProgress type="linear" variant="wavy" value={progress} />
+```
+
+```kotlin
+LoaderKitProgress(value = progress, type = ProgressType.Gauge, showLabel = true)
+```
+
+```swift
+LoaderKitProgress(value: progress, type: .circular).showLabel()
+```
+
+```xml
+<lk:LoaderKitProgress Type="Linear" Value="{x:Bind ViewModel.Progress, Mode=OneWay}" />
+```
+
 ## Learn more
 
 - [Getting started](https://maitrungduc1410.github.io/loader-kit/guide/getting-started): install and a first indicator on every platform.
-- [Built-in indicators](https://maitrungduc1410.github.io/loader-kit/guide/indicators): all 33, live, with copyable code.
+- [Built-in indicators](https://maitrungduc1410.github.io/loader-kit/guide/indicators): all 50, live, with copyable code.
+- [Progress indicators](https://maitrungduc1410.github.io/loader-kit/guide/progress): the 30 progress designs, live, with copyable code.
 - [Custom indicators](https://maitrungduc1410.github.io/loader-kit/spec/): write your own spec, step by step. Experimental: until the schema is declared stable, a minor release may change it. Built-in indicators are not affected.
 - [Playground](https://maitrungduc1410.github.io/loader-kit/tools/playground): edit a spec with live preview and validation.
 
@@ -97,6 +121,6 @@ releases work.
 
 ## License
 
-MIT, see [LICENSE](LICENSE). The motion of the built-in indicators comes from
-NVActivityIndicatorView, loaders.css and DGActivityIndicatorView, see
+MIT, see [LICENSE](LICENSE). The motion of most built-in indicators comes from
+NVActivityIndicatorView, loaders.css, DGActivityIndicatorView and SpinKit, see
 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).

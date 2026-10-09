@@ -4,7 +4,7 @@ description: "Dùng LoaderKit trên Windows: cài package NuGet LoaderKit.WinUI,
 
 # Windows
 
-LoaderKit cho Windows vẽ indicator bằng `Microsoft.UI.Composition`, dành cho WinUI 3 và Windows App SDK.
+LoaderKit cho Windows vẽ indicator bằng `Microsoft.UI.Composition` và progress indicator bằng Win2D, dành cho WinUI 3 và Windows App SDK.
 
 | Package | Nội dung |
 | --- | --- |
@@ -78,6 +78,22 @@ Mọi property, trừ `SpecError` chỉ đọc, đều là dependency property, 
 Event: `SpecFailed` (`EventHandler<InvalidIndicatorSpecException>`) được raise khi không dùng được tên hoặc spec. Control không bao giờ throw từ property setter.
 
 Với UI Automation, control tự khai báo là một progress bar.
+
+## Progress indicator {#progress}
+
+`LoaderKitProgress` cho biết một tác vụ đã chạy được bao nhiêu: 30 mẫu thuộc 9 type, có value hoặc vô định, đổi value mượt.
+
+```xml
+<lk:LoaderKitProgress Type="Linear" Variant="Wavy" Value="{x:Bind ViewModel.Progress, Mode=OneWay}" />
+
+<lk:LoaderKitProgress Type="Border">
+    <Button Content="Upload" />
+</lk:LoaderKitProgress>
+```
+
+Control vẽ bằng Win2D, được `LoaderKit.WinUI` kéo theo như một dependency. `Value` có kiểu `double?`: null là vô định.
+
+Xem [Progress indicator](/vi/guide/progress) để biết mọi type, variant và option.
 
 ## Spec tùy chỉnh {#custom-specs}
 

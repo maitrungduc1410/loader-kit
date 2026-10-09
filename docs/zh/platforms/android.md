@@ -116,6 +116,29 @@ LoaderKitIndicator(
 
 这个可组合项没有 `hidesWhenStopped`。要隐藏它，直接把它移出组合即可。未知名称或无效 spec 什么都不画，并输出一条警告日志。
 
+## 进度指示器 {#progress}
+
+`LoaderKitProgress` 用来显示任务完成了多少：9 种 type、30 种样式，支持确定与不确定状态，value 平滑过渡。
+
+```xml
+<io.github.maitrungduc1410.loaderkit.LoaderKitProgressView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:progressType="linear"
+    app:progressVariant="wavy"
+    app:progressValue="0.4" />
+```
+
+```kotlin
+progress.value = 0.8        // 平滑过渡到 0.8；null 表示不确定状态
+progress.smooth = false     // 每个 value 立即绘制
+
+// Compose
+LoaderKitProgress(value = progress, type = ProgressType.Gauge, showLabel = true, size = 64.dp)
+```
+
+所有 type、variant 和选项见[进度指示器](/zh/guide/progress)。
+
 ## 自定义 spec {#custom-specs}
 
 ::: warning 实验性功能

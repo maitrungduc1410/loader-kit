@@ -48,7 +48,7 @@ test('a spec wins over the indicator, as an object or as JSON', () => {
 });
 
 test('unknown indicators, bad JSON and invalid specs throw InvalidIndicatorError listing the problems', () => {
-  assert.match(problems(() => prepare({ indicator: 'Nope' }))[0]!, /^unknown indicator "Nope", expected one of AudioEqualizer, /);
+  assert.match(problems(() => prepare({ indicator: 'Nope' }))[0]!, /^unknown indicator "Nope", expected one of Atom, AudioEqualizer, /);
   assert.match(problems(() => prepare({ indicator: 'constructor' }))[0]!, /unknown indicator "constructor"/);
   assert.match(problems(() => prepare({ spec: '{"schemaVersion": 1,' }))[0]!, /^spec is not valid JSON: /);
   const invalid = problems(() => prepare({ spec: { schemaVersion: 2, name: 'X', duration: -1 } as unknown as IndicatorSpec }));

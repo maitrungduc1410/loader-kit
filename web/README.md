@@ -107,6 +107,35 @@ and themes work: an animating indicator reads it on every frame, and a stopped o
 redraws when the system color scheme changes or an attribute of `<html>` or `<body>` changes (such
 as a theme class).
 
+## Progress
+
+`LoaderKitProgress` shows how much of a task is done: 30 designs across 9 types (`linear`,
+`circular`, `pie`, `gauge`, `liquid`, `border`, `bars`, `grid`, `battery`) and their variants.
+`value` goes from 0 to 1; null is indeterminate. With `smooth` (on by default) the indicator glides
+to every new value. Full guide: [maitrungduc1410.github.io/loader-kit/guide/progress](https://maitrungduc1410.github.io/loader-kit/guide/progress)
+
+```tsx
+import { LoaderKitProgress } from '@loader-kit/web/react';   // or /vue, /svelte
+
+<LoaderKitProgress type="linear" variant="wavy" value={progress} />
+<LoaderKitProgress type="border"><button>Upload</button></LoaderKitProgress>
+```
+
+```js
+import '@loader-kit/web/progress-element';
+```
+
+```html
+<loader-kit-progress type="gauge" value="0.7" show-label size="64"></loader-kit-progress>
+```
+
+Attributes: `value`, `buffer`, `smooth`, `type`, `variant`, `thickness`, `track-gap`, `segments`,
+`show-label`, `stop-indicator`, `stroke-cap`, `amplitude`, `wavelength`, `wave-speed`,
+`sweep-angle`, `corner-radius`, `speed`, `size`, `color`, `track-color`, `label-color`,
+`respects-reduce-motion`, each mirrored by a camelCase property. Children are shown in the middle,
+or inside the stroke of `border`. The element has the `progressbar` role and an `aria-valuenow` in
+percent. `new LoaderKitProgressView(host, options)` is the same without the element.
+
 ## Custom specs
 
 > Writing your own spec is **experimental**: until the schema is declared stable, a minor release

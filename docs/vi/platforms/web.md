@@ -269,6 +269,31 @@ View lấy kích thước canvas theo host, nên bạn hãy đặt kích thướ
 - Khi JavaScript chưa load xong, element chưa có kích thước riêng. Hãy đặt `size` hoặc kích thước CSS để trang không bị xô lệch khi nó bắt đầu vẽ.
 - Chỉ tạo `LoaderKitView` trong trình duyệt, ví dụ trong `useEffect`, `onMounted` hoặc `onMount`.
 
+## Progress indicator {#progress}
+
+`LoaderKitProgress` cho biết một tác vụ đã chạy được bao nhiêu: 30 mẫu thuộc 9 type, có value hoặc vô định, đổi value mượt.
+
+```html
+<script type="module">
+  import '@loader-kit/web/progress-element';
+</script>
+
+<loader-kit-progress type="linear" value="0.4"></loader-kit-progress>
+<loader-kit-progress type="circular" show-label size="64"></loader-kit-progress>
+```
+
+```ts
+import { LoaderKitProgressView } from '@loader-kit/web';
+
+const view = new LoaderKitProgressView(host, { type: 'linear', variant: 'wavy' });
+view.value = 0.4;    // chạy mượt tới 0.4; null là vô định
+view.destroy();
+```
+
+`LoaderKitProgress` cũng được export từ `@loader-kit/web/react`, `@loader-kit/web/vue` và `@loader-kit/web/svelte`, với props giống các attribute nhưng viết camelCase, và children cho nội dung ở giữa hoặc bên trong border. Giống `<loader-kit>`, phần tử này render được trên server và bắt đầu vẽ khi được upgrade.
+
+Xem [Progress indicator](/vi/guide/progress) để biết mọi type, variant và option.
+
 ## Spec tùy chỉnh {#custom-specs}
 
 Truyền spec dưới dạng object hoặc JSON. Xem [Indicator tùy chỉnh](/vi/spec/) để biết cách viết.

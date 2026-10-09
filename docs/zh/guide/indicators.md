@@ -1,10 +1,10 @@
 ---
-description: "实时浏览 LoaderKit 的 33 个内置加载动画，调节参数、颜色和速度，并复制 Web、Android、Apple、Windows 的现成代码。"
+description: "实时浏览 LoaderKit 的 50 个内置加载动画，调节参数、颜色和速度，并复制 Web、Android、Apple、Windows 的现成代码。"
 ---
 
 # 内置加载动画
 
-LoaderKit 内置了 33 个加载动画，在每个平台上名称、参数和动效都完全一致。点击任意一个即可打开面板：调整参数、颜色、速度和尺寸，然后复制对应平台的代码。
+LoaderKit 内置了 50 个加载动画，在每个平台上名称、参数和动效都完全一致。点击任意一个即可打开面板：调整参数、颜色、速度和尺寸，然后复制对应平台的代码。
 
 <IndicatorGallery />
 
@@ -14,14 +14,19 @@ LoaderKit 内置了 33 个加载动画，在每个平台上名称、参数和动
 
 | 加载动画 | 参数（默认值） | 周期（秒） |
 | --- | --- | --- |
+| `Atom` | 无 | 1.5 |
 | `AudioEqualizer` | 无 | 4.3 |
 | `BallBeat` | 无 | 0.7 |
 | `BallClipRotate` | 无 | 0.75 |
 | `BallClipRotateMultiple` | 无 | 1 |
 | `BallClipRotatePulse` | 无 | 1 |
 | `BallDoubleBounce` | 无 | 2 |
+| `BallFall` | 无 | 1 |
 | `BallGridBeat` | 无 | 1 |
 | `BallGridPulse` | 无 | 1 |
+| `BallHelix` | 无 | 1.8 |
+| `BallHoneycomb` | 无 | 1.4 |
+| `BallMerge` | 无 | 1.4 |
 | `BallPulse` | `count`（3）、`minScale`（0.3） | 0.75 |
 | `BallPulseRise` | 无 | 1 |
 | `BallPulseSync` | 无 | 0.6 |
@@ -32,21 +37,33 @@ LoaderKit 内置了 33 个加载动画，在每个平台上名称、参数和动
 | `BallScaleRipple` | 无 | 1 |
 | `BallScaleRippleMultiple` | 无 | 1.25 |
 | `BallSpinFadeLoader` | `count`（8）、`minScale`（0.4）、`minOpacity`（0.3） | 1 |
+| `BallSquareSpin` | 无 | 1 |
 | `BallTrianglePath` | 无 | 2 |
 | `BallZigZag` | 无 | 0.7 |
 | `BallZigZagDeflect` | 无 | 1.5 |
+| `ChasingDots` | 无 | 2 |
 | `CircleStrokeSpin` | 无 | 1.7 |
 | `CubeTransition` | 无 | 1.6 |
+| `JellyBox` | 无 | 0.9 |
 | `LineScale` | 无 | 1 |
 | `LineScaleParty` | 无 | 1 |
 | `LineScalePulseOut` | 无 | 1 |
 | `LineScalePulseOutRapid` | 无 | 0.9 |
+| `LineSlide` | 无 | 1.5 |
 | `LineSpinFadeLoader` | 无 | 1.2 |
+| `NewtonCradle` | 无 | 1.2 |
 | `Orbit` | 无 | 1.9 |
 | `Pacman` | 无 | 1 |
+| `Radar` | 无 | 2 |
+| `RunningDots` | 无 | 2 |
 | `SemiCircleSpin` | 无 | 0.6 |
+| `SquareGridFlip` | 无 | 1.6 |
+| `SquareGridWave` | 无 | 1.3 |
 | `SquareSpin` | 无 | 3 |
+| `Timer` | 无 | 4 |
+| `TriangleOrbit` | 无 | 2.1 |
 | `TriangleSkewSpin` | 无 | 3 |
+| `TripleArcSpin` | 无 | 2.4 |
 
 周期指速度为 1 时播放一轮的时长。用 [`speed`](/zh/guide/playback#speed) 可以调快或调慢。
 
@@ -69,7 +86,7 @@ LoaderKit 内置了 33 个加载动画，在每个平台上名称、参数和动
 ```ts [TypeScript]
 import { BUILTIN_INDICATOR_NAMES } from '@loader-kit/web';
 
-console.log(BUILTIN_INDICATOR_NAMES); // ['AudioEqualizer', 'BallBeat', ...]
+console.log(BUILTIN_INDICATOR_NAMES); // ['Atom', 'AudioEqualizer', ...]
 ```
 
 ```kotlin [Kotlin]
@@ -109,4 +126,4 @@ var spec = BuiltinIndicators.Get("BallPulse");
 
 ## 致谢 {#credits}
 
-内置加载动画的动效来自 [NVActivityIndicatorView](https://github.com/ninjaprox/NVActivityIndicatorView)、[loaders.css](https://github.com/ConnorAtherton/loaders.css) 和 [DGActivityIndicatorView](https://github.com/gontovnik/DGActivityIndicatorView)。详见仓库中的 `THIRD_PARTY_NOTICES.md`。
+大部分内置加载动画的动效来自 [NVActivityIndicatorView](https://github.com/ninjaprox/NVActivityIndicatorView)、[loaders.css](https://github.com/ConnorAtherton/loaders.css)、[DGActivityIndicatorView](https://github.com/gontovnik/DGActivityIndicatorView) 和 [SpinKit](https://github.com/tobiasahlin/SpinKit)，其余的是专为 LoaderKit 设计的。详见仓库中的 `THIRD_PARTY_NOTICES.md`。

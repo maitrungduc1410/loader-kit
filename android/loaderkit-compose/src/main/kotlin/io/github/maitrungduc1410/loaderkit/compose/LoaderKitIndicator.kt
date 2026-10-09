@@ -144,7 +144,7 @@ private fun Indicator(
 }
 
 @Composable
-private fun rememberSystemReducesMotion(): Boolean {
+internal fun rememberSystemReducesMotion(): Boolean {
     val context = LocalContext.current
     var reduces by remember(context) { mutableStateOf(systemReducesMotion(context)) }
     DisposableEffect(context) {

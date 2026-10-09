@@ -4,7 +4,7 @@ description: "react-native-loader-kit brings the LoaderKit indicators to React N
 
 # React Native
 
-[`react-native-loader-kit`](https://github.com/maitrungduc1410/react-native-loader-kit) is a React Native library built on LoaderKit. It uses the native Android and iOS engines described on this site, so you get the same 33 built-in indicators, with the same names, params and motion.
+[`react-native-loader-kit`](https://github.com/maitrungduc1410/react-native-loader-kit) is a React Native library built on LoaderKit. It uses the native Android and iOS engines described on this site, so you get the same built-in indicators, with the same names, params and motion.
 
 ## Install
 

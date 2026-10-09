@@ -116,6 +116,29 @@ LoaderKitIndicator(
 
 The composable has no `hidesWhenStopped`. To hide it, leave it out of the composition. An unknown name or an invalid spec draws nothing and logs a warning.
 
+## Progress indicators {#progress}
+
+`LoaderKitProgress` shows how much of a task is done: 30 designs across 9 types, determinate or indeterminate, with smooth value changes.
+
+```xml
+<io.github.maitrungduc1410.loaderkit.LoaderKitProgressView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:progressType="linear"
+    app:progressVariant="wavy"
+    app:progressValue="0.4" />
+```
+
+```kotlin
+progress.value = 0.8        // glides to 0.8; null is indeterminate
+progress.smooth = false     // draw every value as it comes
+
+// Compose
+LoaderKitProgress(value = progress, type = ProgressType.Gauge, showLabel = true, size = 64.dp)
+```
+
+See [Progress indicators](/guide/progress) for every type, variant and option.
+
 ## Custom specs
 
 ::: warning Experimental

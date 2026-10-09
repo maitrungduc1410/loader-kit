@@ -1,7 +1,7 @@
 {
   "name": "@loader-kit/web",
   "version": "1.0.0-rc.0",
-  "description": "LoaderKit loading indicators for the web: a canvas renderer, a <loader-kit> custom element, and React, Vue and Svelte components",
+  "description": "LoaderKit loading and progress indicators for the web: a canvas renderer, <loader-kit> and <loader-kit-progress> custom elements, and React, Vue and Svelte components",
   "license": "MIT",
   "author": "Duc Trung Mai <maitrungduc1410@gmail.com> (https://github.com/maitrungduc1410)",
   "homepage": "https://maitrungduc1410.github.io/loader-kit/platforms/web",
@@ -17,6 +17,7 @@
     "loader",
     "loading-indicator",
     "spinner",
+    "progress",
     "animation",
     "canvas",
     "web-component",
@@ -47,6 +48,16 @@
       "require": {
         "types": "./dist/cjs/element.d.ts",
         "default": "./dist/cjs/element.js"
+      }
+    },
+    "./progress-element": {
+      "import": {
+        "types": "./dist/esm/progress-element.d.ts",
+        "default": "./dist/esm/progress-element.js"
+      },
+      "require": {
+        "types": "./dist/cjs/progress-element.d.ts",
+        "default": "./dist/cjs/progress-element.js"
       }
     },
     "./react": {
@@ -84,7 +95,10 @@
   "sideEffects": [
     "./dist/esm/element.js",
     "./dist/cjs/element.js",
-    "./src/element.ts"
+    "./src/element.ts",
+    "./dist/esm/progress-element.js",
+    "./dist/cjs/progress-element.js",
+    "./src/progress-element.ts"
   ],
   "scripts": {
     "prebuild": "npm run build --workspace @loader-kit/spec",

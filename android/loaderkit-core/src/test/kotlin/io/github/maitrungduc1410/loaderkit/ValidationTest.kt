@@ -50,7 +50,7 @@ class ValidationTest {
 
     @Test
     fun builtInIndicatorsAreValid() {
-        assertEquals(33, BuiltinIndicators.names.size)
+        assertEquals(50, BuiltinIndicators.names.size)
         for (name in BuiltinIndicators.names) {
             assertTrue(name in BuiltinIndicators)
             val spec = BuiltinIndicators.require(name)

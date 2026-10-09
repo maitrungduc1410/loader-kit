@@ -108,6 +108,23 @@ Modifiers: `params(_:)`, `color(_:)`, `colors(_:)`, `speed(_:)`, `animating(_:)`
 The LoaderKit modifiers return a `LoaderKitIndicator`. Apply them before SwiftUI modifiers such as `frame` or `padding`, which return a different view type.
 :::
 
+## Progress indicators {#progress}
+
+`LoaderKitProgress` shows how much of a task is done: 30 designs across 9 types, determinate or indeterminate, with smooth value changes.
+
+```swift
+// UIKit and AppKit
+let progress = LoaderKitProgressView(value: 0.4, type: .linear, variant: .wavy)
+progress.value = 0.8        // glides to 0.8; nil is indeterminate
+
+// SwiftUI
+LoaderKitProgress(value: progress, type: .gauge)
+    .showLabel()
+    .size(64)
+```
+
+See [Progress indicators](/guide/progress) for every type, variant and option.
+
 ## Custom specs
 
 ::: warning Experimental

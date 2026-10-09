@@ -38,7 +38,7 @@ test('every built-in matches the schema', () => {
 test('every edge case and vector spec matches the schema', () => {
   for (const { id, spec } of EDGE_CASES) assert.deepEqual(errors(spec), [], id);
   const dir = new URL('../../test-vectors/', import.meta.url);
-  for (const file of readdirSync(dir).filter((name) => name !== 'index.json')) {
+  for (const file of readdirSync(dir).filter((name) => name.endsWith('.json') && name !== 'index.json')) {
     const { spec } = JSON.parse(readFileSync(join(dir.pathname, file), 'utf8'));
     assert.deepEqual(errors(spec), [], file);
   }

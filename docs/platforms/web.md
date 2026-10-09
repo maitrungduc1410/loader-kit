@@ -269,6 +269,31 @@ The view sizes its canvas from the host, so size the host with CSS.
 - Until the JavaScript loads, the element has no size of its own. Set `size` or a CSS size so the page does not shift when it starts drawing.
 - Create a `LoaderKitView` only in the browser, for example in `useEffect`, `onMounted` or `onMount`.
 
+## Progress indicators {#progress}
+
+`LoaderKitProgress` shows how much of a task is done: 30 designs across 9 types, determinate or indeterminate, with smooth value changes.
+
+```html
+<script type="module">
+  import '@loader-kit/web/progress-element';
+</script>
+
+<loader-kit-progress type="linear" value="0.4"></loader-kit-progress>
+<loader-kit-progress type="circular" show-label size="64"></loader-kit-progress>
+```
+
+```ts
+import { LoaderKitProgressView } from '@loader-kit/web';
+
+const view = new LoaderKitProgressView(host, { type: 'linear', variant: 'wavy' });
+view.value = 0.4;    // glides to 0.4; null is indeterminate
+view.destroy();
+```
+
+`LoaderKitProgress` is also exported from `@loader-kit/web/react`, `@loader-kit/web/vue` and `@loader-kit/web/svelte`, with the same props as the attributes in camelCase and children for content in the middle or inside a border. Like `<loader-kit>`, the element renders on the server and draws once it upgrades.
+
+See [Progress indicators](/guide/progress) for every type, variant and option.
+
 ## Custom specs
 
 Pass a spec as an object or as JSON. See [Custom indicators](/spec/) to write one.

@@ -68,3 +68,42 @@ test('Svelte 4 renders the attributes on the server', async () => {
   const component = (await compileLoaderKit(4, 'server')) as { render: (props: Record<string, unknown>) => { html: string } };
   assertMarkup(component.render({ ...props, class: 'spinner' }).html);
 });
+
+const progressProps = { value: 0.25, type: 'gauge', showLabel: true, trackGap: 0, smooth: false } as const;
+
+/** The attributes of the first `<loader-kit-progress>` tag in `html`, and its content. */
+function assertProgressMarkup(html: string) {
+  const match = /<loader-kit-progress\b([^>]*)>([\s\S]*?)<\/loader-kit-progress>/.exec(html);
+  assert.ok(match, `no <loader-kit-progress> in ${html}`);
+  const attributes: Record<string, string> = {};
+  for (const [, name, value = ''] of match[1]!.matchAll(/([\w-]+)(?:="([^"]*)")?/g)) attributes[name!] = value;
+  assert.equal(attributes.value, '0.25');
+  assert.equal(attributes.type, 'gauge');
+  assert.equal(attributes['show-label'], 'true');
+  assert.equal(attributes['track-gap'], '0');
+  assert.equal(attributes.smooth, 'false');
+  assert.equal('variant' in attributes, false);
+  assert.equal(attributes.role, 'progressbar');
+  assert.equal(attributes['aria-valuenow'], '25');
+  assert.match(match[2]!, /<b>25<\/b>/);
+}
+
+test('LoaderKitProgress renders its attributes and children on the server', async () => {
+  const { createElement } = await import('react');
+  const { renderToString } = await import('react-dom/server');
+  const { LoaderKitProgress } = await import('../src/react.ts');
+  assertProgressMarkup(renderToString(createElement(LoaderKitProgress, progressProps, createElement('b', null, '25'))));
+
+  const { createSSRApp, h } = await import('vue');
+  const vueServer = await import('vue/server-renderer');
+  const vue = await import('../src/vue.ts');
+  assertProgressMarkup(await vueServer.renderToString(createSSRApp({ render: () => h(vue.LoaderKitProgress, progressProps, () => h('b', '25')) })));
+
+  const svelte5 = await compileLoaderKit(5, 'server', { component: 'LoaderKitProgress' });
+  const { render } = (await import(svelteModule(5, 'server', 'svelte/server'))) as {
+    render: (component: unknown, options: { props: Record<string, unknown> }) => { body: string };
+  };
+  assertProgressMarkup(render(svelte5, { props: progressProps }).body.replace('</loader-kit-progress>', '<b>25</b></loader-kit-progress>'));
+  const svelte4 = (await compileLoaderKit(4, 'server', { component: 'LoaderKitProgress' })) as { render: (props: Record<string, unknown>) => { html: string } };
+  assertProgressMarkup(svelte4.render(progressProps).html.replace('</loader-kit-progress>', '<b>25</b></loader-kit-progress>'));
+});

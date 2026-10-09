@@ -4,7 +4,7 @@ description: "Windows 上的 LoaderKit：安装 NuGet 包，在 XAML 或 C# 中�
 
 # Windows
 
-Windows 版 LoaderKit 用 `Microsoft.UI.Composition` 绘制加载动画，面向 WinUI 3 和 Windows App SDK。
+Windows 版 LoaderKit 用 `Microsoft.UI.Composition` 绘制加载动画，用 Win2D 绘制进度指示器，面向 WinUI 3 和 Windows App SDK。
 
 | 包 | 内容 |
 | --- | --- |
@@ -78,6 +78,22 @@ indicator.CycleProgress = null;  // 时钟从原来的位置继续
 事件：名称或 spec 无法使用时，会触发 `SpecFailed`（`EventHandler<InvalidIndicatorSpecException>`）。控件的属性 setter 永远不会抛异常。
 
 在 UI Automation 中，控件会把自己报告为进度条。
+
+## 进度指示器 {#progress}
+
+`LoaderKitProgress` 用来显示任务完成了多少：9 种 type、30 种样式，支持确定与不确定状态，value 平滑过渡。
+
+```xml
+<lk:LoaderKitProgress Type="Linear" Variant="Wavy" Value="{x:Bind ViewModel.Progress, Mode=OneWay}" />
+
+<lk:LoaderKitProgress Type="Border">
+    <Button Content="Upload" />
+</lk:LoaderKitProgress>
+```
+
+控件使用 Win2D 绘制，`LoaderKit.WinUI` 会把它作为依赖一起引入。`Value` 的类型是 `double?`：null 表示不确定状态。
+
+所有 type、variant 和选项见[进度指示器](/zh/guide/progress)。
 
 ## 自定义 spec {#custom-specs}
 

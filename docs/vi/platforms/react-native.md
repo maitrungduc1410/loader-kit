@@ -4,7 +4,7 @@ description: "react-native-loader-kit đưa các indicator của LoaderKit vào 
 
 # React Native
 
-[`react-native-loader-kit`](https://github.com/maitrungduc1410/react-native-loader-kit) là thư viện React Native được xây trên LoaderKit. Nó dùng chính các engine native Android và iOS được mô tả trên site này, nên bạn có đủ 33 indicator có sẵn với cùng tên, cùng params và cùng chuyển động.
+[`react-native-loader-kit`](https://github.com/maitrungduc1410/react-native-loader-kit) là thư viện React Native được xây trên LoaderKit. Nó dùng chính các engine native Android và iOS được mô tả trên site này, nên bạn có đủ các indicator có sẵn với cùng tên, cùng params và cùng chuyển động.
 
 ## Cài đặt {#install}
 

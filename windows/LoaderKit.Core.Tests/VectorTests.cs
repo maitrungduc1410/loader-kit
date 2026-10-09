@@ -103,7 +103,7 @@ public class VectorTests
             .Where(name => name != "index.json")
             .OrderBy(name => name, StringComparer.Ordinal);
         Assert.Equal(onDisk, TestVectors.Files.OrderBy(name => name, StringComparer.Ordinal));
-        Assert.Equal(40, TestVectors.Files.Count());
+        Assert.Equal(57, TestVectors.Files.Count());
     }
 
     [Fact]

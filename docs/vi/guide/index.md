@@ -8,7 +8,7 @@ LoaderKit là bộ loading indicator cho Android, iOS, macOS, Windows và web. M
 
 Bạn có hai cách dùng:
 
-- **Indicator có sẵn.** Chọn một trong [33 indicator](/vi/guide/indicators) theo tên, ví dụ `BallPulse` hay `LineSpinFadeLoader`. Đặt màu, kích thước, tốc độ, và với một số indicator thì thêm params như `count`.
+- **Indicator có sẵn.** Chọn một trong [50 indicator](/vi/guide/indicators) theo tên, ví dụ `BallPulse` hay `LineSpinFadeLoader`. Đặt màu, kích thước, tốc độ, và với một số indicator thì thêm params như `count`.
 - **Indicator tùy chỉnh.** Tự viết spec: các phần tử đặt trong một box, một shape, và các track keyframe để animate chúng. Engine nào cũng vẽ được, không cần viết thêm code native. Xem [Indicator tùy chỉnh](/vi/spec/).
 
 <div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: center; margin: 16px 0;">
@@ -72,5 +72,5 @@ Mọi package dùng chung một số phiên bản, và tag release có dạng `1
 ## Tiếp theo {#next-steps}
 
 - [Bắt đầu](/vi/guide/getting-started): cài đặt và hiển thị indicator đầu tiên.
-- [Indicator có sẵn](/vi/guide/indicators): xem và tinh chỉnh 33 indicator có sẵn.
+- [Indicator có sẵn](/vi/guide/indicators): xem và tinh chỉnh 50 indicator có sẵn.
 - [Indicator tùy chỉnh](/vi/spec/): dựng một spec từng bước, có preview trực tiếp.

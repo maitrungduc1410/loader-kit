@@ -1,7 +1,7 @@
 # LoaderKit for Windows
 
-Loading indicators described as data and rendered natively with `Microsoft.UI.Composition`, for WinUI 3 and the
-Windows App SDK. Every indicator is a JSON spec shared with the Android and Apple engines, so the same name or spec
+Loading indicators described as data and rendered natively with `Microsoft.UI.Composition`, plus progress
+indicators drawn with Win2D, for WinUI 3 and the Windows App SDK. Every indicator is a JSON spec shared with the Android and Apple engines, so the same name or spec
 looks and moves the same on every platform. Full guide with live examples:
 https://maitrungduc1410.github.io/loader-kit/platforms/windows
 
@@ -77,21 +77,27 @@ from a property setter.
 
 ## Built-in indicators
 
-The 33 indicators of `BuiltinIndicators.Names`:
+The 50 indicators of `BuiltinIndicators.Names`:
 
 | | | |
 | --- | --- | --- |
-| `AudioEqualizer` | `BallBeat` | `BallClipRotate` |
-| `BallClipRotateMultiple` | `BallClipRotatePulse` | `BallDoubleBounce` |
-| `BallGridBeat` | `BallGridPulse` | `BallPulse` |
-| `BallPulseRise` | `BallPulseSync` | `BallRotate` |
-| `BallRotateChase` | `BallScale` | `BallScaleMultiple` |
-| `BallScaleRipple` | `BallScaleRippleMultiple` | `BallSpinFadeLoader` |
+| `Atom` | `AudioEqualizer` | `BallBeat` |
+| `BallClipRotate` | `BallClipRotateMultiple` | `BallClipRotatePulse` |
+| `BallDoubleBounce` | `BallFall` | `BallGridBeat` |
+| `BallGridPulse` | `BallHelix` | `BallHoneycomb` |
+| `BallMerge` | `BallPulse` | `BallPulseRise` |
+| `BallPulseSync` | `BallRotate` | `BallRotateChase` |
+| `BallScale` | `BallScaleMultiple` | `BallScaleRipple` |
+| `BallScaleRippleMultiple` | `BallSpinFadeLoader` | `BallSquareSpin` |
 | `BallTrianglePath` | `BallZigZag` | `BallZigZagDeflect` |
-| `CircleStrokeSpin` | `CubeTransition` | `LineScale` |
-| `LineScaleParty` | `LineScalePulseOut` | `LineScalePulseOutRapid` |
-| `LineSpinFadeLoader` | `Orbit` | `Pacman` |
-| `SemiCircleSpin` | `SquareSpin` | `TriangleSkewSpin` |
+| `ChasingDots` | `CircleStrokeSpin` | `CubeTransition` |
+| `JellyBox` | `LineScale` | `LineScaleParty` |
+| `LineScalePulseOut` | `LineScalePulseOutRapid` | `LineSlide` |
+| `LineSpinFadeLoader` | `NewtonCradle` | `Orbit` |
+| `Pacman` | `Radar` | `RunningDots` |
+| `SemiCircleSpin` | `SquareGridFlip` | `SquareGridWave` |
+| `SquareSpin` | `Timer` | `TriangleOrbit` |
+| `TriangleSkewSpin` | `TripleArcSpin` |  |
 
 ## Custom specs
 
@@ -161,6 +167,30 @@ var orbit = new IndicatorSpec("Orbit", duration: 1, new[]
 
 In XAML, put JSON in a resource or escape the leading brace (`Spec="{}{ ... }"`), because `{` starts a markup
 extension.
+
+## Progress
+
+The `LoaderKitProgress` control shows how much of a task is done: 30 designs across 9 types, with a
+`Value` from 0 to 1 or, with null, indeterminate. With `Smooth` (on by default) it glides to every
+new value. It draws with Win2D, which `LoaderKit.WinUI` brings as a dependency. Full guide:
+https://maitrungduc1410.github.io/loader-kit/guide/progress
+
+```xml
+<lk:LoaderKitProgress Type="Linear" Variant="Wavy" Value="{x:Bind ViewModel.Progress, Mode=OneWay}" />
+
+<lk:LoaderKitProgress Type="Gauge" Value="0.7" ShowLabel="True" Size="64" />
+
+<lk:LoaderKitProgress Type="Border">
+    <Button Content="Upload" />
+</lk:LoaderKitProgress>
+```
+
+The child goes in the middle, or inside the stroke of `Border`. `CornerRadius` is a property of every
+control, so the corner radius of the border is `ProgressCornerRadius`. UI Automation sees a progress
+bar with a read-only range value in percent.
+
+`ResolvedProgress`, `ProgressGeometry.Commands` and `ProgressAnimator` in `LoaderKit.Core` turn the
+options and the time into draw commands, for another renderer.
 
 ## Without the control
 

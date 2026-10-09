@@ -139,7 +139,7 @@ export const Blink = defineIndicator({
 console.log(JSON.stringify(Blink));
 ```
 
-`defineIndicator()` 出错时会抛出 `InvalidIndicatorError`，列出所有问题。33 个内置加载动画就是这样写出来的。
+`defineIndicator()` 出错时会抛出 `InvalidIndicatorError`，列出所有问题。50 个内置加载动画就是这样写出来的。
 
 ## 接下来 {#where-to-next}
 

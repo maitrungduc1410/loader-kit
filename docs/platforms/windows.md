@@ -4,7 +4,7 @@ description: "Use LoaderKit on Windows: install the LoaderKit.WinUI NuGet packag
 
 # Windows
 
-LoaderKit for Windows draws indicators with `Microsoft.UI.Composition`, for WinUI 3 and the Windows App SDK.
+LoaderKit for Windows draws indicators with `Microsoft.UI.Composition` and progress indicators with Win2D, for WinUI 3 and the Windows App SDK.
 
 | Package | Contents |
 | --- | --- |
@@ -78,6 +78,22 @@ Every property except the read-only `SpecError` is a dependency property, so you
 Event: `SpecFailed` (`EventHandler<InvalidIndicatorSpecException>`) is raised when a name or spec cannot be used. The control never throws from a property setter.
 
 For UI Automation, the control reports itself as a progress bar.
+
+## Progress indicators {#progress}
+
+`LoaderKitProgress` shows how much of a task is done: 30 designs across 9 types, determinate or indeterminate, with smooth value changes.
+
+```xml
+<lk:LoaderKitProgress Type="Linear" Variant="Wavy" Value="{x:Bind ViewModel.Progress, Mode=OneWay}" />
+
+<lk:LoaderKitProgress Type="Border">
+    <Button Content="Upload" />
+</lk:LoaderKitProgress>
+```
+
+The control draws with Win2D, which `LoaderKit.WinUI` brings as a dependency. `Value` is a `double?`: null is indeterminate.
+
+See [Progress indicators](/guide/progress) for every type, variant and option.
 
 ## Custom specs
 

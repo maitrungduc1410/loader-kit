@@ -108,6 +108,23 @@ Modifier: `params(_:)`, `color(_:)`, `colors(_:)`, `speed(_:)`, `animating(_:)`,
 Các modifier của LoaderKit trả về một `LoaderKitIndicator`. Hãy gọi chúng trước các modifier của SwiftUI như `frame` hay `padding`, vì những modifier này trả về một kiểu view khác.
 :::
 
+## Progress indicator {#progress}
+
+`LoaderKitProgress` cho biết một tác vụ đã chạy được bao nhiêu: 30 mẫu thuộc 9 type, có value hoặc vô định, đổi value mượt.
+
+```swift
+// UIKit và AppKit
+let progress = LoaderKitProgressView(value: 0.4, type: .linear, variant: .wavy)
+progress.value = 0.8        // chạy mượt tới 0.8; nil là vô định
+
+// SwiftUI
+LoaderKitProgress(value: progress, type: .gauge)
+    .showLabel()
+    .size(64)
+```
+
+Xem [Progress indicator](/vi/guide/progress) để biết mọi type, variant và option.
+
 ## Spec tùy chỉnh {#custom-specs}
 
 ::: warning Thử nghiệm

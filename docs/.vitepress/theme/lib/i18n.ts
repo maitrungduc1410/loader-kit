@@ -92,6 +92,14 @@ const en = {
   unknownIndicator: 'There is no built-in indicator called "{name}".',
   copyFailed: 'Copying failed. Select the text and copy it by hand.',
   loadingEditor: 'Loading the editor…',
+  // progress
+  progressMode: 'Value source',
+  progressDownload: 'Simulated download',
+  progressManual: 'Slider',
+  progressIndeterminate: 'Indeterminate',
+  progressHint: 'Every design runs with a value or indeterminate. Select one to see its code.',
+  progressUpload: 'Upload',
+  progressCode: 'Code of design #{index} ({name})',
 };
 
 export type Strings = typeof en;
@@ -180,6 +188,13 @@ const vi: Strings = {
   unknownIndicator: 'Không có indicator có sẵn nào tên "{name}".',
   copyFailed: 'Không sao chép được. Hãy chọn đoạn text và tự sao chép.',
   loadingEditor: 'Đang tải editor…',
+  progressMode: 'Nguồn value',
+  progressDownload: 'Giả lập tải file',
+  progressManual: 'Thanh kéo',
+  progressIndeterminate: 'Vô định',
+  progressHint: 'Mẫu nào cũng chạy được khi có value và khi vô định. Chọn một mẫu để xem code.',
+  progressUpload: 'Tải lên',
+  progressCode: 'Code của mẫu #{index} ({name})',
 };
 
 const zh: Strings = {
@@ -266,6 +281,13 @@ const zh: Strings = {
   unknownIndicator: '没有名为 "{name}" 的内置 indicator。',
   copyFailed: '复制失败，请手动选中文本复制。',
   loadingEditor: '正在加载编辑器…',
+  progressMode: 'value 来源',
+  progressDownload: '模拟下载',
+  progressManual: '滑块',
+  progressIndeterminate: '不确定',
+  progressHint: '每种样式都支持有 value 和不确定两种状态。选择一种查看代码。',
+  progressUpload: '上传',
+  progressCode: '样式 #{index}（{name}）的代码',
 };
 
 const dictionaries = { en, vi, zh } as const;

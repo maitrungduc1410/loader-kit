@@ -139,7 +139,7 @@ export const Blink = defineIndicator({
 console.log(JSON.stringify(Blink));
 ```
 
-`defineIndicator()` throw `InvalidIndicatorError` liệt kê mọi lỗi. 33 indicator có sẵn đều được viết theo cách này.
+`defineIndicator()` throw `InvalidIndicatorError` liệt kê mọi lỗi. 50 indicator có sẵn đều được viết theo cách này.
 
 ## Đọc tiếp {#where-to-next}
 

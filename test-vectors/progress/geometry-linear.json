@@ -1,0 +1,657 @@
+{
+  "description": "progressCommands for linear",
+  "cases": [
+    {"description":"linear flat at 0","options":{"type":"linear","variant":"flat"},"width":240,"height":8,"state":{"indeterminate":false,"value":0,"buffer":0,"wave":0,"time":0,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"line","x0":2,"y0":4,"x1":238,"y1":4,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":238,"cy":4,"r":2,"paint":{"type":"solid","color":"color","alpha":1}}
+    ]},
+    {"description":"linear flat at 0.37","options":{"type":"linear","variant":"flat"},"width":240,"height":8,"state":{"indeterminate":false,"value":0.37,"buffer":0,"wave":1,"time":0.8,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"line","x0":97.32,"y0":4,"x1":238,"y1":4,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":238,"cy":4,"r":2,"paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"line","x0":2,"y0":4,"x1":89.32,"y1":4,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}}
+    ]},
+    {"description":"linear flat at 1","options":{"type":"linear","variant":"flat"},"width":240,"height":8,"state":{"indeterminate":false,"value":1,"buffer":0,"wave":0,"time":1.3,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"line","x0":2,"y0":4,"x1":238,"y1":4,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}}
+    ]},
+    {"description":"linear flat indeterminate at 0.3 s","options":{"type":"linear","variant":"flat"},"width":240,"height":8,"state":{"indeterminate":true,"value":0,"buffer":0,"wave":1,"time":0.27,"indeterminateTime":0.3},"x":0,"y":0, "commands": [
+      {"op":"line","x0":2.80760004,"y0":4,"x1":168.194455511,"y1":4,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"line","x0":176.194455511,"y0":4,"x1":238,"y1":4,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}}
+    ]},
+    {"description":"linear flat indeterminate at 1.1 s","options":{"type":"linear","variant":"flat"},"width":240,"height":8,"state":{"indeterminate":true,"value":0,"buffer":0,"wave":1,"time":0.99,"indeterminateTime":1.1},"x":0,"y":0, "commands": [
+      {"op":"line","x0":2.261642001,"y0":4,"x1":166.406385195,"y1":4,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"line","x0":174.406385195,"y0":4,"x1":227.693515351,"y1":4,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"line","x0":235.693515351,"y0":4,"x1":238,"y1":4,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}}
+    ]},
+    {"description":"linear flat indeterminate at 2.75 s","options":{"type":"linear","variant":"flat"},"width":240,"height":8,"state":{"indeterminate":true,"value":0,"buffer":0,"wave":1,"time":2.475,"indeterminateTime":2.75},"x":0,"y":0, "commands": [
+      {"op":"line","x0":2,"y0":4,"x1":100.393998296,"y1":4,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"line","x0":108.393998296,"y0":4,"x1":221.754353911,"y1":4,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"line","x0":229.754353911,"y0":4,"x1":238,"y1":4,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}}
+    ]},
+    {"description":"linear flat with butt caps at 0.62","options":{"type":"linear","variant":"flat","strokeCap":"butt"},"width":240,"height":8,"state":{"indeterminate":false,"value":0.62,"buffer":0,"wave":0.6,"time":0.4,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"line","x0":152.8,"y0":4,"x1":240,"y1":4,"lineWidth":4,"cap":"butt","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":240,"cy":4,"r":2,"paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"line","x0":0,"y0":4,"x1":148.8,"y1":4,"lineWidth":4,"cap":"butt","paint":{"type":"solid","color":"color","alpha":1}}
+    ]},
+    {"description":"linear flat with a label at 0.48","options":{"type":"linear","variant":"flat","showLabel":true},"width":240,"height":18,"state":{"indeterminate":false,"value":0.48,"buffer":0,"wave":1,"time":0.2,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"line","x0":102.16,"y0":9,"x1":194,"y1":9,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":194,"cy":9,"r":2,"paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"line","x0":2,"y0":9,"x1":94.16,"y1":9,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"text","x":240,"y":9,"size":12.5,"text":"48%","align":"right","paint":{"type":"solid","color":"label","alpha":1}}
+    ]},
+    {"description":"linear wavy at 0","options":{"type":"linear","variant":"wavy"},"width":240,"height":14,"state":{"indeterminate":false,"value":0,"buffer":0,"wave":0,"time":0,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"line","x0":2,"y0":7,"x1":238,"y1":7,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":238,"cy":7,"r":2,"paint":{"type":"solid","color":"color","alpha":1}}
+    ]},
+    {"description":"linear wavy at 0.37","options":{"type":"linear","variant":"wavy"},"width":240,"height":14,"state":{"indeterminate":false,"value":0.37,"buffer":0,"wave":1,"time":0.8,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"line","x0":97.32,"y0":7,"x1":238,"y1":7,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":238,"cy":7,"r":2,"paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"polyline","points":[2,10,3.984545455,9.855411643,5.969090909,9.435583768,7.953636364,8.780984523,9.938181818,7.954712194,11.922727273,7.036413021,13.907272727,6.114603914,15.891818182,5.278140118,17.876363636,4.607650249,19.860909091,4.167764327,21.845454545,4.000883939,23.83,4.123095059,25.814545455,4.522617486,27.799090909,5.160940356,29.783636364,5.976534301,31.768181818,6.890782396,33.752727273,7.815558219,35.737272727,8.661720561,37.721818182,9.347705939,39.706363636,9.807390688,41.690909091,9.996464766,43.675454545,9.896702899,45.66,9.517721358,47.644545455,8.89605102,49.629090909,8.091616082,51.613636364,7.181957827,53.598181818,6.254760249,55.582727273,5.399397999,57.567272727,4.698321357,59.551818182,4.219108671,61.536363636,4.007952323,63.520909091,4.085206147,65.505454545,4.443423473,67.49,5.048074931,69.474545455,5.840876816,71.459090909,6.745409177,73.443636364,7.674482118,75.428181818,8.538540219,77.412727273,9.254294984,79.397272727,9.752753211,81.381818182,9.985867396,83.366363636,9.931167141,85.350909091,9.593925125,87.335454545,9.006648862,89.32,8.225947224],"closed":false,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}}
+    ]},
+    {"description":"linear wavy at 1","options":{"type":"linear","variant":"wavy"},"width":240,"height":14,"state":{"indeterminate":false,"value":1,"buffer":0,"wave":0,"time":1.3,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"line","x0":2,"y0":7,"x1":238,"y1":7,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}}
+    ]},
+    {"description":"linear wavy indeterminate at 0.3 s","options":{"type":"linear","variant":"wavy"},"width":240,"height":14,"state":{"indeterminate":true,"value":0,"buffer":0,"wave":1,"time":0.27,"indeterminateTime":0.3},"x":0,"y":0, "commands": [
+      {"op":"polyline","points":[2.80760004,4.147939208,4.800212757,4.573007949,6.792825473,5.233910145,8.78543819,6.066425211,10.778050906,6.989656754,12.770663623,7.913893361,14.763276339,8.749325957,16.755889056,9.414774649,18.748501772,9.845577065,20.741114489,9.999871665,22.733727205,9.862665476,24.726339922,9.447290972,26.718952638,8.794110544,28.711565355,7.966594446,30.704178071,7.045153315,32.696790788,6.119324587,34.689403504,5.279072047,36.682016221,4.606043945,38.674628937,4.165639155,40.667241654,4.000652287,42.65985437,4.127115296,44.652467087,4.532739634,46.645079803,5.178110342,48.63769252,6.000516048,50.630305236,6.920042696,52.622917953,7.847338882,54.615530669,8.692298228,56.608143386,9.372815116,58.600756103,9.822762981,60.593368819,9.9984199,62.585981536,9.882717099,64.578594252,9.486897545,66.571206969,8.849423455,68.563819685,8.032238877,70.556432402,7.114750527,72.549045118,6.186111743,74.541657835,5.336559365,76.534270551,4.648645321,78.526883268,4.189214967,80.519495984,4.002911648,82.512108701,4.107838662,84.504721417,4.493800135,86.497334134,5.123291772,88.48994685,5.935145187,90.482559567,6.850471702,92.475172283,7.780328043,94.467785,8.634359061,96.460397716,9.329577633,98.453010433,9.798428615,100.445623149,9.995353247,102.438235866,9.90121615,104.430848582,9.525164727,106.423461299,8.903740304,108.416074015,8.097327366,110.408686732,7.184285936,112.401299449,6.253337241,114.393912165,5.394942578,116.386524882,4.692513089,118.379137598,4.21430461,120.371750315,4.006785179,122.364363031,4.090119685,124.356975748,4.456210423,126.349588464,5.069483958,128.342201181,5.870347835,130.334813897,6.78098124,132.327426614,7.712896936,134.32003933,8.575539662,136.312652047,9.285085487,138.305264763,9.772587072,140.29787748,9.990673359,142.290490196,9.918152666,144.283102913,9.562071907,146.275715629,8.957031837,148.268328346,8.161824857,150.260941062,7.253722093,152.253553779,6.320964877,154.246166495,5.454190243,156.238779212,4.737623622,158.231391928,4.240894572,160.224004645,4.012270795,162.216617361,4.073967911,164.209230078,4.419990744,166.201842794,5.016715881,168.194455511,5.80615889],"closed":false,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"line","x0":176.194455511,"y0":7,"x1":238,"y1":7,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}}
+    ]},
+    {"description":"linear wavy indeterminate at 1.1 s","options":{"type":"linear","variant":"wavy"},"width":240,"height":14,"state":{"indeterminate":true,"value":0,"buffer":0,"wave":1,"time":0.99,"indeterminateTime":1.1},"x":0,"y":0, "commands": [
+      {"op":"polyline","points":[2.261642001,8.21804644,4.239289509,8.997785841,6.216937018,9.586279791,8.194584526,9.927192529,10.172232034,9.987888919,12.149879543,9.762558574,14.127527051,9.272772076,16.105174559,8.565416053,18.082822068,7.708204779,20.060469576,6.78319798,22.038117084,5.878945357,24.015764593,5.082009842,25.993412101,4.46868104,27.97105961,4.097672122,29.948707118,4.004499291,31.926354626,4.198081861,33.904002135,4.659888424,35.881649643,5.345710836,37.859297151,6.189896206,39.83694466,7.111631763,41.814592168,8.022680955,43.792239676,8.835830225,45.769887185,9.473237847,47.747534693,9.873885613,49.725182202,9.999420034,51.70282971,9.837823862,53.680477218,9.404566489,55.658124727,8.741123081,57.635772235,7.911004217,59.613419743,6.9936761,61.591067252,6.076953361,63.56871476,5.248592681,65.546362268,4.587891955,67.524009777,4.158099206,69.501657285,4.000357937,71.479304794,4.129768517,73.456952302,4.533942637,75.43459981,5.174189233,77.412247319,5.989218328,79.389894827,6.901008243,81.367542335,7.82227451,83.345189844,8.664825504,85.322837352,9.34800491,87.30048486,9.806412848,89.278132369,9.996166521,91.255779877,9.899101055,93.233427386,9.524508402,95.211074894,8.90824783,97.188722402,8.109313167,99.166369911,7.204185391,101.144017419,6.279511212,103.121664927,5.423808492,105.099312436,4.718992542,107.076959944,4.232534481,109.054607452,4.011002307,111.032254961,4.07560301,113.009902469,4.420152447,114.987549978,5.011667348,116.965197486,5.793522757,118.942844994,6.690872669,120.920492503,7.61781494,122.898140011,8.485614587,124.875787519,9.211198275,126.853435028,9.725106817,128.831082536,9.978144415,130.808730044,9.946088107,132.786377553,9.632006602,134.764025061,9.065966515,136.74167257,8.302154131,138.719320078,7.413688219,140.696967586,6.48562047,142.674615095,5.606793607,144.652262603,4.861336587,146.629910111,4.320611044,148.60755762,4.036379934,150.585205128,4.035852332,152.562852636,4.319078746,154.540500145,4.858946278,156.518147653,5.603774108,158.495795162,6.482260834,160.47344267,7.410310059,162.451090178,8.299080834,164.428737687,9.063492284,166.406385195,9.630368291],"closed":false,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"line","x0":174.406385195,"y0":7,"x1":227.693515351,"y1":7,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"polyline","points":[235.693515351,5.272485022,236.846757675,5.74263339,238,6.253930339],"closed":false,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}}
+    ]},
+    {"description":"linear wavy indeterminate at 2.75 s","options":{"type":"linear","variant":"wavy"},"width":240,"height":14,"state":{"indeterminate":true,"value":0,"buffer":0,"wave":1,"time":2.475,"indeterminateTime":2.75},"x":0,"y":0, "commands": [
+      {"op":"polyline","points":[2,5.638028501,3.967879966,4.889409528,5.935759932,4.340859673,7.903639898,4.044377601,9.871519864,4.028067726,11.83939983,4.293476108,13.807279796,4.815443902,15.775159761,5.544492234,17.743039727,6.411512457,19.710919693,7.334317155,21.678799659,8.225430941,23.646679625,9.0003825,25.614559591,9.585711881,27.582439557,9.925933979,29.550319523,9.988798133,31.518199489,9.768345266,33.486079455,9.285472756,35.453959421,8.585953518,37.421839387,7.736097051,39.389719353,6.816463766,41.357599318,5.914228424,43.325479284,5.114916584,45.29335925,4.494297381,47.261239216,4.111201146,49.229119182,4.001942706,51.196999148,4.176878991,53.164879114,4.619427274,55.13275908,5.287637092,57.100639046,6.118166859,59.068519012,7.0322882,61.036398978,7.943348847,63.004278944,8.764986664,64.972158909,9.419316171,66.940038875,9.844311536,68.907918841,9.999686191,70.875798807,9.870711713,72.843678773,9.469613974,74.811558739,8.834414216,76.779438705,8.025324904,78.747318671,7.119042009,80.715198637,6.20147477,82.683078603,5.359602102,84.650958569,4.673227605,86.618838535,4.207414752,88.586718501,4.006319321,90.554598466,4.089003743,92.522478432,4.447630117,94.490358398,5.048203188,96.458238364,5.833792856,98.42611833,6.729930752,100.393998296,7.651669311],"closed":false,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"line","x0":108.393998296,"y0":7,"x1":221.754353911,"y1":7,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"polyline","points":[229.754353911,9.978963519,231.403483129,9.788724806,233.052612347,9.412395316,234.701741564,8.875087405,236.350870782,8.212655469,238,7.469303395],"closed":false,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}}
+    ]},
+    {"description":"linear wavy with butt caps at 0.62","options":{"type":"linear","variant":"wavy","strokeCap":"butt"},"width":240,"height":14,"state":{"indeterminate":false,"value":0.62,"buffer":0,"wave":0.6,"time":0.4,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"line","x0":152.8,"y0":7,"x1":240,"y1":7,"lineWidth":4,"cap":"butt","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":240,"cy":7,"r":2,"paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"polyline","points":[0,5.941986546,1.984,5.546433084,3.968,5.290915805,5.952,5.200051164,7.936,5.282593031,9.92,5.530589349,11.904,5.92014823,13.888,6.413739693,15.872,6.963811291,17.856,7.517369298,19.84,8.021084108,21.824,8.426427995,23.808,8.694350254,25.792,8.799039339,27.776,8.730409536,29.76,8.495072619,31.744,8.115700872,33.728,7.628842853,35.712,7.081402309,37.696,6.526119492,39.68,6.016490176,41.664,5.601611888,43.648,5.321453875,45.632,5.203006471,47.616,5.257680862,49.6,5.480209734,51.584,5.849154726,53.568,6.328971792,55.552,6.873435506,57.536,7.430092404,59.52,7.945314334,61.504,8.369464976,63.488,8.661681791,65.472,8.7938127,67.456,8.753128255,69.44,8.543547981,71.424,8.185262777,73.408,7.712789727,75.392,7.171646738,77.376,6.613967355,79.36,6.093478237,81.344,5.660323142,83.328,5.356232098,85.312,5.210501139,87.296,5.237169942,89.28,5.433669242,91.264,5.781068357,93.248,6.245898967,95.232,6.783379434,97.216,7.341729059,99.2,7.867156613,101.184,8.30904257,103.168,8.624815775,105.152,8.784054736,107.136,8.77141842,109.12,8.588124208,111.104,8.251830605,113.088,7.794936033,115.072,7.261457572,117.056,6.70279037,119.04,6.172756251,121.024,5.722418536,123.008,5.395162621,124.992,5.222516237,126.976,5.221112084,128.96,5.391085437,130.944,5.716061116,132.928,6.164731066,134.912,6.693870565,136.896,7.252502477,138.88,7.78680838,140.864,8.245313409,142.848,8.583845334,144.832,8.769790094,146.816,8.785233829,148.8,8.628688694],"closed":false,"lineWidth":4,"cap":"butt","paint":{"type":"solid","color":"color","alpha":1}}
+    ]},
+    {"description":"linear wavy with a label at 0.48","options":{"type":"linear","variant":"wavy","showLabel":true},"width":240,"height":18,"state":{"indeterminate":false,"value":0.48,"buffer":0,"wave":1,"time":0.2,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"line","x0":102.16,"y0":9,"x1":194,"y1":9,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":194,"cy":9,"r":2,"paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"polyline","points":[2,6.572949017,3.960851064,7.221752528,5.921702128,8.037928881,7.882553191,8.944657635,9.843404255,9.856595343,11.804255319,10.687908278,13.765106383,11.360351309,15.725957447,11.810632513,17.686808511,11.996370362,19.647659574,11.900082772,21.608510638,11.530832557,23.569361702,10.923374418,25.530212766,10.134883747,27.49106383,9.239575144,29.451914894,8.321717163,31.412765957,7.467700761,33.373617021,6.757907975,35.334468085,6.259146173,37.295319149,6.018359991,39.256170213,6.058212794,41.217021277,6.37495354,43.17787234,6.938769845,45.138723404,7.696593989,47.099574468,8.577097778,49.060425532,9.497406121,51.021276596,10.370897428,52.98212766,11.115356638,54.942978723,11.660713497,56.903829787,11.955637732,58.864680851,11.972370379,60.825531915,11.709336521,62.786382979,11.191293526,64.747234043,10.467000821,66.708085106,9.604630541,68.66893617,8.685351011,70.629787234,7.795686984,72.590638298,7.019375737,74.551489362,6.429485512,76.512340426,6.081538168,78.473191489,6.008283329,80.434042553,6.216615913,82.394893617,6.686927165,84.355744681,7.374950284,86.316595745,8.215926911,88.277446809,9.130702345,90.238297872,10.033175766,92.199148936,10.838404249,94.16,11.470597793],"closed":false,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"text","x":240,"y":9,"size":12.5,"text":"48%","align":"right","paint":{"type":"solid","color":"label","alpha":1}}
+    ]},
+    {"description":"linear segmented at 0","options":{"type":"linear","variant":"segmented"},"width":240,"height":10,"state":{"indeterminate":false,"value":0,"buffer":0,"wave":0,"time":0,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"rect","x":0,"y":2,"width":20.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"rect","x":24.4,"y":2,"width":20.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"rect","x":48.8,"y":2,"width":20.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"rect","x":73.2,"y":2,"width":20.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"rect","x":97.6,"y":2,"width":20.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"rect","x":122,"y":2,"width":20.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"rect","x":146.4,"y":2,"width":20.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"rect","x":170.8,"y":2,"width":20.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"rect","x":195.2,"y":2,"width":20.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"rect","x":219.6,"y":2,"width":20.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}}
+    ]},
+    {"description":"linear segmented at 0.37","options":{"type":"linear","variant":"segmented"},"width":240,"height":10,"state":{"indeterminate":false,"value":0.37,"buffer":0,"wave":1,"time":0.8,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"rect","x":0,"y":2,"width":20.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"clip","shape":{"type":"rect","x":0,"y":2,"width":20.4,"height":6,"radius":3},"commands":[{"op":"rect","x":0,"y":2,"width":20.4,"height":6,"radius":0,"paint":{"type":"solid","color":"color","alpha":1}}]},
+      {"op":"rect","x":24.4,"y":2,"width":20.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"clip","shape":{"type":"rect","x":24.4,"y":2,"width":20.4,"height":6,"radius":3},"commands":[{"op":"rect","x":24.4,"y":2,"width":20.4,"height":6,"radius":0,"paint":{"type":"solid","color":"color","alpha":1}}]},
+      {"op":"rect","x":48.8,"y":2,"width":20.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"clip","shape":{"type":"rect","x":48.8,"y":2,"width":20.4,"height":6,"radius":3},"commands":[{"op":"rect","x":48.8,"y":2,"width":20.4,"height":6,"radius":0,"paint":{"type":"solid","color":"color","alpha":1}}]},
+      {"op":"rect","x":73.2,"y":2,"width":20.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"clip","shape":{"type":"rect","x":73.2,"y":2,"width":20.4,"height":6,"radius":3},"commands":[{"op":"rect","x":73.2,"y":2,"width":14.28,"height":6,"radius":0,"paint":{"type":"solid","color":"color","alpha":1}}]},
+      {"op":"rect","x":97.6,"y":2,"width":20.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"rect","x":122,"y":2,"width":20.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"rect","x":146.4,"y":2,"width":20.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"rect","x":170.8,"y":2,"width":20.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"rect","x":195.2,"y":2,"width":20.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"rect","x":219.6,"y":2,"width":20.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}}
+    ]},
+    {"description":"linear segmented at 1","options":{"type":"linear","variant":"segmented"},"width":240,"height":10,"state":{"indeterminate":false,"value":1,"buffer":0,"wave":0,"time":1.3,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"rect","x":0,"y":2,"width":20.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"clip","shape":{"type":"rect","x":0,"y":2,"width":20.4,"height":6,"radius":3},"commands":[{"op":"rect","x":0,"y":2,"width":20.4,"height":6,"radius":0,"paint":{"type":"solid","color":"color","alpha":1}}]},
+      {"op":"rect","x":24.4,"y":2,"width":20.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"clip","shape":{"type":"rect","x":24.4,"y":2,"width":20.4,"height":6,"radius":3},"commands":[{"op":"rect","x":24.4,"y":2,"width":20.4,"height":6,"radius":0,"paint":{"type":"solid","color":"color","alpha":1}}]},
+      {"op":"rect","x":48.8,"y":2,"width":20.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"clip","shape":{"type":"rect","x":48.8,"y":2,"width":20.4,"height":6,"radius":3},"commands":[{"op":"rect","x":48.8,"y":2,"width":20.4,"height":6,"radius":0,"paint":{"type":"solid","color":"color","alpha":1}}]},
+      {"op":"rect","x":73.2,"y":2,"width":20.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"clip","shape":{"type":"rect","x":73.2,"y":2,"width":20.4,"height":6,"radius":3},"commands":[{"op":"rect","x":73.2,"y":2,"width":20.4,"height":6,"radius":0,"paint":{"type":"solid","color":"color","alpha":1}}]},
+      {"op":"rect","x":97.6,"y":2,"width":20.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"clip","shape":{"type":"rect","x":97.6,"y":2,"width":20.4,"height":6,"radius":3},"commands":[{"op":"rect","x":97.6,"y":2,"width":20.4,"height":6,"radius":0,"paint":{"type":"solid","color":"color","alpha":1}}]},
+      {"op":"rect","x":122,"y":2,"width":20.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"clip","shape":{"type":"rect","x":122,"y":2,"width":20.4,"height":6,"radius":3},"commands":[{"op":"rect","x":122,"y":2,"width":20.4,"height":6,"radius":0,"paint":{"type":"solid","color":"color","alpha":1}}]},
+      {"op":"rect","x":146.4,"y":2,"width":20.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"clip","shape":{"type":"rect","x":146.4,"y":2,"width":20.4,"height":6,"radius":3},"commands":[{"op":"rect","x":146.4,"y":2,"width":20.4,"height":6,"radius":0,"paint":{"type":"solid","color":"color","alpha":1}}]},
+      {"op":"rect","x":170.8,"y":2,"width":20.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"clip","shape":{"type":"rect","x":170.8,"y":2,"width":20.4,"height":6,"radius":3},"commands":[{"op":"rect","x":170.8,"y":2,"width":20.4,"height":6,"radius":0,"paint":{"type":"solid","color":"color","alpha":1}}]},
+      {"op":"rect","x":195.2,"y":2,"width":20.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"clip","shape":{"type":"rect","x":195.2,"y":2,"width":20.4,"height":6,"radius":3},"commands":[{"op":"rect","x":195.2,"y":2,"width":20.4,"height":6,"radius":0,"paint":{"type":"solid","color":"color","alpha":1}}]},
+      {"op":"rect","x":219.6,"y":2,"width":20.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"clip","shape":{"type":"rect","x":219.6,"y":2,"width":20.4,"height":6,"radius":3},"commands":[{"op":"rect","x":219.6,"y":2,"width":20.4,"height":6,"radius":0,"paint":{"type":"solid","color":"color","alpha":1}}]}
+    ]},
+    {"description":"linear segmented indeterminate at 0.3 s","options":{"type":"linear","variant":"segmented"},"width":240,"height":10,"state":{"indeterminate":true,"value":0,"buffer":0,"wave":1,"time":0.27,"indeterminateTime":0.3},"x":0,"y":0, "commands": [
+      {"op":"rect","x":0,"y":2,"width":20.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"clip","shape":{"type":"rect","x":0,"y":2,"width":20.4,"height":6,"radius":3},"commands":[{"op":"rect","x":0,"y":2,"width":20.4,"height":6,"radius":0,"paint":{"type":"solid","color":"color","alpha":0.992055602}}]},
+      {"op":"rect","x":24.4,"y":2,"width":20.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"clip","shape":{"type":"rect","x":24.4,"y":2,"width":20.4,"height":6,"radius":3},"commands":[{"op":"rect","x":24.4,"y":2,"width":20.4,"height":6,"radius":0,"paint":{"type":"solid","color":"color","alpha":0.657899794}}]},
+      {"op":"rect","x":48.8,"y":2,"width":20.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"clip","shape":{"type":"rect","x":48.8,"y":2,"width":20.4,"height":6,"radius":3},"commands":[{"op":"rect","x":48.8,"y":2,"width":20.4,"height":6,"radius":0,"paint":{"type":"solid","color":"color","alpha":0.052887365}}]},
+      {"op":"rect","x":73.2,"y":2,"width":20.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"rect","x":97.6,"y":2,"width":20.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"rect","x":122,"y":2,"width":20.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"rect","x":146.4,"y":2,"width":20.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"rect","x":170.8,"y":2,"width":20.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"rect","x":195.2,"y":2,"width":20.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"rect","x":219.6,"y":2,"width":20.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}}
+    ]},
+    {"description":"linear segmented indeterminate at 1.1 s","options":{"type":"linear","variant":"segmented"},"width":240,"height":10,"state":{"indeterminate":true,"value":0,"buffer":0,"wave":1,"time":0.99,"indeterminateTime":1.1},"x":0,"y":0, "commands": [
+      {"op":"rect","x":0,"y":2,"width":20.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"rect","x":24.4,"y":2,"width":20.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"rect","x":48.8,"y":2,"width":20.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"rect","x":73.2,"y":2,"width":20.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"rect","x":97.6,"y":2,"width":20.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"rect","x":122,"y":2,"width":20.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"rect","x":146.4,"y":2,"width":20.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"clip","shape":{"type":"rect","x":146.4,"y":2,"width":20.4,"height":6,"radius":3},"commands":[{"op":"rect","x":146.4,"y":2,"width":20.4,"height":6,"radius":0,"paint":{"type":"solid","color":"color","alpha":0.482153833}}]},
+      {"op":"rect","x":170.8,"y":2,"width":20.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"clip","shape":{"type":"rect","x":170.8,"y":2,"width":20.4,"height":6,"radius":3},"commands":[{"op":"rect","x":170.8,"y":2,"width":20.4,"height":6,"radius":0,"paint":{"type":"solid","color":"color","alpha":0.992055602}}]},
+      {"op":"rect","x":195.2,"y":2,"width":20.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"clip","shape":{"type":"rect","x":195.2,"y":2,"width":20.4,"height":6,"radius":3},"commands":[{"op":"rect","x":195.2,"y":2,"width":20.4,"height":6,"radius":0,"paint":{"type":"solid","color":"color","alpha":0.657899794}}]},
+      {"op":"rect","x":219.6,"y":2,"width":20.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"clip","shape":{"type":"rect","x":219.6,"y":2,"width":20.4,"height":6,"radius":3},"commands":[{"op":"rect","x":219.6,"y":2,"width":20.4,"height":6,"radius":0,"paint":{"type":"solid","color":"color","alpha":0.052887365}}]}
+    ]},
+    {"description":"linear segmented indeterminate at 2.75 s","options":{"type":"linear","variant":"segmented"},"width":240,"height":10,"state":{"indeterminate":true,"value":0,"buffer":0,"wave":1,"time":2.475,"indeterminateTime":2.75},"x":0,"y":0, "commands": [
+      {"op":"rect","x":0,"y":2,"width":20.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"rect","x":24.4,"y":2,"width":20.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"rect","x":48.8,"y":2,"width":20.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"rect","x":73.2,"y":2,"width":20.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"rect","x":97.6,"y":2,"width":20.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"rect","x":122,"y":2,"width":20.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"rect","x":146.4,"y":2,"width":20.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"clip","shape":{"type":"rect","x":146.4,"y":2,"width":20.4,"height":6,"radius":3},"commands":[{"op":"rect","x":146.4,"y":2,"width":20.4,"height":6,"radius":0,"paint":{"type":"solid","color":"color","alpha":0.193264467}}]},
+      {"op":"rect","x":170.8,"y":2,"width":20.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"clip","shape":{"type":"rect","x":170.8,"y":2,"width":20.4,"height":6,"radius":3},"commands":[{"op":"rect","x":170.8,"y":2,"width":20.4,"height":6,"radius":0,"paint":{"type":"solid","color":"color","alpha":0.847186489}}]},
+      {"op":"rect","x":195.2,"y":2,"width":20.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"clip","shape":{"type":"rect","x":195.2,"y":2,"width":20.4,"height":6,"radius":3},"commands":[{"op":"rect","x":195.2,"y":2,"width":20.4,"height":6,"radius":0,"paint":{"type":"solid","color":"color","alpha":0.905555111}}]},
+      {"op":"rect","x":219.6,"y":2,"width":20.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"clip","shape":{"type":"rect","x":219.6,"y":2,"width":20.4,"height":6,"radius":3},"commands":[{"op":"rect","x":219.6,"y":2,"width":20.4,"height":6,"radius":0,"paint":{"type":"solid","color":"color","alpha":0.268246531}}]}
+    ]},
+    {"description":"linear segmented with butt caps at 0.62","options":{"type":"linear","variant":"segmented","strokeCap":"butt"},"width":240,"height":10,"state":{"indeterminate":false,"value":0.62,"buffer":0,"wave":0.6,"time":0.4,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"rect","x":0,"y":2,"width":20.4,"height":6,"radius":0,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"clip","shape":{"type":"rect","x":0,"y":2,"width":20.4,"height":6,"radius":0},"commands":[{"op":"rect","x":0,"y":2,"width":20.4,"height":6,"radius":0,"paint":{"type":"solid","color":"color","alpha":1}}]},
+      {"op":"rect","x":24.4,"y":2,"width":20.4,"height":6,"radius":0,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"clip","shape":{"type":"rect","x":24.4,"y":2,"width":20.4,"height":6,"radius":0},"commands":[{"op":"rect","x":24.4,"y":2,"width":20.4,"height":6,"radius":0,"paint":{"type":"solid","color":"color","alpha":1}}]},
+      {"op":"rect","x":48.8,"y":2,"width":20.4,"height":6,"radius":0,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"clip","shape":{"type":"rect","x":48.8,"y":2,"width":20.4,"height":6,"radius":0},"commands":[{"op":"rect","x":48.8,"y":2,"width":20.4,"height":6,"radius":0,"paint":{"type":"solid","color":"color","alpha":1}}]},
+      {"op":"rect","x":73.2,"y":2,"width":20.4,"height":6,"radius":0,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"clip","shape":{"type":"rect","x":73.2,"y":2,"width":20.4,"height":6,"radius":0},"commands":[{"op":"rect","x":73.2,"y":2,"width":20.4,"height":6,"radius":0,"paint":{"type":"solid","color":"color","alpha":1}}]},
+      {"op":"rect","x":97.6,"y":2,"width":20.4,"height":6,"radius":0,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"clip","shape":{"type":"rect","x":97.6,"y":2,"width":20.4,"height":6,"radius":0},"commands":[{"op":"rect","x":97.6,"y":2,"width":20.4,"height":6,"radius":0,"paint":{"type":"solid","color":"color","alpha":1}}]},
+      {"op":"rect","x":122,"y":2,"width":20.4,"height":6,"radius":0,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"clip","shape":{"type":"rect","x":122,"y":2,"width":20.4,"height":6,"radius":0},"commands":[{"op":"rect","x":122,"y":2,"width":20.4,"height":6,"radius":0,"paint":{"type":"solid","color":"color","alpha":1}}]},
+      {"op":"rect","x":146.4,"y":2,"width":20.4,"height":6,"radius":0,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"clip","shape":{"type":"rect","x":146.4,"y":2,"width":20.4,"height":6,"radius":0},"commands":[{"op":"rect","x":146.4,"y":2,"width":4.08,"height":6,"radius":0,"paint":{"type":"solid","color":"color","alpha":1}}]},
+      {"op":"rect","x":170.8,"y":2,"width":20.4,"height":6,"radius":0,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"rect","x":195.2,"y":2,"width":20.4,"height":6,"radius":0,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"rect","x":219.6,"y":2,"width":20.4,"height":6,"radius":0,"paint":{"type":"solid","color":"track","alpha":1}}
+    ]},
+    {"description":"linear segmented with a label at 0.48","options":{"type":"linear","variant":"segmented","showLabel":true},"width":240,"height":18,"state":{"indeterminate":false,"value":0.48,"buffer":0,"wave":1,"time":0.2,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"rect","x":0,"y":6,"width":16,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"clip","shape":{"type":"rect","x":0,"y":6,"width":16,"height":6,"radius":3},"commands":[{"op":"rect","x":0,"y":6,"width":16,"height":6,"radius":0,"paint":{"type":"solid","color":"color","alpha":1}}]},
+      {"op":"rect","x":20,"y":6,"width":16,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"clip","shape":{"type":"rect","x":20,"y":6,"width":16,"height":6,"radius":3},"commands":[{"op":"rect","x":20,"y":6,"width":16,"height":6,"radius":0,"paint":{"type":"solid","color":"color","alpha":1}}]},
+      {"op":"rect","x":40,"y":6,"width":16,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"clip","shape":{"type":"rect","x":40,"y":6,"width":16,"height":6,"radius":3},"commands":[{"op":"rect","x":40,"y":6,"width":16,"height":6,"radius":0,"paint":{"type":"solid","color":"color","alpha":1}}]},
+      {"op":"rect","x":60,"y":6,"width":16,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"clip","shape":{"type":"rect","x":60,"y":6,"width":16,"height":6,"radius":3},"commands":[{"op":"rect","x":60,"y":6,"width":16,"height":6,"radius":0,"paint":{"type":"solid","color":"color","alpha":1}}]},
+      {"op":"rect","x":80,"y":6,"width":16,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"clip","shape":{"type":"rect","x":80,"y":6,"width":16,"height":6,"radius":3},"commands":[{"op":"rect","x":80,"y":6,"width":12.8,"height":6,"radius":0,"paint":{"type":"solid","color":"color","alpha":1}}]},
+      {"op":"rect","x":100,"y":6,"width":16,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"rect","x":120,"y":6,"width":16,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"rect","x":140,"y":6,"width":16,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"rect","x":160,"y":6,"width":16,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"rect","x":180,"y":6,"width":16,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"text","x":240,"y":9,"size":12.5,"text":"48%","align":"right","paint":{"type":"solid","color":"label","alpha":1}}
+    ]},
+    {"description":"linear striped at 0","options":{"type":"linear","variant":"striped"},"width":240,"height":14,"state":{"indeterminate":false,"value":0,"buffer":0,"wave":0,"time":0,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"rect","x":0,"y":2,"width":240,"height":10,"radius":5,"paint":{"type":"solid","color":"track","alpha":1}}
+    ]},
+    {"description":"linear striped at 0.37","options":{"type":"linear","variant":"striped"},"width":240,"height":14,"state":{"indeterminate":false,"value":0.37,"buffer":0,"wave":1,"time":0.8,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"rect","x":0,"y":2,"width":240,"height":10,"radius":5,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"clip","shape":{"type":"rect","x":0,"y":2,"width":240,"height":10,"radius":5},"commands":[{"op":"clip","shape":{"type":"rect","x":0,"y":2,"width":88.8,"height":10,"radius":5},"commands":[{"op":"rect","x":0,"y":2,"width":88.8,"height":10,"radius":0,"paint":{"type":"solid","color":"color","alpha":1}},{"op":"polygon","points":[-21.2,12,-13.2,12,-3.2,2,-11.2,2],"paint":{"type":"solid","color":"white","alpha":0.22}},{"op":"polygon","points":[-5.2,12,2.8,12,12.8,2,4.8,2],"paint":{"type":"solid","color":"white","alpha":0.22}},{"op":"polygon","points":[10.8,12,18.8,12,28.8,2,20.8,2],"paint":{"type":"solid","color":"white","alpha":0.22}},{"op":"polygon","points":[26.8,12,34.8,12,44.8,2,36.8,2],"paint":{"type":"solid","color":"white","alpha":0.22}},{"op":"polygon","points":[42.8,12,50.8,12,60.8,2,52.8,2],"paint":{"type":"solid","color":"white","alpha":0.22}},{"op":"polygon","points":[58.8,12,66.8,12,76.8,2,68.8,2],"paint":{"type":"solid","color":"white","alpha":0.22}},{"op":"polygon","points":[74.8,12,82.8,12,92.8,2,84.8,2],"paint":{"type":"solid","color":"white","alpha":0.22}},{"op":"polygon","points":[90.8,12,98.8,12,108.8,2,100.8,2],"paint":{"type":"solid","color":"white","alpha":0.22}}]}]}
+    ]},
+    {"description":"linear striped at 1","options":{"type":"linear","variant":"striped"},"width":240,"height":14,"state":{"indeterminate":false,"value":1,"buffer":0,"wave":0,"time":1.3,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"rect","x":0,"y":2,"width":240,"height":10,"radius":5,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"clip","shape":{"type":"rect","x":0,"y":2,"width":240,"height":10,"radius":5},"commands":[{"op":"clip","shape":{"type":"rect","x":0,"y":2,"width":240,"height":10,"radius":5},"commands":[{"op":"rect","x":0,"y":2,"width":240,"height":10,"radius":0,"paint":{"type":"solid","color":"color","alpha":1}},{"op":"polygon","points":[-24.2,12,-16.2,12,-6.2,2,-14.2,2],"paint":{"type":"solid","color":"white","alpha":0.22}},{"op":"polygon","points":[-8.2,12,-0.2,12,9.8,2,1.8,2],"paint":{"type":"solid","color":"white","alpha":0.22}},{"op":"polygon","points":[7.8,12,15.8,12,25.8,2,17.8,2],"paint":{"type":"solid","color":"white","alpha":0.22}},{"op":"polygon","points":[23.8,12,31.8,12,41.8,2,33.8,2],"paint":{"type":"solid","color":"white","alpha":0.22}},{"op":"polygon","points":[39.8,12,47.8,12,57.8,2,49.8,2],"paint":{"type":"solid","color":"white","alpha":0.22}},{"op":"polygon","points":[55.8,12,63.8,12,73.8,2,65.8,2],"paint":{"type":"solid","color":"white","alpha":0.22}},{"op":"polygon","points":[71.8,12,79.8,12,89.8,2,81.8,2],"paint":{"type":"solid","color":"white","alpha":0.22}},{"op":"polygon","points":[87.8,12,95.8,12,105.8,2,97.8,2],"paint":{"type":"solid","color":"white","alpha":0.22}},{"op":"polygon","points":[103.8,12,111.8,12,121.8,2,113.8,2],"paint":{"type":"solid","color":"white","alpha":0.22}},{"op":"polygon","points":[119.8,12,127.8,12,137.8,2,129.8,2],"paint":{"type":"solid","color":"white","alpha":0.22}},{"op":"polygon","points":[135.8,12,143.8,12,153.8,2,145.8,2],"paint":{"type":"solid","color":"white","alpha":0.22}},{"op":"polygon","points":[151.8,12,159.8,12,169.8,2,161.8,2],"paint":{"type":"solid","color":"white","alpha":0.22}},{"op":"polygon","points":[167.8,12,175.8,12,185.8,2,177.8,2],"paint":{"type":"solid","color":"white","alpha":0.22}},{"op":"polygon","points":[183.8,12,191.8,12,201.8,2,193.8,2],"paint":{"type":"solid","color":"white","alpha":0.22}},{"op":"polygon","points":[199.8,12,207.8,12,217.8,2,209.8,2],"paint":{"type":"solid","color":"white","alpha":0.22}},{"op":"polygon","points":[215.8,12,223.8,12,233.8,2,225.8,2],"paint":{"type":"solid","color":"white","alpha":0.22}},{"op":"polygon","points":[231.8,12,239.8,12,249.8,2,241.8,2],"paint":{"type":"solid","color":"white","alpha":0.22}},{"op":"polygon","points":[247.8,12,255.8,12,265.8,2,257.8,2],"paint":{"type":"solid","color":"white","alpha":0.22}}]}]}
+    ]},
+    {"description":"linear striped indeterminate at 0.3 s","options":{"type":"linear","variant":"striped"},"width":240,"height":14,"state":{"indeterminate":true,"value":0,"buffer":0,"wave":1,"time":0.27,"indeterminateTime":0.3},"x":0,"y":0, "commands": [
+      {"op":"rect","x":0,"y":2,"width":240,"height":10,"radius":5,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"clip","shape":{"type":"rect","x":0,"y":2,"width":240,"height":10,"radius":5},"commands":[{"op":"polygon","points":[-18.2,12,-10.2,12,-0.2,2,-8.2,2],"paint":{"type":"solid","color":"color","alpha":0.85}},{"op":"polygon","points":[-2.2,12,5.8,12,15.8,2,7.8,2],"paint":{"type":"solid","color":"color","alpha":0.85}},{"op":"polygon","points":[13.8,12,21.8,12,31.8,2,23.8,2],"paint":{"type":"solid","color":"color","alpha":0.85}},{"op":"polygon","points":[29.8,12,37.8,12,47.8,2,39.8,2],"paint":{"type":"solid","color":"color","alpha":0.85}},{"op":"polygon","points":[45.8,12,53.8,12,63.8,2,55.8,2],"paint":{"type":"solid","color":"color","alpha":0.85}},{"op":"polygon","points":[61.8,12,69.8,12,79.8,2,71.8,2],"paint":{"type":"solid","color":"color","alpha":0.85}},{"op":"polygon","points":[77.8,12,85.8,12,95.8,2,87.8,2],"paint":{"type":"solid","color":"color","alpha":0.85}},{"op":"polygon","points":[93.8,12,101.8,12,111.8,2,103.8,2],"paint":{"type":"solid","color":"color","alpha":0.85}},{"op":"polygon","points":[109.8,12,117.8,12,127.8,2,119.8,2],"paint":{"type":"solid","color":"color","alpha":0.85}},{"op":"polygon","points":[125.8,12,133.8,12,143.8,2,135.8,2],"paint":{"type":"solid","color":"color","alpha":0.85}},{"op":"polygon","points":[141.8,12,149.8,12,159.8,2,151.8,2],"paint":{"type":"solid","color":"color","alpha":0.85}},{"op":"polygon","points":[157.8,12,165.8,12,175.8,2,167.8,2],"paint":{"type":"solid","color":"color","alpha":0.85}},{"op":"polygon","points":[173.8,12,181.8,12,191.8,2,183.8,2],"paint":{"type":"solid","color":"color","alpha":0.85}},{"op":"polygon","points":[189.8,12,197.8,12,207.8,2,199.8,2],"paint":{"type":"solid","color":"color","alpha":0.85}},{"op":"polygon","points":[205.8,12,213.8,12,223.8,2,215.8,2],"paint":{"type":"solid","color":"color","alpha":0.85}},{"op":"polygon","points":[221.8,12,229.8,12,239.8,2,231.8,2],"paint":{"type":"solid","color":"color","alpha":0.85}},{"op":"polygon","points":[237.8,12,245.8,12,255.8,2,247.8,2],"paint":{"type":"solid","color":"color","alpha":0.85}}]}
+    ]},
+    {"description":"linear striped indeterminate at 1.1 s","options":{"type":"linear","variant":"striped"},"width":240,"height":14,"state":{"indeterminate":true,"value":0,"buffer":0,"wave":1,"time":0.99,"indeterminateTime":1.1},"x":0,"y":0, "commands": [
+      {"op":"rect","x":0,"y":2,"width":240,"height":10,"radius":5,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"clip","shape":{"type":"rect","x":0,"y":2,"width":240,"height":10,"radius":5},"commands":[{"op":"polygon","points":[-13.4,12,-5.4,12,4.6,2,-3.4,2],"paint":{"type":"solid","color":"color","alpha":0.85}},{"op":"polygon","points":[2.6,12,10.6,12,20.6,2,12.6,2],"paint":{"type":"solid","color":"color","alpha":0.85}},{"op":"polygon","points":[18.6,12,26.6,12,36.6,2,28.6,2],"paint":{"type":"solid","color":"color","alpha":0.85}},{"op":"polygon","points":[34.6,12,42.6,12,52.6,2,44.6,2],"paint":{"type":"solid","color":"color","alpha":0.85}},{"op":"polygon","points":[50.6,12,58.6,12,68.6,2,60.6,2],"paint":{"type":"solid","color":"color","alpha":0.85}},{"op":"polygon","points":[66.6,12,74.6,12,84.6,2,76.6,2],"paint":{"type":"solid","color":"color","alpha":0.85}},{"op":"polygon","points":[82.6,12,90.6,12,100.6,2,92.6,2],"paint":{"type":"solid","color":"color","alpha":0.85}},{"op":"polygon","points":[98.6,12,106.6,12,116.6,2,108.6,2],"paint":{"type":"solid","color":"color","alpha":0.85}},{"op":"polygon","points":[114.6,12,122.6,12,132.6,2,124.6,2],"paint":{"type":"solid","color":"color","alpha":0.85}},{"op":"polygon","points":[130.6,12,138.6,12,148.6,2,140.6,2],"paint":{"type":"solid","color":"color","alpha":0.85}},{"op":"polygon","points":[146.6,12,154.6,12,164.6,2,156.6,2],"paint":{"type":"solid","color":"color","alpha":0.85}},{"op":"polygon","points":[162.6,12,170.6,12,180.6,2,172.6,2],"paint":{"type":"solid","color":"color","alpha":0.85}},{"op":"polygon","points":[178.6,12,186.6,12,196.6,2,188.6,2],"paint":{"type":"solid","color":"color","alpha":0.85}},{"op":"polygon","points":[194.6,12,202.6,12,212.6,2,204.6,2],"paint":{"type":"solid","color":"color","alpha":0.85}},{"op":"polygon","points":[210.6,12,218.6,12,228.6,2,220.6,2],"paint":{"type":"solid","color":"color","alpha":0.85}},{"op":"polygon","points":[226.6,12,234.6,12,244.6,2,236.6,2],"paint":{"type":"solid","color":"color","alpha":0.85}},{"op":"polygon","points":[242.6,12,250.6,12,260.6,2,252.6,2],"paint":{"type":"solid","color":"color","alpha":0.85}}]}
+    ]},
+    {"description":"linear striped indeterminate at 2.75 s","options":{"type":"linear","variant":"striped"},"width":240,"height":14,"state":{"indeterminate":true,"value":0,"buffer":0,"wave":1,"time":2.475,"indeterminateTime":2.75},"x":0,"y":0, "commands": [
+      {"op":"rect","x":0,"y":2,"width":240,"height":10,"radius":5,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"clip","shape":{"type":"rect","x":0,"y":2,"width":240,"height":10,"radius":5},"commands":[{"op":"polygon","points":[-18.5,12,-10.5,12,-0.5,2,-8.5,2],"paint":{"type":"solid","color":"color","alpha":0.85}},{"op":"polygon","points":[-2.5,12,5.5,12,15.5,2,7.5,2],"paint":{"type":"solid","color":"color","alpha":0.85}},{"op":"polygon","points":[13.5,12,21.5,12,31.5,2,23.5,2],"paint":{"type":"solid","color":"color","alpha":0.85}},{"op":"polygon","points":[29.5,12,37.5,12,47.5,2,39.5,2],"paint":{"type":"solid","color":"color","alpha":0.85}},{"op":"polygon","points":[45.5,12,53.5,12,63.5,2,55.5,2],"paint":{"type":"solid","color":"color","alpha":0.85}},{"op":"polygon","points":[61.5,12,69.5,12,79.5,2,71.5,2],"paint":{"type":"solid","color":"color","alpha":0.85}},{"op":"polygon","points":[77.5,12,85.5,12,95.5,2,87.5,2],"paint":{"type":"solid","color":"color","alpha":0.85}},{"op":"polygon","points":[93.5,12,101.5,12,111.5,2,103.5,2],"paint":{"type":"solid","color":"color","alpha":0.85}},{"op":"polygon","points":[109.5,12,117.5,12,127.5,2,119.5,2],"paint":{"type":"solid","color":"color","alpha":0.85}},{"op":"polygon","points":[125.5,12,133.5,12,143.5,2,135.5,2],"paint":{"type":"solid","color":"color","alpha":0.85}},{"op":"polygon","points":[141.5,12,149.5,12,159.5,2,151.5,2],"paint":{"type":"solid","color":"color","alpha":0.85}},{"op":"polygon","points":[157.5,12,165.5,12,175.5,2,167.5,2],"paint":{"type":"solid","color":"color","alpha":0.85}},{"op":"polygon","points":[173.5,12,181.5,12,191.5,2,183.5,2],"paint":{"type":"solid","color":"color","alpha":0.85}},{"op":"polygon","points":[189.5,12,197.5,12,207.5,2,199.5,2],"paint":{"type":"solid","color":"color","alpha":0.85}},{"op":"polygon","points":[205.5,12,213.5,12,223.5,2,215.5,2],"paint":{"type":"solid","color":"color","alpha":0.85}},{"op":"polygon","points":[221.5,12,229.5,12,239.5,2,231.5,2],"paint":{"type":"solid","color":"color","alpha":0.85}},{"op":"polygon","points":[237.5,12,245.5,12,255.5,2,247.5,2],"paint":{"type":"solid","color":"color","alpha":0.85}}]}
+    ]},
+    {"description":"linear striped with butt caps at 0.62","options":{"type":"linear","variant":"striped","strokeCap":"butt"},"width":240,"height":14,"state":{"indeterminate":false,"value":0.62,"buffer":0,"wave":0.6,"time":0.4,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"rect","x":0,"y":2,"width":240,"height":10,"radius":5,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"clip","shape":{"type":"rect","x":0,"y":2,"width":240,"height":10,"radius":5},"commands":[{"op":"clip","shape":{"type":"rect","x":0,"y":2,"width":148.8,"height":10,"radius":5},"commands":[{"op":"rect","x":0,"y":2,"width":148.8,"height":10,"radius":0,"paint":{"type":"solid","color":"color","alpha":1}},{"op":"polygon","points":[-15.6,12,-7.6,12,2.4,2,-5.6,2],"paint":{"type":"solid","color":"white","alpha":0.22}},{"op":"polygon","points":[0.4,12,8.4,12,18.4,2,10.4,2],"paint":{"type":"solid","color":"white","alpha":0.22}},{"op":"polygon","points":[16.4,12,24.4,12,34.4,2,26.4,2],"paint":{"type":"solid","color":"white","alpha":0.22}},{"op":"polygon","points":[32.4,12,40.4,12,50.4,2,42.4,2],"paint":{"type":"solid","color":"white","alpha":0.22}},{"op":"polygon","points":[48.4,12,56.4,12,66.4,2,58.4,2],"paint":{"type":"solid","color":"white","alpha":0.22}},{"op":"polygon","points":[64.4,12,72.4,12,82.4,2,74.4,2],"paint":{"type":"solid","color":"white","alpha":0.22}},{"op":"polygon","points":[80.4,12,88.4,12,98.4,2,90.4,2],"paint":{"type":"solid","color":"white","alpha":0.22}},{"op":"polygon","points":[96.4,12,104.4,12,114.4,2,106.4,2],"paint":{"type":"solid","color":"white","alpha":0.22}},{"op":"polygon","points":[112.4,12,120.4,12,130.4,2,122.4,2],"paint":{"type":"solid","color":"white","alpha":0.22}},{"op":"polygon","points":[128.4,12,136.4,12,146.4,2,138.4,2],"paint":{"type":"solid","color":"white","alpha":0.22}},{"op":"polygon","points":[144.4,12,152.4,12,162.4,2,154.4,2],"paint":{"type":"solid","color":"white","alpha":0.22}}]}]}
+    ]},
+    {"description":"linear striped with a label at 0.48","options":{"type":"linear","variant":"striped","showLabel":true},"width":240,"height":18,"state":{"indeterminate":false,"value":0.48,"buffer":0,"wave":1,"time":0.2,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"rect","x":0,"y":4,"width":196,"height":10,"radius":5,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"clip","shape":{"type":"rect","x":0,"y":4,"width":196,"height":10,"radius":5},"commands":[{"op":"clip","shape":{"type":"rect","x":0,"y":4,"width":94.08,"height":10,"radius":5},"commands":[{"op":"rect","x":0,"y":4,"width":94.08,"height":10,"radius":0,"paint":{"type":"solid","color":"color","alpha":1}},{"op":"polygon","points":[-20.8,14,-12.8,14,-2.8,4,-10.8,4],"paint":{"type":"solid","color":"white","alpha":0.22}},{"op":"polygon","points":[-4.8,14,3.2,14,13.2,4,5.2,4],"paint":{"type":"solid","color":"white","alpha":0.22}},{"op":"polygon","points":[11.2,14,19.2,14,29.2,4,21.2,4],"paint":{"type":"solid","color":"white","alpha":0.22}},{"op":"polygon","points":[27.2,14,35.2,14,45.2,4,37.2,4],"paint":{"type":"solid","color":"white","alpha":0.22}},{"op":"polygon","points":[43.2,14,51.2,14,61.2,4,53.2,4],"paint":{"type":"solid","color":"white","alpha":0.22}},{"op":"polygon","points":[59.2,14,67.2,14,77.2,4,69.2,4],"paint":{"type":"solid","color":"white","alpha":0.22}},{"op":"polygon","points":[75.2,14,83.2,14,93.2,4,85.2,4],"paint":{"type":"solid","color":"white","alpha":0.22}},{"op":"polygon","points":[91.2,14,99.2,14,109.2,4,101.2,4],"paint":{"type":"solid","color":"white","alpha":0.22}}]}]},
+      {"op":"text","x":240,"y":9,"size":12.5,"text":"48%","align":"right","paint":{"type":"solid","color":"label","alpha":1}}
+    ]},
+    {"description":"linear shimmer at 0","options":{"type":"linear","variant":"shimmer"},"width":240,"height":12,"state":{"indeterminate":false,"value":0,"buffer":0,"wave":0,"time":0,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"rect","x":0,"y":2,"width":240,"height":8,"radius":4,"paint":{"type":"solid","color":"track","alpha":1}}
+    ]},
+    {"description":"linear shimmer at 0.37","options":{"type":"linear","variant":"shimmer"},"width":240,"height":12,"state":{"indeterminate":false,"value":0.37,"buffer":0,"wave":1,"time":0.8,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"rect","x":0,"y":2,"width":240,"height":8,"radius":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"clip","shape":{"type":"rect","x":0,"y":2,"width":240,"height":8,"radius":4},"commands":[{"op":"clip","shape":{"type":"rect","x":0,"y":2,"width":88.8,"height":8,"radius":4},"commands":[{"op":"rect","x":0,"y":2,"width":88.8,"height":8,"radius":0,"paint":{"type":"solid","color":"color","alpha":1}},{"op":"rect","x":22.72,"y":2,"width":52.8,"height":8,"radius":0,"paint":{"type":"linear","x0":22.72,"y0":0,"x1":75.52,"y1":0,"stops":[{"offset":0,"color":"white","alpha":0},{"offset":0.5,"color":"white","alpha":0.5},{"offset":1,"color":"white","alpha":0}]}}]}]}
+    ]},
+    {"description":"linear shimmer at 1","options":{"type":"linear","variant":"shimmer"},"width":240,"height":12,"state":{"indeterminate":false,"value":1,"buffer":0,"wave":0,"time":1.3,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"rect","x":0,"y":2,"width":240,"height":8,"radius":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"clip","shape":{"type":"rect","x":0,"y":2,"width":240,"height":8,"radius":4},"commands":[{"op":"clip","shape":{"type":"rect","x":0,"y":2,"width":240,"height":8,"radius":4},"commands":[{"op":"rect","x":0,"y":2,"width":240,"height":8,"radius":0,"paint":{"type":"solid","color":"color","alpha":1}},{"op":"rect","x":200.96,"y":2,"width":52.8,"height":8,"radius":0,"paint":{"type":"linear","x0":200.96,"y0":0,"x1":253.76,"y1":0,"stops":[{"offset":0,"color":"white","alpha":0},{"offset":0.5,"color":"white","alpha":0.5},{"offset":1,"color":"white","alpha":0}]}}]}]}
+    ]},
+    {"description":"linear shimmer indeterminate at 0.3 s","options":{"type":"linear","variant":"shimmer"},"width":240,"height":12,"state":{"indeterminate":true,"value":0,"buffer":0,"wave":1,"time":0.27,"indeterminateTime":0.3},"x":0,"y":0, "commands": [
+      {"op":"rect","x":0,"y":2,"width":240,"height":8,"radius":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"clip","shape":{"type":"rect","x":0,"y":2,"width":240,"height":8,"radius":4},"commands":[{"op":"rect","x":-93.545663473,"y":2,"width":108,"height":8,"radius":0,"paint":{"type":"linear","x0":-93.545663473,"y0":0,"x1":14.454336527,"y1":0,"stops":[{"offset":0,"color":"color","alpha":0},{"offset":0.5,"color":"color","alpha":1},{"offset":1,"color":"color","alpha":0}]}}]}
+    ]},
+    {"description":"linear shimmer indeterminate at 1.1 s","options":{"type":"linear","variant":"shimmer"},"width":240,"height":12,"state":{"indeterminate":true,"value":0,"buffer":0,"wave":1,"time":0.99,"indeterminateTime":1.1},"x":0,"y":0, "commands": [
+      {"op":"rect","x":0,"y":2,"width":240,"height":8,"radius":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"clip","shape":{"type":"rect","x":0,"y":2,"width":240,"height":8,"radius":4},"commands":[{"op":"rect","x":211.079034564,"y":2,"width":108,"height":8,"radius":0,"paint":{"type":"linear","x0":211.079034564,"y0":0,"x1":319.079034564,"y1":0,"stops":[{"offset":0,"color":"color","alpha":0},{"offset":0.5,"color":"color","alpha":1},{"offset":1,"color":"color","alpha":0}]}}]}
+    ]},
+    {"description":"linear shimmer indeterminate at 2.75 s","options":{"type":"linear","variant":"shimmer"},"width":240,"height":12,"state":{"indeterminate":true,"value":0,"buffer":0,"wave":1,"time":2.475,"indeterminateTime":2.75},"x":0,"y":0, "commands": [
+      {"op":"rect","x":0,"y":2,"width":240,"height":8,"radius":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"clip","shape":{"type":"rect","x":0,"y":2,"width":240,"height":8,"radius":4},"commands":[{"op":"rect","x":230.481030944,"y":2,"width":108,"height":8,"radius":0,"paint":{"type":"linear","x0":230.481030944,"y0":0,"x1":338.481030944,"y1":0,"stops":[{"offset":0,"color":"color","alpha":0},{"offset":0.5,"color":"color","alpha":1},{"offset":1,"color":"color","alpha":0}]}}]}
+    ]},
+    {"description":"linear shimmer with butt caps at 0.62","options":{"type":"linear","variant":"shimmer","strokeCap":"butt"},"width":240,"height":12,"state":{"indeterminate":false,"value":0.62,"buffer":0,"wave":0.6,"time":0.4,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"rect","x":0,"y":2,"width":240,"height":8,"radius":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"clip","shape":{"type":"rect","x":0,"y":2,"width":240,"height":8,"radius":4},"commands":[{"op":"clip","shape":{"type":"rect","x":0,"y":2,"width":148.8,"height":8,"radius":4},"commands":[{"op":"rect","x":0,"y":2,"width":148.8,"height":8,"radius":0,"paint":{"type":"solid","color":"color","alpha":1}},{"op":"rect","x":0.96,"y":2,"width":52.8,"height":8,"radius":0,"paint":{"type":"linear","x0":0.96,"y0":0,"x1":53.76,"y1":0,"stops":[{"offset":0,"color":"white","alpha":0},{"offset":0.5,"color":"white","alpha":0.5},{"offset":1,"color":"white","alpha":0}]}}]}]}
+    ]},
+    {"description":"linear shimmer with a label at 0.48","options":{"type":"linear","variant":"shimmer","showLabel":true},"width":240,"height":18,"state":{"indeterminate":false,"value":0.48,"buffer":0,"wave":1,"time":0.2,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"rect","x":0,"y":5,"width":196,"height":8,"radius":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"clip","shape":{"type":"rect","x":0,"y":5,"width":196,"height":8,"radius":4},"commands":[{"op":"clip","shape":{"type":"rect","x":0,"y":5,"width":94.08,"height":8,"radius":4},"commands":[{"op":"rect","x":0,"y":5,"width":94.08,"height":8,"radius":0,"paint":{"type":"solid","color":"color","alpha":1}},{"op":"rect","x":-24.826666667,"y":5,"width":43.12,"height":8,"radius":0,"paint":{"type":"linear","x0":-24.826666667,"y0":0,"x1":18.293333333,"y1":0,"stops":[{"offset":0,"color":"white","alpha":0},{"offset":0.5,"color":"white","alpha":0.5},{"offset":1,"color":"white","alpha":0}]}}]}]},
+      {"op":"text","x":240,"y":9,"size":12.5,"text":"48%","align":"right","paint":{"type":"solid","color":"label","alpha":1}}
+    ]},
+    {"description":"linear glow at 0","options":{"type":"linear","variant":"glow"},"width":240,"height":21,"state":{"indeterminate":false,"value":0,"buffer":0,"wave":0,"time":0,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"line","x0":3.5,"y0":10.5,"x1":236.5,"y1":10.5,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"color","alpha":0.14}}
+    ]},
+    {"description":"linear glow at 0.37","options":{"type":"linear","variant":"glow"},"width":240,"height":21,"state":{"indeterminate":false,"value":0.37,"buffer":0,"wave":1,"time":0.8,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"line","x0":3.5,"y0":10.5,"x1":236.5,"y1":10.5,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"color","alpha":0.14}},
+      {"op":"line","x0":3.5,"y0":10.5,"x1":89.71,"y1":10.5,"lineWidth":11,"cap":"round","paint":{"type":"solid","color":"color","alpha":0.12}},
+      {"op":"line","x0":3.5,"y0":10.5,"x1":89.71,"y1":10.5,"lineWidth":7,"cap":"round","paint":{"type":"solid","color":"color","alpha":0.22}},
+      {"op":"line","x0":3.5,"y0":10.5,"x1":89.71,"y1":10.5,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"rect","x":78.71,"y":-0.5,"width":22,"height":22,"radius":0,"paint":{"type":"radial","cx":89.71,"cy":10.5,"r":11,"stops":[{"offset":0,"color":"color","alpha":0.55},{"offset":1,"color":"color","alpha":0}]}}
+    ]},
+    {"description":"linear glow at 1","options":{"type":"linear","variant":"glow"},"width":240,"height":21,"state":{"indeterminate":false,"value":1,"buffer":0,"wave":0,"time":1.3,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"line","x0":3.5,"y0":10.5,"x1":236.5,"y1":10.5,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"color","alpha":0.14}},
+      {"op":"line","x0":3.5,"y0":10.5,"x1":236.5,"y1":10.5,"lineWidth":11,"cap":"round","paint":{"type":"solid","color":"color","alpha":0.12}},
+      {"op":"line","x0":3.5,"y0":10.5,"x1":236.5,"y1":10.5,"lineWidth":7,"cap":"round","paint":{"type":"solid","color":"color","alpha":0.22}},
+      {"op":"line","x0":3.5,"y0":10.5,"x1":236.5,"y1":10.5,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"rect","x":225.5,"y":-0.5,"width":22,"height":22,"radius":0,"paint":{"type":"radial","cx":236.5,"cy":10.5,"r":11,"stops":[{"offset":0,"color":"color","alpha":0.55},{"offset":1,"color":"color","alpha":0}]}}
+    ]},
+    {"description":"linear glow indeterminate at 0.3 s","options":{"type":"linear","variant":"glow"},"width":240,"height":21,"state":{"indeterminate":true,"value":0,"buffer":0,"wave":1,"time":0.27,"indeterminateTime":0.3},"x":0,"y":0, "commands": [
+      {"op":"line","x0":3.5,"y0":10.5,"x1":236.5,"y1":10.5,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"color","alpha":0.14}},
+      {"op":"line","x0":4.297333938,"y0":10.5,"x1":167.581814127,"y1":10.5,"lineWidth":11,"cap":"round","paint":{"type":"solid","color":"color","alpha":0.12}},
+      {"op":"line","x0":4.297333938,"y0":10.5,"x1":167.581814127,"y1":10.5,"lineWidth":7,"cap":"round","paint":{"type":"solid","color":"color","alpha":0.22}},
+      {"op":"line","x0":4.297333938,"y0":10.5,"x1":167.581814127,"y1":10.5,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"rect","x":156.581814127,"y":-0.5,"width":22,"height":22,"radius":0,"paint":{"type":"radial","cx":167.581814127,"cy":10.5,"r":11,"stops":[{"offset":0,"color":"color","alpha":0.55},{"offset":1,"color":"color","alpha":0}]}}
+    ]},
+    {"description":"linear glow indeterminate at 1.1 s","options":{"type":"linear","variant":"glow"},"width":240,"height":21,"state":{"indeterminate":true,"value":0,"buffer":0,"wave":1,"time":0.99,"indeterminateTime":1.1},"x":0,"y":0, "commands": [
+      {"op":"line","x0":3.5,"y0":10.5,"x1":236.5,"y1":10.5,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"color","alpha":0.14}},
+      {"op":"line","x0":3.758316043,"y0":10.5,"x1":165.816473519,"y1":10.5,"lineWidth":11,"cap":"round","paint":{"type":"solid","color":"color","alpha":0.12}},
+      {"op":"line","x0":3.758316043,"y0":10.5,"x1":165.816473519,"y1":10.5,"lineWidth":7,"cap":"round","paint":{"type":"solid","color":"color","alpha":0.22}},
+      {"op":"line","x0":3.758316043,"y0":10.5,"x1":165.816473519,"y1":10.5,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"rect","x":154.816473519,"y":-0.5,"width":22,"height":22,"radius":0,"paint":{"type":"radial","cx":165.816473519,"cy":10.5,"r":11,"stops":[{"offset":0,"color":"color","alpha":0.55},{"offset":1,"color":"color","alpha":0}]}},
+      {"op":"line","x0":234.222835071,"y0":10.5,"x1":236.5,"y1":10.5,"lineWidth":11,"cap":"round","paint":{"type":"solid","color":"color","alpha":0.12}},
+      {"op":"line","x0":234.222835071,"y0":10.5,"x1":236.5,"y1":10.5,"lineWidth":7,"cap":"round","paint":{"type":"solid","color":"color","alpha":0.22}},
+      {"op":"line","x0":234.222835071,"y0":10.5,"x1":236.5,"y1":10.5,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"rect","x":225.5,"y":-0.5,"width":22,"height":22,"radius":0,"paint":{"type":"radial","cx":236.5,"cy":10.5,"r":11,"stops":[{"offset":0,"color":"color","alpha":0.55},{"offset":1,"color":"color","alpha":0}]}}
+    ]},
+    {"description":"linear glow indeterminate at 2.75 s","options":{"type":"linear","variant":"glow"},"width":240,"height":21,"state":{"indeterminate":true,"value":0,"buffer":0,"wave":1,"time":2.475,"indeterminateTime":2.75},"x":0,"y":0, "commands": [
+      {"op":"line","x0":3.5,"y0":10.5,"x1":236.5,"y1":10.5,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"color","alpha":0.14}},
+      {"op":"line","x0":3.5,"y0":10.5,"x1":100.643227131,"y1":10.5,"lineWidth":11,"cap":"round","paint":{"type":"solid","color":"color","alpha":0.12}},
+      {"op":"line","x0":3.5,"y0":10.5,"x1":100.643227131,"y1":10.5,"lineWidth":7,"cap":"round","paint":{"type":"solid","color":"color","alpha":0.22}},
+      {"op":"line","x0":3.5,"y0":10.5,"x1":100.643227131,"y1":10.5,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"rect","x":89.643227131,"y":-0.5,"width":22,"height":22,"radius":0,"paint":{"type":"radial","cx":100.643227131,"cy":10.5,"r":11,"stops":[{"offset":0,"color":"color","alpha":0.55},{"offset":1,"color":"color","alpha":0}]}},
+      {"op":"line","x0":228.359171446,"y0":10.5,"x1":236.5,"y1":10.5,"lineWidth":11,"cap":"round","paint":{"type":"solid","color":"color","alpha":0.12}},
+      {"op":"line","x0":228.359171446,"y0":10.5,"x1":236.5,"y1":10.5,"lineWidth":7,"cap":"round","paint":{"type":"solid","color":"color","alpha":0.22}},
+      {"op":"line","x0":228.359171446,"y0":10.5,"x1":236.5,"y1":10.5,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"rect","x":225.5,"y":-0.5,"width":22,"height":22,"radius":0,"paint":{"type":"radial","cx":236.5,"cy":10.5,"r":11,"stops":[{"offset":0,"color":"color","alpha":0.55},{"offset":1,"color":"color","alpha":0}]}}
+    ]},
+    {"description":"linear glow with butt caps at 0.62","options":{"type":"linear","variant":"glow","strokeCap":"butt"},"width":240,"height":21,"state":{"indeterminate":false,"value":0.62,"buffer":0,"wave":0.6,"time":0.4,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"line","x0":2,"y0":10.5,"x1":238,"y1":10.5,"lineWidth":3,"cap":"butt","paint":{"type":"solid","color":"color","alpha":0.14}},
+      {"op":"line","x0":2,"y0":10.5,"x1":148.32,"y1":10.5,"lineWidth":11,"cap":"butt","paint":{"type":"solid","color":"color","alpha":0.12}},
+      {"op":"line","x0":2,"y0":10.5,"x1":148.32,"y1":10.5,"lineWidth":7,"cap":"butt","paint":{"type":"solid","color":"color","alpha":0.22}},
+      {"op":"line","x0":2,"y0":10.5,"x1":148.32,"y1":10.5,"lineWidth":3,"cap":"butt","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"rect","x":137.32,"y":-0.5,"width":22,"height":22,"radius":0,"paint":{"type":"radial","cx":148.32,"cy":10.5,"r":11,"stops":[{"offset":0,"color":"color","alpha":0.55},{"offset":1,"color":"color","alpha":0}]}}
+    ]},
+    {"description":"linear glow with a label at 0.48","options":{"type":"linear","variant":"glow","showLabel":true},"width":240,"height":21,"state":{"indeterminate":false,"value":0.48,"buffer":0,"wave":1,"time":0.2,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"line","x0":3.5,"y0":10.5,"x1":192.5,"y1":10.5,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"color","alpha":0.14}},
+      {"op":"line","x0":3.5,"y0":10.5,"x1":94.22,"y1":10.5,"lineWidth":11,"cap":"round","paint":{"type":"solid","color":"color","alpha":0.12}},
+      {"op":"line","x0":3.5,"y0":10.5,"x1":94.22,"y1":10.5,"lineWidth":7,"cap":"round","paint":{"type":"solid","color":"color","alpha":0.22}},
+      {"op":"line","x0":3.5,"y0":10.5,"x1":94.22,"y1":10.5,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"rect","x":83.22,"y":-0.5,"width":22,"height":22,"radius":0,"paint":{"type":"radial","cx":94.22,"cy":10.5,"r":11,"stops":[{"offset":0,"color":"color","alpha":0.55},{"offset":1,"color":"color","alpha":0}]}},
+      {"op":"text","x":240,"y":10.5,"size":12.5,"text":"48%","align":"right","paint":{"type":"solid","color":"label","alpha":1}}
+    ]},
+    {"description":"linear dots at 0","options":{"type":"linear","variant":"dots"},"width":240,"height":19,"state":{"indeterminate":false,"value":0,"buffer":0,"wave":0,"time":0,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"circle","cx":4,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":37.142857143,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":70.285714286,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":103.428571429,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":136.571428571,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":169.714285714,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":202.857142857,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":236,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}}
+    ]},
+    {"description":"linear dots at 0.37","options":{"type":"linear","variant":"dots"},"width":240,"height":19,"state":{"indeterminate":false,"value":0.37,"buffer":0,"wave":1,"time":0.8,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"circle","cx":4,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":4,"cy":11.3,"r":4,"paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"circle","cx":37.142857143,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":37.142857143,"cy":11.3,"r":4,"paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"circle","cx":70.285714286,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":70.285714286,"cy":11.3,"r":3.919183588,"paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"circle","cx":103.428571429,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":136.571428571,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":169.714285714,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":202.857142857,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":236,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}}
+    ]},
+    {"description":"linear dots at 1","options":{"type":"linear","variant":"dots"},"width":240,"height":19,"state":{"indeterminate":false,"value":1,"buffer":0,"wave":0,"time":1.3,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"circle","cx":4,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":4,"cy":11.3,"r":4,"paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"circle","cx":37.142857143,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":37.142857143,"cy":11.3,"r":4,"paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"circle","cx":70.285714286,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":70.285714286,"cy":11.3,"r":4,"paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"circle","cx":103.428571429,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":103.428571429,"cy":11.3,"r":4,"paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"circle","cx":136.571428571,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":136.571428571,"cy":11.3,"r":4,"paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"circle","cx":169.714285714,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":169.714285714,"cy":11.3,"r":4,"paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"circle","cx":202.857142857,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":202.857142857,"cy":11.3,"r":4,"paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"circle","cx":236,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":236,"cy":11.3,"r":4,"paint":{"type":"solid","color":"color","alpha":1}}
+    ]},
+    {"description":"linear dots indeterminate at 0.3 s","options":{"type":"linear","variant":"dots"},"width":240,"height":19,"state":{"indeterminate":true,"value":0,"buffer":0,"wave":1,"time":0.27,"indeterminateTime":0.3},"x":0,"y":0, "commands": [
+      {"op":"circle","cx":4,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":4,"cy":9.14883742,"r":3.597545161,"paint":{"type":"solid","color":"color","alpha":0.597545161}},
+      {"op":"circle","cx":37.142857143,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":37.142857143,"cy":8.003354698,"r":3.915734806,"paint":{"type":"solid","color":"color","alpha":0.915734806}},
+      {"op":"circle","cx":70.285714286,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":70.285714286,"cy":10.996645302,"r":3.084265194,"paint":{"type":"solid","color":"color","alpha":0.084265194}},
+      {"op":"circle","cx":103.428571429,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":136.571428571,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":169.714285714,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":202.857142857,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":236,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}}
+    ]},
+    {"description":"linear dots indeterminate at 1.1 s","options":{"type":"linear","variant":"dots"},"width":240,"height":19,"state":{"indeterminate":true,"value":0,"buffer":0,"wave":1,"time":0.99,"indeterminateTime":1.1},"x":0,"y":0, "commands": [
+      {"op":"circle","cx":4,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":37.142857143,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":70.285714286,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":103.428571429,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":136.571428571,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":169.714285714,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":169.714285714,"cy":11.296146062,"r":3.001070538,"paint":{"type":"solid","color":"color","alpha":0.001070538}},
+      {"op":"circle","cx":202.857142857,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":202.857142857,"cy":8.703880358,"r":3.721144345,"paint":{"type":"solid","color":"color","alpha":0.721144345}},
+      {"op":"circle","cx":236,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":236,"cy":8.313177533,"r":3.829672908,"paint":{"type":"solid","color":"color","alpha":0.829672908}}
+    ]},
+    {"description":"linear dots indeterminate at 2.75 s","options":{"type":"linear","variant":"dots"},"width":240,"height":19,"state":{"indeterminate":true,"value":0,"buffer":0,"wave":1,"time":2.475,"indeterminateTime":2.75},"x":0,"y":0, "commands": [
+      {"op":"circle","cx":4,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":37.142857143,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":70.285714286,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":103.428571429,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":136.571428571,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":169.714285714,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":202.857142857,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":236,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":236,"cy":9.034125719,"r":3.629409523,"paint":{"type":"solid","color":"color","alpha":0.629409523}}
+    ]},
+    {"description":"linear dots with butt caps at 0.62","options":{"type":"linear","variant":"dots","strokeCap":"butt"},"width":240,"height":19,"state":{"indeterminate":false,"value":0.62,"buffer":0,"wave":0.6,"time":0.4,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"circle","cx":4,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":4,"cy":11.3,"r":4,"paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"circle","cx":37.142857143,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":37.142857143,"cy":11.3,"r":4,"paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"circle","cx":70.285714286,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":70.285714286,"cy":11.3,"r":4,"paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"circle","cx":103.428571429,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":103.428571429,"cy":11.3,"r":4,"paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"circle","cx":136.571428571,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":136.571428571,"cy":11.3,"r":3.919183588,"paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"circle","cx":169.714285714,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":202.857142857,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":236,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}}
+    ]},
+    {"description":"linear dots with a label at 0.48","options":{"type":"linear","variant":"dots","showLabel":true},"width":240,"height":19,"state":{"indeterminate":false,"value":0.48,"buffer":0,"wave":1,"time":0.2,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"circle","cx":4,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":4,"cy":11.3,"r":4,"paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"circle","cx":30.857142857,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":30.857142857,"cy":11.3,"r":4,"paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"circle","cx":57.714285714,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":57.714285714,"cy":11.3,"r":4,"paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"circle","cx":84.571428571,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":84.571428571,"cy":11.3,"r":3.666060556,"paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"circle","cx":111.428571429,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":138.285714286,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":165.142857143,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":192,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"text","x":240,"y":9.5,"size":12.5,"text":"48%","align":"right","paint":{"type":"solid","color":"label","alpha":1}}
+    ]},
+    {"description":"linear steps at 0","options":{"type":"linear","variant":"steps"},"width":240,"height":18,"state":{"indeterminate":false,"value":0,"buffer":0,"wave":0,"time":0,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"line","x0":17,"y0":9,"x1":72.333333333,"y1":9,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"line","x0":92.333333333,"y0":9,"x1":147.666666667,"y1":9,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"line","x0":167.666666667,"y0":9,"x1":223,"y1":9,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":7,"cy":9,"r":7,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":7,"cy":9,"r":7,"paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"polyline","points":[4.34,9.14,6.3,11.1,9.8,7.04],"closed":false,"lineWidth":1.54,"cap":"round","paint":{"type":"solid","color":"white","alpha":1}},
+      {"op":"circle","cx":82.333333333,"cy":9,"r":7,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":157.666666667,"cy":9,"r":7,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":233,"cy":9,"r":7,"paint":{"type":"solid","color":"track","alpha":1}}
+    ]},
+    {"description":"linear steps at 0.37","options":{"type":"linear","variant":"steps"},"width":240,"height":18,"state":{"indeterminate":false,"value":0.37,"buffer":0,"wave":1,"time":0.8,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"line","x0":17,"y0":9,"x1":72.333333333,"y1":9,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"line","x0":17,"y0":9,"x1":72.333333333,"y1":9,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"line","x0":92.333333333,"y0":9,"x1":147.666666667,"y1":9,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"line","x0":92.333333333,"y0":9,"x1":98.42,"y1":9,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"line","x0":167.666666667,"y0":9,"x1":223,"y1":9,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":7,"cy":9,"r":7,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":7,"cy":9,"r":7,"paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"polyline","points":[4.34,9.14,6.3,11.1,9.8,7.04],"closed":false,"lineWidth":1.54,"cap":"round","paint":{"type":"solid","color":"white","alpha":1}},
+      {"op":"circle","cx":82.333333333,"cy":9,"r":7,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":82.333333333,"cy":9,"r":7,"paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"polyline","points":[79.673333333,9.14,81.633333333,11.1,85.133333333,7.04],"closed":false,"lineWidth":1.54,"cap":"round","paint":{"type":"solid","color":"white","alpha":1}},
+      {"op":"circle","cx":157.666666667,"cy":9,"r":7,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":157.666666667,"cy":9,"r":6,"start":0,"end":6.283185307,"lineWidth":2,"cap":"butt","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"circle","cx":233,"cy":9,"r":7,"paint":{"type":"solid","color":"track","alpha":1}}
+    ]},
+    {"description":"linear steps at 1","options":{"type":"linear","variant":"steps"},"width":240,"height":18,"state":{"indeterminate":false,"value":1,"buffer":0,"wave":0,"time":1.3,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"line","x0":17,"y0":9,"x1":72.333333333,"y1":9,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"line","x0":17,"y0":9,"x1":72.333333333,"y1":9,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"line","x0":92.333333333,"y0":9,"x1":147.666666667,"y1":9,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"line","x0":92.333333333,"y0":9,"x1":147.666666667,"y1":9,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"line","x0":167.666666667,"y0":9,"x1":223,"y1":9,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"line","x0":167.666666667,"y0":9,"x1":223,"y1":9,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"circle","cx":7,"cy":9,"r":7,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":7,"cy":9,"r":7,"paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"polyline","points":[4.34,9.14,6.3,11.1,9.8,7.04],"closed":false,"lineWidth":1.54,"cap":"round","paint":{"type":"solid","color":"white","alpha":1}},
+      {"op":"circle","cx":82.333333333,"cy":9,"r":7,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":82.333333333,"cy":9,"r":7,"paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"polyline","points":[79.673333333,9.14,81.633333333,11.1,85.133333333,7.04],"closed":false,"lineWidth":1.54,"cap":"round","paint":{"type":"solid","color":"white","alpha":1}},
+      {"op":"circle","cx":157.666666667,"cy":9,"r":7,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":157.666666667,"cy":9,"r":7,"paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"polyline","points":[155.006666667,9.14,156.966666667,11.1,160.466666667,7.04],"closed":false,"lineWidth":1.54,"cap":"round","paint":{"type":"solid","color":"white","alpha":1}},
+      {"op":"circle","cx":233,"cy":9,"r":7,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":233,"cy":9,"r":7,"paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"polyline","points":[230.34,9.14,232.3,11.1,235.8,7.04],"closed":false,"lineWidth":1.54,"cap":"round","paint":{"type":"solid","color":"white","alpha":1}}
+    ]},
+    {"description":"linear steps indeterminate at 0.3 s","options":{"type":"linear","variant":"steps"},"width":240,"height":18,"state":{"indeterminate":true,"value":0,"buffer":0,"wave":1,"time":0.27,"indeterminateTime":0.3},"x":0,"y":0, "commands": [
+      {"op":"line","x0":17,"y0":9,"x1":72.333333333,"y1":9,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"line","x0":17,"y0":9,"x1":36.115151515,"y1":9,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"line","x0":92.333333333,"y0":9,"x1":147.666666667,"y1":9,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"line","x0":167.666666667,"y0":9,"x1":223,"y1":9,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":7,"cy":9,"r":7,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":7,"cy":9,"r":7,"paint":{"type":"solid","color":"color","alpha":0.983241777}},
+      {"op":"circle","cx":82.333333333,"cy":9,"r":7,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":157.666666667,"cy":9,"r":7,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":233,"cy":9,"r":7,"paint":{"type":"solid","color":"track","alpha":1}}
+    ]},
+    {"description":"linear steps indeterminate at 1.1 s","options":{"type":"linear","variant":"steps"},"width":240,"height":18,"state":{"indeterminate":true,"value":0,"buffer":0,"wave":1,"time":0.99,"indeterminateTime":1.1},"x":0,"y":0, "commands": [
+      {"op":"line","x0":17,"y0":9,"x1":72.333333333,"y1":9,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"line","x0":92.333333333,"y0":9,"x1":147.666666667,"y1":9,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"line","x0":103.4,"y0":9,"x1":136.6,"y1":9,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"line","x0":167.666666667,"y0":9,"x1":223,"y1":9,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":7,"cy":9,"r":7,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":82.333333333,"cy":9,"r":7,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":82.333333333,"cy":9,"r":7,"paint":{"type":"solid","color":"color","alpha":0.020253513}},
+      {"op":"circle","cx":157.666666667,"cy":9,"r":7,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":157.666666667,"cy":9,"r":7,"paint":{"type":"solid","color":"color","alpha":0.020253513}},
+      {"op":"circle","cx":233,"cy":9,"r":7,"paint":{"type":"solid","color":"track","alpha":1}}
+    ]},
+    {"description":"linear steps indeterminate at 2.75 s","options":{"type":"linear","variant":"steps"},"width":240,"height":18,"state":{"indeterminate":true,"value":0,"buffer":0,"wave":1,"time":2.475,"indeterminateTime":2.75},"x":0,"y":0, "commands": [
+      {"op":"line","x0":17,"y0":9,"x1":72.333333333,"y1":9,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"line","x0":28.066666667,"y0":9,"x1":61.266666667,"y1":9,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"line","x0":92.333333333,"y0":9,"x1":147.666666667,"y1":9,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"line","x0":167.666666667,"y0":9,"x1":223,"y1":9,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":7,"cy":9,"r":7,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":7,"cy":9,"r":7,"paint":{"type":"solid","color":"color","alpha":0.020253513}},
+      {"op":"circle","cx":82.333333333,"cy":9,"r":7,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":82.333333333,"cy":9,"r":7,"paint":{"type":"solid","color":"color","alpha":0.020253513}},
+      {"op":"circle","cx":157.666666667,"cy":9,"r":7,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":233,"cy":9,"r":7,"paint":{"type":"solid","color":"track","alpha":1}}
+    ]},
+    {"description":"linear steps with butt caps at 0.62","options":{"type":"linear","variant":"steps","strokeCap":"butt"},"width":240,"height":18,"state":{"indeterminate":false,"value":0.62,"buffer":0,"wave":0.6,"time":0.4,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"line","x0":17,"y0":9,"x1":72.333333333,"y1":9,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"line","x0":17,"y0":9,"x1":72.333333333,"y1":9,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"line","x0":92.333333333,"y0":9,"x1":147.666666667,"y1":9,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"line","x0":92.333333333,"y0":9,"x1":139.92,"y1":9,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"line","x0":167.666666667,"y0":9,"x1":223,"y1":9,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":7,"cy":9,"r":7,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":7,"cy":9,"r":7,"paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"polyline","points":[4.34,9.14,6.3,11.1,9.8,7.04],"closed":false,"lineWidth":1.54,"cap":"round","paint":{"type":"solid","color":"white","alpha":1}},
+      {"op":"circle","cx":82.333333333,"cy":9,"r":7,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":82.333333333,"cy":9,"r":7,"paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"polyline","points":[79.673333333,9.14,81.633333333,11.1,85.133333333,7.04],"closed":false,"lineWidth":1.54,"cap":"round","paint":{"type":"solid","color":"white","alpha":1}},
+      {"op":"circle","cx":157.666666667,"cy":9,"r":7,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":157.666666667,"cy":9,"r":6,"start":0,"end":6.283185307,"lineWidth":2,"cap":"butt","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"circle","cx":233,"cy":9,"r":7,"paint":{"type":"solid","color":"track","alpha":1}}
+    ]},
+    {"description":"linear steps with a label at 0.48","options":{"type":"linear","variant":"steps","showLabel":true},"width":240,"height":18,"state":{"indeterminate":false,"value":0.48,"buffer":0,"wave":1,"time":0.2,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"line","x0":17,"y0":9,"x1":57.666666667,"y1":9,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"line","x0":17,"y0":9,"x1":57.666666667,"y1":9,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"line","x0":77.666666667,"y0":9,"x1":118.333333333,"y1":9,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"line","x0":77.666666667,"y0":9,"x1":95.56,"y1":9,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"line","x0":138.333333333,"y0":9,"x1":179,"y1":9,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":7,"cy":9,"r":7,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":7,"cy":9,"r":7,"paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"polyline","points":[4.34,9.14,6.3,11.1,9.8,7.04],"closed":false,"lineWidth":1.54,"cap":"round","paint":{"type":"solid","color":"white","alpha":1}},
+      {"op":"circle","cx":67.666666667,"cy":9,"r":7,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":67.666666667,"cy":9,"r":7,"paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"polyline","points":[65.006666667,9.14,66.966666667,11.1,70.466666667,7.04],"closed":false,"lineWidth":1.54,"cap":"round","paint":{"type":"solid","color":"white","alpha":1}},
+      {"op":"circle","cx":128.333333333,"cy":9,"r":7,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":128.333333333,"cy":9,"r":6,"start":0,"end":6.283185307,"lineWidth":2,"cap":"butt","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"circle","cx":189,"cy":9,"r":7,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"text","x":240,"y":9,"size":12.5,"text":"48%","align":"right","paint":{"type":"solid","color":"label","alpha":1}}
+    ]},
+    {"description":"linear flat with a buffer","options":{"type":"linear","variant":"flat"},"width":240,"height":8,"state":{"indeterminate":false,"value":0.3,"buffer":0.55,"wave":1,"time":0,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"line","x0":80.8,"y0":4,"x1":131.8,"y1":4,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"color","alpha":0.5}},
+      {"op":"line","x0":139.8,"y0":4,"x1":238,"y1":4,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":238,"cy":4,"r":2,"paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"line","x0":2,"y0":4,"x1":72.8,"y1":4,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}}
+    ]},
+    {"description":"linear wavy with a buffer below the value","options":{"type":"linear","variant":"wavy"},"width":240,"height":14,"state":{"indeterminate":false,"value":0.5,"buffer":0.4,"wave":0.8,"time":2.1,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"line","x0":128,"y0":7,"x1":238,"y1":7,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":238,"cy":7,"r":2,"paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"polyline","points":[2,6.258359214,4,7,6,7.741640786,8,8.410684606,10,8.941640786,12,9.282535639,14,9.4,16,9.282535639,18,8.941640786,20,8.410684606,22,7.741640786,24,7,26,6.258359214,28,5.589315394,30,5.058359214,32,4.717464361,34,4.6,36,4.717464361,38,5.058359214,40,5.589315394,42,6.258359214,44,7,46,7.741640786,48,8.410684606,50,8.941640786,52,9.282535639,54,9.4,56,9.282535639,58,8.941640786,60,8.410684606,62,7.741640786,64,7,66,6.258359214,68,5.589315394,70,5.058359214,72,4.717464361,74,4.6,76,4.717464361,78,5.058359214,80,5.589315394,82,6.258359214,84,7,86,7.741640786,88,8.410684606,90,8.941640786,92,9.282535639,94,9.4,96,9.282535639,98,8.941640786,100,8.410684606,102,7.741640786,104,7,106,6.258359214,108,5.589315394,110,5.058359214,112,4.717464361,114,4.6,116,4.717464361,118,5.058359214,120,5.589315394],"closed":false,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}}
+    ]},
+    {"description":"linear flat without the stop indicator","options":{"type":"linear","variant":"flat","stopIndicator":false},"width":240,"height":8,"state":{"indeterminate":false,"value":0.3,"buffer":0,"wave":1,"time":0,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"line","x0":80.8,"y0":4,"x1":238,"y1":4,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"line","x0":2,"y0":4,"x1":72.8,"y1":4,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}}
+    ]},
+    {"description":"linear wavy with a custom wave","options":{"type":"linear","variant":"wavy","amplitude":5,"wavelength":24,"waveSpeed":-1.5,"thickness":6},"width":240,"height":20,"state":{"indeterminate":false,"value":0.6,"buffer":0,"wave":1,"time":0.7,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"line","x0":153.4,"y0":10,"x1":237,"y1":10,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":237,"cy":10,"r":2,"paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"polyline","points":[3,14.455032621,4.977464789,14.994604601,6.954929577,14.225192279,8.932394366,12.348442978,10.909859155,9.856214528,12.887323944,7.401669325,14.864788732,5.628093757,16.842253521,5.000305914,18.81971831,5.682836223,20.797183099,7.496807371,22.774647887,9.966814406,24.752112676,12.44551871,26.729577465,14.283302288,28.707042254,14.998519437,30.684507042,14.403726284,32.661971831,12.65480602,34.63943662,10.210115083,36.616901408,7.710357255,38.594366197,5.810668232,40.571830986,5.008917876,42.549295775,5.515228654,44.526760563,7.196906805,46.504225352,9.613218683,48.481690141,12.130898079,50.45915493,14.090112419,52.436619718,14.977391465,54.414084507,14.560197422,56.391549296,12.947868364,58.369014085,10.562962952,60.346478873,8.030516397,62.323943662,6.014231446,64.301408451,5.042535385,66.278873239,5.37008999,68.256338028,6.911049862,70.233802817,9.261560752,72.211267606,11.805601553,74.188732394,13.876430904,76.166197183,14.93132654,78.143661972,14.693821767,80.121126761,13.226161756,82.098591549,10.912990351,84.076056338,8.360542741,86.053521127,6.23776354,88.030985915,5.100990012,90.008450704,5.248147383,91.985915493,6.640668697,93.963380282,8.913602435,95.94084507,11.471258883,97.918309859,13.643328296,99.895774648,14.860555448,101.873239437,14.803929854,103.850704225,13.488291932,105.828169014,11.258443628,107.805633803,8.698782838,109.783098592,6.480144607,111.76056338,5.1839889,113.738028169,5.15001177,115.715492958,6.387117932,117.692957746,8.571087018,119.670422535,11.12954514,121.647887324,13.39197245,123.625352113,14.765432755,125.602816901,14.889970038,127.58028169,13.73294561,129.557746479,11.597592046,131.535211268,9.043542093,133.512676056,6.740160308,135.490140845,5.291116219,137.467605634,5.076174816,139.445070423,6.151667869,141.422535211,8.23573052,143.4,10.782172325],"closed":false,"lineWidth":6,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}}
+    ]},
+    {"description":"linear flat label inside","options":{"type":"linear","variant":"flat","thickness":18,"showLabel":true},"width":240,"height":22,"state":{"indeterminate":false,"value":0.42,"buffer":0,"wave":1,"time":0,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"line","x0":124.24,"y0":11,"x1":231,"y1":11,"lineWidth":18,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":231,"cy":11,"r":2,"paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"line","x0":9,"y0":11,"x1":102.24,"y1":11,"lineWidth":18,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"text","x":120,"y":11,"size":11,"text":"42%","align":"center","paint":{"type":"solid","color":"label","alpha":1}},
+      {"op":"clip","shape":{"type":"rect","x":0,"y":0,"width":111.24,"height":22,"radius":0},"commands":[{"op":"text","x":120,"y":11,"size":11,"text":"42%","align":"center","paint":{"type":"solid","color":"white","alpha":1}}]}
+    ]},
+    {"description":"linear striped label inside","options":{"type":"linear","variant":"striped","thickness":16,"showLabel":true},"width":240,"height":20,"state":{"indeterminate":false,"value":0.73,"buffer":0,"wave":1,"time":0.33,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"rect","x":0,"y":2,"width":240,"height":16,"radius":8,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"clip","shape":{"type":"rect","x":0,"y":2,"width":240,"height":16,"radius":8},"commands":[{"op":"clip","shape":{"type":"rect","x":0,"y":2,"width":175.2,"height":16,"radius":8},"commands":[{"op":"rect","x":0,"y":2,"width":175.2,"height":16,"radius":0,"paint":{"type":"solid","color":"color","alpha":1}},{"op":"polygon","points":[-33.02,18,-20.22,18,-4.22,2,-17.02,2],"paint":{"type":"solid","color":"white","alpha":0.22}},{"op":"polygon","points":[-7.42,18,5.38,18,21.38,2,8.58,2],"paint":{"type":"solid","color":"white","alpha":0.22}},{"op":"polygon","points":[18.18,18,30.98,18,46.98,2,34.18,2],"paint":{"type":"solid","color":"white","alpha":0.22}},{"op":"polygon","points":[43.78,18,56.58,18,72.58,2,59.78,2],"paint":{"type":"solid","color":"white","alpha":0.22}},{"op":"polygon","points":[69.38,18,82.18,18,98.18,2,85.38,2],"paint":{"type":"solid","color":"white","alpha":0.22}},{"op":"polygon","points":[94.98,18,107.78,18,123.78,2,110.98,2],"paint":{"type":"solid","color":"white","alpha":0.22}},{"op":"polygon","points":[120.58,18,133.38,18,149.38,2,136.58,2],"paint":{"type":"solid","color":"white","alpha":0.22}},{"op":"polygon","points":[146.18,18,158.98,18,174.98,2,162.18,2],"paint":{"type":"solid","color":"white","alpha":0.22}},{"op":"polygon","points":[171.78,18,184.58,18,200.58,2,187.78,2],"paint":{"type":"solid","color":"white","alpha":0.22}}]}]},
+      {"op":"text","x":120,"y":10,"size":10,"text":"73%","align":"center","paint":{"type":"solid","color":"label","alpha":1}},
+      {"op":"clip","shape":{"type":"rect","x":0,"y":0,"width":175.2,"height":20,"radius":0},"commands":[{"op":"text","x":120,"y":10,"size":10,"text":"73%","align":"center","paint":{"type":"solid","color":"white","alpha":1}}]}
+    ]},
+    {"description":"linear shimmer label inside","options":{"type":"linear","variant":"shimmer","thickness":16,"showLabel":true},"width":240,"height":20,"state":{"indeterminate":false,"value":0.5,"buffer":0,"wave":1,"time":0.9,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"rect","x":0,"y":2,"width":240,"height":16,"radius":8,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"clip","shape":{"type":"rect","x":0,"y":2,"width":240,"height":16,"radius":8},"commands":[{"op":"clip","shape":{"type":"rect","x":0,"y":2,"width":120,"height":16,"radius":8},"commands":[{"op":"rect","x":0,"y":2,"width":120,"height":16,"radius":0,"paint":{"type":"solid","color":"color","alpha":1}},{"op":"rect","x":50.88,"y":2,"width":52.8,"height":16,"radius":0,"paint":{"type":"linear","x0":50.88,"y0":0,"x1":103.68,"y1":0,"stops":[{"offset":0,"color":"white","alpha":0},{"offset":0.5,"color":"white","alpha":0.5},{"offset":1,"color":"white","alpha":0}]}}]}]},
+      {"op":"text","x":120,"y":10,"size":10,"text":"50%","align":"center","paint":{"type":"solid","color":"label","alpha":1}},
+      {"op":"clip","shape":{"type":"rect","x":0,"y":0,"width":120,"height":20,"radius":0},"commands":[{"op":"text","x":120,"y":10,"size":10,"text":"50%","align":"center","paint":{"type":"solid","color":"white","alpha":1}}]}
+    ]},
+    {"description":"linear segmented with 5 segments and no gap","options":{"type":"linear","variant":"segmented","segments":5,"trackGap":0},"width":240,"height":10,"state":{"indeterminate":false,"value":0.5,"buffer":0,"wave":1,"time":0,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"rect","x":0,"y":2,"width":46.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"clip","shape":{"type":"rect","x":0,"y":2,"width":46.4,"height":6,"radius":3},"commands":[{"op":"rect","x":0,"y":2,"width":46.4,"height":6,"radius":0,"paint":{"type":"solid","color":"color","alpha":1}}]},
+      {"op":"rect","x":48.4,"y":2,"width":46.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"clip","shape":{"type":"rect","x":48.4,"y":2,"width":46.4,"height":6,"radius":3},"commands":[{"op":"rect","x":48.4,"y":2,"width":46.4,"height":6,"radius":0,"paint":{"type":"solid","color":"color","alpha":1}}]},
+      {"op":"rect","x":96.8,"y":2,"width":46.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"clip","shape":{"type":"rect","x":96.8,"y":2,"width":46.4,"height":6,"radius":3},"commands":[{"op":"rect","x":96.8,"y":2,"width":23.2,"height":6,"radius":0,"paint":{"type":"solid","color":"color","alpha":1}}]},
+      {"op":"rect","x":145.2,"y":2,"width":46.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"rect","x":193.6,"y":2,"width":46.4,"height":6,"radius":3,"paint":{"type":"solid","color":"track","alpha":1}}
+    ]},
+    {"description":"linear steps with 6 steps","options":{"type":"linear","variant":"steps","segments":6},"width":240,"height":18,"state":{"indeterminate":false,"value":0.5,"buffer":0,"wave":1,"time":0,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"line","x0":17,"y0":9,"x1":42.2,"y1":9,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"line","x0":17,"y0":9,"x1":42.2,"y1":9,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"line","x0":62.2,"y0":9,"x1":87.4,"y1":9,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"line","x0":62.2,"y0":9,"x1":87.4,"y1":9,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"line","x0":107.4,"y0":9,"x1":132.6,"y1":9,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"line","x0":107.4,"y0":9,"x1":120,"y1":9,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"line","x0":152.6,"y0":9,"x1":177.8,"y1":9,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"line","x0":197.8,"y0":9,"x1":223,"y1":9,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":7,"cy":9,"r":7,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":7,"cy":9,"r":7,"paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"polyline","points":[4.34,9.14,6.3,11.1,9.8,7.04],"closed":false,"lineWidth":1.54,"cap":"round","paint":{"type":"solid","color":"white","alpha":1}},
+      {"op":"circle","cx":52.2,"cy":9,"r":7,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":52.2,"cy":9,"r":7,"paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"polyline","points":[49.54,9.14,51.5,11.1,55,7.04],"closed":false,"lineWidth":1.54,"cap":"round","paint":{"type":"solid","color":"white","alpha":1}},
+      {"op":"circle","cx":97.4,"cy":9,"r":7,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":97.4,"cy":9,"r":7,"paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"polyline","points":[94.74,9.14,96.7,11.1,100.2,7.04],"closed":false,"lineWidth":1.54,"cap":"round","paint":{"type":"solid","color":"white","alpha":1}},
+      {"op":"circle","cx":142.6,"cy":9,"r":7,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":142.6,"cy":9,"r":6,"start":0,"end":6.283185307,"lineWidth":2,"cap":"butt","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"circle","cx":187.8,"cy":9,"r":7,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":233,"cy":9,"r":7,"paint":{"type":"solid","color":"track","alpha":1}}
+    ]},
+    {"description":"linear dots with 1 dot","options":{"type":"linear","variant":"dots","segments":1},"width":240,"height":19,"state":{"indeterminate":false,"value":0.5,"buffer":0,"wave":1,"time":0,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"circle","cx":4,"cy":11.3,"r":4,"paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":4,"cy":11.3,"r":2.828427125,"paint":{"type":"solid","color":"color","alpha":1}}
+    ]},
+    {"description":"linear flat in a narrow box","options":{"type":"linear","variant":"flat"},"width":6,"height":8,"state":{"indeterminate":false,"value":0.5,"buffer":0,"wave":1,"time":0,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"line","x0":2,"y0":4,"x1":3,"y1":4,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}}
+    ]},
+    {"description":"linear glow too narrow for the label","options":{"type":"linear","variant":"glow","showLabel":true},"width":60,"height":14,"state":{"indeterminate":false,"value":0.5,"buffer":0,"wave":1,"time":0,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"line","x0":3.5,"y0":7,"x1":56.5,"y1":7,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"color","alpha":0.14}},
+      {"op":"line","x0":3.5,"y0":7,"x1":30,"y1":7,"lineWidth":11,"cap":"round","paint":{"type":"solid","color":"color","alpha":0.12}},
+      {"op":"line","x0":3.5,"y0":7,"x1":30,"y1":7,"lineWidth":7,"cap":"round","paint":{"type":"solid","color":"color","alpha":0.22}},
+      {"op":"line","x0":3.5,"y0":7,"x1":30,"y1":7,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"rect","x":19,"y":-4,"width":22,"height":22,"radius":0,"paint":{"type":"radial","cx":30,"cy":7,"r":11,"stops":[{"offset":0,"color":"color","alpha":0.55},{"offset":1,"color":"color","alpha":0}]}}
+    ]},
+    {"description":"linear flat while one segment leaves and the next enters","options":{"type":"linear","variant":"flat"},"width":240,"height":8,"state":{"indeterminate":true,"value":0,"buffer":0,"wave":1,"time":0,"indeterminateTime":1.155},"x":0,"y":0, "commands": [
+      {"op":"line","x0":8.849347127,"y0":4,"x1":187.059611334,"y1":4,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"line","x0":195.059611334,"y0":4,"x1":229.311186293,"y1":4,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"line","x0":237.311186293,"y0":4,"x1":238,"y1":4,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}}
+    ]},
+    {"description":"linear flat after a long time","options":{"type":"linear","variant":"flat"},"width":240,"height":8,"state":{"indeterminate":true,"value":0,"buffer":0,"wave":1,"time":0,"indeterminateTime":3600.4},"x":0,"y":0, "commands": [
+      {"op":"line","x0":2,"y0":4,"x1":140.048999671,"y1":4,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"line","x0":148.048999671,"y0":4,"x1":227.658736482,"y1":4,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"line","x0":235.658736482,"y0":4,"x1":238,"y1":4,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}}
+    ]}
+  ]
+}

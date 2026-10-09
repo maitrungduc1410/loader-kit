@@ -139,7 +139,7 @@ export const Blink = defineIndicator({
 console.log(JSON.stringify(Blink));
 ```
 
-`defineIndicator()` throws an `InvalidIndicatorError` that lists every problem. The 33 built-in indicators are written this way.
+`defineIndicator()` throws an `InvalidIndicatorError` that lists every problem. The 50 built-in indicators are written this way.
 
 ## Where to next
 

@@ -269,6 +269,31 @@ view.destroy(); // 停止帧循环，移除 observer 和它创建的 canvas
 - 在 JavaScript 加载完成之前，元素本身没有尺寸。请设置 `size` 或 CSS 尺寸，避免开始绘制时页面发生布局偏移。
 - 只在浏览器中创建 `LoaderKitView`，例如放在 `useEffect`、`onMounted` 或 `onMount` 里。
 
+## 进度指示器 {#progress}
+
+`LoaderKitProgress` 用来显示任务完成了多少：9 种 type、30 种样式，支持确定与不确定状态，value 平滑过渡。
+
+```html
+<script type="module">
+  import '@loader-kit/web/progress-element';
+</script>
+
+<loader-kit-progress type="linear" value="0.4"></loader-kit-progress>
+<loader-kit-progress type="circular" show-label size="64"></loader-kit-progress>
+```
+
+```ts
+import { LoaderKitProgressView } from '@loader-kit/web';
+
+const view = new LoaderKitProgressView(host, { type: 'linear', variant: 'wavy' });
+view.value = 0.4;    // 平滑过渡到 0.4；null 表示不确定状态
+view.destroy();
+```
+
+`@loader-kit/web/react`、`@loader-kit/web/vue` 和 `@loader-kit/web/svelte` 也导出了 `LoaderKitProgress`，props 与属性相同但使用 camelCase，children 用于放在中间或 border 内部的内容。和 `<loader-kit>` 一样，这个元素可以在服务端渲染，upgrade 之后开始绘制。
+
+所有 type、variant 和选项见[进度指示器](/zh/guide/progress)。
+
 ## 自定义 spec {#custom-specs}
 
 spec 可以用对象或 JSON 传入。编写方法见[自定义加载动画](/zh/spec/)。

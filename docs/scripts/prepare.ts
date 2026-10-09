@@ -48,6 +48,7 @@ const sections: [string, [string, string][]][] = [
       ['guide/indicators.md', 'Built-in indicators'],
       ['guide/customizing.md', 'Params, colors and size'],
       ['guide/playback.md', 'Playback'],
+      ['guide/progress.md', 'Progress indicators'],
       ['guide/faq.md', 'FAQ'],
     ],
   ],
@@ -94,7 +95,9 @@ const llms = `# LoaderKit
 
 > Loading indicators described as JSON data and rendered natively on Android (View, Jetpack Compose), iOS and macOS (UIKit, AppKit, SwiftUI), Windows (WinUI 3) and the web (React, Vue and Svelte components, a custom element, a canvas class). One spec format, one conformance suite, the same motion everywhere.
 
-LoaderKit ships 33 built-in indicators (BallPulse, BallSpinFadeLoader, LineScale, ...), some with params such as \`count\` and \`minScale\`. A custom indicator is a schema v1 spec: groups of elements placed in a unit box by a layout (single, stack, row, grid, ring), drawn with a shape (circle, rect, ring, triangle, line), and animated by keyframe tracks (scale, opacity, rotate, translate, strokeStart, strokeEnd) with cubic bezier easing and per-element stagger. Writing custom specs is experimental: a minor release may change the schema; built-in names and params are stable.
+LoaderKit ships 50 built-in indicators (BallPulse, BallSpinFadeLoader, LineScale, ...), some with params such as \`count\` and \`minScale\`. A custom indicator is a schema v1 spec: groups of elements placed in a unit box by a layout (single, stack, row, grid, ring), drawn with a shape (circle, rect, ring, triangle, line), and animated by keyframe tracks (scale, opacity, rotate, translate, strokeStart, strokeEnd) with cubic bezier easing and per-element stagger. Writing custom specs is experimental: a minor release may change the schema; built-in names and params are stable.
+
+LoaderKit also ships \`LoaderKitProgress\` (\`<loader-kit-progress>\` on the web): 30 progress designs across 9 types (linear, circular, pie, gauge, liquid, border, bars, grid, battery), each with a value in [0, 1] or indeterminate (null), gliding smoothly between values by default. Progress designs are built in, not JSON specs.
 
 Key facts for generating specs:
 - Every spec needs \`"schemaVersion": 1\`, a \`name\`, a positive \`duration\` in seconds, a \`layout\`, a \`shape\` and at least one track (or a non-empty \`parts\` list).

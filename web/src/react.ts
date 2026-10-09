@@ -4,11 +4,17 @@ import type { CSSProperties, ForwardedRef, HTMLAttributes } from 'react';
 import { loaderKitAttributes, sizeLength, toJson } from './attributes.ts';
 import type { LoaderKitProps } from './attributes.ts';
 import type { LoaderKitElementApi } from './element.ts';
+import { progressAttributes } from './progress-attributes.ts';
+import type { LoaderKitProgressProps } from './progress-attributes.ts';
+import type { LoaderKitProgressElementApi } from './progress-element.ts';
 import './element.ts';
+import './progress-element.ts';
 
 export type { LoaderKitProps } from './attributes.ts';
 export type { LoaderKitElementApi } from './element.ts';
-export type { BuiltinIndicatorName, IndicatorSpec, Params } from '@loader-kit/spec';
+export type { LoaderKitProgressProps } from './progress-attributes.ts';
+export type { LoaderKitProgressElementApi } from './progress-element.ts';
+export type { BuiltinIndicatorName, IndicatorSpec, Params, ProgressStrokeCap, ProgressType, ProgressVariant } from '@loader-kit/spec';
 
 export interface LoaderKitReactProps extends LoaderKitProps, Omit<HTMLAttributes<HTMLElement>, 'color' | 'onError'> {}
 
@@ -101,3 +107,83 @@ export const LoaderKit = forwardRef(function LoaderKit(
 });
 
 LoaderKit.displayName = 'LoaderKit';
+
+export interface LoaderKitProgressReactProps
+  extends LoaderKitProgressProps,
+    Omit<HTMLAttributes<HTMLElement>, 'color' | keyof LoaderKitProgressProps> {}
+
+/**
+ * A progress indicator. Renders a `<loader-kit-progress>` element, so it works with server-side
+ * rendering; children are centered over circular, pie and gauge, and framed by border. The ref is
+ * the element.
+ */
+export const LoaderKitProgress = forwardRef(function LoaderKitProgress(
+  props: LoaderKitProgressReactProps,
+  ref: ForwardedRef<LoaderKitProgressElementApi>,
+) {
+  const {
+    value,
+    buffer,
+    smooth,
+    type,
+    variant,
+    thickness,
+    trackGap,
+    segments,
+    showLabel,
+    stopIndicator,
+    strokeCap,
+    amplitude,
+    wavelength,
+    waveSpeed,
+    sweepAngle,
+    cornerRadius,
+    speed,
+    size,
+    color,
+    trackColor,
+    labelColor,
+    respectsReduceMotion,
+    accessibilityLabel,
+    className,
+    children,
+    ...rest
+  } = props;
+  const attributes = progressAttributes({
+    value,
+    buffer,
+    smooth,
+    type,
+    variant,
+    thickness,
+    trackGap,
+    segments,
+    showLabel,
+    stopIndicator,
+    strokeCap,
+    amplitude,
+    wavelength,
+    waveSpeed,
+    sweepAngle,
+    cornerRadius,
+    speed,
+    size,
+    color,
+    trackColor,
+    labelColor,
+    respectsReduceMotion,
+    accessibilityLabel,
+  });
+  return createElement(
+    'loader-kit-progress',
+    {
+      ...attributes,
+      ...rest,
+      ...(className === undefined ? {} : { [classAttribute]: className }),
+      ref,
+    },
+    children,
+  );
+});
+
+LoaderKitProgress.displayName = 'LoaderKitProgress';

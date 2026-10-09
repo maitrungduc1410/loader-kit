@@ -15,7 +15,7 @@ const released = version !== '0.0.0';
 const root = (path: string) => fileURLToPath(new URL(`../../${path}`, import.meta.url));
 
 const sections = {
-  guide: ['', 'getting-started', 'indicators', 'customizing', 'playback', 'faq'],
+  guide: ['', 'getting-started', 'indicators', 'customizing', 'playback', 'progress', 'faq'],
   platforms: ['web', 'android', 'apple', 'windows', 'react-native'],
   spec: ['', 'layouts', 'shapes', 'tracks', 'timing', 'params', 'using', 'reference'],
   tools: ['playground', 'json-schema', 'ai'],
@@ -79,6 +79,7 @@ const en: Labels = {
       'indicators': 'Built-in indicators',
       'customizing': 'Params, colors and size',
       'playback': 'Playback',
+      'progress': 'Progress indicators',
       'faq': 'FAQ',
     },
     platforms: {
@@ -113,6 +114,7 @@ const vi: Labels = {
       'indicators': 'Indicator có sẵn',
       'customizing': 'Params, màu và kích thước',
       'playback': 'Điều khiển animation',
+      'progress': 'Progress indicator',
       'faq': 'Câu hỏi thường gặp',
     },
     platforms: {
@@ -147,6 +149,7 @@ const zh: Labels = {
       'indicators': '内置加载动画',
       'customizing': '参数、颜色与尺寸',
       'playback': '播放控制',
+      'progress': '进度指示器',
       'faq': '常见问题',
     },
     platforms: {

@@ -1,11 +1,11 @@
 ---
-description: "Loading indicators described as JSON and rendered natively on Android, iOS, macOS, Windows and the web. 33 built-in indicators, or write your own spec."
+description: "Loading indicators described as JSON and rendered natively on Android, iOS, macOS, Windows and the web. 50 built-in indicators, or write your own spec."
 layout: home
 
 hero:
   name: LoaderKit
   text: Loading indicators as data, rendered natively
-  tagline: One JSON spec, the same motion on Android, iOS, macOS, Windows and the web. Pick one of 33 built-in indicators or describe your own.
+  tagline: One JSON spec, the same motion on Android, iOS, macOS, Windows and the web. Pick one of 50 built-in indicators or describe your own.
   actions:
     - theme: brand
       text: Get started
@@ -19,10 +19,15 @@ hero:
 
 features:
   - icon: 🎛️
-    title: 33 built-in indicators
+    title: 50 built-in indicators
     details: Pulses, spinners, bars, grids and orbits, with the same names on every platform. Some take params such as count and minScale.
     link: /guide/indicators
     linkText: See them all
+  - icon: 📊
+    title: 30 progress designs
+    details: Linear, circular, pie, gauge, liquid, border, bars, grid and battery, with a value or indeterminate, gliding smoothly to every new value.
+    link: /guide/progress
+    linkText: Progress indicators
   - icon: 📱
     title: Native on every platform
     details: Canvas on Android (View and Compose), Core Animation on iOS and macOS (UIKit, AppKit, SwiftUI), Composition on Windows, canvas on the web.
@@ -127,6 +132,6 @@ LoaderKitIndicator("BallSpinFadeLoader").color(.purple)
   <LoaderKitPreview indicator="Orbit" />
 </div>
 
-[See all 33 indicators](/guide/indicators), with params, colors and copyable code.
+[See all 50 indicators](/guide/indicators), with params, colors and copyable code.
 
 </div>

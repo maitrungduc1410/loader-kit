@@ -116,6 +116,29 @@ LoaderKitIndicator(
 
 Composable này không có `hidesWhenStopped`. Muốn ẩn thì bạn bỏ nó ra khỏi composition. Tên không tồn tại hoặc spec không hợp lệ sẽ không vẽ gì và ghi một warning vào log.
 
+## Progress indicator {#progress}
+
+`LoaderKitProgress` cho biết một tác vụ đã chạy được bao nhiêu: 30 mẫu thuộc 9 type, có value hoặc vô định, đổi value mượt.
+
+```xml
+<io.github.maitrungduc1410.loaderkit.LoaderKitProgressView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:progressType="linear"
+    app:progressVariant="wavy"
+    app:progressValue="0.4" />
+```
+
+```kotlin
+progress.value = 0.8        // chạy mượt tới 0.8; null là vô định
+progress.smooth = false     // vẽ đúng từng value ngay khi nhận
+
+// Compose
+LoaderKitProgress(value = progress, type = ProgressType.Gauge, showLabel = true, size = 64.dp)
+```
+
+Xem [Progress indicator](/vi/guide/progress) để biết mọi type, variant và option.
+
 ## Spec tùy chỉnh {#custom-specs}
 
 ::: warning Thử nghiệm
