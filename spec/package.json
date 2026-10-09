@@ -35,11 +35,22 @@
         "default": "./dist/cjs/index.js"
       }
     },
+    "./lite": {
+      "import": {
+        "types": "./dist/esm/lite.d.ts",
+        "default": "./dist/esm/lite.js"
+      },
+      "require": {
+        "types": "./dist/cjs/lite.d.ts",
+        "default": "./dist/cjs/lite.js"
+      }
+    },
     "./schema.json": "./schema.json",
     "./package.json": "./package.json"
   },
   "files": [
     "dist",
+    "lite",
     "src",
     "schema.json"
   ],

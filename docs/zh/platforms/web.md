@@ -14,7 +14,7 @@ description: "在 Web 上使用 @loader-kit/web：React、Vue、Svelte 组件，
 | `@loader-kit/web/element` | `<loader-kit>` 自定义元素，适用于纯 HTML 和其他框架 |
 | `@loader-kit/web` | `LoaderKitView` 类，以及自己准备和绘制 spec 的函数 |
 
-这些组件会渲染 `<loader-kit>` 元素并自动完成注册，不需要任何额外配置。所有入口在服务端渲染时导入都是安全的。
+这些组件会渲染 `<loader-kit>` 元素并自动完成注册，不需要任何额外配置。所有入口在服务端渲染时导入都是安全的。使用 ES 模块打包工具时，打包结果只包含你导入的组件对应的元素：只用 `LoaderKit` 的应用不会带上 `<loader-kit-progress>`，反之亦然。
 
 ## 安装 {#install}
 
@@ -271,7 +271,7 @@ view.destroy(); // 停止帧循环，移除 observer 和它创建的 canvas
 
 ## 进度指示器 {#progress}
 
-`LoaderKitProgress` 用来显示任务完成了多少：10 种 type、50 种样式，支持确定与不确定状态，value 平滑过渡。
+`LoaderKitProgress` 用来显示任务完成了多少：9 种 type、30 种样式，支持确定与不确定状态，value 平滑过渡。
 
 ```html
 <script type="module">

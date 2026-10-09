@@ -69,6 +69,17 @@ The commands (`line`, `arc`, `polyline`, `circle`, `rect`, `strokeRect`, `polygo
 `text`, `clip`) use solid, linear, radial or conic paints. `drawProgress()` in `@loader-kit/web`
 draws them on a canvas.
 
+## Lite entry
+
+`@loader-kit/spec/lite` has the same API without `BUILTIN_INDICATORS` and the progress drawing
+code (`ProgressAnimator`, `progressCommands()`, `progressGridOrder()`, `progressHasAmbientMotion()`,
+`progressLabel()` and the `ProgressDrawing` type). It is for hosts whose native views do the drawing, such as React Native, where
+the bundler keeps every module it reaches. `BUILTIN_INDICATOR_NAMES` is still there.
+
+```ts
+import { BUILTIN_INDICATOR_NAMES, resolveProgress, validate } from '@loader-kit/spec/lite';
+```
+
 ## JSON Schema
 
 Spec files can name the schema so editors offer completion and checks:

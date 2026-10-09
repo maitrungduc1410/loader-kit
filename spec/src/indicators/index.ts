@@ -1,4 +1,5 @@
 import type { IndicatorSpec } from '../types.ts';
+import type { BuiltinIndicatorName } from './names.ts';
 import Atom from './Atom.ts';
 import AudioEqualizer from './AudioEqualizer.ts';
 import BallBeat from './BallBeat.ts';
@@ -101,8 +102,7 @@ export const BUILTIN_INDICATORS = {
   TriangleOrbit,
   TriangleSkewSpin,
   TripleArcSpin,
-} as const satisfies Record<string, IndicatorSpec>;
+} as const satisfies Record<BuiltinIndicatorName, IndicatorSpec>;
 
-export type BuiltinIndicatorName = keyof typeof BUILTIN_INDICATORS;
-
-export const BUILTIN_INDICATOR_NAMES = Object.keys(BUILTIN_INDICATORS) as BuiltinIndicatorName[];
+export { BUILTIN_INDICATOR_NAMES } from './names.ts';
+export type { BuiltinIndicatorName } from './names.ts';

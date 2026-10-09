@@ -14,7 +14,7 @@ description: "Use LoaderKit on the web with @loader-kit/web: React, Vue and Svel
 | `@loader-kit/web/element` | the `<loader-kit>` custom element, for plain HTML and other frameworks |
 | `@loader-kit/web` | the `LoaderKitView` class, plus functions to prepare and draw a spec yourself |
 
-The components render the `<loader-kit>` element and register it for you, so there is nothing else to set up. All entry points are safe to import during server-side rendering.
+The components render the `<loader-kit>` element and register it for you, so there is nothing else to set up. All entry points are safe to import during server-side rendering. With an ES module bundler, your bundle only gets the elements of the components you import: an app that uses `LoaderKit` alone leaves `<loader-kit-progress>` out, and the other way round.
 
 ## Install
 
@@ -271,7 +271,7 @@ The view sizes its canvas from the host, so size the host with CSS.
 
 ## Progress indicators {#progress}
 
-`LoaderKitProgress` shows how much of a task is done: 50 designs across 10 types, determinate or indeterminate, with smooth value changes.
+`LoaderKitProgress` shows how much of a task is done: 30 designs across 9 types, determinate or indeterminate, with smooth value changes.
 
 ```html
 <script type="module">

@@ -14,7 +14,7 @@ description: "Dùng LoaderKit trên web với @loader-kit/web: component cho Rea
 | `@loader-kit/web/element` | custom element `<loader-kit>`, cho HTML thuần và các framework khác |
 | `@loader-kit/web` | class `LoaderKitView`, cùng các hàm để bạn tự prepare và vẽ một spec |
 
-Các component render element `<loader-kit>` và tự đăng ký nó, nên bạn không cần setup gì thêm. Mọi entry point đều import an toàn trong lúc server-side rendering.
+Các component render element `<loader-kit>` và tự đăng ký nó, nên bạn không cần setup gì thêm. Mọi entry point đều import an toàn trong lúc server-side rendering. Với bundler dùng ES module, bundle chỉ chứa element của những component bạn import: app chỉ dùng `LoaderKit` sẽ không kèm `<loader-kit-progress>`, và ngược lại.
 
 ## Cài đặt {#install}
 
@@ -271,7 +271,7 @@ View lấy kích thước canvas theo host, nên bạn hãy đặt kích thướ
 
 ## Progress indicator {#progress}
 
-`LoaderKitProgress` cho biết một tác vụ đã chạy được bao nhiêu: 50 mẫu thuộc 10 type, có value hoặc vô định, đổi value mượt.
+`LoaderKitProgress` cho biết một tác vụ đã chạy được bao nhiêu: 30 mẫu thuộc 9 type, có value hoặc vô định, đổi value mượt.
 
 ```html
 <script type="module">
