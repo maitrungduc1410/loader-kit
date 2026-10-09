@@ -1,10 +1,19 @@
 name: CI
 
 on:
+  # Changes to the docs site and Markdown files only are built by the Docs workflow.
   push:
     branches: [master]
+    paths-ignore:
+      - 'docs/**'
+      - '**/*.md'
+      - '.github/workflows/docs.yml'
   pull_request:
     branches: [master]
+    paths-ignore:
+      - 'docs/**'
+      - '**/*.md'
+      - '.github/workflows/docs.yml'
   # The release workflow runs CI first and publishes only when every job passed.
   workflow_call:
   # Pushes made with GITHUB_TOKEN do not trigger pull_request runs, so the release workflow

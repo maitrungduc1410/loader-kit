@@ -1,6 +1,7 @@
 name: Release
 
-# Runs on every push to master, after CI passed. Every step can be rerun safely:
+# Runs on every push to master that changes more than the docs site and Markdown files (a new
+# changeset still counts), after CI passed. Every step can be rerun safely:
 #   1. Pending changesets: open or update the "chore: release X.Y.Z" pull request (branch
 #      release/X.Y.Z) that bumps every package to the same version and writes the changelogs.
 #   2. Otherwise publish the current version wherever it is missing:
@@ -12,6 +13,13 @@ name: Release
 on:
   push:
     branches: [master]
+    # Later patterns win, so a changeset brings the run back.
+    paths:
+      - '**'
+      - '!docs/**'
+      - '!**/*.md'
+      - '!.github/workflows/docs.yml'
+      - '.changeset/**'
   workflow_dispatch:
 
 permissions: {}
