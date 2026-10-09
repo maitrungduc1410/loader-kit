@@ -6,6 +6,11 @@ description: "LoaderKitProgress: 30 progress designs (linear, circular, pie, gau
 
 `LoaderKitProgress` shows how much of a task is done. It has 9 types and 30 designs, and each one runs with a value or, when the value is unknown, indeterminate. When the value changes, the indicator glides to it. Click a design to open its panel: change the value, thickness, size and color, then copy the code for your platform.
 
+::: tip Built-in or progress?
+- **No percentage, ever** (waiting for a request, pull to refresh): use a [built-in indicator](/guide/indicators). There are 50 styles to pick from.
+- **The task has progress**, even if it is unknown at first (a download, an upload, processing a file): use a progress indicator from this page. Start it indeterminate with `value` null (`nil` in Swift), then set a value once you know it. It is the same component, so nothing else changes.
+:::
+
 <ProgressGallery />
 
 Progress indicators are not JSON specs. Every type is drawn from the same geometry on every platform: a reference implementation turns the options and the animation state into draw commands, and each platform runs the same test vectors against its own port. A design looks and moves the same on the web, Android, iOS, macOS and Windows.

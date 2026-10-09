@@ -96,7 +96,7 @@ LoaderKitIndicator("BallPulse")
 `cycleProgress` draws one still frame at a point of the animation cycle, from 0 to 1. Use it for screenshot tests, previews and design reviews. Set it back to null (`nil` in Swift) to resume the clock from where it was.
 
 ::: warning It is not a progress bar
-`cycleProgress` does not show how much of a task is done. 0.5 is the middle of one loop of the animation. An indicator does not fill up as the value goes from 0 to 1.
+`cycleProgress` does not show how much of a task is done. 0.5 is the middle of one loop of the animation. An indicator does not fill up as the value goes from 0 to 1. To show progress, use a [progress indicator](/guide/progress).
 :::
 
 The engine skips whole cycles until every element has started. So in a frozen frame, no element is still waiting for its [stagger](/spec/timing#stagger) delay.

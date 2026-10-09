@@ -96,7 +96,7 @@ LoaderKitIndicator("BallPulse")
 `cycleProgress` vẽ một frame tĩnh tại một điểm trong chu kỳ animation, từ 0 đến 1. Dùng nó cho screenshot test, preview và review thiết kế. Đặt lại về null (`nil` trong Swift) thì đồng hồ chạy tiếp từ chỗ cũ.
 
 ::: warning Đây không phải progress bar
-`cycleProgress` không thể hiện công việc đã xong bao nhiêu. 0.5 là điểm giữa của một vòng animation. Indicator không "đầy dần" khi giá trị đi từ 0 lên 1.
+`cycleProgress` không thể hiện công việc đã xong bao nhiêu. 0.5 là điểm giữa của một vòng animation. Indicator không "đầy dần" khi giá trị đi từ 0 lên 1. Muốn thể hiện tiến độ, hãy dùng [progress indicator](/vi/guide/progress).
 :::
 
 Engine sẽ bỏ qua các chu kỳ trọn vẹn cho đến khi mọi phần tử đều đã bắt đầu. Vì vậy trong một frame bị freeze, không có phần tử nào còn đang chờ hết thời gian trễ [stagger](/vi/spec/timing#stagger).

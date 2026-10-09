@@ -68,6 +68,11 @@ dotnet add package LoaderKit.WinUI
 
 ## Indicator đầu tiên {#your-first-indicator}
 
+::: tip Indicator có sẵn hay progress?
+- **Không bao giờ có %** (chờ request, pull to refresh): dùng [indicator có sẵn](/vi/guide/indicators), như ví dụ bên dưới. Có 50 kiểu để chọn.
+- **Tác vụ có tiến độ**, kể cả khi lúc đầu chưa biết (download, upload, xử lý file): dùng [progress indicator](/vi/guide/progress). Bắt đầu ở chế độ vô định với `value` là null (`nil` trong Swift), rồi đặt value khi đã biết. Vẫn là một component, nên không phải đổi gì khác.
+:::
+
 Mỗi đoạn code dưới đây hiển thị `BallSpinFadeLoader` màu tím, nhanh gấp 1.5 lần bình thường.
 
 ::: code-group
@@ -234,5 +239,6 @@ Xem [Điều khiển animation](/vi/guide/playback) để chỉnh tốc độ, f
 ## Tiếp theo {#next-steps}
 
 - [Indicator có sẵn](/vi/guide/indicators): chọn một indicator.
+- [Progress indicator](/vi/guide/progress): cho biết tác vụ đã chạy được bao nhiêu.
 - [Tùy chỉnh](/vi/guide/customizing): params, màu và kích thước.
 - Các trang theo nền tảng: [Web](/vi/platforms/web), [Android](/vi/platforms/android), [iOS và macOS](/vi/platforms/apple), [Windows](/vi/platforms/windows).

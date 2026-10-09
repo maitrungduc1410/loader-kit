@@ -64,6 +64,11 @@ features:
 
 <HomeShortcuts />
 
+::: tip Built-in or progress?
+- **No percentage, ever** (waiting for a request, pull to refresh): use a [built-in indicator](/guide/indicators). There are 50 styles to pick from.
+- **The task has progress**, even if it is unknown at first (a download, an upload, processing a file): use a [progress indicator](/guide/progress). Start it indeterminate with `value` null (`nil` in Swift), then set a value once you know it. It is the same component, so nothing else changes.
+:::
+
 ## Install
 
 ::: code-group

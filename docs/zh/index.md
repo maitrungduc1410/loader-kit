@@ -64,6 +64,11 @@ features:
 
 <HomeShortcuts />
 
+::: tip 内置加载动画还是进度指示器？
+- **始终没有百分比**（等待请求、下拉刷新）：用[内置加载动画](/zh/guide/indicators)，有 50 种样式可选。
+- **任务有进度**，哪怕一开始还不知道（下载、上传、处理文件）：用[进度指示器](/zh/guide/progress)。先以不确定状态开始（`value` 为 null，Swift 中为 `nil`），知道进度后再设置 value。始终是同一个组件，其他代码都不用改。
+:::
+
 ## 安装 {#install}
 
 ::: code-group

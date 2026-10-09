@@ -96,7 +96,7 @@ LoaderKitIndicator("BallPulse")
 `cycleProgress` 在动画周期的某个位置（0 到 1）画出一帧静止画面，适合截图测试、预览和设计评审。把它设回 null（Swift 中为 `nil`），时钟会从原来的位置继续走。
 
 ::: warning 它不是进度条
-`cycleProgress` 并不表示任务完成了多少。0.5 只是动画一轮的中间点。值从 0 变到 1 时，加载动画并不会被“填满”。
+`cycleProgress` 并不表示任务完成了多少。0.5 只是动画一轮的中间点。值从 0 变到 1 时，加载动画并不会被“填满”。要显示进度，请使用[进度指示器](/zh/guide/progress)。
 :::
 
 引擎会先跳过若干个完整周期，直到所有元素都已启动。所以在定格的画面里，不会有元素还在等待它的 [stagger](/zh/spec/timing#stagger) 延迟。

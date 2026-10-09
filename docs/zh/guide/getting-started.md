@@ -68,6 +68,11 @@ dotnet add package LoaderKit.WinUI
 
 ## 第一个加载动画 {#your-first-indicator}
 
+::: tip 内置加载动画还是进度指示器？
+- **始终没有百分比**（等待请求、下拉刷新）：用[内置加载动画](/zh/guide/indicators)，就像下面的例子。有 50 种样式可选。
+- **任务有进度**，哪怕一开始还不知道（下载、上传、处理文件）：用[进度指示器](/zh/guide/progress)。先以不确定状态开始（`value` 为 null，Swift 中为 `nil`），知道进度后再设置 value。始终是同一个组件，其他代码都不用改。
+:::
+
 下面每段代码都会显示一个紫色的 `BallSpinFadeLoader`，速度是默认的 1.5 倍。
 
 ::: code-group
@@ -234,5 +239,6 @@ indicator.IsAnimating = false;
 ## 下一步 {#next-steps}
 
 - [内置加载动画](/zh/guide/indicators)：挑一个加载动画。
+- [进度指示器](/zh/guide/progress)：显示任务完成了多少。
 - [自定义](/zh/guide/customizing)：参数、颜色和尺寸。
 - 各平台页面：[Web](/zh/platforms/web)、[Android](/zh/platforms/android)、[iOS 与 macOS](/zh/platforms/apple)、[Windows](/zh/platforms/windows)。

@@ -6,6 +6,11 @@ description: "LoaderKitProgress：30 种进度样式（linear、circular、pie�
 
 `LoaderKitProgress` 用来显示任务完成了多少。它有 9 种 type、30 种样式，每种样式都可以显示具体的 value，也可以在 value 未知时以不确定状态运行。value 变化时，指示器会平滑过渡到新的 value。点击任意一种样式即可打开面板：调整 value、粗细、尺寸和颜色，然后复制对应平台的代码。
 
+::: tip 内置加载动画还是进度指示器？
+- **始终没有百分比**（等待请求、下拉刷新）：用[内置加载动画](/zh/guide/indicators)，有 50 种样式可选。
+- **任务有进度**，哪怕一开始还不知道（下载、上传、处理文件）：用本页的进度指示器。先以不确定状态开始（`value` 为 null，Swift 中为 `nil`），知道进度后再设置 value。始终是同一个组件，其他代码都不用改。
+:::
+
 <ProgressGallery />
 
 进度指示器不使用 JSON spec。每种 type 在所有平台上都由同一套几何逻辑绘制：一份参考实现把选项和动画状态转换成绘制命令，每个平台的移植版本都运行同一套测试向量。因此同一种样式在 Web、Android、iOS、macOS 和 Windows 上的外观和动效都一致。

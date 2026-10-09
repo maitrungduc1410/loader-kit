@@ -43,6 +43,12 @@ description: "LoaderKit 常见问题：性能、无障碍、与 GIF、Lottie 和
 
 ## 对比 {#comparison}
 
+### 用内置加载动画还是进度指示器？ {#built-in-indicator-or-progress-indicator}
+
+内置加载动画只表示“正在加载”，它没有 value。如果始终没有百分比，比如等待请求或下拉刷新，就用它。
+
+[进度指示器](/zh/guide/progress)显示任务完成了多少，在进度未知时以不确定状态运行。下载、上传和处理文件时用它：先把 `value` 设为 null（Swift 中为 `nil`），知道进度后再设置 value，不用更换组件。
+
 ### 为什么不用 GIF 或动图？ {#why-not-a-gif-or-an-animated-image}
 
 GIF 的尺寸、颜色和帧率都是固定的，在高分屏上还可能发虚。LoaderKit 的加载动画以矢量图形绘制，按视图尺寸渲染，颜色任选，帧率跟随屏幕。运行时还能调整速度或定格某一帧。

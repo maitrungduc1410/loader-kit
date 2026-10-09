@@ -6,6 +6,11 @@ description: "LoaderKitProgress: 30 mẫu progress (linear, circular, pie, gauge
 
 `LoaderKitProgress` cho biết một tác vụ đã chạy được bao nhiêu. Có 9 type và 30 mẫu, mẫu nào cũng chạy được khi có value, hoặc ở chế độ vô định khi chưa biết value. Khi value thay đổi, indicator chạy mượt tới value mới. Bấm vào một mẫu để mở panel của nó: đổi value, độ dày, kích thước và màu, rồi copy code cho nền tảng của bạn.
 
+::: tip Indicator có sẵn hay progress?
+- **Không bao giờ có %** (chờ request, pull to refresh): dùng [indicator có sẵn](/vi/guide/indicators), có 50 kiểu để chọn.
+- **Tác vụ có tiến độ**, kể cả khi lúc đầu chưa biết (download, upload, xử lý file): dùng một progress indicator trên trang này. Bắt đầu ở chế độ vô định với `value` là null (`nil` trong Swift), rồi đặt value khi đã biết. Vẫn là một component, nên không phải đổi gì khác.
+:::
+
 <ProgressGallery />
 
 Progress indicator không dùng spec JSON. Mỗi type được vẽ từ cùng một bộ hình học trên mọi nền tảng: một bản cài đặt tham chiếu biến option và trạng thái animation thành các lệnh vẽ, và mỗi nền tảng chạy cùng bộ test vector trên bản port của mình. Nhờ vậy một mẫu trông và chuyển động giống nhau trên web, Android, iOS, macOS và Windows.

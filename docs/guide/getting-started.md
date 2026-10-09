@@ -68,6 +68,11 @@ dotnet add package LoaderKit.WinUI
 
 ## Your first indicator
 
+::: tip Built-in or progress?
+- **No percentage, ever** (waiting for a request, pull to refresh): use a [built-in indicator](/guide/indicators), as below. There are 50 styles to pick from.
+- **The task has progress**, even if it is unknown at first (a download, an upload, processing a file): use a [progress indicator](/guide/progress). Start it indeterminate with `value` null (`nil` in Swift), then set a value once you know it. It is the same component, so nothing else changes.
+:::
+
 Each snippet shows `BallSpinFadeLoader` in purple, 1.5 times faster than normal.
 
 ::: code-group
@@ -234,5 +239,6 @@ See [Playback](/guide/playback) for speed, freezing a frame and reduced motion.
 ## Next steps
 
 - [Built-in indicators](/guide/indicators): pick an indicator.
+- [Progress indicators](/guide/progress): show how much of a task is done.
 - [Customizing](/guide/customizing): params, colors and size.
 - Platform pages: [Web](/platforms/web), [Android](/platforms/android), [iOS and macOS](/platforms/apple), [Windows](/platforms/windows).

@@ -6,6 +6,11 @@ description: "Browse the 50 built-in LoaderKit indicators live, tune their param
 
 LoaderKit ships 50 indicators. They have the same names, params and motion on every platform. Click an indicator to open its panel: change params, color, speed and size, then copy the code for your platform.
 
+::: tip Built-in or progress?
+- **No percentage, ever** (waiting for a request, pull to refresh): use a built-in indicator from this page.
+- **The task has progress**, even if it is unknown at first (a download, an upload, processing a file): use a [progress indicator](/guide/progress). Start it indeterminate with `value` null (`nil` in Swift), then set a value once you know it. It is the same component, so nothing else changes.
+:::
+
 <IndicatorGallery />
 
 ## Names and params

@@ -43,6 +43,12 @@ Yes, by default on every platform. See [Reduced motion](/guide/playback#reduced-
 
 ## Comparison
 
+### Built-in indicator or progress indicator?
+
+A built-in indicator only says that something is loading: it has no value. Use one when there is never a percentage, such as waiting for a request or pull to refresh.
+
+A [progress indicator](/guide/progress) shows how much of a task is done, and runs indeterminate while that is unknown. Use one for downloads, uploads and file processing: start with `value` null (`nil` in Swift) and set a value once you know it, without swapping components.
+
 ### Why not a GIF or an animated image?
 
 A GIF has a fixed size, a fixed color and a fixed frame rate, and it can look blurry on high density screens. A LoaderKit indicator is drawn as vector shapes at the size of the view, in any color, at the display's frame rate. You can change its speed or freeze a frame at runtime.

@@ -6,6 +6,11 @@ description: "Xem trực tiếp 50 indicator có sẵn của LoaderKit, chỉnh 
 
 LoaderKit có sẵn 50 indicator. Trên mọi nền tảng chúng có cùng tên, cùng params và cùng chuyển động. Bấm vào một indicator để mở panel của nó: đổi params, màu, tốc độ và kích thước, rồi copy code cho nền tảng của bạn.
 
+::: tip Indicator có sẵn hay progress?
+- **Không bao giờ có %** (chờ request, pull to refresh): dùng một indicator có sẵn trên trang này.
+- **Tác vụ có tiến độ**, kể cả khi lúc đầu chưa biết (download, upload, xử lý file): dùng [progress indicator](/vi/guide/progress). Bắt đầu ở chế độ vô định với `value` là null (`nil` trong Swift), rồi đặt value khi đã biết. Vẫn là một component, nên không phải đổi gì khác.
+:::
+
 <IndicatorGallery />
 
 ## Tên và params {#names-and-params}

@@ -43,6 +43,12 @@ Có, mặc định trên mọi nền tảng. Xem [Reduce motion](/vi/guide/playb
 
 ## So sánh {#comparison}
 
+### Dùng indicator có sẵn hay progress indicator? {#built-in-indicator-or-progress-indicator}
+
+Indicator có sẵn chỉ báo là đang tải: nó không có value. Hãy dùng nó khi không bao giờ có %, ví dụ chờ một request hoặc pull to refresh.
+
+[Progress indicator](/vi/guide/progress) cho biết tác vụ đã xong bao nhiêu, và chạy ở chế độ vô định khi chưa biết. Hãy dùng nó cho download, upload và xử lý file: bắt đầu với `value` là null (`nil` trong Swift) rồi đặt value khi đã biết, không phải đổi component.
+
 ### Sao không dùng GIF hay ảnh động? {#why-not-a-gif-or-an-animated-image}
 
 GIF cố định kích thước, màu và frame rate, lại có thể bị mờ trên màn hình mật độ điểm ảnh cao. Indicator của LoaderKit được vẽ bằng hình vector theo đúng kích thước view, với màu bất kỳ, theo frame rate của màn hình. Bạn còn có thể đổi tốc độ hoặc freeze một frame ngay lúc runtime.

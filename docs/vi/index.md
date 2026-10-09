@@ -64,6 +64,11 @@ features:
 
 <HomeShortcuts />
 
+::: tip Indicator có sẵn hay progress?
+- **Không bao giờ có %** (chờ request, pull to refresh): dùng [indicator có sẵn](/vi/guide/indicators), có 50 kiểu để chọn.
+- **Tác vụ có tiến độ**, kể cả khi lúc đầu chưa biết (download, upload, xử lý file): dùng [progress indicator](/vi/guide/progress). Bắt đầu ở chế độ vô định với `value` là null (`nil` trong Swift), rồi đặt value khi đã biết. Vẫn là một component, nên không phải đổi gì khác.
+:::
+
 ## Cài đặt {#install}
 
 ::: code-group
