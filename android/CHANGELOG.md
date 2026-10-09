@@ -1,5 +1,11 @@
 # @loader-kit/android
 
+## 1.0.0-rc.2
+
+### Minor Changes
+
+- 64e727d: 20 new progress designs, for 50 in total. New variants: linear `gradient`, `center`, `chevrons` and `ticks`; circular `glow`, `split`, `orbit` and `dual`; pie `segmented`; gauge `needle`, `gradient` and `dots`; liquid `heart`; border `glow` and `segmented`; bars `dots` and `arcs`; grid `dots`; battery `segmented`. New type: `hourglass`. Border `glow` adds 4 to the content inset to make room for its glow.
+
 ## 1.0.0-rc.1
 
 ### Minor Changes
