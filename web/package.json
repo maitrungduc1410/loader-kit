@@ -1,6 +1,6 @@
 {
   "name": "@loader-kit/web",
-  "version": "1.0.0-rc.1",
+  "version": "1.0.0-rc.2",
   "description": "LoaderKit loading and progress indicators for the web: a canvas renderer, <loader-kit> and <loader-kit-progress> custom elements, and React, Vue and Svelte components",
   "license": "MIT",
   "author": "Duc Trung Mai <maitrungduc1410@gmail.com> (https://github.com/maitrungduc1410)",
@@ -109,7 +109,7 @@
     "typecheck": "tsc -p tsconfig.json"
   },
   "dependencies": {
-    "@loader-kit/spec": "1.0.0-rc.1"
+    "@loader-kit/spec": "1.0.0-rc.2"
   },
   "peerDependencies": {
     "react": ">=17",

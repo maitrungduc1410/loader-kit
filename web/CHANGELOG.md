@@ -1,5 +1,18 @@
 # @loader-kit/web
 
+## 1.0.0-rc.2
+
+### Minor Changes
+
+- 64e727d: 20 new progress designs, for 50 in total. New variants: linear `gradient`, `center`, `chevrons` and `ticks`; circular `glow`, `split`, `orbit` and `dual`; pie `segmented`; gauge `needle`, `gradient` and `dots`; liquid `heart`; border `glow` and `segmented`; bars `dots` and `arcs`; grid `dots`; battery `segmented`. New type: `hourglass`. Border `glow` adds 4 to the content inset to make room for its glow.
+
+### Patch Changes
+
+- accecc2: `@loader-kit/spec/lite`: the spec API without the built-in indicator specs and the progress drawing code, for hosts whose native views draw, such as React Native. The React and Vue components of `@loader-kit/web` now keep each component in its own module, so a bundle only gets the custom elements of the components it imports.
+- Updated dependencies [accecc2]
+- Updated dependencies [64e727d]
+  - @loader-kit/spec@1.0.0-rc.2
+
 ## 1.0.0-rc.1
 
 ### Minor Changes

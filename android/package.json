@@ -1,6 +1,6 @@
 {
   "name": "@loader-kit/android",
-  "version": "1.0.0-rc.1",
+  "version": "1.0.0-rc.2",
   "private": true,
   "description": "Version holder for the Android artifacts (Maven Central)"
 }
