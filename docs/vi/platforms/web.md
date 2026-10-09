@@ -271,7 +271,7 @@ View lấy kích thước canvas theo host, nên bạn hãy đặt kích thướ
 
 ## Progress indicator {#progress}
 
-`LoaderKitProgress` cho biết một tác vụ đã chạy được bao nhiêu: 30 mẫu thuộc 9 type, có value hoặc vô định, đổi value mượt.
+`LoaderKitProgress` cho biết một tác vụ đã chạy được bao nhiêu: 50 mẫu thuộc 10 type, có value hoặc vô định, đổi value mượt.
 
 ```html
 <script type="module">

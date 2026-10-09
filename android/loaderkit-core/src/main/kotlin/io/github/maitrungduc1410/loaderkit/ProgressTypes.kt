@@ -10,7 +10,8 @@ public enum class ProgressType(public val key: String) {
     Border("border"),
     Bars("bars"),
     Grid("grid"),
-    Battery("battery");
+    Battery("battery"),
+    Hourglass("hourglass");
 
     /** The variants this type accepts; the first one is its default. */
     public val variants: List<ProgressVariant>
@@ -18,13 +19,24 @@ public enum class ProgressType(public val key: String) {
             Linear -> listOf(
                 ProgressVariant.Flat, ProgressVariant.Wavy, ProgressVariant.Segmented, ProgressVariant.Striped,
                 ProgressVariant.Shimmer, ProgressVariant.Glow, ProgressVariant.Dots, ProgressVariant.Steps,
+                ProgressVariant.Gradient, ProgressVariant.Center, ProgressVariant.Chevrons, ProgressVariant.Ticks,
             )
             Circular -> listOf(
                 ProgressVariant.Flat, ProgressVariant.Wavy, ProgressVariant.Segmented,
                 ProgressVariant.Gradient, ProgressVariant.Ticks, ProgressVariant.Dots,
+                ProgressVariant.Glow, ProgressVariant.Split, ProgressVariant.Orbit, ProgressVariant.Dual,
             )
-            Gauge -> listOf(ProgressVariant.Flat, ProgressVariant.Segmented)
-            else -> listOf(ProgressVariant.Flat)
+            Pie -> listOf(ProgressVariant.Flat, ProgressVariant.Segmented)
+            Gauge -> listOf(
+                ProgressVariant.Flat, ProgressVariant.Segmented, ProgressVariant.Needle,
+                ProgressVariant.Gradient, ProgressVariant.Dots,
+            )
+            Liquid -> listOf(ProgressVariant.Flat, ProgressVariant.Heart)
+            Border -> listOf(ProgressVariant.Flat, ProgressVariant.Glow, ProgressVariant.Segmented)
+            Bars -> listOf(ProgressVariant.Flat, ProgressVariant.Dots, ProgressVariant.Arcs)
+            Grid -> listOf(ProgressVariant.Flat, ProgressVariant.Dots)
+            Battery -> listOf(ProgressVariant.Flat, ProgressVariant.Segmented)
+            Hourglass -> listOf(ProgressVariant.Flat)
         }
 
     public companion object {
@@ -44,7 +56,15 @@ public enum class ProgressVariant(public val key: String) {
     Dots("dots"),
     Steps("steps"),
     Gradient("gradient"),
-    Ticks("ticks");
+    Ticks("ticks"),
+    Center("center"),
+    Chevrons("chevrons"),
+    Split("split"),
+    Orbit("orbit"),
+    Dual("dual"),
+    Needle("needle"),
+    Arcs("arcs"),
+    Heart("heart");
 
     public companion object {
         /** The variant named `key`, or null. */

@@ -5,7 +5,7 @@ layout: home
 hero:
   name: LoaderKit
   text: Loading indicators as data, rendered natively
-  tagline: One JSON spec, the same motion on Android, iOS, macOS, Windows and the web. Pick one of 50 built-in indicators or 30 progress designs, or describe your own.
+  tagline: One JSON spec, the same motion on Android, iOS, macOS, Windows and the web. Pick one of 50 built-in indicators or 50 progress designs, or describe your own.
   actions:
     - theme: brand
       text: Built-in indicators
@@ -27,8 +27,8 @@ features:
     link: /guide/indicators
     linkText: See them all
   - icon: 📊
-    title: 30 progress designs
-    details: Linear, circular, pie, gauge, liquid, border, bars, grid and battery, with a value or indeterminate, gliding smoothly to every new value.
+    title: 50 progress designs
+    details: Linear, circular, pie, gauge, liquid, border, bars, grid, battery and hourglass, with a value or indeterminate, gliding smoothly to every new value.
     link: /guide/progress
     linkText: Progress indicators
   - icon: 📱

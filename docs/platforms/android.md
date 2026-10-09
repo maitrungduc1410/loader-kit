@@ -118,7 +118,7 @@ The composable has no `hidesWhenStopped`. To hide it, leave it out of the compos
 
 ## Progress indicators {#progress}
 
-`LoaderKitProgress` shows how much of a task is done: 30 designs across 9 types, determinate or indeterminate, with smooth value changes.
+`LoaderKitProgress` shows how much of a task is done: 50 designs across 10 types, determinate or indeterminate, with smooth value changes.
 
 ```xml
 <io.github.maitrungduc1410.loaderkit.LoaderKitProgressView

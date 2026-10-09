@@ -124,7 +124,7 @@ The composable is 40.dp square unless `modifier` sizes it.
 ## Progress
 
 `LoaderKitProgressView` and the `LoaderKitProgress` composable show how much of a task is done:
-30 designs across 9 types, with a value from 0 to 1 or, with null, indeterminate. With `smooth`
+50 designs across 10 types, with a value from 0 to 1 or, with null, indeterminate. With `smooth`
 (on by default) they glide to every new value. Full guide:
 [maitrungduc1410.github.io/loader-kit/guide/progress](https://maitrungduc1410.github.io/loader-kit/guide/progress)
 

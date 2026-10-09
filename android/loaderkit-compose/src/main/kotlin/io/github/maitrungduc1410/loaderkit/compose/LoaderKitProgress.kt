@@ -64,7 +64,7 @@ private fun themeColor(@AttrRes attr: Int, fallback: Color): Color {
 }
 
 /**
- * A progress indicator: linear, circular, pie, gauge, liquid, border, bars, grid or battery.
+ * A progress indicator: linear, circular, pie, gauge, liquid, border, bars, grid, battery or hourglass.
  *
  * Linear fills the width it is offered; border takes the size of [content] plus its stroke; the
  * other types are [size] wide, or larger to fit [content], unless [modifier] sizes them. [content]

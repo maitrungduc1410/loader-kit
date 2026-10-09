@@ -61,6 +61,8 @@ const RESOLVE_CASES: { description: string; options: ProgressOptions }[] = [
   },
   { description: 'Linear label outside sets a minimum height', options: { type: 'linear', variant: 'glow', showLabel: true } },
   { description: 'Border inset', options: { type: 'border', thickness: 4, trackGap: 6 } },
+  { description: 'Border glow inset makes room for the glow', options: { type: 'border', variant: 'glow', thickness: 4, trackGap: 6 } },
+  { description: 'Linear chevrons and ticks grow with the thickness', options: { type: 'linear', variant: 'ticks', thickness: 8 } },
 ];
 
 function resolveFile(): ProgressVectorFile {
@@ -124,6 +126,8 @@ function geometryCases(type: ProgressType): GeometryCase[] {
     add('linear segmented with 5 segments and no gap', { type, variant: 'segmented', segments: 5, trackGap: 0 }, state(0.5));
     add('linear steps with 6 steps', { type, variant: 'steps', segments: 6 }, state(0.5));
     add('linear dots with 1 dot', { type, variant: 'dots', segments: 1 }, state(0.5));
+    add('linear chevrons with 3 chevrons', { type, variant: 'chevrons', segments: 3, thickness: 5 }, state(0.5));
+    add('linear ticks with 1 tick', { type, variant: 'ticks', segments: 1 }, state(1));
     add('linear flat in a narrow box', { type, variant: 'flat' }, state(0.5), [6, 8]);
     add('linear glow too narrow for the label', { type, variant: 'glow', showLabel: true }, state(0.5), [60, 14]);
     add('linear flat while one segment leaves and the next enters', { type, variant: 'flat' }, state(null, { indeterminateTime: 1.155 }));
@@ -135,22 +139,51 @@ function geometryCases(type: ProgressType): GeometryCase[] {
     add('circular flat without a track gap at 1', { type, variant: 'flat', trackGap: 0 }, state(1));
     add('circular segmented with 7 segments', { type, variant: 'segmented', segments: 7, thickness: 6 }, state(0.6));
     add('circular large label', { type, variant: 'flat', showLabel: true }, state(0.5), [240, 240]);
+    add('circular dual too small to draw', { type, variant: 'dual' }, state(0.5), [10, 10]);
+    add('circular orbit with a thick dot', { type, variant: 'orbit', thickness: 8 }, state(0.8), [64, 64]);
     add('circular wavy after a long time', { type, variant: 'wavy' }, state(null, { indeterminateTime: 7201.3, time: 7200.1 }), [96, 96]);
   }
   if (type === 'gauge') {
     add('gauge with a 180 degree sweep', { type, sweepAngle: 180 }, state(0.5));
     add('gauge segmented with a 120 degree sweep', { type, variant: 'segmented', sweepAngle: 120, segments: 4 }, state(0.6));
+    add('gauge needle with a 180 degree sweep and a label', { type, variant: 'needle', sweepAngle: 180, showLabel: true }, state(0.25), [96, 96]);
+    add('gauge dots with 1 dot', { type, variant: 'dots', segments: 1 }, state(1));
+    add('gauge gradient with butt caps', { type, variant: 'gradient', strokeCap: 'butt' }, state(0.5));
+    add('gauge gradient thicker than its radius', { type, variant: 'gradient', thickness: 30 }, state(0.5));
   }
-  if (type === 'liquid') add('liquid with a thick ring in a tall box', { type, thickness: 8, waveSpeed: 2 }, state(0.3, { time: 1.7, wave: 0.5 }), [50, 70]);
+  if (type === 'pie') add('pie segmented with 1 segment', { type, variant: 'segmented', segments: 1 }, state(0.5));
+  if (type === 'liquid') {
+    add('liquid with a thick ring in a tall box', { type, thickness: 8, waveSpeed: 2 }, state(0.3, { time: 1.7, wave: 0.5 }), [50, 70]);
+    add('liquid heart with a thick ring in a tall box', { type, variant: 'heart', thickness: 8 }, state(0.6, { time: 0.9 }), [50, 70]);
+  }
   if (type === 'border') {
     add('border with a large radius', { type, cornerRadius: 40, thickness: 4 }, state(0.8), [120, 60]);
     add('border without corners', { type, cornerRadius: 0 }, state(0.6), [100, 40]);
     add('border wrapping past the start', { type }, state(null, { indeterminateTime: 0.95 }), [100, 40]);
     add('border too small to draw', { type, thickness: 10 }, state(0.5), [10, 40]);
+    add('border glow too small to draw', { type, variant: 'glow' }, state(0.5), [10, 40]);
+    add('border glow wrapping past the start', { type, variant: 'glow' }, state(null, { indeterminateTime: 0.95 }), [100, 40]);
+    add('border segmented with too many segments', { type, variant: 'segmented', segments: 200, thickness: 8 }, state(0.5), [60, 30]);
   }
-  if (type === 'bars') add('bars with 3 bars in a wide box', { type, segments: 3 }, state(0.5), [100, 30]);
-  if (type === 'grid') add('grid with 3 columns', { type, segments: 3, strokeCap: 'butt' }, state(0.5));
-  if (type === 'battery') add('battery in a tall box', { type, showLabel: true }, state(0.9), [40, 60]);
+  if (type === 'bars') {
+    add('bars with 3 bars in a wide box', { type, segments: 3 }, state(0.5), [100, 30]);
+    add('bars dots with 3 bars in a tall box', { type, variant: 'dots', segments: 3 }, state(0.5), [60, 120]);
+    add('bars dots with 1 bar wider than the box is tall', { type, variant: 'dots', segments: 1 }, state(0.5), [48, 36]);
+    add('bars arcs with 2 arcs in a wide box', { type, variant: 'arcs', segments: 2 }, state(0.75), [100, 30]);
+  }
+  if (type === 'grid') {
+    add('grid with 3 columns', { type, segments: 3, strokeCap: 'butt' }, state(0.5));
+    add('grid dots with 7 columns', { type, variant: 'dots', segments: 7 }, state(0.3));
+  }
+  if (type === 'battery') {
+    add('battery in a tall box', { type, showLabel: true }, state(0.9), [40, 60]);
+    add('battery segmented with too many cells', { type, variant: 'segmented', segments: 40 }, state(0.5), [30, 15]);
+  }
+  if (type === 'hourglass') {
+    add('hourglass in a wide box', { type }, state(0.5), [80, 50]);
+    add('hourglass turning over', { type }, state(null, { indeterminateTime: 2.2 }));
+    add('hourglass with a thick glass', { type, thickness: 8 }, state(0.25), [96, 96]);
+  }
   return cases;
 }
 

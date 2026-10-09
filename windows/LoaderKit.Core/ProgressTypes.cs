@@ -23,6 +23,8 @@ public enum ProgressType
     Grid,
     /// <summary>A battery.</summary>
     Battery,
+    /// <summary>An hourglass.</summary>
+    Hourglass,
 }
 
 /// <summary>The style of a <c>LoaderKitProgress</c> within its type.</summary>
@@ -32,22 +34,38 @@ public enum ProgressVariant
     Flat,
     /// <summary>A traveling wave (linear and circular).</summary>
     Wavy,
-    /// <summary>Separate segments (linear, circular and gauge).</summary>
+    /// <summary>Separate segments (linear, circular, pie, gauge, border and battery).</summary>
     Segmented,
     /// <summary>Moving diagonal stripes (linear).</summary>
     Striped,
     /// <summary>A passing sheen (linear).</summary>
     Shimmer,
-    /// <summary>A glowing head (linear).</summary>
+    /// <summary>A glowing head (linear, circular and border).</summary>
     Glow,
-    /// <summary>A row or ring of dots (linear and circular).</summary>
+    /// <summary>Dots instead of strokes or cells (linear, circular, gauge, bars and grid).</summary>
     Dots,
     /// <summary>Numbered steps (linear).</summary>
     Steps,
-    /// <summary>A gradient tail (circular).</summary>
+    /// <summary>A gradient tail (linear, circular and gauge).</summary>
     Gradient,
-    /// <summary>Radial ticks (circular).</summary>
+    /// <summary>Ticks (linear and circular).</summary>
     Ticks,
+    /// <summary>Grows from the middle (linear).</summary>
+    Center,
+    /// <summary>A row of chevrons (linear).</summary>
+    Chevrons,
+    /// <summary>Two arcs growing both ways from the top (circular).</summary>
+    Split,
+    /// <summary>A dot orbiting the ring (circular).</summary>
+    Orbit,
+    /// <summary>Two rings turning opposite ways (circular).</summary>
+    Dual,
+    /// <summary>A needle and ticks (gauge).</summary>
+    Needle,
+    /// <summary>Signal arcs (bars).</summary>
+    Arcs,
+    /// <summary>A heart filling with liquid (liquid).</summary>
+    Heart,
 }
 
 /// <summary>The ends of strokes.</summary>

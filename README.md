@@ -6,13 +6,13 @@ Loading indicators described as data and rendered natively on Android, iOS, macO
   <a href="https://maitrungduc1410.github.io/loader-kit/guide/indicators">
     <picture>
       <source media="(prefers-color-scheme: dark)" srcset="docs/public/readme/indicators-dark.gif">
-      <img alt="The 50 built-in LoaderKit indicators, animating" src="docs/public/readme/indicators-light.gif" width="100%">
+      <img alt="The 50 built-in LoaderKit indicators, then the 50 progress designs, animating" src="docs/public/readme/indicators-light.gif" width="100%">
     </picture>
   </a>
 </p>
 
 <p align="center">
-  All 50 built-in indicators. <a href="https://maitrungduc1410.github.io/loader-kit/guide/indicators">Open the gallery</a> to try them with your own colors, size and speed, or build a new one in the <a href="https://maitrungduc1410.github.io/loader-kit/tools/playground">playground</a>.
+  The 50 built-in indicators and the 50 progress designs. Try them with your own colors, size and speed in the <a href="https://maitrungduc1410.github.io/loader-kit/guide/indicators">indicator gallery</a> and the <a href="https://maitrungduc1410.github.io/loader-kit/guide/progress">progress gallery</a>, or build a new indicator in the <a href="https://maitrungduc1410.github.io/loader-kit/tools/playground">playground</a>.
 </p>
 
 Each indicator is a small JSON spec: elements laid out in a unit box, and keyframe tracks for
@@ -85,8 +85,8 @@ import '@loader-kit/web/element'; // registers <loader-kit>
 
 ## Progress indicators
 
-`LoaderKitProgress` shows how much of a task is done: 30 designs across 9 types (linear, circular,
-pie, gauge, liquid, border, bars, grid, battery). Each one runs with a value from 0 to 1 or, with
+`LoaderKitProgress` shows how much of a task is done: 50 designs across 10 types (linear, circular,
+pie, gauge, liquid, border, bars, grid, battery, hourglass). Each one runs with a value from 0 to 1 or, with
 null, indeterminate, and glides smoothly to every new value. The geometry is shared by every
 platform and checked by the same test vectors ([test-vectors/progress](test-vectors/progress)).
 
@@ -110,7 +110,7 @@ LoaderKitProgress(value: progress, type: .circular).showLabel()
 
 - [Getting started](https://maitrungduc1410.github.io/loader-kit/guide/getting-started): install and a first indicator on every platform.
 - [Built-in indicators](https://maitrungduc1410.github.io/loader-kit/guide/indicators): all 50, live, with copyable code.
-- [Progress indicators](https://maitrungduc1410.github.io/loader-kit/guide/progress): the 30 progress designs, live, with copyable code.
+- [Progress indicators](https://maitrungduc1410.github.io/loader-kit/guide/progress): the 50 progress designs, live, with copyable code.
 - [Custom indicators](https://maitrungduc1410.github.io/loader-kit/spec/): write your own spec, step by step. Experimental: until the schema is declared stable, a minor release may change it. Built-in indicators are not affected.
 - [Playground](https://maitrungduc1410.github.io/loader-kit/tools/playground): edit a spec with live preview and validation.
 

@@ -13,7 +13,7 @@
     </declare-styleable>
 
     <declare-styleable name="LoaderKitProgressView">
-        <!-- linear, circular, pie, gauge, liquid, border, bars, grid or battery. Default circular. -->
+        <!-- linear, circular, pie, gauge, liquid, border, bars, grid, battery or hourglass. Default circular. -->
         <attr name="progressType" format="string" />
         <!-- A variant of the type, e.g. wavy. Default: the first variant of the type. -->
         <attr name="progressVariant" format="string" />

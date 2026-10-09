@@ -156,7 +156,7 @@ final class ProgressVectorTests: XCTestCase {
         let files = try XCTUnwrap(load("index.json")["files"] as? [String])
         let onDisk = try FileManager.default.contentsOfDirectory(atPath: Self.directory.path).filter { $0.hasSuffix(".json") && $0 != "index.json" }
         XCTAssertEqual(Set(files), Set(onDisk))
-        XCTAssertEqual(files.count, 11)
+        XCTAssertEqual(files.count, 12)
     }
 
     func testResolveVectors() throws {
@@ -173,7 +173,7 @@ final class ProgressVectorTests: XCTestCase {
 
     func testGeometryVectors() throws {
         let files = try XCTUnwrap(load("index.json")["files"] as? [String]).filter { $0.hasPrefix("geometry-") }
-        XCTAssertEqual(files.count, 9)
+        XCTAssertEqual(files.count, 10)
         for file in files {
             let cases = try XCTUnwrap(load(file)["cases"] as? [[String: Any]])
             for c in cases {

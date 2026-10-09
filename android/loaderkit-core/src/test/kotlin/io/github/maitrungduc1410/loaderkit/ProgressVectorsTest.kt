@@ -125,7 +125,7 @@ class ProgressVectorsTest {
     fun indexListsEveryFile() {
         val onDisk = dir.list { _, name -> name.endsWith(".json") && name != "index.json" }.orEmpty().toSet()
         assertEquals(onDisk, files.toSet())
-        assertEquals(11, files.size)
+        assertEquals(12, files.size)
     }
 
     @Test
@@ -144,7 +144,7 @@ class ProgressVectorsTest {
     @Test
     fun geometryVectors() {
         val geometry = files.filter { it.startsWith("geometry-") }
-        assertEquals(9, geometry.size)
+        assertEquals(10, geometry.size)
         for (file in geometry) {
             val cases = load(file).getJSONArray("cases")
             assertTrue(cases.length() > 0)

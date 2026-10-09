@@ -44,6 +44,7 @@ test('progress index lists the vector files', () => {
     'geometry-circular.json',
     'geometry-gauge.json',
     'geometry-grid.json',
+    'geometry-hourglass.json',
     'geometry-linear.json',
     'geometry-liquid.json',
     'geometry-pie.json',

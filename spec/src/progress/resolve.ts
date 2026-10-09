@@ -13,24 +13,40 @@ const THICKNESS: Readonly<Record<string, number>> = {
   'linear:glow': 3,
   'linear:dots': 4,
   'linear:steps': 3,
+  'linear:gradient': 6,
+  'linear:chevrons': 3,
+  'linear:ticks': 2,
   'circular:gradient': 5,
   'circular:ticks': 3,
+  'circular:orbit': 3,
+  'circular:dual': 3,
   gauge: 6,
+  'gauge:needle': 3,
   liquid: 3,
   border: 3,
+  'bars:arcs': 4,
   battery: 3,
+  hourglass: 3,
 };
 
 const SEGMENTS: Readonly<Record<string, number>> = {
   'linear:segmented': 10,
   'linear:dots': 8,
   'linear:steps': 4,
+  'linear:chevrons': 12,
+  'linear:ticks': 24,
   'circular:segmented': 12,
   'circular:ticks': 12,
   'circular:dots': 10,
   'gauge:segmented': 10,
+  'gauge:needle': 10,
+  'gauge:dots': 12,
+  'pie:segmented': 8,
+  'border:segmented': 20,
   bars: 5,
+  'bars:arcs': 4,
   grid: 5,
+  'battery:segmented': 5,
 };
 
 const MAX_SEGMENTS = 64;
@@ -111,6 +127,12 @@ export function progressLinearHeight(p: ResolvedProgress): number {
     case 'steps':
       height = 2 * Math.max(7, t * 1.75) + 4;
       break;
+    case 'chevrons':
+      height = 2 * Math.max(3, t * 1.5) + t + 4;
+      break;
+    case 'ticks':
+      height = 2 * Math.max(4, t * 2.5) + t + 4;
+      break;
     default:
       height = t + 4;
   }
@@ -137,7 +159,11 @@ export function progressIntrinsicSize(p: ResolvedProgress): { width: number | nu
   }
 }
 
+/** Room the glow of border `glow` takes outside its stroke. */
+export const PROGRESS_BORDER_GLOW = 4;
+
 /** Padding between a `border` and its content, so the stroke does not cover it. */
 export function progressContentInset(p: ResolvedProgress): number {
-  return p.type === 'border' ? p.thickness + p.trackGap : 0;
+  if (p.type !== 'border') return 0;
+  return p.thickness + p.trackGap + (p.variant === 'glow' ? PROGRESS_BORDER_GLOW : 0);
 }

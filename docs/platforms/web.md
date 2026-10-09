@@ -271,7 +271,7 @@ The view sizes its canvas from the host, so size the host with CSS.
 
 ## Progress indicators {#progress}
 
-`LoaderKitProgress` shows how much of a task is done: 30 designs across 9 types, determinate or indeterminate, with smooth value changes.
+`LoaderKitProgress` shows how much of a task is done: 50 designs across 10 types, determinate or indeterminate, with smooth value changes.
 
 ```html
 <script type="module">

@@ -1,10 +1,10 @@
 ---
-description: "LoaderKitProgress: 30 mẫu progress (linear, circular, pie, gauge, liquid, border, bars, grid, battery), có value hoặc vô định, đổi value mượt trên web, Android, iOS, macOS và Windows."
+description: "LoaderKitProgress: 50 mẫu progress (linear, circular, pie, gauge, liquid, border, bars, grid, battery, hourglass), có value hoặc vô định, đổi value mượt trên web, Android, iOS, macOS và Windows."
 ---
 
 # Progress indicator
 
-`LoaderKitProgress` cho biết một tác vụ đã chạy được bao nhiêu. Có 9 type và 30 mẫu, mẫu nào cũng chạy được khi có value, hoặc ở chế độ vô định khi chưa biết value. Khi value thay đổi, indicator chạy mượt tới value mới. Bấm vào một mẫu để mở panel của nó: đổi value, độ dày, kích thước và màu, rồi copy code cho nền tảng của bạn.
+`LoaderKitProgress` cho biết một tác vụ đã chạy được bao nhiêu. Có 10 type và 50 mẫu, mẫu nào cũng chạy được khi có value, hoặc ở chế độ vô định khi chưa biết value. Khi value thay đổi, indicator chạy mượt tới value mới. Bấm vào một mẫu để mở panel của nó: đổi value, độ dày, kích thước và màu, rồi copy code cho nền tảng của bạn.
 
 ::: tip Indicator có sẵn hay progress?
 - **Không bao giờ có %** (chờ request, pull to refresh): dùng [indicator có sẵn](/vi/guide/indicators), có 50 kiểu để chọn.
@@ -160,17 +160,18 @@ LoaderKitProgress(value: progress, type: .linear).smooth(false)
 
 | Type | Variant | Kích thước khi layout không ràng buộc |
 | --- | --- | --- |
-| `linear` | `flat`, `wavy`, `segmented`, `striped`, `shimmer`, `glow`, `dots`, `steps` | rộng hết chiều ngang; chiều cao theo thickness |
-| `circular` (mặc định) | `flat`, `wavy`, `segmented`, `gradient`, `ticks`, `dots` | `size` × `size` |
-| `pie` | `flat` | `size` × `size` |
-| `gauge` | `flat`, `segmented` | `size` × `size` |
-| `liquid` | `flat` | `size` × `size` |
-| `border` | `flat` | bọc quanh nội dung |
-| `bars` | `flat` | `size` × 0.75 `size` |
-| `grid` | `flat` | `size` × `size` |
-| `battery` | `flat` | `size` × 0.5 `size` |
+| `linear` | `flat`, `wavy`, `segmented`, `striped`, `shimmer`, `glow`, `dots`, `steps`, `gradient`, `center`, `chevrons`, `ticks` | rộng hết chiều ngang; chiều cao theo thickness |
+| `circular` (mặc định) | `flat`, `wavy`, `segmented`, `gradient`, `ticks`, `dots`, `glow`, `split`, `orbit`, `dual` | `size` × `size` |
+| `pie` | `flat`, `segmented` | `size` × `size` |
+| `gauge` | `flat`, `segmented`, `needle`, `gradient`, `dots` | `size` × `size` |
+| `liquid` | `flat`, `heart` | `size` × `size` |
+| `border` | `flat`, `glow`, `segmented` | bọc quanh nội dung |
+| `bars` | `flat`, `dots`, `arcs` | `size` × 0.75 `size` |
+| `grid` | `flat`, `dots` | `size` × `size` |
+| `battery` | `flat`, `segmented` | `size` × 0.5 `size` |
+| `hourglass` | `flat` | `size` × `size` |
 
-`size` là một số pixel (dp trên Android, point trên Apple), mặc định là 48; khác với `LoaderKit`, nó không nhận độ dài CSS. Dưới 32, circular `wavy` vẽ phẳng, vì ở kích thước đó sóng không còn nhìn rõ.
+`size` là một số pixel (dp trên Android, point trên Apple), mặc định là 48; khác với `LoaderKit`, nó không nhận độ dài CSS. Dưới 32, circular `wavy` vẽ phẳng, vì ở kích thước đó sóng không còn nhìn rõ. `hourglass` không có chỗ cho phần trăm nên bỏ qua `showLabel`.
 
 Một số mẫu vẫn chuyển động khi value đứng yên: sóng của `wavy` và `liquid`, sọc của `striped` và vệt sáng của `shimmer`.
 

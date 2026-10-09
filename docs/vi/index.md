@@ -5,7 +5,7 @@ layout: home
 hero:
   name: LoaderKit
   text: Loading indicator dạng dữ liệu, render native
-  tagline: Một spec JSON, cùng một chuyển động trên Android, iOS, macOS, Windows và web. Chọn một trong 50 indicator có sẵn hay 30 mẫu progress, hoặc tự mô tả indicator của bạn.
+  tagline: Một spec JSON, cùng một chuyển động trên Android, iOS, macOS, Windows và web. Chọn một trong 50 indicator có sẵn hay 50 mẫu progress, hoặc tự mô tả indicator của bạn.
   actions:
     - theme: brand
       text: Indicator có sẵn
@@ -27,8 +27,8 @@ features:
     link: /vi/guide/indicators
     linkText: Xem tất cả
   - icon: 📊
-    title: 30 mẫu progress
-    details: Linear, circular, pie, gauge, liquid, border, bars, grid và battery, có value hoặc vô định, chạy mượt tới mỗi value mới.
+    title: 50 mẫu progress
+    details: Linear, circular, pie, gauge, liquid, border, bars, grid, battery và hourglass, có value hoặc vô định, chạy mượt tới mỗi value mới.
     link: /vi/guide/progress
     linkText: Progress indicator
   - icon: 📱

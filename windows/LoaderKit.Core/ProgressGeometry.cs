@@ -10,8 +10,9 @@ public sealed record ResolvedProgress
     private static readonly Dictionary<string, double> ThicknessDefaults = new()
     {
         ["linear:flat"] = 4, ["linear:wavy"] = 4, ["linear:segmented"] = 6, ["linear:striped"] = 10, ["linear:shimmer"] = 8,
-        ["linear:glow"] = 3, ["linear:dots"] = 4, ["linear:steps"] = 3, ["circular:gradient"] = 5, ["circular:ticks"] = 3,
-        ["gauge"] = 6, ["liquid"] = 3, ["border"] = 3, ["battery"] = 3,
+        ["linear:glow"] = 3, ["linear:dots"] = 4, ["linear:steps"] = 3, ["linear:gradient"] = 6, ["linear:chevrons"] = 3,
+        ["linear:ticks"] = 2, ["circular:gradient"] = 5, ["circular:ticks"] = 3, ["circular:orbit"] = 3, ["circular:dual"] = 3,
+        ["gauge"] = 6, ["gauge:needle"] = 3, ["liquid"] = 3, ["border"] = 3, ["bars:arcs"] = 4, ["battery"] = 3, ["hourglass"] = 3,
     };
 
     /// <summary>Shorter waves alias: the wave is sampled every 2 units of length.</summary>
@@ -19,9 +20,14 @@ public sealed record ResolvedProgress
 
     private static readonly Dictionary<string, double> SegmentDefaults = new()
     {
-        ["linear:segmented"] = 10, ["linear:dots"] = 8, ["linear:steps"] = 4, ["circular:segmented"] = 12, ["circular:ticks"] = 12,
-        ["circular:dots"] = 10, ["gauge:segmented"] = 10, ["bars"] = 5, ["grid"] = 5,
+        ["linear:segmented"] = 10, ["linear:dots"] = 8, ["linear:steps"] = 4, ["linear:chevrons"] = 12, ["linear:ticks"] = 24,
+        ["circular:segmented"] = 12, ["circular:ticks"] = 12, ["circular:dots"] = 10, ["gauge:segmented"] = 10, ["gauge:needle"] = 10,
+        ["gauge:dots"] = 12, ["pie:segmented"] = 8, ["border:segmented"] = 20, ["bars"] = 5, ["bars:arcs"] = 4, ["grid"] = 5,
+        ["battery:segmented"] = 5,
     };
+
+    /// <summary>Room the glow of border glow takes outside its stroke.</summary>
+    internal const double BorderGlow = 4;
 
     /// <summary>
     /// Applies the defaults: a variant the type does not have becomes its default, non-finite numbers
@@ -102,9 +108,23 @@ public sealed record ResolvedProgress
     /// <summary>The variants <paramref name="type"/> accepts; the first one is its default.</summary>
     public static IReadOnlyList<ProgressVariant> Variants(ProgressType type) => type switch
     {
-        ProgressType.Linear => new[] { ProgressVariant.Flat, ProgressVariant.Wavy, ProgressVariant.Segmented, ProgressVariant.Striped, ProgressVariant.Shimmer, ProgressVariant.Glow, ProgressVariant.Dots, ProgressVariant.Steps },
-        ProgressType.Circular => new[] { ProgressVariant.Flat, ProgressVariant.Wavy, ProgressVariant.Segmented, ProgressVariant.Gradient, ProgressVariant.Ticks, ProgressVariant.Dots },
-        ProgressType.Gauge => new[] { ProgressVariant.Flat, ProgressVariant.Segmented },
+        ProgressType.Linear => new[]
+        {
+            ProgressVariant.Flat, ProgressVariant.Wavy, ProgressVariant.Segmented, ProgressVariant.Striped, ProgressVariant.Shimmer, ProgressVariant.Glow,
+            ProgressVariant.Dots, ProgressVariant.Steps, ProgressVariant.Gradient, ProgressVariant.Center, ProgressVariant.Chevrons, ProgressVariant.Ticks,
+        },
+        ProgressType.Circular => new[]
+        {
+            ProgressVariant.Flat, ProgressVariant.Wavy, ProgressVariant.Segmented, ProgressVariant.Gradient, ProgressVariant.Ticks, ProgressVariant.Dots,
+            ProgressVariant.Glow, ProgressVariant.Split, ProgressVariant.Orbit, ProgressVariant.Dual,
+        },
+        ProgressType.Pie => new[] { ProgressVariant.Flat, ProgressVariant.Segmented },
+        ProgressType.Gauge => new[] { ProgressVariant.Flat, ProgressVariant.Segmented, ProgressVariant.Needle, ProgressVariant.Gradient, ProgressVariant.Dots },
+        ProgressType.Liquid => new[] { ProgressVariant.Flat, ProgressVariant.Heart },
+        ProgressType.Border => new[] { ProgressVariant.Flat, ProgressVariant.Glow, ProgressVariant.Segmented },
+        ProgressType.Bars => new[] { ProgressVariant.Flat, ProgressVariant.Dots, ProgressVariant.Arcs },
+        ProgressType.Grid => new[] { ProgressVariant.Flat, ProgressVariant.Dots },
+        ProgressType.Battery => new[] { ProgressVariant.Flat, ProgressVariant.Segmented },
         _ => new[] { ProgressVariant.Flat },
     };
 
@@ -138,6 +158,8 @@ public sealed record ResolvedProgress
                 ProgressVariant.Glow => t + 18,
                 ProgressVariant.Dots => Math.Max(6, t * 2) * 2.3,
                 ProgressVariant.Steps => 2 * Math.Max(7, t * 1.75) + 4,
+                ProgressVariant.Chevrons => 2 * Math.Max(3, t * 1.5) + t + 4,
+                ProgressVariant.Ticks => 2 * Math.Max(4, t * 2.5) + t + 4,
                 _ => t + 4,
             };
             if (ShowLabel && !LabelInside) height = Math.Max(height, 18);
@@ -159,7 +181,7 @@ public sealed record ResolvedProgress
     };
 
     /// <summary>Padding between a border and its content, so the stroke does not cover it.</summary>
-    public double ContentInset => Type == ProgressType.Border ? Thickness + TrackGap : 0;
+    public double ContentInset => Type != ProgressType.Border ? 0 : Thickness + TrackGap + (Variant == ProgressVariant.Glow ? BorderGlow : 0);
 
     internal static string Name(ProgressType type) => type.ToString().ToLowerInvariant();
 
@@ -189,6 +211,9 @@ public static class ProgressGeometry
     private const double Tau = Math.PI * 2;
     private const double Top = -Math.PI / 2;
     private const double MinWavySize = 32;
+
+    /// <summary>Half the height of the heart of <see cref="HeartPoints"/>, for a half width of 1.</summary>
+    private const double HeartHalfHeight = 14.5 / 16;
 
     /// <summary>The percentage text of the labels, rounded half up.</summary>
     public static string Label(double value) =>
@@ -247,6 +272,7 @@ public static class ProgressGeometry
                     case ProgressType.Pie: b.Pie(size); break;
                     case ProgressType.Gauge: b.Gauge(size); break;
                     case ProgressType.Liquid: b.Liquid(size); break;
+                    case ProgressType.Hourglass: b.Hourglass(size); break;
                     default: b.Grid(size); break;
                 }
                 return new ProgressDrawing((width - size) / 2, (height - size) / 2, b.Out);
@@ -320,6 +346,21 @@ public static class ProgressGeometry
         var tail = EaseInOut.Evaluate(Clamp01((u - 0.5) / 0.5)) * 0.72;
         var b = Mod(k * 0.72 + time / 2.2, 1);
         return ((b + tail) * Tau, (b + head) * Tau + 0.12);
+    }
+
+    /// <summary>A heart centered at <paramref name="cx"/>, <paramref name="cy"/> and <paramref name="half"/> wide on each side, clockwise from the notch at the top.</summary>
+    private static List<double> HeartPoints(double cx, double cy, double half)
+    {
+        var points = new List<double>(144);
+        for (var i = 0; i < 72; i++)
+        {
+            var a = i * Tau / 72;
+            var sa = Math.Sin(a);
+            var y = (-13 * Math.Cos(a) + 5 * Math.Cos(2 * a) + 2 * Math.Cos(3 * a) + Math.Cos(4 * a) - 2.5) / 16;
+            points.Add(cx + half * sa * sa * sa);
+            points.Add(cy + half * y);
+        }
+        return points;
     }
 
     private sealed class BorderPath
@@ -428,6 +469,10 @@ public static class ProgressGeometry
                 case ProgressVariant.Glow: LinearGlow(barWidth, h); break;
                 case ProgressVariant.Dots: LinearDots(barWidth, h); break;
                 case ProgressVariant.Steps: LinearSteps(barWidth, h); break;
+                case ProgressVariant.Gradient: LinearGradient(barWidth, h); break;
+                case ProgressVariant.Center: LinearCenter(barWidth, h); break;
+                case ProgressVariant.Chevrons: LinearChevrons(barWidth, h); break;
+                case ProgressVariant.Ticks: LinearTicks(barWidth, h); break;
                 default: Linear(barWidth, h); break;
             }
             if (s.Indeterminate || !p.ShowLabel || !labelFits) return;
@@ -699,6 +744,98 @@ public static class ProgressGeometry
             }
         }
 
+        private void LinearGradient(double w, double h)
+        {
+            var t = p.Thickness;
+            var cap = p.StrokeCap;
+            var r = cap == ProgressStrokeCap.Round ? t / 2 : 0;
+            var cy = h / 2;
+            var x0 = r;
+            var x1 = w - r;
+            var len = x1 - x0;
+            HLine(x0, x1, cy, t, cap, Solid(ProgressColorRole.Track));
+            void Active(double a, double b)
+            {
+                var from = x0 + a * len;
+                var to = x0 + b * len;
+                HLine(from, to, cy, t, cap, new ProgressPaint.Linear(from - r, 0, to + r, 0, new[]
+                {
+                    new ProgressColorStop(0, ProgressColorRole.Color, 0.15),
+                    new ProgressColorStop(1, ProgressColorRole.Color, 1),
+                }));
+            }
+            if (s.Indeterminate)
+            {
+                foreach (var (a, b) in LinearSegments(Mod(s.IndeterminateTime / 1.75, 1))) Active(a, b);
+                return;
+            }
+            var v = Clamp01(s.Value);
+            if (v > 0.0005) Active(0, v);
+        }
+
+        private void LinearCenter(double w, double h)
+        {
+            var t = p.Thickness;
+            var cap = p.StrokeCap;
+            var r = cap == ProgressStrokeCap.Round ? t / 2 : 0;
+            var cy = h / 2;
+            var x0 = r;
+            var len = w - 2 * r;
+            HLine(x0, x0 + len, cy, t, cap, Solid(ProgressColorRole.Track));
+            double half;
+            var alpha = 1.0;
+            if (s.Indeterminate)
+            {
+                var u = Mod(s.IndeterminateTime / 1.6, 1);
+                half = Emphasized.Evaluate(u) / 2;
+                alpha = 1 - Standard.Evaluate(Clamp01((u - 0.55) / 0.45));
+            }
+            else
+            {
+                half = Clamp01(s.Value) / 2;
+            }
+            if (half > 0.00025 && alpha > 0.01) HLine(x0 + (0.5 - half) * len, x0 + (0.5 + half) * len, cy, t, cap, Solid(ProgressColorRole.Color, alpha));
+        }
+
+        private void LinearChevrons(double w, double h)
+        {
+            var n = p.Segments;
+            var t = p.Thickness;
+            var cy = h / 2;
+            var half = Math.Max(3, t * 1.5);
+            var cell = (w - t) / n;
+            var depth = Math.Min(cell * 0.5, half);
+            if (cell <= 0) return;
+            var center = Mod(s.IndeterminateTime / 1.4, 1) * (n + 4) - 2;
+            for (var i = 0; i < n; i++)
+            {
+                var x = t / 2 + i * cell + (cell - depth) / 2;
+                var points = new[] { x, cy - half, x + depth, cy, x, cy + half };
+                Out.Add(new ProgressCommand.Polyline(points, false, t, p.StrokeCap, Solid(ProgressColorRole.Track)));
+                var k = s.Indeterminate ? Bump(i + 0.5 - center, 3) : Clamp01(Clamp01(s.Value) * n - i);
+                if (k > 0.01) Out.Add(new ProgressCommand.Polyline(points, false, t, p.StrokeCap, Solid(ProgressColorRole.Color, k)));
+            }
+        }
+
+        private void LinearTicks(double w, double h)
+        {
+            var n = p.Segments;
+            var t = p.Thickness;
+            var cy = h / 2;
+            var longReach = Math.Max(4, t * 2.5);
+            var shortReach = longReach * 0.55;
+            var center = Mod(s.IndeterminateTime / 1.6, 1) * (n + 6) - 3;
+            for (var i = 0; i < n; i++)
+            {
+                var x = n == 1 ? w / 2 : t / 2 + i * (w - t) / (n - 1);
+                var reach = i % 4 == 0 ? longReach : shortReach;
+                ProgressCommand Tick(ProgressPaint paint) => new ProgressCommand.Line(x, cy - reach, x, cy + reach, t, p.StrokeCap, paint);
+                Out.Add(Tick(Solid(ProgressColorRole.Track)));
+                var k = s.Indeterminate ? Bump(i - center, 3.5) : Clamp01(Clamp01(s.Value) * n - i);
+                if (k > 0.01) Out.Add(Tick(Solid(ProgressColorRole.Color, k)));
+            }
+        }
+
         // ---------- circular family ----------
 
         public void CircularAny(double size)
@@ -709,6 +846,10 @@ public static class ProgressGeometry
                 case ProgressVariant.Gradient: CircularGradient(size); break;
                 case ProgressVariant.Ticks: CircularTicks(size); break;
                 case ProgressVariant.Dots: CircularDots(size); break;
+                case ProgressVariant.Glow: CircularGlow(size); break;
+                case ProgressVariant.Split: CircularSplit(size); break;
+                case ProgressVariant.Orbit: CircularOrbit(size); break;
+                case ProgressVariant.Dual: CircularDual(size); break;
                 default: Circular(size); break;
             }
             if (p.ShowLabel && !s.Indeterminate) Text(size / 2, size / 2, LabelSize(size), ProgressGeometry.Label(s.Value), false, Solid(ProgressColorRole.Label));
@@ -872,8 +1013,131 @@ public static class ProgressGeometry
             }
         }
 
+        /// <summary>Arc of the active part of a ring: the indeterminate arc, or from the top to the value. Null draws nothing.</summary>
+        private (double Start, double End)? ActiveArc()
+        {
+            if (s.Indeterminate)
+            {
+                var (a0, a1) = CircularArc(s.IndeterminateTime);
+                return (Top + a0, Top + a1);
+            }
+            var v = Clamp01(s.Value);
+            return v > 0.0005 ? (Top, Top + v * Tau) : null;
+        }
+
+        private void CircularGlow(double size)
+        {
+            var t = p.Thickness;
+            var cap = p.StrokeCap;
+            var cx = size / 2;
+            var cy = size / 2;
+            var r = (size - t) / 2 - 4;
+            if (r <= 0) return;
+            Arc(cx, cy, r, 0, Tau, t, ProgressStrokeCap.Butt, Solid(ProgressColorRole.Color, 0.14));
+            if (ActiveArc() is not var (a0, a1)) return;
+            Arc(cx, cy, r, a0, a1, t + 8, cap, Solid(ProgressColorRole.Color, 0.12));
+            Arc(cx, cy, r, a0, a1, t + 4, cap, Solid(ProgressColorRole.Color, 0.22));
+            Arc(cx, cy, r, a0, a1, t, cap, Solid(ProgressColorRole.Color));
+            var hx = cx + r * Math.Cos(a1);
+            var hy = cy + r * Math.Sin(a1);
+            Circle(hx, hy, t / 2 + 4, Fade(hx, hy, t / 2 + 4, 0.5));
+        }
+
+        private void CircularSplit(double size)
+        {
+            var t = p.Thickness;
+            var cap = p.StrokeCap;
+            var cx = size / 2;
+            var cy = size / 2;
+            var r = (size - t) / 2;
+            if (r <= 0) return;
+            Arc(cx, cy, r, 0, Tau, t, ProgressStrokeCap.Butt, Solid(ProgressColorRole.Track));
+            var tail = 0.0;
+            double head;
+            if (s.Indeterminate)
+            {
+                var u = Mod(s.IndeterminateTime / 1.6, 1);
+                head = Emphasized.Evaluate(Clamp01(u / 0.6)) * Math.PI;
+                tail = Standard.Evaluate(Clamp01((u - 0.3) / 0.7)) * Math.PI;
+            }
+            else
+            {
+                head = Clamp01(s.Value) * Math.PI;
+            }
+            if (head - tail <= 0.0005) return;
+            Arc(cx, cy, r, Top + tail, Top + head, t, cap, Solid(ProgressColorRole.Color));
+            Arc(cx, cy, r, Top - head, Top - tail, t, cap, Solid(ProgressColorRole.Color));
+        }
+
+        private void CircularOrbit(double size)
+        {
+            var ring = Math.Max(1, p.Thickness * 0.5);
+            var dot = Math.Max(2, p.Thickness);
+            var cx = size / 2;
+            var cy = size / 2;
+            var r = size / 2 - dot * 1.6;
+            if (r <= 0) return;
+            Arc(cx, cy, r, 0, Tau, ring, ProgressStrokeCap.Butt, Solid(ProgressColorRole.Track));
+            double head;
+            double tail;
+            var start = 0.0;
+            if (s.Indeterminate)
+            {
+                head = Top + Mod(s.IndeterminateTime / 1.2, 1) * Tau;
+                tail = head - 0.35 * Tau;
+            }
+            else
+            {
+                tail = Top;
+                head = Top + Clamp01(s.Value) * Tau;
+                start = 0.15;
+            }
+            if (head - tail > 0.0005)
+            {
+                Arc(cx, cy, r, tail, head, ring * 1.6, ProgressStrokeCap.Butt, new ProgressPaint.Conic(cx, cy, tail, new[]
+                {
+                    new ProgressColorStop(0, ProgressColorRole.Color, start),
+                    new ProgressColorStop(Math.Min(1, (head - tail) / Tau), ProgressColorRole.Color, 1),
+                }));
+            }
+            var hx = cx + r * Math.Cos(head);
+            var hy = cy + r * Math.Sin(head);
+            Circle(hx, hy, dot * 1.6, Fade(hx, hy, dot * 1.6, 0.35));
+            Circle(hx, hy, dot, Solid(ProgressColorRole.Color));
+        }
+
+        private void CircularDual(double size)
+        {
+            var t = p.Thickness;
+            var cap = p.StrokeCap;
+            var cx = size / 2;
+            var cy = size / 2;
+            var outer = (size - t) / 2;
+            var inner = outer - t - Math.Max(2, p.TrackGap * 0.75);
+            if (inner <= 0) return;
+            Arc(cx, cy, outer, 0, Tau, t, ProgressStrokeCap.Butt, Solid(ProgressColorRole.Track));
+            Arc(cx, cy, inner, 0, Tau, t, ProgressStrokeCap.Butt, Solid(ProgressColorRole.Track));
+            if (s.Indeterminate)
+            {
+                var (a0, a1) = CircularArc(s.IndeterminateTime);
+                var (b0, b1) = CircularArc(s.IndeterminateTime * 1.3 + 0.7);
+                Arc(cx, cy, outer, Top + a0, Top + a1, t, cap, Solid(ProgressColorRole.Color));
+                Arc(cx, cy, inner, Top - b1, Top - b0, t, cap, Solid(ProgressColorRole.Color, 0.6));
+                return;
+            }
+            var v = Clamp01(s.Value);
+            if (v <= 0.0005) return;
+            Arc(cx, cy, outer, Top, Top + v * Tau, t, cap, Solid(ProgressColorRole.Color));
+            Arc(cx, cy, inner, Top - v * Tau, Top, t, cap, Solid(ProgressColorRole.Color, 0.6));
+        }
+
         public void Pie(double size)
         {
+            if (p.Variant == ProgressVariant.Segmented)
+            {
+                PieSegmented(size);
+                return;
+            }
             var t = Math.Max(1, p.Thickness * 0.6);
             var cx = size / 2;
             var cy = size / 2;
@@ -897,6 +1161,124 @@ public static class ProgressGeometry
             Out.Add(new ProgressCommand.Sector(cx, cy, inner, start, end, Solid(ProgressColorRole.Color)));
         }
 
+        private void PieSegmented(double size)
+        {
+            var n = p.Segments;
+            var cx = size / 2;
+            var cy = size / 2;
+            var r = size / 2;
+            var gapAngle = n > 1 ? Math.Max(2, p.TrackGap) / r : 0;
+            var segment = Tau / n - gapAngle;
+            if (segment <= 0.01) return;
+            var center = Mod(s.IndeterminateTime / 1.2, 1) * n;
+            for (var i = 0; i < n; i++)
+            {
+                var a0 = Top + i * (segment + gapAngle) + gapAngle / 2;
+                Out.Add(new ProgressCommand.Sector(cx, cy, r, a0, a0 + segment, Solid(ProgressColorRole.Track)));
+                if (s.Indeterminate)
+                {
+                    var m = Mod(i + 0.5 - center, n);
+                    var k = Bump(Math.Min(m, n - m), n * 0.32);
+                    if (k > 0.01) Out.Add(new ProgressCommand.Sector(cx, cy, r, a0, a0 + segment, Solid(ProgressColorRole.Color, k)));
+                    continue;
+                }
+                var fill = Clamp01(Clamp01(s.Value) * n - i);
+                if (fill > 0.001) Out.Add(new ProgressCommand.Sector(cx, cy, r, a0, a0 + segment * fill, Solid(ProgressColorRole.Color)));
+            }
+        }
+
+        /// <summary>Value the gauge shows: the value, or a needle sweeping back and forth.</summary>
+        private double GaugeValue() => s.Indeterminate ? 0.5 - 0.5 * Math.Cos(s.IndeterminateTime * Math.PI * 0.8) : Clamp01(s.Value);
+
+        private void GaugeNeedle(double size, double start)
+        {
+            var t = p.Thickness;
+            var n = p.Segments;
+            var cx = size / 2;
+            var cy = size / 2;
+            var r = (size - t) / 2;
+            var sweep = p.SweepAngle;
+            var v = GaugeValue();
+            var at = start + v * sweep;
+            Arc(cx, cy, r, start, start + sweep, t, p.StrokeCap, Solid(ProgressColorRole.Track));
+            if (v > 0.0005) Arc(cx, cy, r, start, at, t, p.StrokeCap, Solid(ProgressColorRole.Color));
+            var outer = r - t / 2 - Math.Max(1.5, size * 0.03);
+            var inner = outer - Math.Max(2, size * 0.07);
+            var tickWidth = Math.Max(1, t * 0.4);
+            for (var i = 0; i <= n; i++)
+            {
+                var a = start + i * sweep / n;
+                var ca = Math.Cos(a);
+                var sa = Math.Sin(a);
+                var lit = (double)i / n <= v + 1e-9;
+                Out.Add(new ProgressCommand.Line(cx + inner * ca, cy + inner * sa, cx + outer * ca, cy + outer * sa, tickWidth, ProgressStrokeCap.Round,
+                    Solid(lit ? ProgressColorRole.Color : ProgressColorRole.Track)));
+            }
+            var length = inner - Math.Max(1.5, size * 0.04);
+            var b = Math.Max(1.5, size * 0.035);
+            var c = Math.Cos(at);
+            var sn = Math.Sin(at);
+            Out.Add(new ProgressCommand.Polygon(new[] { cx + length * c, cy + length * sn, cx - b * sn, cy + b * c, cx + b * sn, cy - b * c }, Solid(ProgressColorRole.Color)));
+            Circle(cx, cy, Math.Max(2.5, size * 0.07), Solid(ProgressColorRole.Color));
+        }
+
+        private void GaugeGradient(double size, double start)
+        {
+            var t = p.Thickness;
+            var cx = size / 2;
+            var cy = size / 2;
+            var r = (size - t) / 2;
+            var sweep = p.SweepAngle;
+            Arc(cx, cy, r, start, start + sweep, t, p.StrokeCap, Solid(ProgressColorRole.Track));
+            var from = start;
+            double to;
+            if (s.Indeterminate)
+            {
+                var length = 0.35 * sweep;
+                from = start + (0.5 - 0.5 * Math.Cos(s.IndeterminateTime * Math.PI)) * (sweep - length);
+                to = from + length;
+            }
+            else
+            {
+                to = start + Clamp01(s.Value) * sweep;
+            }
+            if (to - from <= 0.0005) return;
+            // A round cap reaches back past `from`, where the conic would wrap around to its last stop.
+            var lead = p.StrokeCap == ProgressStrokeCap.Round ? Math.Min(Math.PI / 4, Math.Atan2(t / 2, Math.Max(r - t / 2, 1e-6))) : 0;
+            Arc(cx, cy, r, from, to, t, p.StrokeCap, new ProgressPaint.Conic(cx, cy, from - lead, new[]
+            {
+                new ProgressColorStop(0, ProgressColorRole.Color, 0.2),
+                new ProgressColorStop(lead / Tau, ProgressColorRole.Color, 0.2),
+                new ProgressColorStop((to - from + lead) / Tau, ProgressColorRole.Color, 1),
+            }));
+        }
+
+        private void GaugeDots(double size, double start)
+        {
+            var n = p.Segments;
+            var dr = Math.Max(1.5, p.Thickness * 0.5);
+            var cx = size / 2;
+            var cy = size / 2;
+            var r = size / 2 - dr - 1;
+            var sweep = p.SweepAngle;
+            var center = (0.5 - 0.5 * Math.Cos(s.IndeterminateTime * Math.PI)) * n;
+            for (var i = 0; i < n; i++)
+            {
+                var a = n == 1 ? start + sweep / 2 : start + i * sweep / (n - 1);
+                var x = cx + r * Math.Cos(a);
+                var y = cy + r * Math.Sin(a);
+                Circle(x, y, dr, Solid(ProgressColorRole.Track));
+                if (s.Indeterminate)
+                {
+                    var k = Bump(i + 0.5 - center, 2);
+                    if (k > 0.01) Circle(x, y, dr, Solid(ProgressColorRole.Color, k));
+                    continue;
+                }
+                var fill = Clamp01(Clamp01(s.Value) * n - i);
+                if (fill > 0) Circle(x, y, dr * Math.Sqrt(fill), Solid(ProgressColorRole.Color));
+            }
+        }
+
         public void Gauge(double size)
         {
             var t = p.Thickness;
@@ -910,7 +1292,19 @@ public static class ProgressGeometry
             if (r > 0)
             {
                 var gapAngle = (p.TrackGap + (cap == ProgressStrokeCap.Round ? t : 0)) / r;
-                if (p.Variant == ProgressVariant.Segmented)
+                if (p.Variant == ProgressVariant.Needle)
+                {
+                    GaugeNeedle(size, start);
+                }
+                else if (p.Variant == ProgressVariant.Gradient)
+                {
+                    GaugeGradient(size, start);
+                }
+                else if (p.Variant == ProgressVariant.Dots)
+                {
+                    GaugeDots(size, start);
+                }
+                else if (p.Variant == ProgressVariant.Segmented)
                 {
                     SegmentedArc(cx, cy, r, start, sweep, false);
                 }
@@ -936,7 +1330,11 @@ public static class ProgressGeometry
                     }
                 }
             }
-            if (p.ShowLabel && !s.Indeterminate) Text(cx, cy, LabelSize(size), ProgressGeometry.Label(s.Value), false, Solid(ProgressColorRole.Label));
+            if (p.ShowLabel && !s.Indeterminate)
+            {
+                var needle = p.Variant == ProgressVariant.Needle;
+                Text(cx, needle ? cy + r * 0.55 : cy, needle ? LabelSize(size) * 0.7 : LabelSize(size), ProgressGeometry.Label(s.Value), false, Solid(ProgressColorRole.Label));
+            }
         }
 
         private static List<double> LiquidSurface(double cx, double cy, double inner, double level, double amp, double wavelength, double phase)
@@ -957,8 +1355,58 @@ public static class ProgressGeometry
             return points;
         }
 
+        /// <summary>Like <see cref="LiquidSurface"/>, for a liquid filling the box from <paramref name="top"/> to <paramref name="bottom"/>.</summary>
+        private static List<double> LiquidSurfaceBox(double left, double right, double top, double bottom, double level, double amp, double wavelength, double phase)
+        {
+            var y = bottom - level * (bottom - top);
+            var end = right + 2;
+            var n = Math.Max(1, Steps((end - left) / 2));
+            var points = new List<double>(2 * n + 6) { left, bottom + 1 };
+            for (var i = 0; i <= n; i++)
+            {
+                var x = left + (end - left) * i / n;
+                points.Add(x);
+                points.Add(y + amp * Math.Sin(x / wavelength * Tau + phase));
+            }
+            points.Add(end);
+            points.Add(bottom + 1);
+            return points;
+        }
+
+        private void LiquidHeart(double size)
+        {
+            var ring = Math.Max(1.5, p.Thickness * 0.6);
+            var cx = size / 2;
+            var cy = size / 2;
+            var half = (size - ring) / 2;
+            var inner = half - ring / 2 - Math.Max(1.5, p.TrackGap * 0.6);
+            if (inner > 0)
+            {
+                var top = cy - inner * HeartHalfHeight;
+                var bottom = cy + inner * HeartHalfHeight;
+                var level = s.Indeterminate ? 0.5 + 0.14 * Math.Sin(s.IndeterminateTime * 1.8) : Clamp01(s.Value);
+                var amp = inner * (s.Indeterminate ? 0.09 : 0.07 * s.Wave);
+                var wavelength = inner * 1.35;
+                var cycles = s.Time * p.WaveSpeed * 0.8;
+                var front = LiquidSurfaceBox(cx - inner, cx + inner, top, bottom, level, amp, wavelength, Mod(cycles, 1) * Tau);
+                var back = LiquidSurfaceBox(cx - inner, cx + inner, top, bottom, level, amp * 0.8, wavelength, 2 - Mod(cycles * 0.7, 1) * Tau);
+                var content = Nested();
+                content.Rect(cx - inner, top, inner * 2, bottom - top, 0, Solid(ProgressColorRole.Track));
+                content.Out.Add(new ProgressCommand.Polygon(back, Solid(ProgressColorRole.Color, 0.45)));
+                content.Out.Add(new ProgressCommand.Polygon(front, Solid(ProgressColorRole.Color)));
+                if (p.ShowLabel && !s.Indeterminate) content.InvertedLabel(ProgressGeometry.Label(s.Value), cx, cy - inner * 0.12, LabelSize(size) * 0.8, new ProgressClipShape.Polygon(front));
+                Out.Add(new ProgressCommand.Clip(new ProgressClipShape.Polygon(HeartPoints(cx, cy, inner)), content.Out));
+            }
+            Out.Add(new ProgressCommand.Polyline(HeartPoints(cx, cy, half), true, ring, ProgressStrokeCap.Butt, Solid(ProgressColorRole.Color)));
+        }
+
         public void Liquid(double size)
         {
+            if (p.Variant == ProgressVariant.Heart)
+            {
+                LiquidHeart(size);
+                return;
+            }
             var ring = Math.Max(1.5, p.Thickness * 0.6);
             var cx = size / 2;
             var cy = size / 2;
@@ -1072,19 +1520,61 @@ public static class ProgressGeometry
         public void Border(double w, double h)
         {
             var t = p.Thickness;
-            if (w <= t || h <= t) return;
-            var path = MakeBorderPath(w, h, t / 2, p.CornerRadius - t / 2);
-            Out.Add(new ProgressCommand.Polyline(path.Points.GetRange(0, path.Points.Count - 2), true, t, ProgressStrokeCap.Butt, Solid(ProgressColorRole.Track)));
+            var glow = p.Variant == ProgressVariant.Glow ? ResolvedProgress.BorderGlow : 0;
+            var inset = t / 2 + glow;
+            if (w <= 2 * inset || h <= 2 * inset) return;
+            var path = MakeBorderPath(w, h, inset, p.CornerRadius - inset);
+            if (p.Variant == ProgressVariant.Segmented)
+            {
+                BorderSegmented(path);
+                return;
+            }
+            var track = glow > 0 ? Solid(ProgressColorRole.Color, 0.14) : Solid(ProgressColorRole.Track);
+            Out.Add(new ProgressCommand.Polyline(path.Points.GetRange(0, path.Points.Count - 2), true, t, ProgressStrokeCap.Butt, track));
+            void Active(double a, double b)
+            {
+                if (glow > 0)
+                {
+                    StrokeAlong(path, a, b, t + 2 * glow, p.StrokeCap, Solid(ProgressColorRole.Color, 0.12));
+                    StrokeAlong(path, a, b, t + glow, p.StrokeCap, Solid(ProgressColorRole.Color, 0.22));
+                }
+                StrokeAlong(path, a, b, t, p.StrokeCap, Solid(ProgressColorRole.Color));
+            }
             if (s.Indeterminate)
             {
                 var (a0, a1) = CircularArc(s.IndeterminateTime);
                 var from = Mod(a0 / Tau, 1);
-                StrokeAlong(path, from, from + (a1 - a0) / Tau, t, p.StrokeCap, Solid(ProgressColorRole.Color));
+                Active(from, from + (a1 - a0) / Tau);
             }
             else
             {
                 var v = Clamp01(s.Value);
-                if (v > 0.0005) StrokeAlong(path, 0, v, t, p.StrokeCap, Solid(ProgressColorRole.Color));
+                if (v > 0.0005) Active(0, v);
+            }
+        }
+
+        private void BorderSegmented(BorderPath path)
+        {
+            var n = p.Segments;
+            var t = p.Thickness;
+            var cap = p.StrokeCap;
+            var gap = n > 1 ? (Math.Max(2, p.TrackGap) + (cap == ProgressStrokeCap.Round ? t : 0)) / path.Total : 0;
+            var segment = 1.0 / n - gap;
+            if (segment <= 0) return;
+            var center = Mod(s.IndeterminateTime / 1.4, 1) * n;
+            for (var i = 0; i < n; i++)
+            {
+                var a = (double)i / n + gap / 2;
+                StrokeAlong(path, a, a + segment, t, cap, Solid(ProgressColorRole.Track));
+                if (s.Indeterminate)
+                {
+                    var m = Mod(i + 0.5 - center, n);
+                    var k = Bump(Math.Min(m, n - m), n * 0.3);
+                    if (k > 0.01) StrokeAlong(path, a, a + segment, t, cap, Solid(ProgressColorRole.Color, k));
+                    continue;
+                }
+                var fill = Clamp01(Clamp01(s.Value) * n - i);
+                if (fill > 0.001) StrokeAlong(path, a, a + segment * fill, t, cap, Solid(ProgressColorRole.Color));
             }
         }
 
@@ -1092,6 +1582,11 @@ public static class ProgressGeometry
 
         public void Bars(double w, double h)
         {
+            if (p.Variant == ProgressVariant.Arcs)
+            {
+                BarsArcs(w, h);
+                return;
+            }
             var n = p.Segments;
             var gap = Math.Max(3, p.TrackGap);
             var width = (w - gap * (n - 1)) / n;
@@ -1103,12 +1598,46 @@ public static class ProgressGeometry
                 var height = h * (0.25 + 0.75 * (i + 1) / n);
                 var x = i * (width + gap);
                 var y = h - height;
-                Rect(x, y, width, height, radius, Solid(ProgressColorRole.Track));
                 var fill = s.Indeterminate ? Bump(i + 0.5 - center, 1.6) : Clamp01(Clamp01(s.Value) * n - i);
+                if (p.Variant == ProgressVariant.Dots)
+                {
+                    var d = Math.Min(width, h);
+                    var pitch = d + Math.Max(1.5, gap * 0.5);
+                    var count = Math.Max(1, (int)Math.Floor((height - d) / pitch + 1e-9) + 1);
+                    for (var j = 0; j < count; j++)
+                    {
+                        var dy = h - d / 2 - j * pitch;
+                        Circle(x + width / 2, dy, d / 2, Solid(ProgressColorRole.Track));
+                        var k = Clamp01(fill * count - j);
+                        if (k > 0.01) Circle(x + width / 2, dy, d / 2, Solid(ProgressColorRole.Color, k));
+                    }
+                    continue;
+                }
+                Rect(x, y, width, height, radius, Solid(ProgressColorRole.Track));
                 if (fill <= 0.001) continue;
                 var inner = Nested();
                 inner.Rect(x, h - height * fill, width, height * fill, 0, Solid(ProgressColorRole.Color));
                 Out.Add(new ProgressCommand.Clip(RectClip(x, y, width, height, radius), inner.Out));
+            }
+        }
+
+        private void BarsArcs(double w, double h)
+        {
+            var n = p.Segments;
+            var t = p.Thickness;
+            const double spread = Math.PI / 4;
+            var cx = w / 2;
+            var cy = h - t;
+            var outer = Math.Min(cy - t / 2, (w / 2 - t / 2) / Math.Sin(spread));
+            if (outer <= 0) return;
+            Circle(cx, cy, t * 0.8, Solid(ProgressColorRole.Color));
+            var center = Mod(s.IndeterminateTime / 1.4, 1) * (n + 2) - 1;
+            for (var i = 0; i < n; i++)
+            {
+                var r = outer * (i + 1) / n;
+                Arc(cx, cy, r, Top - spread, Top + spread, t, p.StrokeCap, Solid(ProgressColorRole.Track));
+                var k = s.Indeterminate ? Bump(i + 0.5 - center, 1.5) : Clamp01(Clamp01(s.Value) * n - i);
+                if (k > 0.01) Arc(cx, cy, r, Top - spread, Top + spread, t, p.StrokeCap, Solid(ProgressColorRole.Color, k));
             }
         }
 
@@ -1127,11 +1656,15 @@ public static class ProgressGeometry
                 {
                     var x = c * (cell + gap);
                     var y = r * (cell + gap);
-                    Rect(x, y, cell, cell, radius, Solid(ProgressColorRole.Track));
+                    var dots = p.Variant == ProgressVariant.Dots;
+                    if (dots) Circle(x + cell / 2, y + cell / 2, cell / 2, Solid(ProgressColorRole.Track));
+                    else Rect(x, y, cell, cell, radius, Solid(ProgressColorRole.Track));
                     var fill = s.Indeterminate ? Bump(r + c - center, 1.8) : Clamp01(Clamp01(s.Value) * k * k - rank[r * k + c]);
                     if (fill <= 0.01) continue;
                     var side = cell * (0.3 + 0.7 * fill);
-                    Rect(x + (cell - side) / 2, y + (cell - side) / 2, side, side, radius * side / cell, Solid(ProgressColorRole.Color, Math.Min(1, fill * 1.6)));
+                    var paint = Solid(ProgressColorRole.Color, Math.Min(1, fill * 1.6));
+                    if (dots) Circle(x + cell / 2, y + cell / 2, side / 2, paint);
+                    else Rect(x + (cell - side) / 2, y + (cell - side) / 2, side, side, radius * side / cell, paint);
                 }
             }
         }
@@ -1171,8 +1704,24 @@ public static class ProgressGeometry
                 filled = iw * Clamp01(s.Value);
             }
             var content = Nested();
-            content.Rect(pad, pad, iw, ih, 0, Solid(ProgressColorRole.Track));
-            content.Rect(pad, pad, filled, ih, 0, Solid(ProgressColorRole.Color, alpha));
+            if (p.Variant == ProgressVariant.Segmented)
+            {
+                var n = p.Segments;
+                var gap = Math.Max(1.5, p.TrackGap * 0.5);
+                var cell = (iw - gap * (n - 1)) / n;
+                for (var i = 0; cell > 0 && i < n; i++)
+                {
+                    var x = pad + i * (cell + gap);
+                    content.Rect(x, pad, cell, ih, 0, Solid(ProgressColorRole.Track));
+                    var k = Clamp01(filled / iw * n - i);
+                    if (k > 0.01) content.Rect(x, pad, cell, ih, 0, Solid(ProgressColorRole.Color, alpha * k));
+                }
+            }
+            else
+            {
+                content.Rect(pad, pad, iw, ih, 0, Solid(ProgressColorRole.Track));
+                content.Rect(pad, pad, filled, ih, 0, Solid(ProgressColorRole.Color, alpha));
+            }
             if (p.ShowLabel && !s.Indeterminate)
             {
                 content.InvertedLabel(ProgressGeometry.Label(s.Value), pad + iw / 2, pad + ih / 2, Math.Max(10, Math.Min(ih * 0.55, 30)), RectClip(pad, pad, filled, ih, 0));
@@ -1191,6 +1740,66 @@ public static class ProgressGeometry
                 }
                 Out.Add(new ProgressCommand.Polygon(points, Solid(ProgressColorRole.White)));
                 Out.Add(new ProgressCommand.Polyline(points, true, 1.2, ProgressStrokeCap.Butt, Solid(ProgressColorRole.Color)));
+            }
+        }
+    
+        // ---------- hourglass ----------
+
+        public void Hourglass(double size)
+        {
+            var ring = Math.Max(1.5, p.Thickness * 0.5);
+            var cx = size / 2;
+            var cy = size / 2;
+            var half = size * 0.3;
+            var top = size * 0.1;
+            var bottom = size * 0.9;
+            var neck = Math.Max(1, size * 0.035);
+            var left = cx - half;
+            var right = cx + half;
+            var bulb = cy - top;
+            double v;
+            var flip = 0.0;
+            if (s.Indeterminate)
+            {
+                var u = Mod(s.IndeterminateTime / 2.4, 1);
+                v = EaseInOut.Evaluate(Clamp01(u / 0.8));
+                flip = Math.PI * EaseInOut.Evaluate(Clamp01((u - 0.8) / 0.2));
+            }
+            else
+            {
+                v = Clamp01(s.Value);
+            }
+            var lift = 1 - 0.2 * Math.Sin(flip);
+            var cos = Math.Cos(flip) * lift;
+            var sin = Math.Sin(flip) * lift;
+            double[] Turn(params double[] points)
+            {
+                var turned = new double[points.Length];
+                for (var i = 0; i < points.Length; i += 2)
+                {
+                    var dx = points[i] - cx;
+                    var dy = points[i + 1] - cy;
+                    turned[i] = cx + dx * cos - dy * sin;
+                    turned[i + 1] = cy + dx * sin + dy * cos;
+                }
+                return turned;
+            }
+            var glass = Turn(left, top, right, top, cx + neck, cy, right, bottom, left, bottom, cx - neck, cy);
+            Out.Add(new ProgressCommand.Polygon(glass, Solid(ProgressColorRole.Track)));
+            var upper = bulb * Math.Sqrt(1 - v);
+            var sand = new List<ProgressCommand>(2);
+            if (v < 0.9995) sand.Add(new ProgressCommand.Polygon(Turn(left, cy - upper, right, cy - upper, right, cy, left, cy), Solid(ProgressColorRole.Color)));
+            if (v > 0.0005) sand.Add(new ProgressCommand.Polygon(Turn(left, cy + upper, right, cy + upper, right, bottom, left, bottom), Solid(ProgressColorRole.Color)));
+            Out.Add(new ProgressCommand.Clip(new ProgressClipShape.Polygon(glass), sand));
+            if (v > 0.0005 && v < 0.9995 && flip == 0)
+            {
+                Out.Add(new ProgressCommand.Line(cx, cy, cx, cy + upper, Math.Max(1, neck * 0.8), ProgressStrokeCap.Butt, Solid(ProgressColorRole.Color)));
+            }
+            Out.Add(new ProgressCommand.Polyline(glass, true, ring, ProgressStrokeCap.Butt, Solid(ProgressColorRole.Color, 0.7)));
+            foreach (var y in new[] { top, bottom })
+            {
+                var cap = Turn(left - ring * 1.5, y, right + ring * 1.5, y);
+                Out.Add(new ProgressCommand.Line(cap[0], cap[1], cap[2], cap[3], ring * 1.6, ProgressStrokeCap.Round, Solid(ProgressColorRole.Color)));
             }
         }
     }

@@ -118,7 +118,7 @@ LoaderKitIndicator(
 
 ## 进度指示器 {#progress}
 
-`LoaderKitProgress` 用来显示任务完成了多少：9 种 type、30 种样式，支持确定与不确定状态，value 平滑过渡。
+`LoaderKitProgress` 用来显示任务完成了多少：10 种 type、50 种样式，支持确定与不确定状态，value 平滑过渡。
 
 ```xml
 <io.github.maitrungduc1410.loaderkit.LoaderKitProgressView

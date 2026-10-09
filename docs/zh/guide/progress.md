@@ -1,10 +1,10 @@
 ---
-description: "LoaderKitProgress：30 种进度样式（linear、circular、pie、gauge、liquid、border、bars、grid、battery），支持确定与不确定状态，在 Web、Android、iOS、macOS 和 Windows 上平滑过渡 value。"
+description: "LoaderKitProgress：50 种进度样式（linear、circular、pie、gauge、liquid、border、bars、grid、battery、hourglass），支持确定与不确定状态，在 Web、Android、iOS、macOS 和 Windows 上平滑过渡 value。"
 ---
 
 # 进度指示器
 
-`LoaderKitProgress` 用来显示任务完成了多少。它有 9 种 type、30 种样式，每种样式都可以显示具体的 value，也可以在 value 未知时以不确定状态运行。value 变化时，指示器会平滑过渡到新的 value。点击任意一种样式即可打开面板：调整 value、粗细、尺寸和颜色，然后复制对应平台的代码。
+`LoaderKitProgress` 用来显示任务完成了多少。它有 10 种 type、50 种样式，每种样式都可以显示具体的 value，也可以在 value 未知时以不确定状态运行。value 变化时，指示器会平滑过渡到新的 value。点击任意一种样式即可打开面板：调整 value、粗细、尺寸和颜色，然后复制对应平台的代码。
 
 ::: tip 内置加载动画还是进度指示器？
 - **始终没有百分比**（等待请求、下拉刷新）：用[内置加载动画](/zh/guide/indicators)，有 50 种样式可选。
@@ -160,17 +160,18 @@ LoaderKitProgress(value: progress, type: .linear).smooth(false)
 
 | Type | Variant | 布局不限制尺寸时的大小 |
 | --- | --- | --- |
-| `linear` | `flat`、`wavy`、`segmented`、`striped`、`shimmer`、`glow`、`dots`、`steps` | 宽度占满；高度取决于 thickness |
-| `circular`（默认） | `flat`、`wavy`、`segmented`、`gradient`、`ticks`、`dots` | `size` × `size` |
-| `pie` | `flat` | `size` × `size` |
-| `gauge` | `flat`、`segmented` | `size` × `size` |
-| `liquid` | `flat` | `size` × `size` |
-| `border` | `flat` | 包裹内容 |
-| `bars` | `flat` | `size` × 0.75 `size` |
-| `grid` | `flat` | `size` × `size` |
-| `battery` | `flat` | `size` × 0.5 `size` |
+| `linear` | `flat`、`wavy`、`segmented`、`striped`、`shimmer`、`glow`、`dots`、`steps`、`gradient`、`center`、`chevrons`、`ticks` | 宽度占满；高度取决于 thickness |
+| `circular`（默认） | `flat`、`wavy`、`segmented`、`gradient`、`ticks`、`dots`、`glow`、`split`、`orbit`、`dual` | `size` × `size` |
+| `pie` | `flat`、`segmented` | `size` × `size` |
+| `gauge` | `flat`、`segmented`、`needle`、`gradient`、`dots` | `size` × `size` |
+| `liquid` | `flat`、`heart` | `size` × `size` |
+| `border` | `flat`、`glow`、`segmented` | 包裹内容 |
+| `bars` | `flat`、`dots`、`arcs` | `size` × 0.75 `size` |
+| `grid` | `flat`、`dots` | `size` × `size` |
+| `battery` | `flat`、`segmented` | `size` × 0.5 `size` |
+| `hourglass` | `flat` | `size` × `size` |
 
-`size` 是像素数（Android 上是 dp，Apple 上是 point），默认是 48；与 `LoaderKit` 不同，它不接受 CSS 长度。小于 32 时，circular `wavy` 会画成平的，因为这么小的尺寸下波浪已经看不清。
+`size` 是像素数（Android 上是 dp，Apple 上是 point），默认是 48；与 `LoaderKit` 不同，它不接受 CSS 长度。小于 32 时，circular `wavy` 会画成平的，因为这么小的尺寸下波浪已经看不清。`hourglass` 没有显示百分比的空间，所以会忽略 `showLabel`。
 
 有些样式即使 value 不变也会动：`wavy` 和 `liquid` 的波浪、`striped` 的条纹和 `shimmer` 的光泽。
 

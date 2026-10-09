@@ -8,7 +8,7 @@
     <RootNamespace>LoaderKit.WinUI</RootNamespace>
     <AssemblyName>LoaderKit.WinUI</AssemblyName>
     <PackageId>LoaderKit.WinUI</PackageId>
-    <Description>Loading indicators described as data, rendered with Microsoft.UI.Composition: the LoaderKitIndicator control and the LoaderKitProgress control (30 progress designs drawn with Win2D) for WinUI 3 and the Windows App SDK.</Description>
+    <Description>Loading indicators described as data, rendered with Microsoft.UI.Composition: the LoaderKitIndicator control and the LoaderKitProgress control (50 progress designs drawn with Win2D) for WinUI 3 and the Windows App SDK.</Description>
     <PackageTags>$(PackageTags);progress;winui;winui3;windowsappsdk;composition;win2d</PackageTags>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <!-- The library is AnyCPU; apps get the native Win2D binary for their platform through the package dependency. -->

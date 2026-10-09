@@ -15,7 +15,7 @@ using Windows.UI.ViewManagement;
 namespace LoaderKit.WinUI;
 
 /// <summary>
-/// A progress indicator: 30 designs across linear, circular, pie, gauge, liquid, border, bars, grid and battery,
+/// A progress indicator: 50 designs across linear, circular, pie, gauge, liquid, border, bars, grid, battery and hourglass,
 /// determinate or indeterminate, drawn with Win2D from the same geometry as every other LoaderKit platform.
 /// Value changes glide to the new value unless <see cref="Smooth"/> is false.
 /// </summary>

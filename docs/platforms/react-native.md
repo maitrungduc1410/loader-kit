@@ -70,7 +70,7 @@ Every `View` prop applies as well. `BUILTIN_INDICATOR_NAMES` lists the built-in 
 
 ## Progress indicators {#progress}
 
-`LoaderKitProgress` shows how much of a task is done: 30 designs across 9 types. Set `value` to a number in [0, 1], or leave it `null` for the indeterminate animation. New values glide along a curve that follows the rhythm of your updates and never passes the real value; `smooth={false}` jumps instead.
+`LoaderKitProgress` shows how much of a task is done: 50 designs across 10 types. Set `value` to a number in [0, 1], or leave it `null` for the indeterminate animation. New values glide along a curve that follows the rhythm of your updates and never passes the real value; `smooth={false}` jumps instead.
 
 ```tsx
 import { LoaderKitProgress } from 'react-native-loader-kit';

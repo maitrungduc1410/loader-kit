@@ -12,6 +12,7 @@
     "geometry-bars.json",
     "geometry-grid.json",
     "geometry-battery.json",
+    "geometry-hourglass.json",
     "animator.json"
   ]
 }

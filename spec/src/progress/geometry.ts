@@ -1,6 +1,6 @@
 import { cubicBezier } from '../easing.ts';
 import type { BezierEasing } from '../types.ts';
-import { PROGRESS_LABEL_WIDTH, progressLabelInside } from './resolve.ts';
+import { PROGRESS_BORDER_GLOW, PROGRESS_LABEL_WIDTH, progressLabelInside } from './resolve.ts';
 import type {
   ProgressClipShape,
   ProgressColorRole,
@@ -88,6 +88,7 @@ export function progressCommands(p: ResolvedProgress, s: ProgressState, width: n
       else if (p.type === 'pie') drawPie(out, p, s, size);
       else if (p.type === 'gauge') drawGauge(out, p, s, size);
       else if (p.type === 'liquid') drawLiquid(out, p, s, size);
+      else if (p.type === 'hourglass') drawHourglass(out, p, s, size);
       else drawGrid(out, p, s, size);
       return { x: (width - size) / 2, y: (height - size) / 2, commands: out };
     }
@@ -206,6 +207,18 @@ function drawLinearAny(out: ProgressCommand[], p: ResolvedProgress, s: ProgressS
       break;
     case 'steps':
       drawLinearSteps(out, p, s, barWidth, h);
+      break;
+    case 'gradient':
+      drawLinearGradient(out, p, s, barWidth, h);
+      break;
+    case 'center':
+      drawLinearCenter(out, p, s, barWidth, h);
+      break;
+    case 'chevrons':
+      drawLinearChevrons(out, p, s, barWidth, h);
+      break;
+    case 'ticks':
+      drawLinearTicks(out, p, s, barWidth, h);
       break;
     default:
       drawLinear(out, p, s, barWidth, h);
@@ -464,6 +477,94 @@ function drawLinearSteps(out: ProgressCommand[], p: ResolvedProgress, s: Progres
   }
 }
 
+function drawLinearGradient(out: ProgressCommand[], p: ResolvedProgress, s: ProgressState, w: number, h: number) {
+  const t = p.thickness;
+  const cap = p.strokeCap;
+  const r = cap === 'round' ? t / 2 : 0;
+  const cy = h / 2;
+  const x0 = r;
+  const x1 = w - r;
+  const len = x1 - x0;
+  hLine(out, x0, x1, cy, t, cap, solid('track'));
+  const active = (a: number, b: number) => {
+    const from = x0 + a * len;
+    const to = x0 + b * len;
+    hLine(out, from, to, cy, t, cap, {
+      type: 'linear',
+      x0: from - r,
+      y0: 0,
+      x1: to + r,
+      y1: 0,
+      stops: [
+        { offset: 0, color: 'color', alpha: 0.15 },
+        { offset: 1, color: 'color', alpha: 1 },
+      ],
+    });
+  };
+  if (s.indeterminate) {
+    for (const [a, b] of linearSegments(mod(s.indeterminateTime / 1.75, 1))) active(a, b);
+    return;
+  }
+  const v = clamp01(s.value);
+  if (v > 0.0005) active(0, v);
+}
+
+function drawLinearCenter(out: ProgressCommand[], p: ResolvedProgress, s: ProgressState, w: number, h: number) {
+  const t = p.thickness;
+  const cap = p.strokeCap;
+  const r = cap === 'round' ? t / 2 : 0;
+  const cy = h / 2;
+  const x0 = r;
+  const len = w - 2 * r;
+  hLine(out, x0, x0 + len, cy, t, cap, solid('track'));
+  let half: number;
+  let alpha = 1;
+  if (s.indeterminate) {
+    const u = mod(s.indeterminateTime / 1.6, 1);
+    half = ease(EMPHASIZED, u) / 2;
+    alpha = 1 - ease(STANDARD, clamp01((u - 0.55) / 0.45));
+  } else {
+    half = clamp01(s.value) / 2;
+  }
+  if (half > 0.00025 && alpha > 0.01) hLine(out, x0 + (0.5 - half) * len, x0 + (0.5 + half) * len, cy, t, cap, solid('color', alpha));
+}
+
+function drawLinearChevrons(out: ProgressCommand[], p: ResolvedProgress, s: ProgressState, w: number, h: number) {
+  const n = p.segments;
+  const t = p.thickness;
+  const cy = h / 2;
+  const half = Math.max(3, t * 1.5);
+  const cell = (w - t) / n;
+  const depth = Math.min(cell * 0.5, half);
+  if (cell <= 0) return;
+  const center = mod(s.indeterminateTime / 1.4, 1) * (n + 4) - 2;
+  for (let i = 0; i < n; i++) {
+    const x = t / 2 + i * cell + (cell - depth) / 2;
+    const points = [x, cy - half, x + depth, cy, x, cy + half];
+    const chevron = (paint: ProgressPaint) => out.push({ op: 'polyline', points, closed: false, lineWidth: t, cap: p.strokeCap, paint });
+    chevron(solid('track'));
+    const k = s.indeterminate ? bump(i + 0.5 - center, 3) : clamp01(clamp01(s.value) * n - i);
+    if (k > 0.01) chevron(solid('color', k));
+  }
+}
+
+function drawLinearTicks(out: ProgressCommand[], p: ResolvedProgress, s: ProgressState, w: number, h: number) {
+  const n = p.segments;
+  const t = p.thickness;
+  const cy = h / 2;
+  const long = Math.max(4, t * 2.5);
+  const short = long * 0.55;
+  const center = mod(s.indeterminateTime / 1.6, 1) * (n + 6) - 3;
+  for (let i = 0; i < n; i++) {
+    const x = n === 1 ? w / 2 : t / 2 + (i * (w - t)) / (n - 1);
+    const reach = i % 4 === 0 ? long : short;
+    const tick = (paint: ProgressPaint) => out.push({ op: 'line', x0: x, y0: cy - reach, x1: x, y1: cy + reach, lineWidth: t, cap: p.strokeCap, paint });
+    tick(solid('track'));
+    const k = s.indeterminate ? bump(i - center, 3.5) : clamp01(clamp01(s.value) * n - i);
+    if (k > 0.01) tick(solid('color', k));
+  }
+}
+
 // ---------- circular family ----------
 
 function labelSize(size: number): number {
@@ -483,6 +584,18 @@ function drawCircularAny(out: ProgressCommand[], p: ResolvedProgress, s: Progres
       break;
     case 'dots':
       drawCircularDots(out, p, s, size);
+      break;
+    case 'glow':
+      drawCircularGlow(out, p, s, size);
+      break;
+    case 'split':
+      drawCircularSplit(out, p, s, size);
+      break;
+    case 'orbit':
+      drawCircularOrbit(out, p, s, size);
+      break;
+    case 'dual':
+      drawCircularDual(out, p, s, size);
       break;
     default:
       drawCircular(out, p, s, size);
@@ -584,16 +697,7 @@ function drawCircularGradient(out: ProgressCommand[], p: ResolvedProgress, s: Pr
   });
   const hx = cx + r * Math.cos(head);
   const hy = cy + r * Math.sin(head);
-  circle(out, hx, hy, t * 1.25, {
-    type: 'radial',
-    cx: hx,
-    cy: hy,
-    r: t * 1.25,
-    stops: [
-      { offset: 0, color: 'color', alpha: 0.5 },
-      { offset: 1, color: 'color', alpha: 0 },
-    ],
-  });
+  glowHead(out, hx, hy, t * 1.25, 0.5);
   circle(out, hx, hy, t / 2, solid('color'));
 }
 
@@ -643,7 +747,133 @@ function drawCircularDots(out: ProgressCommand[], p: ResolvedProgress, s: Progre
   }
 }
 
+/** Arc of the active part of a ring: the indeterminate arc, or from the top to the value. Null draws nothing. */
+function activeArc(s: ProgressState): [number, number] | null {
+  if (s.indeterminate) {
+    const [a0, a1] = circularArc(s.indeterminateTime);
+    return [TOP + a0, TOP + a1];
+  }
+  const v = clamp01(s.value);
+  return v > 0.0005 ? [TOP, TOP + v * TAU] : null;
+}
+
+function glowHead(out: ProgressCommand[], x: number, y: number, reach: number, peak: number) {
+  circle(out, x, y, reach, {
+    type: 'radial',
+    cx: x,
+    cy: y,
+    r: reach,
+    stops: [
+      { offset: 0, color: 'color', alpha: peak },
+      { offset: 1, color: 'color', alpha: 0 },
+    ],
+  });
+}
+
+function drawCircularGlow(out: ProgressCommand[], p: ResolvedProgress, s: ProgressState, size: number) {
+  const t = p.thickness;
+  const cap = p.strokeCap;
+  const cx = size / 2;
+  const cy = size / 2;
+  const r = (size - t) / 2 - 4;
+  if (r <= 0) return;
+  arc(out, cx, cy, r, 0, TAU, t, 'butt', solid('color', 0.14));
+  const active = activeArc(s);
+  if (!active) return;
+  const [a0, a1] = active;
+  arc(out, cx, cy, r, a0, a1, t + 8, cap, solid('color', 0.12));
+  arc(out, cx, cy, r, a0, a1, t + 4, cap, solid('color', 0.22));
+  arc(out, cx, cy, r, a0, a1, t, cap, solid('color'));
+  glowHead(out, cx + r * Math.cos(a1), cy + r * Math.sin(a1), t / 2 + 4, 0.5);
+}
+
+function drawCircularSplit(out: ProgressCommand[], p: ResolvedProgress, s: ProgressState, size: number) {
+  const t = p.thickness;
+  const cap = p.strokeCap;
+  const cx = size / 2;
+  const cy = size / 2;
+  const r = (size - t) / 2;
+  if (r <= 0) return;
+  arc(out, cx, cy, r, 0, TAU, t, 'butt', solid('track'));
+  let tail = 0;
+  let head: number;
+  if (s.indeterminate) {
+    const u = mod(s.indeterminateTime / 1.6, 1);
+    head = ease(EMPHASIZED, clamp01(u / 0.6)) * Math.PI;
+    tail = ease(STANDARD, clamp01((u - 0.3) / 0.7)) * Math.PI;
+  } else {
+    head = clamp01(s.value) * Math.PI;
+  }
+  if (head - tail <= 0.0005) return;
+  arc(out, cx, cy, r, TOP + tail, TOP + head, t, cap, solid('color'));
+  arc(out, cx, cy, r, TOP - head, TOP - tail, t, cap, solid('color'));
+}
+
+function drawCircularOrbit(out: ProgressCommand[], p: ResolvedProgress, s: ProgressState, size: number) {
+  const ring = Math.max(1, p.thickness * 0.5);
+  const dot = Math.max(2, p.thickness);
+  const cx = size / 2;
+  const cy = size / 2;
+  const r = size / 2 - dot * 1.6;
+  if (r <= 0) return;
+  arc(out, cx, cy, r, 0, TAU, ring, 'butt', solid('track'));
+  let head: number;
+  let tail: number;
+  let fade = 0;
+  if (s.indeterminate) {
+    head = TOP + mod(s.indeterminateTime / 1.2, 1) * TAU;
+    tail = head - 0.35 * TAU;
+  } else {
+    tail = TOP;
+    head = TOP + clamp01(s.value) * TAU;
+    fade = 0.15;
+  }
+  if (head - tail > 0.0005) {
+    arc(out, cx, cy, r, tail, head, ring * 1.6, 'butt', {
+      type: 'conic',
+      cx,
+      cy,
+      start: tail,
+      stops: [
+        { offset: 0, color: 'color', alpha: fade },
+        { offset: Math.min(1, (head - tail) / TAU), color: 'color', alpha: 1 },
+      ],
+    });
+  }
+  const hx = cx + r * Math.cos(head);
+  const hy = cy + r * Math.sin(head);
+  glowHead(out, hx, hy, dot * 1.6, 0.35);
+  circle(out, hx, hy, dot, solid('color'));
+}
+
+function drawCircularDual(out: ProgressCommand[], p: ResolvedProgress, s: ProgressState, size: number) {
+  const t = p.thickness;
+  const cap = p.strokeCap;
+  const cx = size / 2;
+  const cy = size / 2;
+  const outer = (size - t) / 2;
+  const inner = outer - t - Math.max(2, p.trackGap * 0.75);
+  if (inner <= 0) return;
+  arc(out, cx, cy, outer, 0, TAU, t, 'butt', solid('track'));
+  arc(out, cx, cy, inner, 0, TAU, t, 'butt', solid('track'));
+  if (s.indeterminate) {
+    const [a0, a1] = circularArc(s.indeterminateTime);
+    const [b0, b1] = circularArc(s.indeterminateTime * 1.3 + 0.7);
+    arc(out, cx, cy, outer, TOP + a0, TOP + a1, t, cap, solid('color'));
+    arc(out, cx, cy, inner, TOP - b1, TOP - b0, t, cap, solid('color', 0.6));
+    return;
+  }
+  const v = clamp01(s.value);
+  if (v <= 0.0005) return;
+  arc(out, cx, cy, outer, TOP, TOP + v * TAU, t, cap, solid('color'));
+  arc(out, cx, cy, inner, TOP - v * TAU, TOP, t, cap, solid('color', 0.6));
+}
+
 function drawPie(out: ProgressCommand[], p: ResolvedProgress, s: ProgressState, size: number) {
+  if (p.variant === 'segmented') {
+    drawPieSegmented(out, p, s, size);
+    return;
+  }
   const t = Math.max(1, p.thickness * 0.6);
   const cx = size / 2;
   const cy = size / 2;
@@ -664,6 +894,118 @@ function drawPie(out: ProgressCommand[], p: ResolvedProgress, s: ProgressState, 
   out.push({ op: 'sector', cx, cy, r: inner, start, end, paint: solid('color') });
 }
 
+function drawPieSegmented(out: ProgressCommand[], p: ResolvedProgress, s: ProgressState, size: number) {
+  const n = p.segments;
+  const cx = size / 2;
+  const cy = size / 2;
+  const r = size / 2;
+  const gapAngle = n > 1 ? Math.max(2, p.trackGap) / r : 0;
+  const segment = TAU / n - gapAngle;
+  if (segment <= 0.01) return;
+  const center = mod(s.indeterminateTime / 1.2, 1) * n;
+  for (let i = 0; i < n; i++) {
+    const a0 = TOP + i * (segment + gapAngle) + gapAngle / 2;
+    out.push({ op: 'sector', cx, cy, r, start: a0, end: a0 + segment, paint: solid('track') });
+    if (s.indeterminate) {
+      const m = mod(i + 0.5 - center, n);
+      const k = bump(Math.min(m, n - m), n * 0.32);
+      if (k > 0.01) out.push({ op: 'sector', cx, cy, r, start: a0, end: a0 + segment, paint: solid('color', k) });
+      continue;
+    }
+    const fill = clamp01(clamp01(s.value) * n - i);
+    if (fill > 0.001) out.push({ op: 'sector', cx, cy, r, start: a0, end: a0 + segment * fill, paint: solid('color') });
+  }
+}
+
+/** Value the gauge shows: the value, or a needle sweeping back and forth. */
+function gaugeValue(s: ProgressState): number {
+  return s.indeterminate ? 0.5 - 0.5 * Math.cos(s.indeterminateTime * Math.PI * 0.8) : clamp01(s.value);
+}
+
+function drawGaugeNeedle(out: ProgressCommand[], p: ResolvedProgress, s: ProgressState, size: number, start: number) {
+  const t = p.thickness;
+  const n = p.segments;
+  const cx = size / 2;
+  const cy = size / 2;
+  const r = (size - t) / 2;
+  const sweep = p.sweepAngle;
+  const v = gaugeValue(s);
+  const at = start + v * sweep;
+  arc(out, cx, cy, r, start, start + sweep, t, p.strokeCap, solid('track'));
+  if (v > 0.0005) arc(out, cx, cy, r, start, at, t, p.strokeCap, solid('color'));
+  const outer = r - t / 2 - Math.max(1.5, size * 0.03);
+  const inner = outer - Math.max(2, size * 0.07);
+  const tickWidth = Math.max(1, t * 0.4);
+  for (let i = 0; i <= n; i++) {
+    const a = start + (i * sweep) / n;
+    const ca = Math.cos(a);
+    const sa = Math.sin(a);
+    const lit = i / n <= v + 1e-9;
+    out.push({ op: 'line', x0: cx + inner * ca, y0: cy + inner * sa, x1: cx + outer * ca, y1: cy + outer * sa, lineWidth: tickWidth, cap: 'round', paint: solid(lit ? 'color' : 'track') });
+  }
+  const length = inner - Math.max(1.5, size * 0.04);
+  const base = Math.max(1.5, size * 0.035);
+  const ca = Math.cos(at);
+  const sa = Math.sin(at);
+  out.push({ op: 'polygon', points: [cx + length * ca, cy + length * sa, cx - base * sa, cy + base * ca, cx + base * sa, cy - base * ca], paint: solid('color') });
+  circle(out, cx, cy, Math.max(2.5, size * 0.07), solid('color'));
+}
+
+function drawGaugeGradient(out: ProgressCommand[], p: ResolvedProgress, s: ProgressState, size: number, start: number) {
+  const t = p.thickness;
+  const cx = size / 2;
+  const cy = size / 2;
+  const r = (size - t) / 2;
+  const sweep = p.sweepAngle;
+  arc(out, cx, cy, r, start, start + sweep, t, p.strokeCap, solid('track'));
+  let from = start;
+  let to: number;
+  if (s.indeterminate) {
+    const length = 0.35 * sweep;
+    from = start + (0.5 - 0.5 * Math.cos(s.indeterminateTime * Math.PI)) * (sweep - length);
+    to = from + length;
+  } else {
+    to = start + clamp01(s.value) * sweep;
+  }
+  if (to - from <= 0.0005) return;
+  // A round cap reaches back past `from`, where the conic would wrap around to its last stop.
+  const lead = p.strokeCap === 'round' ? Math.min(Math.PI / 4, Math.atan2(t / 2, Math.max(r - t / 2, 1e-6))) : 0;
+  arc(out, cx, cy, r, from, to, t, p.strokeCap, {
+    type: 'conic',
+    cx,
+    cy,
+    start: from - lead,
+    stops: [
+      { offset: 0, color: 'color', alpha: 0.2 },
+      { offset: lead / TAU, color: 'color', alpha: 0.2 },
+      { offset: (to - from + lead) / TAU, color: 'color', alpha: 1 },
+    ],
+  });
+}
+
+function drawGaugeDots(out: ProgressCommand[], p: ResolvedProgress, s: ProgressState, size: number, start: number) {
+  const n = p.segments;
+  const dr = Math.max(1.5, p.thickness * 0.5);
+  const cx = size / 2;
+  const cy = size / 2;
+  const r = size / 2 - dr - 1;
+  const sweep = p.sweepAngle;
+  const center = (0.5 - 0.5 * Math.cos(s.indeterminateTime * Math.PI)) * n;
+  for (let i = 0; i < n; i++) {
+    const a = n === 1 ? start + sweep / 2 : start + (i * sweep) / (n - 1);
+    const x = cx + r * Math.cos(a);
+    const y = cy + r * Math.sin(a);
+    circle(out, x, y, dr, solid('track'));
+    if (s.indeterminate) {
+      const k = bump(i + 0.5 - center, 2);
+      if (k > 0.01) circle(out, x, y, dr, solid('color', k));
+      continue;
+    }
+    const fill = clamp01(clamp01(s.value) * n - i);
+    if (fill > 0) circle(out, x, y, dr * Math.sqrt(fill), solid('color'));
+  }
+}
+
 function drawGauge(out: ProgressCommand[], p: ResolvedProgress, s: ProgressState, size: number) {
   const t = p.thickness;
   const cap = p.strokeCap;
@@ -675,7 +1017,13 @@ function drawGauge(out: ProgressCommand[], p: ResolvedProgress, s: ProgressState
   const end = start + sweep;
   if (r > 0) {
     const gapAngle = (p.trackGap + (cap === 'round' ? t : 0)) / r;
-    if (p.variant === 'segmented') {
+    if (p.variant === 'needle') {
+      drawGaugeNeedle(out, p, s, size, start);
+    } else if (p.variant === 'gradient') {
+      drawGaugeGradient(out, p, s, size, start);
+    } else if (p.variant === 'dots') {
+      drawGaugeDots(out, p, s, size, start);
+    } else if (p.variant === 'segmented') {
       drawSegmentedArc(out, p, s, cx, cy, r, start, sweep, false);
     } else if (s.indeterminate) {
       const length = 0.24 * sweep;
@@ -693,7 +1041,10 @@ function drawGauge(out: ProgressCommand[], p: ResolvedProgress, s: ProgressState
       }
     }
   }
-  if (p.showLabel && !s.indeterminate) text(out, cx, cy, labelSize(size), progressLabel(s.value), 'center', solid('label'));
+  if (p.showLabel && !s.indeterminate) {
+    const y = p.variant === 'needle' ? cy + r * 0.55 : cy;
+    text(out, cx, y, p.variant === 'needle' ? labelSize(size) * 0.7 : labelSize(size), progressLabel(s.value), 'center', solid('label'));
+  }
 }
 
 function liquidSurface(cx: number, cy: number, inner: number, level: number, amp: number, wavelength: number, phase: number): number[] {
@@ -710,7 +1061,65 @@ function liquidSurface(cx: number, cy: number, inner: number, level: number, amp
   return points;
 }
 
+/** Like `liquidSurface`, for a liquid filling the box from `top` to `bottom`. */
+function liquidSurfaceBox(left: number, right: number, top: number, bottom: number, level: number, amp: number, wavelength: number, phase: number): number[] {
+  const y = bottom - level * (bottom - top);
+  const end = right + 2;
+  const n = Math.max(1, steps((end - left) / 2));
+  const points = [left, bottom + 1];
+  for (let i = 0; i <= n; i++) {
+    const x = left + ((end - left) * i) / n;
+    points.push(x, y + amp * Math.sin((x / wavelength) * TAU + phase));
+  }
+  points.push(end, bottom + 1);
+  return points;
+}
+
+/** Half the height of the heart of `heartPoints`, for a half width of 1. */
+const HEART_HALF_HEIGHT = 14.5 / 16;
+
+/** A heart centered at `cx`, `cy` and `half` wide on each side, clockwise from the notch at the top. */
+function heartPoints(cx: number, cy: number, half: number): number[] {
+  const points: number[] = [];
+  for (let i = 0; i < 72; i++) {
+    const a = (i * TAU) / 72;
+    const sa = Math.sin(a);
+    const y = (-13 * Math.cos(a) + 5 * Math.cos(2 * a) + 2 * Math.cos(3 * a) + Math.cos(4 * a) - 2.5) / 16;
+    points.push(cx + half * sa * sa * sa, cy + half * y);
+  }
+  return points;
+}
+
+function drawLiquidHeart(out: ProgressCommand[], p: ResolvedProgress, s: ProgressState, size: number) {
+  const ring = Math.max(1.5, p.thickness * 0.6);
+  const cx = size / 2;
+  const cy = size / 2;
+  const half = (size - ring) / 2;
+  const inner = half - ring / 2 - Math.max(1.5, p.trackGap * 0.6);
+  if (inner > 0) {
+    const top = cy - inner * HEART_HALF_HEIGHT;
+    const bottom = cy + inner * HEART_HALF_HEIGHT;
+    const level = s.indeterminate ? 0.5 + 0.14 * Math.sin(s.indeterminateTime * 1.8) : clamp01(s.value);
+    const amp = inner * (s.indeterminate ? 0.09 : 0.07 * s.wave);
+    const wavelength = inner * 1.35;
+    const cycles = s.time * p.waveSpeed * 0.8;
+    const front = liquidSurfaceBox(cx - inner, cx + inner, top, bottom, level, amp, wavelength, mod(cycles, 1) * TAU);
+    const back = liquidSurfaceBox(cx - inner, cx + inner, top, bottom, level, amp * 0.8, wavelength, 2 - mod(cycles * 0.7, 1) * TAU);
+    const content: ProgressCommand[] = [];
+    rect(content, cx - inner, top, inner * 2, bottom - top, 0, solid('track'));
+    content.push({ op: 'polygon', points: back, paint: solid('color', 0.45) });
+    content.push({ op: 'polygon', points: front, paint: solid('color') });
+    if (p.showLabel && !s.indeterminate) invertedLabel(content, progressLabel(s.value), cx, cy - inner * 0.12, labelSize(size) * 0.8, { type: 'polygon', points: front });
+    out.push({ op: 'clip', shape: { type: 'polygon', points: heartPoints(cx, cy, inner) }, commands: content });
+  }
+  out.push({ op: 'polyline', points: heartPoints(cx, cy, half), closed: true, lineWidth: ring, cap: 'butt', paint: solid('color') });
+}
+
 function drawLiquid(out: ProgressCommand[], p: ResolvedProgress, s: ProgressState, size: number) {
+  if (p.variant === 'heart') {
+    drawLiquidHeart(out, p, s, size);
+    return;
+  }
   const ring = Math.max(1.5, p.thickness * 0.6);
   const cx = size / 2;
   const cy = size / 2;
@@ -807,22 +1216,61 @@ function strokeAlong(out: ProgressCommand[], path: BorderPath, a: number, b: num
 
 function drawBorder(out: ProgressCommand[], p: ResolvedProgress, s: ProgressState, w: number, h: number) {
   const t = p.thickness;
-  if (w <= t || h <= t) return;
-  const path = borderPath(w, h, t / 2, p.cornerRadius - t / 2);
-  out.push({ op: 'polyline', points: path.points.slice(0, -2), closed: true, lineWidth: t, cap: 'butt', paint: solid('track') });
+  const glow = p.variant === 'glow' ? PROGRESS_BORDER_GLOW : 0;
+  const inset = t / 2 + glow;
+  if (w <= 2 * inset || h <= 2 * inset) return;
+  const path = borderPath(w, h, inset, p.cornerRadius - inset);
+  if (p.variant === 'segmented') {
+    drawBorderSegmented(out, p, s, path);
+    return;
+  }
+  out.push({ op: 'polyline', points: path.points.slice(0, -2), closed: true, lineWidth: t, cap: 'butt', paint: glow ? solid('color', 0.14) : solid('track') });
+  const active = (a: number, b: number) => {
+    if (glow) {
+      strokeAlong(out, path, a, b, t + 2 * glow, p.strokeCap, solid('color', 0.12));
+      strokeAlong(out, path, a, b, t + glow, p.strokeCap, solid('color', 0.22));
+    }
+    strokeAlong(out, path, a, b, t, p.strokeCap, solid('color'));
+  };
   if (s.indeterminate) {
     const [a0, a1] = circularArc(s.indeterminateTime);
     const from = mod(a0 / TAU, 1);
-    strokeAlong(out, path, from, from + (a1 - a0) / TAU, t, p.strokeCap, solid('color'));
+    active(from, from + (a1 - a0) / TAU);
   } else {
     const v = clamp01(s.value);
-    if (v > 0.0005) strokeAlong(out, path, 0, v, t, p.strokeCap, solid('color'));
+    if (v > 0.0005) active(0, v);
+  }
+}
+
+function drawBorderSegmented(out: ProgressCommand[], p: ResolvedProgress, s: ProgressState, path: BorderPath) {
+  const n = p.segments;
+  const t = p.thickness;
+  const cap = p.strokeCap;
+  const gap = n > 1 ? (Math.max(2, p.trackGap) + (cap === 'round' ? t : 0)) / path.total : 0;
+  const segment = 1 / n - gap;
+  if (segment <= 0) return;
+  const center = mod(s.indeterminateTime / 1.4, 1) * n;
+  for (let i = 0; i < n; i++) {
+    const a = i / n + gap / 2;
+    strokeAlong(out, path, a, a + segment, t, cap, solid('track'));
+    if (s.indeterminate) {
+      const m = mod(i + 0.5 - center, n);
+      const k = bump(Math.min(m, n - m), n * 0.3);
+      if (k > 0.01) strokeAlong(out, path, a, a + segment, t, cap, solid('color', k));
+      continue;
+    }
+    const fill = clamp01(clamp01(s.value) * n - i);
+    if (fill > 0.001) strokeAlong(out, path, a, a + segment * fill, t, cap, solid('color'));
   }
 }
 
 // ---------- bars, grid, battery ----------
 
 function drawBars(out: ProgressCommand[], p: ResolvedProgress, s: ProgressState, w: number, h: number) {
+  if (p.variant === 'arcs') {
+    drawBarsArcs(out, p, s, w, h);
+    return;
+  }
   const n = p.segments;
   const gap = Math.max(3, p.trackGap);
   const width = (w - gap * (n - 1)) / n;
@@ -833,12 +1281,42 @@ function drawBars(out: ProgressCommand[], p: ResolvedProgress, s: ProgressState,
     const height = h * (0.25 + (0.75 * (i + 1)) / n);
     const x = i * (width + gap);
     const y = h - height;
-    rect(out, x, y, width, height, radius, solid('track'));
     const fill = s.indeterminate ? bump(i + 0.5 - center, 1.6) : clamp01(clamp01(s.value) * n - i);
+    if (p.variant === 'dots') {
+      const d = Math.min(width, h);
+      const pitch = d + Math.max(1.5, gap * 0.5);
+      const count = Math.max(1, Math.floor((height - d) / pitch + EPSILON) + 1);
+      for (let j = 0; j < count; j++) {
+        const dy = h - d / 2 - j * pitch;
+        circle(out, x + width / 2, dy, d / 2, solid('track'));
+        const k = clamp01(fill * count - j);
+        if (k > 0.01) circle(out, x + width / 2, dy, d / 2, solid('color', k));
+      }
+      continue;
+    }
+    rect(out, x, y, width, height, radius, solid('track'));
     if (fill <= 0.001) continue;
     const inner: ProgressCommand[] = [];
     rect(inner, x, h - height * fill, width, height * fill, 0, solid('color'));
     out.push({ op: 'clip', shape: rectClip(x, y, width, height, radius), commands: inner });
+  }
+}
+
+function drawBarsArcs(out: ProgressCommand[], p: ResolvedProgress, s: ProgressState, w: number, h: number) {
+  const n = p.segments;
+  const t = p.thickness;
+  const spread = Math.PI / 4;
+  const cx = w / 2;
+  const cy = h - t;
+  const outer = Math.min(cy - t / 2, (w / 2 - t / 2) / Math.sin(spread));
+  if (outer <= 0) return;
+  circle(out, cx, cy, t * 0.8, solid('color'));
+  const center = mod(s.indeterminateTime / 1.4, 1) * (n + 2) - 1;
+  for (let i = 0; i < n; i++) {
+    const r = (outer * (i + 1)) / n;
+    arc(out, cx, cy, r, TOP - spread, TOP + spread, t, p.strokeCap, solid('track'));
+    const k = s.indeterminate ? bump(i + 0.5 - center, 1.5) : clamp01(clamp01(s.value) * n - i);
+    if (k > 0.01) arc(out, cx, cy, r, TOP - spread, TOP + spread, t, p.strokeCap, solid('color', k));
   }
 }
 
@@ -865,11 +1343,15 @@ function drawGrid(out: ProgressCommand[], p: ResolvedProgress, s: ProgressState,
     for (let c = 0; c < k; c++) {
       const x = c * (cell + gap);
       const y = r * (cell + gap);
-      rect(out, x, y, cell, cell, radius, solid('track'));
+      const dots = p.variant === 'dots';
+      if (dots) circle(out, x + cell / 2, y + cell / 2, cell / 2, solid('track'));
+      else rect(out, x, y, cell, cell, radius, solid('track'));
       const fill = s.indeterminate ? bump(r + c - center, 1.8) : clamp01(clamp01(s.value) * k * k - rank[r * k + c]!);
       if (fill <= 0.01) continue;
       const side = cell * (0.3 + 0.7 * fill);
-      rect(out, x + (cell - side) / 2, y + (cell - side) / 2, side, side, (radius * side) / cell, solid('color', Math.min(1, fill * 1.6)));
+      const paint = solid('color', Math.min(1, fill * 1.6));
+      if (dots) circle(out, x + cell / 2, y + cell / 2, side / 2, paint);
+      else rect(out, x + (cell - side) / 2, y + (cell - side) / 2, side, side, (radius * side) / cell, paint);
     }
   }
 }
@@ -899,7 +1381,6 @@ function drawBattery(out: ProgressCommand[], p: ResolvedProgress, s: ProgressSta
   const ih = h - 2 * pad;
   if (iw <= 0 || ih <= 0) return;
   const content: ProgressCommand[] = [];
-  rect(content, pad, pad, iw, ih, 0, solid('track'));
   let filled: number;
   let alpha = 1;
   if (s.indeterminate) {
@@ -909,7 +1390,20 @@ function drawBattery(out: ProgressCommand[], p: ResolvedProgress, s: ProgressSta
   } else {
     filled = iw * clamp01(s.value);
   }
-  rect(content, pad, pad, filled, ih, 0, solid('color', alpha));
+  if (p.variant === 'segmented') {
+    const n = p.segments;
+    const gap = Math.max(1.5, p.trackGap * 0.5);
+    const cell = (iw - gap * (n - 1)) / n;
+    for (let i = 0; cell > 0 && i < n; i++) {
+      const x = pad + i * (cell + gap);
+      rect(content, x, pad, cell, ih, 0, solid('track'));
+      const k = clamp01((filled / iw) * n - i);
+      if (k > 0.01) rect(content, x, pad, cell, ih, 0, solid('color', alpha * k));
+    }
+  } else {
+    rect(content, pad, pad, iw, ih, 0, solid('track'));
+    rect(content, pad, pad, filled, ih, 0, solid('color', alpha));
+  }
   if (p.showLabel && !s.indeterminate) {
     invertedLabel(content, progressLabel(s.value), pad + iw / 2, pad + ih / 2, Math.max(10, Math.min(ih * 0.55, 30)), rectClip(pad, pad, filled, ih, 0));
   }
@@ -922,5 +1416,56 @@ function drawBattery(out: ProgressCommand[], p: ResolvedProgress, s: ProgressSta
     for (let i = 0; i < BOLT.length; i += 2) points.push(bx + BOLT[i]! * k * 0.9, by + BOLT[i + 1]! * k);
     out.push({ op: 'polygon', points, paint: solid('white') });
     out.push({ op: 'polyline', points, closed: true, lineWidth: 1.2, cap: 'butt', paint: solid('color') });
+  }
+}
+
+// ---------- hourglass ----------
+
+function drawHourglass(out: ProgressCommand[], p: ResolvedProgress, s: ProgressState, size: number) {
+  const ring = Math.max(1.5, p.thickness * 0.5);
+  const cx = size / 2;
+  const cy = size / 2;
+  const half = size * 0.3;
+  const top = size * 0.1;
+  const bottom = size * 0.9;
+  const neck = Math.max(1, size * 0.035);
+  const left = cx - half;
+  const right = cx + half;
+  const bulb = cy - top;
+  let v: number;
+  let flip = 0;
+  if (s.indeterminate) {
+    const u = mod(s.indeterminateTime / 2.4, 1);
+    v = ease(EASE_IN_OUT, clamp01(u / 0.8));
+    flip = Math.PI * ease(EASE_IN_OUT, clamp01((u - 0.8) / 0.2));
+  } else {
+    v = clamp01(s.value);
+  }
+  const lift = 1 - 0.2 * Math.sin(flip);
+  const cos = Math.cos(flip) * lift;
+  const sin = Math.sin(flip) * lift;
+  const turn = (points: number[]) => {
+    const turned: number[] = [];
+    for (let i = 0; i < points.length; i += 2) {
+      const dx = points[i]! - cx;
+      const dy = points[i + 1]! - cy;
+      turned.push(cx + dx * cos - dy * sin, cy + dx * sin + dy * cos);
+    }
+    return turned;
+  };
+  const glass = turn([left, top, right, top, cx + neck, cy, right, bottom, left, bottom, cx - neck, cy]);
+  out.push({ op: 'polygon', points: glass, paint: solid('track') });
+  const sand: ProgressCommand[] = [];
+  const upper = bulb * Math.sqrt(1 - v);
+  if (v < 0.9995) sand.push({ op: 'polygon', points: turn([left, cy - upper, right, cy - upper, right, cy, left, cy]), paint: solid('color') });
+  if (v > 0.0005) sand.push({ op: 'polygon', points: turn([left, cy + upper, right, cy + upper, right, bottom, left, bottom]), paint: solid('color') });
+  out.push({ op: 'clip', shape: { type: 'polygon', points: glass }, commands: sand });
+  if (v > 0.0005 && v < 0.9995 && flip === 0) {
+    out.push({ op: 'line', x0: cx, y0: cy, x1: cx, y1: cy + upper, lineWidth: Math.max(1, neck * 0.8), cap: 'butt', paint: solid('color') });
+  }
+  out.push({ op: 'polyline', points: glass, closed: true, lineWidth: ring, cap: 'butt', paint: solid('color', 0.7) });
+  for (const y of [top, bottom]) {
+    const [x0, y0, x1, y1] = turn([left - ring * 1.5, y, right + ring * 1.5, y]);
+    out.push({ op: 'line', x0: x0!, y0: y0!, x1: x1!, y1: y1!, lineWidth: ring * 1.6, cap: 'round', paint: solid('color') });
   }
 }

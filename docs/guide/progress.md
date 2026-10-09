@@ -1,10 +1,10 @@
 ---
-description: "LoaderKitProgress: 30 progress designs (linear, circular, pie, gauge, liquid, border, bars, grid, battery), determinate or indeterminate, with smooth value changes on the web, Android, iOS, macOS and Windows."
+description: "LoaderKitProgress: 50 progress designs (linear, circular, pie, gauge, liquid, border, bars, grid, battery, hourglass), determinate or indeterminate, with smooth value changes on the web, Android, iOS, macOS and Windows."
 ---
 
 # Progress indicators
 
-`LoaderKitProgress` shows how much of a task is done. It has 9 types and 30 designs, and each one runs with a value or, when the value is unknown, indeterminate. When the value changes, the indicator glides to it. Click a design to open its panel: change the value, thickness, size and color, then copy the code for your platform.
+`LoaderKitProgress` shows how much of a task is done. It has 10 types and 50 designs, and each one runs with a value or, when the value is unknown, indeterminate. When the value changes, the indicator glides to it. Click a design to open its panel: change the value, thickness, size and color, then copy the code for your platform.
 
 ::: tip Built-in or progress?
 - **No percentage, ever** (waiting for a request, pull to refresh): use a [built-in indicator](/guide/indicators). There are 50 styles to pick from.
@@ -160,17 +160,18 @@ LoaderKitProgress(value: progress, type: .linear).smooth(false)
 
 | Type | Variants | Size without layout constraints |
 | --- | --- | --- |
-| `linear` | `flat`, `wavy`, `segmented`, `striped`, `shimmer`, `glow`, `dots`, `steps` | fills the width; the height follows the thickness |
-| `circular` (default) | `flat`, `wavy`, `segmented`, `gradient`, `ticks`, `dots` | `size` × `size` |
-| `pie` | `flat` | `size` × `size` |
-| `gauge` | `flat`, `segmented` | `size` × `size` |
-| `liquid` | `flat` | `size` × `size` |
-| `border` | `flat` | wraps its content |
-| `bars` | `flat` | `size` × 0.75 `size` |
-| `grid` | `flat` | `size` × `size` |
-| `battery` | `flat` | `size` × 0.5 `size` |
+| `linear` | `flat`, `wavy`, `segmented`, `striped`, `shimmer`, `glow`, `dots`, `steps`, `gradient`, `center`, `chevrons`, `ticks` | fills the width; the height follows the thickness |
+| `circular` (default) | `flat`, `wavy`, `segmented`, `gradient`, `ticks`, `dots`, `glow`, `split`, `orbit`, `dual` | `size` × `size` |
+| `pie` | `flat`, `segmented` | `size` × `size` |
+| `gauge` | `flat`, `segmented`, `needle`, `gradient`, `dots` | `size` × `size` |
+| `liquid` | `flat`, `heart` | `size` × `size` |
+| `border` | `flat`, `glow`, `segmented` | wraps its content |
+| `bars` | `flat`, `dots`, `arcs` | `size` × 0.75 `size` |
+| `grid` | `flat`, `dots` | `size` × `size` |
+| `battery` | `flat`, `segmented` | `size` × 0.5 `size` |
+| `hourglass` | `flat` | `size` × `size` |
 
-`size` is a number of pixels (dp on Android, points on Apple), 48 by default; unlike `LoaderKit`, it takes no CSS lengths. Below 32, circular `wavy` draws flat, because the wave would not read at that size.
+`size` is a number of pixels (dp on Android, points on Apple), 48 by default; unlike `LoaderKit`, it takes no CSS lengths. Below 32, circular `wavy` draws flat, because the wave would not read at that size. `hourglass` has no room for the percentage, so it ignores `showLabel`.
 
 Some designs move even with a fixed value: the waves of `wavy` and `liquid`, the stripes of `striped` and the sheen of `shimmer`.
 

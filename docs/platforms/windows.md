@@ -81,7 +81,7 @@ For UI Automation, the control reports itself as a progress bar.
 
 ## Progress indicators {#progress}
 
-`LoaderKitProgress` shows how much of a task is done: 30 designs across 9 types, determinate or indeterminate, with smooth value changes.
+`LoaderKitProgress` shows how much of a task is done: 50 designs across 10 types, determinate or indeterminate, with smooth value changes.
 
 ```xml
 <lk:LoaderKitProgress Type="Linear" Variant="Wavy" Value="{x:Bind ViewModel.Progress, Mode=OneWay}" />

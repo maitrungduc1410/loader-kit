@@ -5,7 +5,7 @@ layout: home
 hero:
   name: LoaderKit
   text: 用数据描述加载动画，原生渲染
-  tagline: 一份 JSON spec，在 Android、iOS、macOS、Windows 和 Web 上呈现完全相同的动效。从 50 个内置加载动画和 30 种进度样式里挑一个，或者描述你自己的。
+  tagline: 一份 JSON spec，在 Android、iOS、macOS、Windows 和 Web 上呈现完全相同的动效。从 50 个内置加载动画和 50 种进度样式里挑一个，或者描述你自己的。
   actions:
     - theme: brand
       text: 内置加载动画
@@ -27,8 +27,8 @@ features:
     link: /zh/guide/indicators
     linkText: 查看全部
   - icon: 📊
-    title: 30 种进度样式
-    details: Linear、circular、pie、gauge、liquid、border、bars、grid 和 battery，支持确定与不确定状态，value 变化时平滑过渡。
+    title: 50 种进度样式
+    details: Linear、circular、pie、gauge、liquid、border、bars、grid、battery 和 hourglass，支持确定与不确定状态，value 变化时平滑过渡。
     link: /zh/guide/progress
     linkText: 进度指示器
   - icon: 📱

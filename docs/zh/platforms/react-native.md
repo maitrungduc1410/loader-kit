@@ -70,7 +70,7 @@ import { LoaderKitView } from 'react-native-loader-kit';
 
 ## 进度指示器 {#progress}
 
-`LoaderKitProgress` 用来显示任务完成了多少：9 种 type、30 种样式。把 `value` 设为 [0, 1] 内的数，或设为 `null` 显示不确定状态的动画。新的 value 会沿一条贴合你更新节奏的曲线平滑过渡，且永远不会超过真实值；`smooth={false}` 则直接跳到新值。
+`LoaderKitProgress` 用来显示任务完成了多少：10 种 type、50 种样式。把 `value` 设为 [0, 1] 内的数，或设为 `null` 显示不确定状态的动画。新的 value 会沿一条贴合你更新节奏的曲线平滑过渡，且永远不会超过真实值；`smooth={false}` 则直接跳到新值。
 
 ```tsx
 import { LoaderKitProgress } from 'react-native-loader-kit';

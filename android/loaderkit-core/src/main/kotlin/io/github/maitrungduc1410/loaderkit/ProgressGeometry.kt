@@ -2,6 +2,7 @@ package io.github.maitrungduc1410.loaderkit
 
 import kotlin.math.PI
 import kotlin.math.abs
+import kotlin.math.atan2
 import kotlin.math.ceil
 import kotlin.math.cos
 import kotlin.math.floor
@@ -75,6 +76,8 @@ public class ResolvedProgress(options: ProgressOptions = ProgressOptions()) {
                 ProgressVariant.Glow -> t + 18
                 ProgressVariant.Dots -> max(6.0, t * 2) * 2.3
                 ProgressVariant.Steps -> 2 * max(7.0, t * 1.75) + 4
+                ProgressVariant.Chevrons -> 2 * max(3.0, t * 1.5) + t + 4
+                ProgressVariant.Ticks -> 2 * max(4.0, t * 2.5) + t + 4
                 else -> t + 4
             }
             if (showLabel && !labelInside) height = max(height, 18.0)
@@ -97,7 +100,11 @@ public class ResolvedProgress(options: ProgressOptions = ProgressOptions()) {
 
     /** Padding between a border and its content, so the stroke does not cover it. */
     public val contentInset: Double
-        get() = if (type == ProgressType.Border) thickness + trackGap else 0.0
+        get() = when {
+            type != ProgressType.Border -> 0.0
+            variant == ProgressVariant.Glow -> thickness + trackGap + BORDER_GLOW
+            else -> thickness + trackGap
+        }
 
     override fun equals(other: Any?): Boolean = other is ResolvedProgress && fields == other.fields
 
@@ -113,12 +120,16 @@ public class ResolvedProgress(options: ProgressOptions = ProgressOptions()) {
         val THICKNESS = mapOf(
             "linear:flat" to 4.0, "linear:wavy" to 4.0, "linear:segmented" to 6.0, "linear:striped" to 10.0,
             "linear:shimmer" to 8.0, "linear:glow" to 3.0, "linear:dots" to 4.0, "linear:steps" to 3.0,
-            "circular:gradient" to 5.0, "circular:ticks" to 3.0, "gauge" to 6.0, "liquid" to 3.0, "border" to 3.0,
-            "battery" to 3.0,
+            "linear:gradient" to 6.0, "linear:chevrons" to 3.0, "linear:ticks" to 2.0,
+            "circular:gradient" to 5.0, "circular:ticks" to 3.0, "circular:orbit" to 3.0, "circular:dual" to 3.0,
+            "gauge" to 6.0, "gauge:needle" to 3.0, "liquid" to 3.0, "border" to 3.0, "bars:arcs" to 4.0,
+            "battery" to 3.0, "hourglass" to 3.0,
         )
         val SEGMENTS = mapOf(
-            "linear:segmented" to 10.0, "linear:dots" to 8.0, "linear:steps" to 4.0, "circular:segmented" to 12.0,
-            "circular:ticks" to 12.0, "circular:dots" to 10.0, "gauge:segmented" to 10.0, "bars" to 5.0, "grid" to 5.0,
+            "linear:segmented" to 10.0, "linear:dots" to 8.0, "linear:steps" to 4.0, "linear:chevrons" to 12.0,
+            "linear:ticks" to 24.0, "circular:segmented" to 12.0, "circular:ticks" to 12.0, "circular:dots" to 10.0,
+            "gauge:segmented" to 10.0, "gauge:needle" to 10.0, "gauge:dots" to 12.0, "pie:segmented" to 8.0,
+            "border:segmented" to 20.0, "bars" to 5.0, "bars:arcs" to 4.0, "grid" to 5.0, "battery:segmented" to 5.0,
         )
 
         fun finite(value: Double?, fallback: Double): Double = if (value != null && value.isFinite()) value else fallback
@@ -182,6 +193,7 @@ public object ProgressGeometry {
                     ProgressType.Pie -> b.pie(size)
                     ProgressType.Gauge -> b.gauge(size)
                     ProgressType.Liquid -> b.liquid(size)
+                    ProgressType.Hourglass -> b.hourglass(size)
                     else -> b.grid(size)
                 }
                 ProgressDrawing((width - size) / 2, (height - size) / 2, b.out)
@@ -193,6 +205,12 @@ public object ProgressGeometry {
 private const val TAU = PI * 2
 private const val TOP = -PI / 2
 private const val MIN_WAVY_SIZE = 32.0
+
+/** Room the glow of border glow takes outside its stroke. */
+private const val BORDER_GLOW = 4.0
+
+/** Half the height of the heart of [heartPoints], for a half width of 1. */
+private const val HEART_HALF_HEIGHT = 14.5 / 16
 
 /** Shorter waves alias: the wave is sampled every 2 units of length. */
 private const val MIN_WAVELENGTH = 8.0
@@ -258,6 +276,19 @@ private fun circularArc(time: Double): Pair<Double, Double> {
     val tail = easeInOut(clamp01((u - 0.5) / 0.5)) * 0.72
     val base = mod(k * 0.72 + time / 2.2, 1.0)
     return (base + tail) * TAU to (base + head) * TAU + 0.12
+}
+
+/** A heart centered at [cx], [cy] and [half] wide on each side, clockwise from the notch at the top. */
+private fun heartPoints(cx: Double, cy: Double, half: Double): List<Double> {
+    val points = ArrayList<Double>(144)
+    for (i in 0 until 72) {
+        val a = i * TAU / 72
+        val sa = sin(a)
+        val y = (-13 * cos(a) + 5 * cos(2 * a) + 2 * cos(3 * a) + cos(4 * a) - 2.5) / 16
+        points.add(cx + half * sa * sa * sa)
+        points.add(cy + half * y)
+    }
+    return points
 }
 
 private class BorderPath(val points: List<Double>, val lengths: List<Double>, val total: Double)
@@ -342,6 +373,10 @@ private class Builder(private val p: ResolvedProgress, private val s: ProgressSt
             ProgressVariant.Glow -> linearGlow(barWidth, h)
             ProgressVariant.Dots -> linearDots(barWidth, h)
             ProgressVariant.Steps -> linearSteps(barWidth, h)
+            ProgressVariant.Gradient -> linearGradient(barWidth, h)
+            ProgressVariant.Center -> linearCenter(barWidth, h)
+            ProgressVariant.Chevrons -> linearChevrons(barWidth, h)
+            ProgressVariant.Ticks -> linearTicks(barWidth, h)
             else -> linear(barWidth, h)
         }
         if (s.indeterminate || !p.showLabel || !labelFits) return
@@ -578,6 +613,84 @@ private class Builder(private val p: ResolvedProgress, private val s: ProgressSt
         }
     }
 
+    private fun linearGradient(w: Double, h: Double) {
+        val t = p.thickness
+        val cap = p.strokeCap
+        val r = if (cap == ProgressStrokeCap.Round) t / 2 else 0.0
+        val cy = h / 2
+        val x0 = r
+        val x1 = w - r
+        val len = x1 - x0
+        hLine(x0, x1, cy, t, cap, solid(ProgressColorRole.Track))
+        fun active(a: Double, b: Double) {
+            val from = x0 + a * len
+            val to = x0 + b * len
+            val stops = listOf(ProgressColorStop(0.0, ProgressColorRole.Color, 0.15), ProgressColorStop(1.0, ProgressColorRole.Color, 1.0))
+            hLine(from, to, cy, t, cap, ProgressPaint.Linear(from - r, 0.0, to + r, 0.0, stops))
+        }
+        if (s.indeterminate) {
+            for ((a, b) in linearSegments(mod(s.indeterminateTime / 1.75, 1.0))) active(a, b)
+            return
+        }
+        val v = clamp01(s.value)
+        if (v > 0.0005) active(0.0, v)
+    }
+
+    private fun linearCenter(w: Double, h: Double) {
+        val t = p.thickness
+        val cap = p.strokeCap
+        val r = if (cap == ProgressStrokeCap.Round) t / 2 else 0.0
+        val cy = h / 2
+        val x0 = r
+        val len = w - 2 * r
+        hLine(x0, x0 + len, cy, t, cap, solid(ProgressColorRole.Track))
+        val half: Double
+        var alpha = 1.0
+        if (s.indeterminate) {
+            val u = mod(s.indeterminateTime / 1.6, 1.0)
+            half = emphasized(u) / 2
+            alpha = 1 - standard(clamp01((u - 0.55) / 0.45))
+        } else {
+            half = clamp01(s.value) / 2
+        }
+        if (half > 0.00025 && alpha > 0.01) hLine(x0 + (0.5 - half) * len, x0 + (0.5 + half) * len, cy, t, cap, solid(ProgressColorRole.Color, alpha))
+    }
+
+    private fun linearChevrons(w: Double, h: Double) {
+        val n = p.segments
+        val t = p.thickness
+        val cy = h / 2
+        val half = max(3.0, t * 1.5)
+        val cell = (w - t) / n
+        val depth = min(cell * 0.5, half)
+        if (cell <= 0) return
+        val center = mod(s.indeterminateTime / 1.4, 1.0) * (n + 4) - 2
+        for (i in 0 until n) {
+            val x = t / 2 + i * cell + (cell - depth) / 2
+            val points = listOf(x, cy - half, x + depth, cy, x, cy + half)
+            out.add(ProgressCommand.Polyline(points, false, t, p.strokeCap, solid(ProgressColorRole.Track)))
+            val k = if (s.indeterminate) bump(i + 0.5 - center, 3.0) else clamp01(clamp01(s.value) * n - i)
+            if (k > 0.01) out.add(ProgressCommand.Polyline(points, false, t, p.strokeCap, solid(ProgressColorRole.Color, k)))
+        }
+    }
+
+    private fun linearTicks(w: Double, h: Double) {
+        val n = p.segments
+        val t = p.thickness
+        val cy = h / 2
+        val long = max(4.0, t * 2.5)
+        val short = long * 0.55
+        val center = mod(s.indeterminateTime / 1.6, 1.0) * (n + 6) - 3
+        for (i in 0 until n) {
+            val x = if (n == 1) w / 2 else t / 2 + i * (w - t) / (n - 1)
+            val reach = if (i % 4 == 0) long else short
+            fun tick(paint: ProgressPaint) = ProgressCommand.Line(x, cy - reach, x, cy + reach, t, p.strokeCap, paint)
+            out.add(tick(solid(ProgressColorRole.Track)))
+            val k = if (s.indeterminate) bump(i - center, 3.5) else clamp01(clamp01(s.value) * n - i)
+            if (k > 0.01) out.add(tick(solid(ProgressColorRole.Color, k)))
+        }
+    }
+
     // ---------- circular family ----------
 
     fun circularAny(size: Double) {
@@ -586,6 +699,10 @@ private class Builder(private val p: ResolvedProgress, private val s: ProgressSt
             ProgressVariant.Gradient -> circularGradient(size)
             ProgressVariant.Ticks -> circularTicks(size)
             ProgressVariant.Dots -> circularDots(size)
+            ProgressVariant.Glow -> circularGlow(size)
+            ProgressVariant.Split -> circularSplit(size)
+            ProgressVariant.Orbit -> circularOrbit(size)
+            ProgressVariant.Dual -> circularDual(size)
             else -> circular(size)
         }
         if (p.showLabel && !s.indeterminate) {
@@ -735,7 +852,115 @@ private class Builder(private val p: ResolvedProgress, private val s: ProgressSt
         }
     }
 
+    /** Arc of the active part of a ring: the indeterminate arc, or from the top to the value. Null draws nothing. */
+    private fun activeArc(): Pair<Double, Double>? {
+        if (s.indeterminate) {
+            val (a0, a1) = circularArc(s.indeterminateTime)
+            return TOP + a0 to TOP + a1
+        }
+        val v = clamp01(s.value)
+        return if (v > 0.0005) TOP to TOP + v * TAU else null
+    }
+
+    private fun circularGlow(size: Double) {
+        val t = p.thickness
+        val cap = p.strokeCap
+        val cx = size / 2
+        val cy = size / 2
+        val r = (size - t) / 2 - 4
+        if (r <= 0) return
+        arc(cx, cy, r, 0.0, TAU, t, ProgressStrokeCap.Butt, solid(ProgressColorRole.Color, 0.14))
+        val (a0, a1) = activeArc() ?: return
+        arc(cx, cy, r, a0, a1, t + 8, cap, solid(ProgressColorRole.Color, 0.12))
+        arc(cx, cy, r, a0, a1, t + 4, cap, solid(ProgressColorRole.Color, 0.22))
+        arc(cx, cy, r, a0, a1, t, cap, solid(ProgressColorRole.Color))
+        val hx = cx + r * cos(a1)
+        val hy = cy + r * sin(a1)
+        circle(hx, hy, t / 2 + 4, fade(hx, hy, t / 2 + 4, 0.5))
+    }
+
+    private fun circularSplit(size: Double) {
+        val t = p.thickness
+        val cap = p.strokeCap
+        val cx = size / 2
+        val cy = size / 2
+        val r = (size - t) / 2
+        if (r <= 0) return
+        arc(cx, cy, r, 0.0, TAU, t, ProgressStrokeCap.Butt, solid(ProgressColorRole.Track))
+        var tail = 0.0
+        val head: Double
+        if (s.indeterminate) {
+            val u = mod(s.indeterminateTime / 1.6, 1.0)
+            head = emphasized(clamp01(u / 0.6)) * PI
+            tail = standard(clamp01((u - 0.3) / 0.7)) * PI
+        } else {
+            head = clamp01(s.value) * PI
+        }
+        if (head - tail <= 0.0005) return
+        arc(cx, cy, r, TOP + tail, TOP + head, t, cap, solid(ProgressColorRole.Color))
+        arc(cx, cy, r, TOP - head, TOP - tail, t, cap, solid(ProgressColorRole.Color))
+    }
+
+    private fun circularOrbit(size: Double) {
+        val ring = max(1.0, p.thickness * 0.5)
+        val dot = max(2.0, p.thickness)
+        val cx = size / 2
+        val cy = size / 2
+        val r = size / 2 - dot * 1.6
+        if (r <= 0) return
+        arc(cx, cy, r, 0.0, TAU, ring, ProgressStrokeCap.Butt, solid(ProgressColorRole.Track))
+        val head: Double
+        val tail: Double
+        var start = 0.0
+        if (s.indeterminate) {
+            head = TOP + mod(s.indeterminateTime / 1.2, 1.0) * TAU
+            tail = head - 0.35 * TAU
+        } else {
+            tail = TOP
+            head = TOP + clamp01(s.value) * TAU
+            start = 0.15
+        }
+        if (head - tail > 0.0005) {
+            val stops = listOf(
+                ProgressColorStop(0.0, ProgressColorRole.Color, start),
+                ProgressColorStop(min(1.0, (head - tail) / TAU), ProgressColorRole.Color, 1.0),
+            )
+            arc(cx, cy, r, tail, head, ring * 1.6, ProgressStrokeCap.Butt, ProgressPaint.Conic(cx, cy, tail, stops))
+        }
+        val hx = cx + r * cos(head)
+        val hy = cy + r * sin(head)
+        circle(hx, hy, dot * 1.6, fade(hx, hy, dot * 1.6, 0.35))
+        circle(hx, hy, dot, solid(ProgressColorRole.Color))
+    }
+
+    private fun circularDual(size: Double) {
+        val t = p.thickness
+        val cap = p.strokeCap
+        val cx = size / 2
+        val cy = size / 2
+        val outer = (size - t) / 2
+        val inner = outer - t - max(2.0, p.trackGap * 0.75)
+        if (inner <= 0) return
+        arc(cx, cy, outer, 0.0, TAU, t, ProgressStrokeCap.Butt, solid(ProgressColorRole.Track))
+        arc(cx, cy, inner, 0.0, TAU, t, ProgressStrokeCap.Butt, solid(ProgressColorRole.Track))
+        if (s.indeterminate) {
+            val (a0, a1) = circularArc(s.indeterminateTime)
+            val (b0, b1) = circularArc(s.indeterminateTime * 1.3 + 0.7)
+            arc(cx, cy, outer, TOP + a0, TOP + a1, t, cap, solid(ProgressColorRole.Color))
+            arc(cx, cy, inner, TOP - b1, TOP - b0, t, cap, solid(ProgressColorRole.Color, 0.6))
+            return
+        }
+        val v = clamp01(s.value)
+        if (v <= 0.0005) return
+        arc(cx, cy, outer, TOP, TOP + v * TAU, t, cap, solid(ProgressColorRole.Color))
+        arc(cx, cy, inner, TOP - v * TAU, TOP, t, cap, solid(ProgressColorRole.Color, 0.6))
+    }
+
     fun pie(size: Double) {
+        if (p.variant == ProgressVariant.Segmented) {
+            pieSegmented(size)
+            return
+        }
         val t = max(1.0, p.thickness * 0.6)
         val cx = size / 2
         val cy = size / 2
@@ -756,6 +981,116 @@ private class Builder(private val p: ResolvedProgress, private val s: ProgressSt
         out.add(ProgressCommand.Sector(cx, cy, inner, start, end, solid(ProgressColorRole.Color)))
     }
 
+    private fun pieSegmented(size: Double) {
+        val n = p.segments
+        val count = n.toDouble()
+        val cx = size / 2
+        val cy = size / 2
+        val r = size / 2
+        val gapAngle = if (n > 1) max(2.0, p.trackGap) / r else 0.0
+        val segment = TAU / count - gapAngle
+        if (segment <= 0.01) return
+        val center = mod(s.indeterminateTime / 1.2, 1.0) * count
+        for (i in 0 until n) {
+            val a0 = TOP + i * (segment + gapAngle) + gapAngle / 2
+            out.add(ProgressCommand.Sector(cx, cy, r, a0, a0 + segment, solid(ProgressColorRole.Track)))
+            if (s.indeterminate) {
+                val m = mod(i + 0.5 - center, count)
+                val k = bump(min(m, count - m), count * 0.32)
+                if (k > 0.01) out.add(ProgressCommand.Sector(cx, cy, r, a0, a0 + segment, solid(ProgressColorRole.Color, k)))
+                continue
+            }
+            val fill = clamp01(clamp01(s.value) * count - i)
+            if (fill > 0.001) out.add(ProgressCommand.Sector(cx, cy, r, a0, a0 + segment * fill, solid(ProgressColorRole.Color)))
+        }
+    }
+
+    /** Value the gauge shows: the value, or a needle sweeping back and forth. */
+    private fun gaugeValue(): Double =
+        if (s.indeterminate) 0.5 - 0.5 * cos(s.indeterminateTime * PI * 0.8) else clamp01(s.value)
+
+    private fun gaugeNeedle(size: Double, start: Double) {
+        val t = p.thickness
+        val n = p.segments
+        val cx = size / 2
+        val cy = size / 2
+        val r = (size - t) / 2
+        val sweep = p.sweepAngle
+        val v = gaugeValue()
+        val at = start + v * sweep
+        arc(cx, cy, r, start, start + sweep, t, p.strokeCap, solid(ProgressColorRole.Track))
+        if (v > 0.0005) arc(cx, cy, r, start, at, t, p.strokeCap, solid(ProgressColorRole.Color))
+        val outer = r - t / 2 - max(1.5, size * 0.03)
+        val inner = outer - max(2.0, size * 0.07)
+        val tickWidth = max(1.0, t * 0.4)
+        for (i in 0..n) {
+            val a = start + i * sweep / n
+            val ca = cos(a)
+            val sa = sin(a)
+            val lit = i.toDouble() / n <= v + 1e-9
+            val paint = solid(if (lit) ProgressColorRole.Color else ProgressColorRole.Track)
+            out.add(ProgressCommand.Line(cx + inner * ca, cy + inner * sa, cx + outer * ca, cy + outer * sa, tickWidth, ProgressStrokeCap.Round, paint))
+        }
+        val length = inner - max(1.5, size * 0.04)
+        val base = max(1.5, size * 0.035)
+        val ca = cos(at)
+        val sa = sin(at)
+        val needle = listOf(cx + length * ca, cy + length * sa, cx - base * sa, cy + base * ca, cx + base * sa, cy - base * ca)
+        out.add(ProgressCommand.Polygon(needle, solid(ProgressColorRole.Color)))
+        circle(cx, cy, max(2.5, size * 0.07), solid(ProgressColorRole.Color))
+    }
+
+    private fun gaugeGradient(size: Double, start: Double) {
+        val t = p.thickness
+        val cx = size / 2
+        val cy = size / 2
+        val r = (size - t) / 2
+        val sweep = p.sweepAngle
+        arc(cx, cy, r, start, start + sweep, t, p.strokeCap, solid(ProgressColorRole.Track))
+        var from = start
+        val to: Double
+        if (s.indeterminate) {
+            val length = 0.35 * sweep
+            from = start + (0.5 - 0.5 * cos(s.indeterminateTime * PI)) * (sweep - length)
+            to = from + length
+        } else {
+            to = start + clamp01(s.value) * sweep
+        }
+        if (to - from <= 0.0005) return
+        // A round cap reaches back past `from`, where the conic would wrap around to its last stop.
+        val lead = if (p.strokeCap == ProgressStrokeCap.Round) min(PI / 4, atan2(t / 2, max(r - t / 2, 1e-6))) else 0.0
+        val stops = listOf(
+            ProgressColorStop(0.0, ProgressColorRole.Color, 0.2),
+            ProgressColorStop(lead / TAU, ProgressColorRole.Color, 0.2),
+            ProgressColorStop((to - from + lead) / TAU, ProgressColorRole.Color, 1.0),
+        )
+        arc(cx, cy, r, from, to, t, p.strokeCap, ProgressPaint.Conic(cx, cy, from - lead, stops))
+    }
+
+    private fun gaugeDots(size: Double, start: Double) {
+        val n = p.segments
+        val count = n.toDouble()
+        val dr = max(1.5, p.thickness * 0.5)
+        val cx = size / 2
+        val cy = size / 2
+        val r = size / 2 - dr - 1
+        val sweep = p.sweepAngle
+        val center = (0.5 - 0.5 * cos(s.indeterminateTime * PI)) * count
+        for (i in 0 until n) {
+            val a = if (n == 1) start + sweep / 2 else start + i * sweep / (n - 1)
+            val x = cx + r * cos(a)
+            val y = cy + r * sin(a)
+            circle(x, y, dr, solid(ProgressColorRole.Track))
+            if (s.indeterminate) {
+                val k = bump(i + 0.5 - center, 2.0)
+                if (k > 0.01) circle(x, y, dr, solid(ProgressColorRole.Color, k))
+                continue
+            }
+            val fill = clamp01(clamp01(s.value) * count - i)
+            if (fill > 0) circle(x, y, dr * sqrt(fill), solid(ProgressColorRole.Color))
+        }
+    }
+
     fun gauge(size: Double) {
         val t = p.thickness
         val cap = p.strokeCap
@@ -767,7 +1102,13 @@ private class Builder(private val p: ResolvedProgress, private val s: ProgressSt
         val end = start + sweep
         if (r > 0) {
             val gapAngle = (p.trackGap + if (cap == ProgressStrokeCap.Round) t else 0.0) / r
-            if (p.variant == ProgressVariant.Segmented) {
+            if (p.variant == ProgressVariant.Needle) {
+                gaugeNeedle(size, start)
+            } else if (p.variant == ProgressVariant.Gradient) {
+                gaugeGradient(size, start)
+            } else if (p.variant == ProgressVariant.Dots) {
+                gaugeDots(size, start)
+            } else if (p.variant == ProgressVariant.Segmented) {
                 segmentedArc(cx, cy, r, start, sweep, false)
             } else if (s.indeterminate) {
                 val length = 0.24 * sweep
@@ -786,7 +1127,9 @@ private class Builder(private val p: ResolvedProgress, private val s: ProgressSt
             }
         }
         if (p.showLabel && !s.indeterminate) {
-            text(cx, cy, labelSize(size), ProgressGeometry.label(s.value), false, solid(ProgressColorRole.Label))
+            val needle = p.variant == ProgressVariant.Needle
+            val y = if (needle) cy + r * 0.55 else cy
+            text(cx, y, if (needle) labelSize(size) * 0.7 else labelSize(size), ProgressGeometry.label(s.value), false, solid(ProgressColorRole.Label))
         }
     }
 
@@ -808,7 +1151,59 @@ private class Builder(private val p: ResolvedProgress, private val s: ProgressSt
         return points
     }
 
+    /** Like [liquidSurface], for a liquid filling the box from [top] to [bottom]. */
+    private fun liquidSurfaceBox(
+        left: Double, right: Double, top: Double, bottom: Double, level: Double, amp: Double, wavelength: Double, phase: Double,
+    ): List<Double> {
+        val y = bottom - level * (bottom - top)
+        val end = right + 2
+        val n = max(1, steps((end - left) / 2))
+        val points = ArrayList<Double>(2 * n + 6)
+        points.add(left)
+        points.add(bottom + 1)
+        for (i in 0..n) {
+            val x = left + (end - left) * i / n
+            points.add(x)
+            points.add(y + amp * sin(x / wavelength * TAU + phase))
+        }
+        points.add(end)
+        points.add(bottom + 1)
+        return points
+    }
+
+    private fun liquidHeart(size: Double) {
+        val ring = max(1.5, p.thickness * 0.6)
+        val cx = size / 2
+        val cy = size / 2
+        val half = (size - ring) / 2
+        val inner = half - ring / 2 - max(1.5, p.trackGap * 0.6)
+        if (inner > 0) {
+            val top = cy - inner * HEART_HALF_HEIGHT
+            val bottom = cy + inner * HEART_HALF_HEIGHT
+            val level = if (s.indeterminate) 0.5 + 0.14 * sin(s.indeterminateTime * 1.8) else clamp01(s.value)
+            val amp = inner * if (s.indeterminate) 0.09 else 0.07 * s.wave
+            val wavelength = inner * 1.35
+            val cycles = s.time * p.waveSpeed * 0.8
+            val front = liquidSurfaceBox(cx - inner, cx + inner, top, bottom, level, amp, wavelength, mod(cycles, 1.0) * TAU)
+            val back = liquidSurfaceBox(cx - inner, cx + inner, top, bottom, level, amp * 0.8, wavelength, 2 - mod(cycles * 0.7, 1.0) * TAU)
+            val content = nested {
+                rect(cx - inner, top, inner * 2, bottom - top, 0.0, solid(ProgressColorRole.Track))
+                out.add(ProgressCommand.Polygon(back, solid(ProgressColorRole.Color, 0.45)))
+                out.add(ProgressCommand.Polygon(front, solid(ProgressColorRole.Color)))
+                if (p.showLabel && !s.indeterminate) {
+                    invertedLabel(ProgressGeometry.label(s.value), cx, cy - inner * 0.12, labelSize(size) * 0.8, ProgressClipShape.Polygon(front))
+                }
+            }
+            out.add(ProgressCommand.Clip(ProgressClipShape.Polygon(heartPoints(cx, cy, inner)), content))
+        }
+        out.add(ProgressCommand.Polyline(heartPoints(cx, cy, half), true, ring, ProgressStrokeCap.Butt, solid(ProgressColorRole.Color)))
+    }
+
     fun liquid(size: Double) {
+        if (p.variant == ProgressVariant.Heart) {
+            liquidHeart(size)
+            return
+        }
         val ring = max(1.5, p.thickness * 0.6)
         val cx = size / 2
         val cy = size / 2
@@ -912,22 +1307,63 @@ private class Builder(private val p: ResolvedProgress, private val s: ProgressSt
 
     fun border(w: Double, h: Double) {
         val t = p.thickness
-        if (w <= t || h <= t) return
-        val path = borderPath(w, h, t / 2, p.cornerRadius - t / 2)
-        out.add(ProgressCommand.Polyline(path.points.subList(0, path.points.size - 2).toList(), true, t, ProgressStrokeCap.Butt, solid(ProgressColorRole.Track)))
+        val glow = if (p.variant == ProgressVariant.Glow) BORDER_GLOW else 0.0
+        val inset = t / 2 + glow
+        if (w <= 2 * inset || h <= 2 * inset) return
+        val path = borderPath(w, h, inset, p.cornerRadius - inset)
+        if (p.variant == ProgressVariant.Segmented) {
+            borderSegmented(path)
+            return
+        }
+        val track = if (glow > 0) solid(ProgressColorRole.Color, 0.14) else solid(ProgressColorRole.Track)
+        out.add(ProgressCommand.Polyline(path.points.subList(0, path.points.size - 2).toList(), true, t, ProgressStrokeCap.Butt, track))
+        fun active(a: Double, b: Double) {
+            if (glow > 0) {
+                strokeAlong(path, a, b, t + 2 * glow, p.strokeCap, solid(ProgressColorRole.Color, 0.12))
+                strokeAlong(path, a, b, t + glow, p.strokeCap, solid(ProgressColorRole.Color, 0.22))
+            }
+            strokeAlong(path, a, b, t, p.strokeCap, solid(ProgressColorRole.Color))
+        }
         if (s.indeterminate) {
             val (a0, a1) = circularArc(s.indeterminateTime)
             val from = mod(a0 / TAU, 1.0)
-            strokeAlong(path, from, from + (a1 - a0) / TAU, t, p.strokeCap, solid(ProgressColorRole.Color))
+            active(from, from + (a1 - a0) / TAU)
         } else {
             val v = clamp01(s.value)
-            if (v > 0.0005) strokeAlong(path, 0.0, v, t, p.strokeCap, solid(ProgressColorRole.Color))
+            if (v > 0.0005) active(0.0, v)
+        }
+    }
+
+    private fun borderSegmented(path: BorderPath) {
+        val n = p.segments
+        val count = n.toDouble()
+        val t = p.thickness
+        val cap = p.strokeCap
+        val gap = if (n > 1) (max(2.0, p.trackGap) + if (cap == ProgressStrokeCap.Round) t else 0.0) / path.total else 0.0
+        val segment = 1 / count - gap
+        if (segment <= 0) return
+        val center = mod(s.indeterminateTime / 1.4, 1.0) * count
+        for (i in 0 until n) {
+            val a = i / count + gap / 2
+            strokeAlong(path, a, a + segment, t, cap, solid(ProgressColorRole.Track))
+            if (s.indeterminate) {
+                val m = mod(i + 0.5 - center, count)
+                val k = bump(min(m, count - m), count * 0.3)
+                if (k > 0.01) strokeAlong(path, a, a + segment, t, cap, solid(ProgressColorRole.Color, k))
+                continue
+            }
+            val fill = clamp01(clamp01(s.value) * count - i)
+            if (fill > 0.001) strokeAlong(path, a, a + segment * fill, t, cap, solid(ProgressColorRole.Color))
         }
     }
 
     // ---------- bars, grid, battery ----------
 
     fun bars(w: Double, h: Double) {
+        if (p.variant == ProgressVariant.Arcs) {
+            barsArcs(w, h)
+            return
+        }
         val n = p.segments
         val gap = max(3.0, p.trackGap)
         val width = (w - gap * (n - 1)) / n
@@ -938,11 +1374,41 @@ private class Builder(private val p: ResolvedProgress, private val s: ProgressSt
             val height = h * (0.25 + 0.75 * (i + 1) / n)
             val x = i * (width + gap)
             val y = h - height
-            rect(x, y, width, height, radius, solid(ProgressColorRole.Track))
             val fill = if (s.indeterminate) bump(i + 0.5 - center, 1.6) else clamp01(clamp01(s.value) * n - i)
+            if (p.variant == ProgressVariant.Dots) {
+                val d = min(width, h)
+                val pitch = d + max(1.5, gap * 0.5)
+                val count = max(1, floor((height - d) / pitch + 1e-9).toInt() + 1)
+                for (j in 0 until count) {
+                    val dy = h - d / 2 - j * pitch
+                    circle(x + width / 2, dy, d / 2, solid(ProgressColorRole.Track))
+                    val k = clamp01(fill * count - j)
+                    if (k > 0.01) circle(x + width / 2, dy, d / 2, solid(ProgressColorRole.Color, k))
+                }
+                continue
+            }
+            rect(x, y, width, height, radius, solid(ProgressColorRole.Track))
             if (fill <= 0.001) continue
             val inner = nested { rect(x, h - height * fill, width, height * fill, 0.0, solid(ProgressColorRole.Color)) }
             out.add(ProgressCommand.Clip(rectClip(x, y, width, height, radius), inner))
+        }
+    }
+
+    private fun barsArcs(w: Double, h: Double) {
+        val n = p.segments
+        val t = p.thickness
+        val spread = PI / 4
+        val cx = w / 2
+        val cy = h - t
+        val outer = min(cy - t / 2, (w / 2 - t / 2) / sin(spread))
+        if (outer <= 0) return
+        circle(cx, cy, t * 0.8, solid(ProgressColorRole.Color))
+        val center = mod(s.indeterminateTime / 1.4, 1.0) * (n + 2) - 1
+        for (i in 0 until n) {
+            val r = outer * (i + 1) / n
+            arc(cx, cy, r, TOP - spread, TOP + spread, t, p.strokeCap, solid(ProgressColorRole.Track))
+            val k = if (s.indeterminate) bump(i + 0.5 - center, 1.5) else clamp01(clamp01(s.value) * n - i)
+            if (k > 0.01) arc(cx, cy, r, TOP - spread, TOP + spread, t, p.strokeCap, solid(ProgressColorRole.Color, k))
         }
     }
 
@@ -958,11 +1424,15 @@ private class Builder(private val p: ResolvedProgress, private val s: ProgressSt
             for (c in 0 until k) {
                 val x = c * (cell + gap)
                 val y = r * (cell + gap)
-                rect(x, y, cell, cell, radius, solid(ProgressColorRole.Track))
+                val dots = p.variant == ProgressVariant.Dots
+                if (dots) circle(x + cell / 2, y + cell / 2, cell / 2, solid(ProgressColorRole.Track))
+                else rect(x, y, cell, cell, radius, solid(ProgressColorRole.Track))
                 val fill = if (s.indeterminate) bump(r + c - center, 1.8) else clamp01(clamp01(s.value) * k * k - rank[r * k + c])
                 if (fill <= 0.01) continue
                 val side = cell * (0.3 + 0.7 * fill)
-                rect(x + (cell - side) / 2, y + (cell - side) / 2, side, side, radius * side / cell, solid(ProgressColorRole.Color, min(1.0, fill * 1.6)))
+                val paint = solid(ProgressColorRole.Color, min(1.0, fill * 1.6))
+                if (dots) circle(x + cell / 2, y + cell / 2, side / 2, paint)
+                else rect(x + (cell - side) / 2, y + (cell - side) / 2, side, side, radius * side / cell, paint)
             }
         }
     }
@@ -1000,8 +1470,22 @@ private class Builder(private val p: ResolvedProgress, private val s: ProgressSt
             filled = iw * clamp01(s.value)
         }
         val content = nested {
-            rect(pad, pad, iw, ih, 0.0, solid(ProgressColorRole.Track))
-            rect(pad, pad, filled, ih, 0.0, solid(ProgressColorRole.Color, alpha))
+            if (p.variant == ProgressVariant.Segmented) {
+                val n = p.segments
+                val gap = max(1.5, p.trackGap * 0.5)
+                val cell = (iw - gap * (n - 1)) / n
+                if (cell > 0) {
+                    for (i in 0 until n) {
+                        val x = pad + i * (cell + gap)
+                        rect(x, pad, cell, ih, 0.0, solid(ProgressColorRole.Track))
+                        val k = clamp01(filled / iw * n - i)
+                        if (k > 0.01) rect(x, pad, cell, ih, 0.0, solid(ProgressColorRole.Color, alpha * k))
+                    }
+                }
+            } else {
+                rect(pad, pad, iw, ih, 0.0, solid(ProgressColorRole.Track))
+                rect(pad, pad, filled, ih, 0.0, solid(ProgressColorRole.Color, alpha))
+            }
             if (p.showLabel && !s.indeterminate) {
                 invertedLabel(ProgressGeometry.label(s.value), pad + iw / 2, pad + ih / 2, max(10.0, min(ih * 0.55, 30.0)), rectClip(pad, pad, filled, ih, 0.0))
             }
@@ -1018,6 +1502,58 @@ private class Builder(private val p: ResolvedProgress, private val s: ProgressSt
             }
             out.add(ProgressCommand.Polygon(points, solid(ProgressColorRole.White)))
             out.add(ProgressCommand.Polyline(points, true, 1.2, ProgressStrokeCap.Butt, solid(ProgressColorRole.Color)))
+        }
+    }
+
+    // ---------- hourglass ----------
+
+    fun hourglass(size: Double) {
+        val ring = max(1.5, p.thickness * 0.5)
+        val cx = size / 2
+        val cy = size / 2
+        val half = size * 0.3
+        val top = size * 0.1
+        val bottom = size * 0.9
+        val neck = max(1.0, size * 0.035)
+        val left = cx - half
+        val right = cx + half
+        val bulb = cy - top
+        val v: Double
+        var flip = 0.0
+        if (s.indeterminate) {
+            val u = mod(s.indeterminateTime / 2.4, 1.0)
+            v = easeInOut(clamp01(u / 0.8))
+            flip = PI * easeInOut(clamp01((u - 0.8) / 0.2))
+        } else {
+            v = clamp01(s.value)
+        }
+        val lift = 1 - 0.2 * sin(flip)
+        val cos = cos(flip) * lift
+        val sin = sin(flip) * lift
+        fun turn(vararg points: Double): List<Double> {
+            val turned = ArrayList<Double>(points.size)
+            for (i in points.indices step 2) {
+                val dx = points[i] - cx
+                val dy = points[i + 1] - cy
+                turned.add(cx + dx * cos - dy * sin)
+                turned.add(cy + dx * sin + dy * cos)
+            }
+            return turned
+        }
+        val glass = turn(left, top, right, top, cx + neck, cy, right, bottom, left, bottom, cx - neck, cy)
+        out.add(ProgressCommand.Polygon(glass, solid(ProgressColorRole.Track)))
+        val upper = bulb * sqrt(1 - v)
+        val sand = ArrayList<ProgressCommand>(2)
+        if (v < 0.9995) sand.add(ProgressCommand.Polygon(turn(left, cy - upper, right, cy - upper, right, cy, left, cy), solid(ProgressColorRole.Color)))
+        if (v > 0.0005) sand.add(ProgressCommand.Polygon(turn(left, cy + upper, right, cy + upper, right, bottom, left, bottom), solid(ProgressColorRole.Color)))
+        out.add(ProgressCommand.Clip(ProgressClipShape.Polygon(glass), sand))
+        if (v > 0.0005 && v < 0.9995 && flip == 0.0) {
+            out.add(ProgressCommand.Line(cx, cy, cx, cy + upper, max(1.0, neck * 0.8), ProgressStrokeCap.Butt, solid(ProgressColorRole.Color)))
+        }
+        out.add(ProgressCommand.Polyline(glass, true, ring, ProgressStrokeCap.Butt, solid(ProgressColorRole.Color, 0.7)))
+        for (y in doubleArrayOf(top, bottom)) {
+            val cap = turn(left - ring * 1.5, y, right + ring * 1.5, y)
+            out.add(ProgressCommand.Line(cap[0], cap[1], cap[2], cap[3], ring * 1.6, ProgressStrokeCap.Round, solid(ProgressColorRole.Color)))
         }
     }
 }

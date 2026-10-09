@@ -81,7 +81,7 @@ Với UI Automation, control tự khai báo là một progress bar.
 
 ## Progress indicator {#progress}
 
-`LoaderKitProgress` cho biết một tác vụ đã chạy được bao nhiêu: 30 mẫu thuộc 9 type, có value hoặc vô định, đổi value mượt.
+`LoaderKitProgress` cho biết một tác vụ đã chạy được bao nhiêu: 50 mẫu thuộc 10 type, có value hoặc vô định, đổi value mượt.
 
 ```xml
 <lk:LoaderKitProgress Type="Linear" Variant="Wavy" Value="{x:Bind ViewModel.Progress, Mode=OneWay}" />

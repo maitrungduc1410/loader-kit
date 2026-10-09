@@ -225,7 +225,7 @@ default and restarts the animation.
 ### Progress
 
 `LoaderKitProgressView` (UIKit, AppKit) and `LoaderKitProgress` (SwiftUI) show how much of a task
-is done: 30 designs across 9 types, with a value from 0 to 1 or, with `nil`, indeterminate. With
+is done: 50 designs across 10 types, with a value from 0 to 1 or, with `nil`, indeterminate. With
 `smooth` (on by default) they glide to every new value. Full guide:
 [maitrungduc1410.github.io/loader-kit/guide/progress](https://maitrungduc1410.github.io/loader-kit/guide/progress)
 

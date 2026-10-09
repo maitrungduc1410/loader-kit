@@ -70,7 +70,7 @@ Mọi prop của `View` đều dùng được. `BUILTIN_INDICATOR_NAMES` liệt 
 
 ## Progress indicator {#progress}
 
-`LoaderKitProgress` cho biết một tác vụ đã chạy được bao nhiêu: 30 mẫu thuộc 9 type. Đặt `value` là một số trong [0, 1], hoặc để `null` cho animation vô định. Value mới chạy mượt theo một đường cong bám theo nhịp cập nhật của bạn và không bao giờ vượt quá value thật; `smooth={false}` thì nhảy thẳng tới value.
+`LoaderKitProgress` cho biết một tác vụ đã chạy được bao nhiêu: 50 mẫu thuộc 10 type. Đặt `value` là một số trong [0, 1], hoặc để `null` cho animation vô định. Value mới chạy mượt theo một đường cong bám theo nhịp cập nhật của bạn và không bao giờ vượt quá value thật; `smooth={false}` thì nhảy thẳng tới value.
 
 ```tsx
 import { LoaderKitProgress } from 'react-native-loader-kit';

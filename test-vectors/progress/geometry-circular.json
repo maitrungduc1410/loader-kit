@@ -561,6 +561,193 @@
       {"op":"circle","cx":12.273684217,"cy":7.860110962,"r":3,"paint":{"type":"solid","color":"track","alpha":1}},
       {"op":"text","x":24,"y":24,"size":10.56,"text":"48%","align":"center","paint":{"type":"solid","color":"label","alpha":1}}
     ]},
+    {"description":"circular glow at 0","options":{"type":"circular","variant":"glow"},"width":48,"height":48,"state":{"indeterminate":false,"value":0,"buffer":0,"wave":0,"time":0,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"arc","cx":24,"cy":24,"r":18,"start":0,"end":6.283185307,"lineWidth":4,"cap":"butt","paint":{"type":"solid","color":"color","alpha":0.14}}
+    ]},
+    {"description":"circular glow at 0.37","options":{"type":"circular","variant":"glow"},"width":48,"height":48,"state":{"indeterminate":false,"value":0.37,"buffer":0,"wave":1,"time":0.8,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"arc","cx":24,"cy":24,"r":18,"start":0,"end":6.283185307,"lineWidth":4,"cap":"butt","paint":{"type":"solid","color":"color","alpha":0.14}},
+      {"op":"arc","cx":24,"cy":24,"r":18,"start":-1.570796327,"end":0.753982237,"lineWidth":12,"cap":"round","paint":{"type":"solid","color":"color","alpha":0.12}},
+      {"op":"arc","cx":24,"cy":24,"r":18,"start":-1.570796327,"end":0.753982237,"lineWidth":8,"cap":"round","paint":{"type":"solid","color":"color","alpha":0.22}},
+      {"op":"arc","cx":24,"cy":24,"r":18,"start":-1.570796327,"end":0.753982237,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"circle","cx":37.121435294,"cy":36.321847907,"r":6,"paint":{"type":"radial","cx":37.121435294,"cy":36.321847907,"r":6,"stops":[{"offset":0,"color":"color","alpha":0.5},{"offset":1,"color":"color","alpha":0}]}}
+    ]},
+    {"description":"circular glow at 1","options":{"type":"circular","variant":"glow"},"width":48,"height":48,"state":{"indeterminate":false,"value":1,"buffer":0,"wave":0,"time":1.3,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"arc","cx":24,"cy":24,"r":18,"start":0,"end":6.283185307,"lineWidth":4,"cap":"butt","paint":{"type":"solid","color":"color","alpha":0.14}},
+      {"op":"arc","cx":24,"cy":24,"r":18,"start":-1.570796327,"end":4.71238898,"lineWidth":12,"cap":"round","paint":{"type":"solid","color":"color","alpha":0.12}},
+      {"op":"arc","cx":24,"cy":24,"r":18,"start":-1.570796327,"end":4.71238898,"lineWidth":8,"cap":"round","paint":{"type":"solid","color":"color","alpha":0.22}},
+      {"op":"arc","cx":24,"cy":24,"r":18,"start":-1.570796327,"end":4.71238898,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"circle","cx":24,"cy":6,"r":6,"paint":{"type":"radial","cx":24,"cy":6,"r":6,"stops":[{"offset":0,"color":"color","alpha":0.5},{"offset":1,"color":"color","alpha":0}]}}
+    ]},
+    {"description":"circular glow indeterminate at 0.3 s","options":{"type":"circular","variant":"glow"},"width":48,"height":48,"state":{"indeterminate":true,"value":0,"buffer":0,"wave":1,"time":0.27,"indeterminateTime":0.3},"x":0,"y":0, "commands": [
+      {"op":"arc","cx":24,"cy":24,"r":18,"start":0,"end":6.283185307,"lineWidth":4,"cap":"butt","paint":{"type":"solid","color":"color","alpha":0.14}},
+      {"op":"arc","cx":24,"cy":24,"r":18,"start":-0.71399833,"end":0.81583527,"lineWidth":12,"cap":"round","paint":{"type":"solid","color":"color","alpha":0.12}},
+      {"op":"arc","cx":24,"cy":24,"r":18,"start":-0.71399833,"end":0.81583527,"lineWidth":8,"cap":"round","paint":{"type":"solid","color":"color","alpha":0.22}},
+      {"op":"arc","cx":24,"cy":24,"r":18,"start":-0.71399833,"end":0.81583527,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"circle","cx":36.33468553,"cy":37.109368134,"r":6,"paint":{"type":"radial","cx":36.33468553,"cy":37.109368134,"r":6,"stops":[{"offset":0,"color":"color","alpha":0.5},{"offset":1,"color":"color","alpha":0}]}}
+    ]},
+    {"description":"circular glow indeterminate at 1.1 s","options":{"type":"circular","variant":"glow"},"width":48,"height":48,"state":{"indeterminate":true,"value":0,"buffer":0,"wave":1,"time":0.99,"indeterminateTime":1.1},"x":0,"y":0, "commands": [
+      {"op":"arc","cx":24,"cy":24,"r":18,"start":0,"end":6.283185307,"lineWidth":4,"cap":"butt","paint":{"type":"solid","color":"color","alpha":0.14}},
+      {"op":"arc","cx":24,"cy":24,"r":18,"start":4.684856148,"end":6.214689748,"lineWidth":12,"cap":"round","paint":{"type":"solid","color":"color","alpha":0.12}},
+      {"op":"arc","cx":24,"cy":24,"r":18,"start":4.684856148,"end":6.214689748,"lineWidth":8,"cap":"round","paint":{"type":"solid","color":"color","alpha":0.22}},
+      {"op":"arc","cx":24,"cy":24,"r":18,"start":4.684856148,"end":6.214689748,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"circle","cx":41.957791731,"cy":22.768043778,"r":6,"paint":{"type":"radial","cx":41.957791731,"cy":22.768043778,"r":6,"stops":[{"offset":0,"color":"color","alpha":0.5},{"offset":1,"color":"color","alpha":0}]}}
+    ]},
+    {"description":"circular glow indeterminate at 2.75 s","options":{"type":"circular","variant":"glow"},"width":48,"height":48,"state":{"indeterminate":true,"value":0,"buffer":0,"wave":1,"time":2.475,"indeterminateTime":2.75},"x":0,"y":0, "commands": [
+      {"op":"arc","cx":24,"cy":24,"r":18,"start":0,"end":6.283185307,"lineWidth":4,"cap":"butt","paint":{"type":"solid","color":"color","alpha":0.14}},
+      {"op":"arc","cx":24,"cy":24,"r":18,"start":9.027914213,"end":9.167786842,"lineWidth":12,"cap":"round","paint":{"type":"solid","color":"color","alpha":0.12}},
+      {"op":"arc","cx":24,"cy":24,"r":18,"start":9.027914213,"end":9.167786842,"lineWidth":8,"cap":"round","paint":{"type":"solid","color":"color","alpha":0.22}},
+      {"op":"arc","cx":24,"cy":24,"r":18,"start":9.027914213,"end":9.167786842,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"circle","cx":6.591135707,"cy":28.575089512,"r":6,"paint":{"type":"radial","cx":6.591135707,"cy":28.575089512,"r":6,"stops":[{"offset":0,"color":"color","alpha":0.5},{"offset":1,"color":"color","alpha":0}]}}
+    ]},
+    {"description":"circular glow with butt caps at 0.62","options":{"type":"circular","variant":"glow","strokeCap":"butt"},"width":48,"height":48,"state":{"indeterminate":false,"value":0.62,"buffer":0,"wave":0.6,"time":0.4,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"arc","cx":24,"cy":24,"r":18,"start":0,"end":6.283185307,"lineWidth":4,"cap":"butt","paint":{"type":"solid","color":"color","alpha":0.14}},
+      {"op":"arc","cx":24,"cy":24,"r":18,"start":-1.570796327,"end":2.324778564,"lineWidth":12,"cap":"butt","paint":{"type":"solid","color":"color","alpha":0.12}},
+      {"op":"arc","cx":24,"cy":24,"r":18,"start":-1.570796327,"end":2.324778564,"lineWidth":8,"cap":"butt","paint":{"type":"solid","color":"color","alpha":0.22}},
+      {"op":"arc","cx":24,"cy":24,"r":18,"start":-1.570796327,"end":2.324778564,"lineWidth":4,"cap":"butt","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"circle","cx":11.678152093,"cy":37.121435294,"r":6,"paint":{"type":"radial","cx":11.678152093,"cy":37.121435294,"r":6,"stops":[{"offset":0,"color":"color","alpha":0.5},{"offset":1,"color":"color","alpha":0}]}}
+    ]},
+    {"description":"circular glow with a label at 0.48","options":{"type":"circular","variant":"glow","showLabel":true},"width":48,"height":48,"state":{"indeterminate":false,"value":0.48,"buffer":0,"wave":1,"time":0.2,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"arc","cx":24,"cy":24,"r":18,"start":0,"end":6.283185307,"lineWidth":4,"cap":"butt","paint":{"type":"solid","color":"color","alpha":0.14}},
+      {"op":"arc","cx":24,"cy":24,"r":18,"start":-1.570796327,"end":1.445132621,"lineWidth":12,"cap":"round","paint":{"type":"solid","color":"color","alpha":0.12}},
+      {"op":"arc","cx":24,"cy":24,"r":18,"start":-1.570796327,"end":1.445132621,"lineWidth":8,"cap":"round","paint":{"type":"solid","color":"color","alpha":0.22}},
+      {"op":"arc","cx":24,"cy":24,"r":18,"start":-1.570796327,"end":1.445132621,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"circle","cx":26.255998204,"cy":41.858064624,"r":6,"paint":{"type":"radial","cx":26.255998204,"cy":41.858064624,"r":6,"stops":[{"offset":0,"color":"color","alpha":0.5},{"offset":1,"color":"color","alpha":0}]}},
+      {"op":"text","x":24,"y":24,"size":10.56,"text":"48%","align":"center","paint":{"type":"solid","color":"label","alpha":1}}
+    ]},
+    {"description":"circular split at 0","options":{"type":"circular","variant":"split"},"width":48,"height":48,"state":{"indeterminate":false,"value":0,"buffer":0,"wave":0,"time":0,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"arc","cx":24,"cy":24,"r":22,"start":0,"end":6.283185307,"lineWidth":4,"cap":"butt","paint":{"type":"solid","color":"track","alpha":1}}
+    ]},
+    {"description":"circular split at 0.37","options":{"type":"circular","variant":"split"},"width":48,"height":48,"state":{"indeterminate":false,"value":0.37,"buffer":0,"wave":1,"time":0.8,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"arc","cx":24,"cy":24,"r":22,"start":0,"end":6.283185307,"lineWidth":4,"cap":"butt","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":22,"start":-1.570796327,"end":-0.408407045,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":22,"start":-2.733185609,"end":-1.570796327,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}}
+    ]},
+    {"description":"circular split at 1","options":{"type":"circular","variant":"split"},"width":48,"height":48,"state":{"indeterminate":false,"value":1,"buffer":0,"wave":0,"time":1.3,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"arc","cx":24,"cy":24,"r":22,"start":0,"end":6.283185307,"lineWidth":4,"cap":"butt","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":22,"start":-1.570796327,"end":1.570796327,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":22,"start":-4.71238898,"end":-1.570796327,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}}
+    ]},
+    {"description":"circular split indeterminate at 0.3 s","options":{"type":"circular","variant":"split"},"width":48,"height":48,"state":{"indeterminate":true,"value":0,"buffer":0,"wave":1,"time":0.27,"indeterminateTime":0.3},"x":0,"y":0, "commands": [
+      {"op":"arc","cx":24,"cy":24,"r":22,"start":0,"end":6.283185307,"lineWidth":4,"cap":"butt","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":22,"start":-1.570796327,"end":0.644975774,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":22,"start":-3.786568427,"end":-1.570796327,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}}
+    ]},
+    {"description":"circular split indeterminate at 1.1 s","options":{"type":"circular","variant":"split"},"width":48,"height":48,"state":{"indeterminate":true,"value":0,"buffer":0,"wave":1,"time":0.99,"indeterminateTime":1.1},"x":0,"y":0, "commands": [
+      {"op":"arc","cx":24,"cy":24,"r":22,"start":0,"end":6.283185307,"lineWidth":4,"cap":"butt","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":22,"start":1.053063339,"end":1.570796327,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":22,"start":-4.71238898,"end":-4.194655993,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}}
+    ]},
+    {"description":"circular split indeterminate at 2.75 s","options":{"type":"circular","variant":"split"},"width":48,"height":48,"state":{"indeterminate":true,"value":0,"buffer":0,"wave":1,"time":2.475,"indeterminateTime":2.75},"x":0,"y":0, "commands": [
+      {"op":"arc","cx":24,"cy":24,"r":22,"start":0,"end":6.283185307,"lineWidth":4,"cap":"butt","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":22,"start":1.176714512,"end":1.570796327,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":22,"start":-4.71238898,"end":-4.318307166,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}}
+    ]},
+    {"description":"circular split with butt caps at 0.62","options":{"type":"circular","variant":"split","strokeCap":"butt"},"width":48,"height":48,"state":{"indeterminate":false,"value":0.62,"buffer":0,"wave":0.6,"time":0.4,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"arc","cx":24,"cy":24,"r":22,"start":0,"end":6.283185307,"lineWidth":4,"cap":"butt","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":22,"start":-1.570796327,"end":0.376991118,"lineWidth":4,"cap":"butt","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":22,"start":-3.518583772,"end":-1.570796327,"lineWidth":4,"cap":"butt","paint":{"type":"solid","color":"color","alpha":1}}
+    ]},
+    {"description":"circular split with a label at 0.48","options":{"type":"circular","variant":"split","showLabel":true},"width":48,"height":48,"state":{"indeterminate":false,"value":0.48,"buffer":0,"wave":1,"time":0.2,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"arc","cx":24,"cy":24,"r":22,"start":0,"end":6.283185307,"lineWidth":4,"cap":"butt","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":22,"start":-1.570796327,"end":-0.062831853,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":22,"start":-3.078760801,"end":-1.570796327,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"text","x":24,"y":24,"size":10.56,"text":"48%","align":"center","paint":{"type":"solid","color":"label","alpha":1}}
+    ]},
+    {"description":"circular orbit at 0","options":{"type":"circular","variant":"orbit"},"width":48,"height":48,"state":{"indeterminate":false,"value":0,"buffer":0,"wave":0,"time":0,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"arc","cx":24,"cy":24,"r":19.2,"start":0,"end":6.283185307,"lineWidth":1.5,"cap":"butt","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"circle","cx":24,"cy":4.8,"r":4.8,"paint":{"type":"radial","cx":24,"cy":4.8,"r":4.8,"stops":[{"offset":0,"color":"color","alpha":0.35},{"offset":1,"color":"color","alpha":0}]}},
+      {"op":"circle","cx":24,"cy":4.8,"r":3,"paint":{"type":"solid","color":"color","alpha":1}}
+    ]},
+    {"description":"circular orbit at 0.37","options":{"type":"circular","variant":"orbit"},"width":48,"height":48,"state":{"indeterminate":false,"value":0.37,"buffer":0,"wave":1,"time":0.8,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"arc","cx":24,"cy":24,"r":19.2,"start":0,"end":6.283185307,"lineWidth":1.5,"cap":"butt","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":19.2,"start":-1.570796327,"end":0.753982237,"lineWidth":2.4,"cap":"butt","paint":{"type":"conic","cx":24,"cy":24,"start":-1.570796327,"stops":[{"offset":0,"color":"color","alpha":0.15},{"offset":0.37,"color":"color","alpha":1}]}},
+      {"op":"circle","cx":37.996197646,"cy":37.143304434,"r":4.8,"paint":{"type":"radial","cx":37.996197646,"cy":37.143304434,"r":4.8,"stops":[{"offset":0,"color":"color","alpha":0.35},{"offset":1,"color":"color","alpha":0}]}},
+      {"op":"circle","cx":37.996197646,"cy":37.143304434,"r":3,"paint":{"type":"solid","color":"color","alpha":1}}
+    ]},
+    {"description":"circular orbit at 1","options":{"type":"circular","variant":"orbit"},"width":48,"height":48,"state":{"indeterminate":false,"value":1,"buffer":0,"wave":0,"time":1.3,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"arc","cx":24,"cy":24,"r":19.2,"start":0,"end":6.283185307,"lineWidth":1.5,"cap":"butt","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":19.2,"start":-1.570796327,"end":4.71238898,"lineWidth":2.4,"cap":"butt","paint":{"type":"conic","cx":24,"cy":24,"start":-1.570796327,"stops":[{"offset":0,"color":"color","alpha":0.15},{"offset":1,"color":"color","alpha":1}]}},
+      {"op":"circle","cx":24,"cy":4.8,"r":4.8,"paint":{"type":"radial","cx":24,"cy":4.8,"r":4.8,"stops":[{"offset":0,"color":"color","alpha":0.35},{"offset":1,"color":"color","alpha":0}]}},
+      {"op":"circle","cx":24,"cy":4.8,"r":3,"paint":{"type":"solid","color":"color","alpha":1}}
+    ]},
+    {"description":"circular orbit indeterminate at 0.3 s","options":{"type":"circular","variant":"orbit"},"width":48,"height":48,"state":{"indeterminate":true,"value":0,"buffer":0,"wave":1,"time":0.27,"indeterminateTime":0.3},"x":0,"y":0, "commands": [
+      {"op":"arc","cx":24,"cy":24,"r":19.2,"start":0,"end":6.283185307,"lineWidth":1.5,"cap":"butt","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":19.2,"start":-2.199114858,"end":0,"lineWidth":2.4,"cap":"butt","paint":{"type":"conic","cx":24,"cy":24,"start":-2.199114858,"stops":[{"offset":0,"color":"color","alpha":0},{"offset":0.35,"color":"color","alpha":1}]}},
+      {"op":"circle","cx":43.2,"cy":24,"r":4.8,"paint":{"type":"radial","cx":43.2,"cy":24,"r":4.8,"stops":[{"offset":0,"color":"color","alpha":0.35},{"offset":1,"color":"color","alpha":0}]}},
+      {"op":"circle","cx":43.2,"cy":24,"r":3,"paint":{"type":"solid","color":"color","alpha":1}}
+    ]},
+    {"description":"circular orbit indeterminate at 1.1 s","options":{"type":"circular","variant":"orbit"},"width":48,"height":48,"state":{"indeterminate":true,"value":0,"buffer":0,"wave":1,"time":0.99,"indeterminateTime":1.1},"x":0,"y":0, "commands": [
+      {"op":"arc","cx":24,"cy":24,"r":19.2,"start":0,"end":6.283185307,"lineWidth":1.5,"cap":"butt","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":19.2,"start":1.989675347,"end":4.188790205,"lineWidth":2.4,"cap":"butt","paint":{"type":"conic","cx":24,"cy":24,"start":1.989675347,"stops":[{"offset":0,"color":"color","alpha":0},{"offset":0.35,"color":"color","alpha":1}]}},
+      {"op":"circle","cx":14.4,"cy":7.372312247,"r":4.8,"paint":{"type":"radial","cx":14.4,"cy":7.372312247,"r":4.8,"stops":[{"offset":0,"color":"color","alpha":0.35},{"offset":1,"color":"color","alpha":0}]}},
+      {"op":"circle","cx":14.4,"cy":7.372312247,"r":3,"paint":{"type":"solid","color":"color","alpha":1}}
+    ]},
+    {"description":"circular orbit indeterminate at 2.75 s","options":{"type":"circular","variant":"orbit"},"width":48,"height":48,"state":{"indeterminate":true,"value":0,"buffer":0,"wave":1,"time":2.475,"indeterminateTime":2.75},"x":0,"y":0, "commands": [
+      {"op":"arc","cx":24,"cy":24,"r":19.2,"start":0,"end":6.283185307,"lineWidth":1.5,"cap":"butt","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":19.2,"start":-1.93731547,"end":0.261799388,"lineWidth":2.4,"cap":"butt","paint":{"type":"conic","cx":24,"cy":24,"start":-1.93731547,"stops":[{"offset":0,"color":"color","alpha":0},{"offset":0.35,"color":"color","alpha":1}]}},
+      {"op":"circle","cx":42.545775865,"cy":28.969325666,"r":4.8,"paint":{"type":"radial","cx":42.545775865,"cy":28.969325666,"r":4.8,"stops":[{"offset":0,"color":"color","alpha":0.35},{"offset":1,"color":"color","alpha":0}]}},
+      {"op":"circle","cx":42.545775865,"cy":28.969325666,"r":3,"paint":{"type":"solid","color":"color","alpha":1}}
+    ]},
+    {"description":"circular orbit with butt caps at 0.62","options":{"type":"circular","variant":"orbit","strokeCap":"butt"},"width":48,"height":48,"state":{"indeterminate":false,"value":0.62,"buffer":0,"wave":0.6,"time":0.4,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"arc","cx":24,"cy":24,"r":19.2,"start":0,"end":6.283185307,"lineWidth":1.5,"cap":"butt","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":19.2,"start":-1.570796327,"end":2.324778564,"lineWidth":2.4,"cap":"butt","paint":{"type":"conic","cx":24,"cy":24,"start":-1.570796327,"stops":[{"offset":0,"color":"color","alpha":0.15},{"offset":0.62,"color":"color","alpha":1}]}},
+      {"op":"circle","cx":10.856695566,"cy":37.996197646,"r":4.8,"paint":{"type":"radial","cx":10.856695566,"cy":37.996197646,"r":4.8,"stops":[{"offset":0,"color":"color","alpha":0.35},{"offset":1,"color":"color","alpha":0}]}},
+      {"op":"circle","cx":10.856695566,"cy":37.996197646,"r":3,"paint":{"type":"solid","color":"color","alpha":1}}
+    ]},
+    {"description":"circular orbit with a label at 0.48","options":{"type":"circular","variant":"orbit","showLabel":true},"width":48,"height":48,"state":{"indeterminate":false,"value":0.48,"buffer":0,"wave":1,"time":0.2,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"arc","cx":24,"cy":24,"r":19.2,"start":0,"end":6.283185307,"lineWidth":1.5,"cap":"butt","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":19.2,"start":-1.570796327,"end":1.445132621,"lineWidth":2.4,"cap":"butt","paint":{"type":"conic","cx":24,"cy":24,"start":-1.570796327,"stops":[{"offset":0,"color":"color","alpha":0.15},{"offset":0.48,"color":"color","alpha":1}]}},
+      {"op":"circle","cx":26.406398084,"cy":43.048602265,"r":4.8,"paint":{"type":"radial","cx":26.406398084,"cy":43.048602265,"r":4.8,"stops":[{"offset":0,"color":"color","alpha":0.35},{"offset":1,"color":"color","alpha":0}]}},
+      {"op":"circle","cx":26.406398084,"cy":43.048602265,"r":3,"paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"text","x":24,"y":24,"size":10.56,"text":"48%","align":"center","paint":{"type":"solid","color":"label","alpha":1}}
+    ]},
+    {"description":"circular dual at 0","options":{"type":"circular","variant":"dual"},"width":48,"height":48,"state":{"indeterminate":false,"value":0,"buffer":0,"wave":0,"time":0,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"arc","cx":24,"cy":24,"r":22.5,"start":0,"end":6.283185307,"lineWidth":3,"cap":"butt","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":16.5,"start":0,"end":6.283185307,"lineWidth":3,"cap":"butt","paint":{"type":"solid","color":"track","alpha":1}}
+    ]},
+    {"description":"circular dual at 0.37","options":{"type":"circular","variant":"dual"},"width":48,"height":48,"state":{"indeterminate":false,"value":0.37,"buffer":0,"wave":1,"time":0.8,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"arc","cx":24,"cy":24,"r":22.5,"start":0,"end":6.283185307,"lineWidth":3,"cap":"butt","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":16.5,"start":0,"end":6.283185307,"lineWidth":3,"cap":"butt","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":22.5,"start":-1.570796327,"end":0.753982237,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":16.5,"start":-3.89557489,"end":-1.570796327,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"color","alpha":0.6}}
+    ]},
+    {"description":"circular dual at 1","options":{"type":"circular","variant":"dual"},"width":48,"height":48,"state":{"indeterminate":false,"value":1,"buffer":0,"wave":0,"time":1.3,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"arc","cx":24,"cy":24,"r":22.5,"start":0,"end":6.283185307,"lineWidth":3,"cap":"butt","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":16.5,"start":0,"end":6.283185307,"lineWidth":3,"cap":"butt","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":22.5,"start":-1.570796327,"end":4.71238898,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":16.5,"start":-7.853981634,"end":-1.570796327,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"color","alpha":0.6}}
+    ]},
+    {"description":"circular dual indeterminate at 0.3 s","options":{"type":"circular","variant":"dual"},"width":48,"height":48,"state":{"indeterminate":true,"value":0,"buffer":0,"wave":1,"time":0.27,"indeterminateTime":0.3},"x":0,"y":0, "commands": [
+      {"op":"arc","cx":24,"cy":24,"r":22.5,"start":0,"end":6.283185307,"lineWidth":3,"cap":"butt","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":16.5,"start":0,"end":6.283185307,"lineWidth":3,"cap":"butt","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":22.5,"start":-0.71399833,"end":0.81583527,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":16.5,"start":-9.327722468,"end":-7.645809914,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"color","alpha":0.6}}
+    ]},
+    {"description":"circular dual indeterminate at 1.1 s","options":{"type":"circular","variant":"dual"},"width":48,"height":48,"state":{"indeterminate":true,"value":0,"buffer":0,"wave":1,"time":0.99,"indeterminateTime":1.1},"x":0,"y":0, "commands": [
+      {"op":"arc","cx":24,"cy":24,"r":22.5,"start":0,"end":6.283185307,"lineWidth":3,"cap":"butt","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":16.5,"start":0,"end":6.283185307,"lineWidth":3,"cap":"butt","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":22.5,"start":4.684856148,"end":6.214689748,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":16.5,"start":-10.538663637,"end":-5.901670452,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"color","alpha":0.6}}
+    ]},
+    {"description":"circular dual indeterminate at 2.75 s","options":{"type":"circular","variant":"dual"},"width":48,"height":48,"state":{"indeterminate":true,"value":0,"buffer":0,"wave":1,"time":2.475,"indeterminateTime":2.75},"x":0,"y":0, "commands": [
+      {"op":"arc","cx":24,"cy":24,"r":22.5,"start":0,"end":6.283185307,"lineWidth":3,"cap":"butt","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":16.5,"start":0,"end":6.283185307,"lineWidth":3,"cap":"butt","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":22.5,"start":9.027914213,"end":9.167786842,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":16.5,"start":-2.386003446,"end":-2.219106811,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"color","alpha":0.6}}
+    ]},
+    {"description":"circular dual with butt caps at 0.62","options":{"type":"circular","variant":"dual","strokeCap":"butt"},"width":48,"height":48,"state":{"indeterminate":false,"value":0.62,"buffer":0,"wave":0.6,"time":0.4,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"arc","cx":24,"cy":24,"r":22.5,"start":0,"end":6.283185307,"lineWidth":3,"cap":"butt","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":16.5,"start":0,"end":6.283185307,"lineWidth":3,"cap":"butt","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":22.5,"start":-1.570796327,"end":2.324778564,"lineWidth":3,"cap":"butt","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":16.5,"start":-5.466371217,"end":-1.570796327,"lineWidth":3,"cap":"butt","paint":{"type":"solid","color":"color","alpha":0.6}}
+    ]},
+    {"description":"circular dual with a label at 0.48","options":{"type":"circular","variant":"dual","showLabel":true},"width":48,"height":48,"state":{"indeterminate":false,"value":0.48,"buffer":0,"wave":1,"time":0.2,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"arc","cx":24,"cy":24,"r":22.5,"start":0,"end":6.283185307,"lineWidth":3,"cap":"butt","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":16.5,"start":0,"end":6.283185307,"lineWidth":3,"cap":"butt","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":22.5,"start":-1.570796327,"end":1.445132621,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
+      {"op":"arc","cx":24,"cy":24,"r":16.5,"start":-4.586725274,"end":-1.570796327,"lineWidth":3,"cap":"round","paint":{"type":"solid","color":"color","alpha":0.6}},
+      {"op":"text","x":24,"y":24,"size":10.56,"text":"48%","align":"center","paint":{"type":"solid","color":"label","alpha":1}}
+    ]},
     {"description":"circular wavy below 32 draws flat","options":{"type":"circular","variant":"wavy"},"width":30,"height":30,"state":{"indeterminate":false,"value":0.5,"buffer":0,"wave":1,"time":0.6,"indeterminateTime":0},"x":0,"y":0, "commands": [
       {"op":"arc","cx":15,"cy":15,"r":13,"start":2.186180942,"end":4.097004365,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
       {"op":"arc","cx":15,"cy":15,"r":13,"start":-1.570796327,"end":1.570796327,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}}
@@ -590,6 +777,13 @@
       {"op":"arc","cx":120,"cy":120,"r":118,"start":1.638592937,"end":4.64459237,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},
       {"op":"arc","cx":120,"cy":120,"r":118,"start":-1.570796327,"end":1.570796327,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"color","alpha":1}},
       {"op":"text","x":120,"y":120,"size":44,"text":"50%","align":"center","paint":{"type":"solid","color":"label","alpha":1}}
+    ]},
+    {"description":"circular dual too small to draw","options":{"type":"circular","variant":"dual"},"width":10,"height":10,"state":{"indeterminate":false,"value":0.5,"buffer":0,"wave":1,"time":0,"indeterminateTime":0},"x":0,"y":0, "commands": []},
+    {"description":"circular orbit with a thick dot","options":{"type":"circular","variant":"orbit","thickness":8},"width":64,"height":64,"state":{"indeterminate":false,"value":0.8,"buffer":0,"wave":1,"time":0,"indeterminateTime":0},"x":0,"y":0, "commands": [
+      {"op":"arc","cx":32,"cy":32,"r":19.2,"start":0,"end":6.283185307,"lineWidth":4,"cap":"butt","paint":{"type":"solid","color":"track","alpha":1}},
+      {"op":"arc","cx":32,"cy":32,"r":19.2,"start":-1.570796327,"end":3.455751919,"lineWidth":6.4,"cap":"butt","paint":{"type":"conic","cx":32,"cy":32,"start":-1.570796327,"stops":[{"offset":0,"color":"color","alpha":0.15},{"offset":0.8,"color":"color","alpha":1}]}},
+      {"op":"circle","cx":13.739714887,"cy":26.066873708,"r":12.8,"paint":{"type":"radial","cx":13.739714887,"cy":26.066873708,"r":12.8,"stops":[{"offset":0,"color":"color","alpha":0.35},{"offset":1,"color":"color","alpha":0}]}},
+      {"op":"circle","cx":13.739714887,"cy":26.066873708,"r":8,"paint":{"type":"solid","color":"color","alpha":1}}
     ]},
     {"description":"circular wavy after a long time","options":{"type":"circular","variant":"wavy"},"width":96,"height":96,"state":{"indeterminate":true,"value":0,"buffer":0,"wave":1,"time":7200.1,"indeterminateTime":7201.3},"x":0,"y":0, "commands": [
       {"op":"arc","cx":48,"cy":48,"r":44,"start":5.002783189,"end":9.392498533,"lineWidth":4,"cap":"round","paint":{"type":"solid","color":"track","alpha":1}},

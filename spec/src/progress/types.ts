@@ -8,17 +8,42 @@
  * origin at the top-left, y pointing down. Angles are radians, positive is clockwise on screen.
  */
 
-export const PROGRESS_TYPES = ['linear', 'circular', 'pie', 'gauge', 'liquid', 'border', 'bars', 'grid', 'battery'] as const;
+export const PROGRESS_TYPES = ['linear', 'circular', 'pie', 'gauge', 'liquid', 'border', 'bars', 'grid', 'battery', 'hourglass'] as const;
 export type ProgressType = (typeof PROGRESS_TYPES)[number];
 
-export const PROGRESS_VARIANTS = ['flat', 'wavy', 'segmented', 'striped', 'shimmer', 'glow', 'dots', 'steps', 'gradient', 'ticks'] as const;
+export const PROGRESS_VARIANTS = [
+  'flat',
+  'wavy',
+  'segmented',
+  'striped',
+  'shimmer',
+  'glow',
+  'dots',
+  'steps',
+  'gradient',
+  'ticks',
+  'center',
+  'chevrons',
+  'split',
+  'orbit',
+  'dual',
+  'needle',
+  'arcs',
+  'heart',
+] as const;
 export type ProgressVariant = (typeof PROGRESS_VARIANTS)[number];
 
 /** The variants each type accepts; the first one is its default. Types not listed only have `flat`. */
 export const PROGRESS_TYPE_VARIANTS: Readonly<Partial<Record<ProgressType, readonly ProgressVariant[]>>> = {
-  linear: ['flat', 'wavy', 'segmented', 'striped', 'shimmer', 'glow', 'dots', 'steps'],
-  circular: ['flat', 'wavy', 'segmented', 'gradient', 'ticks', 'dots'],
-  gauge: ['flat', 'segmented'],
+  linear: ['flat', 'wavy', 'segmented', 'striped', 'shimmer', 'glow', 'dots', 'steps', 'gradient', 'center', 'chevrons', 'ticks'],
+  circular: ['flat', 'wavy', 'segmented', 'gradient', 'ticks', 'dots', 'glow', 'split', 'orbit', 'dual'],
+  pie: ['flat', 'segmented'],
+  gauge: ['flat', 'segmented', 'needle', 'gradient', 'dots'],
+  liquid: ['flat', 'heart'],
+  border: ['flat', 'glow', 'segmented'],
+  bars: ['flat', 'dots', 'arcs'],
+  grid: ['flat', 'dots'],
+  battery: ['flat', 'segmented'],
 };
 
 export type ProgressStrokeCap = 'round' | 'butt';

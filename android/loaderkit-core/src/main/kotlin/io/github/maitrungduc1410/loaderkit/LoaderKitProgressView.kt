@@ -22,7 +22,7 @@ import kotlin.math.min
 import kotlin.math.roundToInt
 
 /**
- * A progress indicator: linear, circular, pie, gauge, liquid, border, bars, grid or battery.
+ * A progress indicator: linear, circular, pie, gauge, liquid, border, bars, grid, battery or hourglass.
  *
  * Set [value] to a number in [0, 1], or null for the indeterminate animation. With [smooth] on, a
  * new value is reached along a curve that follows the rhythm of the updates and never passes the

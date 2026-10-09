@@ -170,7 +170,7 @@ extension.
 
 ## Progress
 
-The `LoaderKitProgress` control shows how much of a task is done: 30 designs across 9 types, with a
+The `LoaderKitProgress` control shows how much of a task is done: 50 designs across 10 types, with a
 `Value` from 0 to 1 or, with null, indeterminate. With `Smooth` (on by default) it glides to every
 new value. It draws with Win2D, which `LoaderKit.WinUI` brings as a dependency. Full guide:
 https://maitrungduc1410.github.io/loader-kit/guide/progress

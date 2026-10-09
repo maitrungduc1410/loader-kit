@@ -110,7 +110,7 @@ The LoaderKit modifiers return a `LoaderKitIndicator`. Apply them before SwiftUI
 
 ## Progress indicators {#progress}
 
-`LoaderKitProgress` shows how much of a task is done: 30 designs across 9 types, determinate or indeterminate, with smooth value changes.
+`LoaderKitProgress` shows how much of a task is done: 50 designs across 10 types, determinate or indeterminate, with smooth value changes.
 
 ```swift
 // UIKit and AppKit

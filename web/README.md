@@ -109,8 +109,8 @@ as a theme class).
 
 ## Progress
 
-`LoaderKitProgress` shows how much of a task is done: 30 designs across 9 types (`linear`,
-`circular`, `pie`, `gauge`, `liquid`, `border`, `bars`, `grid`, `battery`) and their variants.
+`LoaderKitProgress` shows how much of a task is done: 50 designs across 10 types (`linear`,
+`circular`, `pie`, `gauge`, `liquid`, `border`, `bars`, `grid`, `battery`, `hourglass`) and their variants.
 `value` goes from 0 to 1; null is indeterminate. With `smooth` (on by default) the indicator glides
 to every new value. Full guide: [maitrungduc1410.github.io/loader-kit/guide/progress](https://maitrungduc1410.github.io/loader-kit/guide/progress)
 

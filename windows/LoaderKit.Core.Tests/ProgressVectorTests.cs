@@ -163,7 +163,7 @@ public class ProgressVectorTests
     {
         var onDisk = System.IO.Directory.GetFiles(Directory, "*.json").Select(Path.GetFileName).Where(name => name != "index.json").OrderBy(name => name, StringComparer.Ordinal);
         Assert.Equal(onDisk, Files.OrderBy(name => name, StringComparer.Ordinal));
-        Assert.Equal(11, Files.Count());
+        Assert.Equal(12, Files.Count());
     }
 
     [Fact]
